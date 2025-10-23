@@ -47,7 +47,6 @@ public class AddStudent extends javax.swing.JFrame {
         setBackground(new java.awt.Color(102, 255, 255));
         setForeground(java.awt.Color.black);
 
-        jButton1.setBackground(new java.awt.Color(51, 255, 255));
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

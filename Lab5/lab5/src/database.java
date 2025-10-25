@@ -7,11 +7,12 @@ import java.util.*;
 
 public abstract class database {
 
-    private ArrayList<Student> records = new ArrayList<>();
-    private String filename;
+    private ArrayList<Student> records ;
+    private String filename="students.txt";
 
-    public database(String filename) {
-        this.filename = filename;
+    public database() {
+        this.records= new ArrayList<>();
+        readFromFile();
     }
 
     public void readFromFile() {

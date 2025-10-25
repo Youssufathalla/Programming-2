@@ -12,8 +12,10 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    StudentManagementSystem sms;
     public Home() {
         initComponents();
+       this.sms= new StudentManagementSystem();
     }
 
     /**
@@ -46,6 +48,11 @@ public class Home extends javax.swing.JFrame {
         viewstudentsbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         viewstudentsbutton.setText("View Students");
         viewstudentsbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        viewstudentsbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewstudentsbuttonActionPerformed(evt);
+            }
+        });
 
         updatestudentbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         updatestudentbutton.setText("Search And Update");
@@ -91,6 +98,12 @@ public class Home extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewstudentsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewstudentsbuttonActionPerformed
+        // TODO add your handling code here:
+        ViewStudents V=new ViewStudents(sms,this);
+        V.setVisible(true);
+    }//GEN-LAST:event_viewstudentsbuttonActionPerformed
 
     /**
      * @param args the command line arguments

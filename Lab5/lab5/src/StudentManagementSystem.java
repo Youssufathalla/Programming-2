@@ -11,8 +11,8 @@
  */
 public class StudentManagementSystem extends database{
 
-    public StudentManagementSystem(String filename) {
-        super(filename);
+    public StudentManagementSystem() {
+        super();
     }
 
     @Override
@@ -21,12 +21,13 @@ public class StudentManagementSystem extends database{
         if (parts.length != 6) {
             return null;
         }
-        Integer id =Integer.parseInt(parts[0].trim());
+        Integer id =Integer.valueOf(parts[0].trim());
         String name = parts[1].trim();
-        Integer age = Integer.parseInt(parts[2].trim());
+        Integer age = Integer.valueOf(parts[2].trim());
         String gender = parts[3].trim();
         String department = parts[4].trim();
-        Double gpa=Double.parseDouble(parts[5].trim());
+        Double gpa=Double.valueOf(parts[5].trim());
+        System.out.println("New Record created with id"+id);
         return new Student(id, name, age, gender, department,gpa);
     }
  

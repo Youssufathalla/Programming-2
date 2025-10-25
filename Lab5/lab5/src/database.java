@@ -72,6 +72,7 @@ public abstract class database {
 
     public void addStudent(Student record) {
         records.add(record);
+        saveToFile();
     }
 
     public void deleteStudent(String key) {

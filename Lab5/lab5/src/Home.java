@@ -13,9 +13,10 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      */
     StudentManagementSystem sms;
+
     public Home() {
         initComponents();
-       this.sms= new StudentManagementSystem();
+        this.sms = new StudentManagementSystem();
     }
 
     /**
@@ -106,13 +107,16 @@ public class Home extends javax.swing.JFrame {
 
     private void viewstudentsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewstudentsbuttonActionPerformed
         // TODO add your handling code here:
-        ViewStudents V=new ViewStudents(sms,this);
+        ViewStudents V = new ViewStudents(sms, this);
         this.setVisible(false);
         V.setVisible(true);
     }//GEN-LAST:event_viewstudentsbuttonActionPerformed
 
     private void addstudentbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudentbuttonActionPerformed
-        // TODO add your handling code here:
+        AddStudent A = new AddStudent(sms, this);
+        this.setVisible(false);
+        A.setVisible(true);
+// TODO add your handling code here:
     }//GEN-LAST:event_addstudentbuttonActionPerformed
 
     /**
@@ -146,7 +150,7 @@ public class Home extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
-                
+
             }
         });
     }

@@ -1,4 +1,14 @@
 1234,Yomna,22,Female,CCE,3.45
 4567,Mohamed,21,Male,ELectro,3.7
 9585,Zeina,20,Female,CCE,3.8
-
+9666,aaaa,777,Male,Computer,0.0
+9666,aaaa,777,Male,Computer,0.0
+9666,aaaa,777,Male,Computer,0.0
+9666,aaaa,777,Male,Computer,0.0
+12,aa,22,Female,Computer,3.0
+55,hh,9,Female,Electromechanics,2.5
+5,k,5,Female,Computer,1.0
+55,58,6,Female,Computer,1.0
+5,hssan,55,Female,Computer,2.0
+4,3,15,Female,Computer,3.0
+22,aa,2,Female,Computer,2.0

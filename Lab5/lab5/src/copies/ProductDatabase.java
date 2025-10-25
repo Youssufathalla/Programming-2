@@ -1,3 +1,5 @@
+package copies;
+
 
 public class ProductDatabase extends database {
 

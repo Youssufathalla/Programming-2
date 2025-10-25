@@ -7,7 +7,7 @@ import java.util.*;
 
 public abstract class database {
 
-    private ArrayList<item> records = new ArrayList<>();
+    private ArrayList<Student> records = new ArrayList<>();
     private String filename;
 
     public database(String filename) {
@@ -28,7 +28,7 @@ public abstract class database {
                 if (line.isEmpty()) {
                     continue;
                 }
-                item cp = createRecordFrom(line);
+                Student cp = createRecordFrom(line);
                 if (cp != null) {
                     records.add(cp);
                 }
@@ -44,8 +44,8 @@ public abstract class database {
             return;
         }
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, false))) {
-            for (item p : records) {
-                bw.write(p.lineRepresentation());
+            for (Student p : records) {
+                bw.write( p.LineRepresentation());
                 bw.newLine();
             }
         } catch (IOException e) {
@@ -53,39 +53,50 @@ public abstract class database {
         }
     }
 
-    public abstract item createRecordFrom(String line);
+    public abstract Student createRecordFrom(String line);
 
-    public ArrayList<item> returnAllRecords() {
+    public ArrayList<Student> returnAllRecords() {
         return records;
     }
 
-    public boolean contains(String key) {
-        String k = key == null ? "" : key.trim();
-        for (item cp : records) {
-            if (cp.getSearchKey().trim().equals(k)) {
+    public boolean contains(int id) {
+        int k=id;
+        for (Student cp : records) {
+            if (cp.getStudentID()==k) {
                 return true;
             }
         }
         return false;
     }
 
-    public void insertRecord(item record) {
+    public void addStudent(Student record) {
         records.add(record);
     }
 
-    public void deleteRecord(String key) {
+    public void deleteStudent(String key) {
         for (int i = 0; i < records.size(); i++) {
-            if (records.get(i).getSearchKey().equals(key)) {
+            if (records.get(i).getStudentID()==Integer.parseInt(key)) {
                 records.remove(i);
                 break;
             }
         }
     }
-
-    public item getRecord(String key) {
-        String k = key == null ? "" : key.trim();
-        for (item cp : records) {
-            if (cp.getSearchKey().trim().equals(k)) {
+    public ArrayList<Student> getRecordByName(String name){
+        ArrayList<Student> students=new ArrayList<>();
+        for(Student s:records){
+        if(s.getName().equals(name))
+        {
+            students.add(s);
+        }
+        }
+       if(!students.isEmpty()){
+       return students;}
+       return null;
+    }
+    public Student getRecord(int key) {
+        
+        for (Student cp : records) {
+            if (cp.getStudentID()==key) {
                 return cp;
             }
         }

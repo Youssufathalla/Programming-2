@@ -44,6 +44,11 @@ public class Home extends javax.swing.JFrame {
         addstudentbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         addstudentbutton.setText("Add Student");
         addstudentbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addstudentbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addstudentbuttonActionPerformed(evt);
+            }
+        });
 
         viewstudentsbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         viewstudentsbutton.setText("View Students");
@@ -102,8 +107,13 @@ public class Home extends javax.swing.JFrame {
     private void viewstudentsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewstudentsbuttonActionPerformed
         // TODO add your handling code here:
         ViewStudents V=new ViewStudents(sms,this);
+        this.setVisible(false);
         V.setVisible(true);
     }//GEN-LAST:event_viewstudentsbuttonActionPerformed
+
+    private void addstudentbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudentbuttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addstudentbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +146,7 @@ public class Home extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
+                
             }
         });
     }

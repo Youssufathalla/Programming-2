@@ -27,7 +27,6 @@ public class StudentManagementSystem extends database{
         String gender = parts[3].trim();
         String department = parts[4].trim();
         Double gpa=Double.valueOf(parts[5].trim());
-        System.out.println("New Record created with id"+id);
         return new Student(id, name, age, gender, department,gpa);
     }
  

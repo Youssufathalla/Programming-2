@@ -29,6 +29,14 @@ public class StudentManagementSystem extends database{
         Double gpa=Double.valueOf(parts[5].trim());
         return new Student(id, name, age, gender, department,gpa);
     }
+    
+    public void update(Student oldStudent,Student newStudent){
+        
+        deleteStudent(oldStudent.LineRepresentation());
+        addStudent(newStudent);
+        //error if deleted then addf failed due to input error
+    
+    }
  
    
     

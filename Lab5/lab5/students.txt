@@ -2,9 +2,9 @@
 4567,Mohamed,21,Male,ELectro,3.7
 9585,Zeina,20,Female,CCE,3.8
 9123,marawan,777,Male,Computer,0.0
-9666,hamed,18,Male,Computer,0.0
-9776,tamer,19,Male,Computer,0.0
-9556,ali,30,Male,Computer,0.0
+9666,hamed,18,Male,Computer,3.2
+9776,tamer,19,Male,Computer,2.0
+9556,ali,30,Male,Computer,4.0
 9055,sara,9,Female,Electromechanics,2.5
 5905,sara,16,Female,Computer,1.0
 9760,tarek,12,Male,Computer,3.0

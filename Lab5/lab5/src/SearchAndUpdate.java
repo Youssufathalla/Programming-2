@@ -23,6 +23,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
 
     public SearchAndUpdate(StudentManagementSystem sms, Home parent) {
         initComponents();
+        SearchTable.setAutoCreateRowSorter(true);
         this.sms = sms;
         this.parent = parent;
     }

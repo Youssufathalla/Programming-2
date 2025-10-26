@@ -72,18 +72,15 @@ public abstract class database {
 
     public void addStudent(Student record) {
         records.add(record);
-        saveToFile();
     }
 
     public void deleteStudent(String key) {
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).getStudentID()==Integer.parseInt(key)) {
                 records.remove(i);
-                saveToFile();
                 break;
             }
         }
-        
     }
     public ArrayList<Student> getRecordByName(String name){
         ArrayList<Student> students=new ArrayList<>();

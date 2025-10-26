@@ -10,4 +10,6 @@
 5,k,5,Female,Computer,1.0
 55,58,6,Female,Computer,1.0
 5,hssan,55,Female,Computer,2.0
-
+0,seif,22,Male,Computer,2.0
+0,ww,12,Male,Computer,3.0
+0,s,2,Female,Computer,2.0

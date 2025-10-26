@@ -204,24 +204,29 @@ public class AddStudent extends javax.swing.JFrame {
         String name = "", gender = "";
         int id = 0, age = 0;
         double gpa = 0;
-        try {
-            id = Integer.parseInt(ID.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a Number");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Id ");
+        String idText = ID.getText().trim();
+        if (idText.isEmpty() || !idText.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid numeric ID");
+            return;
         }
+        id = Integer.parseInt(idText);
+
         if (Name.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a valid Name");
+            return;
         } else {
             name = Name.getText();
+        }
+
+        if (Age.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter an Age");
+            return;
         }
         try {
             age = Integer.parseInt(Age.getText());
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a Number");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Age");
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for Age");
+            return;
         }
 
         if (Male.isSelected()) {
@@ -232,32 +237,36 @@ public class AddStudent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a gender");
             return;
         }
+
         String dep = (String) Department.getSelectedItem();
+
+        if (Gpa.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a GPA");
+            return;
+        }
         try {
             gpa = Double.parseDouble(Gpa.getText());
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a Number");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Gpa ");
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for GPA");
+            return;
         }
+
         if (age < 0) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid age");
-
+            JOptionPane.showMessageDialog(this, "Please enter a valid Age");
             return;
         }
+
         if (gpa > 4 || gpa < 0) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Gpa");
-
+            JOptionPane.showMessageDialog(this, "Please enter a GPA between 0 and 4");
             return;
         }
+
         if (id < 0) {
             JOptionPane.showMessageDialog(this, "Please enter a valid ID");
-
             return;
         }
-        if (name.matches("[A-Za-z]+")) {
 
-        } else {
+        if (!name.matches("[A-Za-z]+")) {
             JOptionPane.showMessageDialog(this, "Please enter a valid Name");
             return;
         }
@@ -285,12 +294,12 @@ public class AddStudent extends javax.swing.JFrame {
 
     private void MaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_MaleActionPerformed
 
     private void FemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_FemaleActionPerformed
 
     /**

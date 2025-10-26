@@ -57,6 +57,11 @@ public class Home extends javax.swing.JFrame {
         updatestudentbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         updatestudentbutton.setText("Search And Update");
         updatestudentbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        updatestudentbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatestudentbuttonActionPerformed(evt);
+            }
+        });
 
         deletestudentsbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         deletestudentsbutton.setText("Delete  Students");
@@ -104,6 +109,12 @@ public class Home extends javax.swing.JFrame {
         ViewStudents V=new ViewStudents(sms,this);
         V.setVisible(true);
     }//GEN-LAST:event_viewstudentsbuttonActionPerformed
+
+    private void updatestudentbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatestudentbuttonActionPerformed
+        // TODO add your handling code here:
+        SearchAndUpdate S=new SearchAndUpdate(sms, this);
+        S.setVisible(true);
+    }//GEN-LAST:event_updatestudentbuttonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -23,6 +23,7 @@ public class DeleteStudent extends javax.swing.JFrame {
         this.parent = parent;
         this.sms = s;
         loadTable();
+        tableStudents.setAutoCreateRowSorter(true);
     }
 
     public void loadTable() {

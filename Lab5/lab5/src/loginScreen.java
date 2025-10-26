@@ -1,5 +1,4 @@
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /*
@@ -120,14 +119,16 @@ public class loginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_UsernameTextFieldActionPerformed
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        String userName = UsernameTextField.getText();
+             String userName = UsernameTextField.getText();
         String password = PasswordField.getText();
         if (usersDb.contains(userName, password)) {
             Home h=new Home();
+            this.setVisible(false);
             h.setVisible(true);
         } else {
            JOptionPane.showMessageDialog(this, "Incorrect username or password");
         }
+
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     /**

@@ -13,9 +13,10 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      */
     StudentManagementSystem sms;
+
     public Home() {
         initComponents();
-       this.sms= new StudentManagementSystem();
+        this.sms = new StudentManagementSystem();
     }
 
     /**
@@ -28,9 +29,9 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        addstudentbutton = new javax.swing.JButton();
         viewstudentsbutton = new javax.swing.JButton();
         updatestudentbutton = new javax.swing.JButton();
+        addstudentbutton = new javax.swing.JButton();
         deletestudentsbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,10 +41,6 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("Welcome!");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        addstudentbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        addstudentbutton.setText("Add Student");
-        addstudentbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         viewstudentsbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         viewstudentsbutton.setText("View Students");
@@ -57,10 +54,29 @@ public class Home extends javax.swing.JFrame {
         updatestudentbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         updatestudentbutton.setText("Search And Update");
         updatestudentbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        updatestudentbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatestudentbuttonActionPerformed(evt);
+            }
+        });
+
+        addstudentbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        addstudentbutton.setText("Add Student");
+        addstudentbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addstudentbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addstudentbuttonActionPerformed(evt);
+            }
+        });
 
         deletestudentsbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         deletestudentsbutton.setText("Delete  Students");
         deletestudentsbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deletestudentsbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletestudentsbuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,9 +87,9 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addstudentbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(viewstudentsbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(updatestudentbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addstudentbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(deletestudentsbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(152, 152, 152))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -87,7 +103,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(addstudentbutton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(viewstudentsbutton)
                 .addGap(18, 18, 18)
                 .addComponent(updatestudentbutton)
@@ -101,9 +117,30 @@ public class Home extends javax.swing.JFrame {
 
     private void viewstudentsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewstudentsbuttonActionPerformed
         // TODO add your handling code here:
-        ViewStudents V=new ViewStudents(sms,this);
+        ViewStudents V = new ViewStudents(sms, this);
+        this.setVisible(false);
         V.setVisible(true);
     }//GEN-LAST:event_viewstudentsbuttonActionPerformed
+
+    private void updatestudentbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatestudentbuttonActionPerformed
+        SearchAndUpdate S = new SearchAndUpdate(sms, this);
+        this.setVisible(false);
+        S.setVisible(true);
+    }//GEN-LAST:event_updatestudentbuttonActionPerformed
+
+    private void addstudentbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudentbuttonActionPerformed
+        AddStudent A = new AddStudent(sms, this);
+        this.setVisible(false);
+        A.setVisible(true);
+
+    }//GEN-LAST:event_addstudentbuttonActionPerformed
+
+    private void deletestudentsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletestudentsbuttonActionPerformed
+        DeleteStudent D = new DeleteStudent(sms, this);
+        this.setVisible(false);
+        D.setVisible(true);// TODO add your handling code here:
+
+    }//GEN-LAST:event_deletestudentsbuttonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -315,6 +315,9 @@ public class SearchAndUpdate extends javax.swing.JFrame {
         if (!SearchIDtext.getText().isEmpty()) {
             try {
                 id = Integer.parseInt(SearchIDtext.getText());
+                if (!sms.contains(id)) {
+                    JOptionPane.showMessageDialog(this, "No Student found with this ID");
+                }
             } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(this, "Enter a numeric ID");
             } catch (Exception ex) {
@@ -436,7 +439,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
     }//GEN-LAST:event_FemaleActionPerformed
 
     private void FilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterButtonActionPerformed
-@SuppressWarnings("unchecked")
+        @SuppressWarnings("unchecked")
         TableRowSorter<DefaultTableModel> sorter
                 = (TableRowSorter<DefaultTableModel>) SearchTable.getRowSorter();
 

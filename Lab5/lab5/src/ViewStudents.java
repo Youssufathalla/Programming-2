@@ -1,6 +1,10 @@
-
-import java.util.ArrayList;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.util.*;
+import javax.swing.JOptionPane;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -24,6 +28,10 @@ public class ViewStudents extends javax.swing.JFrame {
         this.sms = s;
         loadTable();
          tableStudents.setAutoCreateRowSorter(true);
+         DefaultTableModel model = (DefaultTableModel) tableStudents.getModel();
+TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+tableStudents.setRowSorter(sorter);
+         
 
     }
 
@@ -59,6 +67,9 @@ public class ViewStudents extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableStudents = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        FilterButton = new javax.swing.JButton();
+        MinGpaField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +83,15 @@ public class ViewStudents extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableStudents);
 
+        jLabel1.setText("MIn Gpa :");
+
+        FilterButton.setText("Filter");
+        FilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FilterButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,17 +100,62 @@ public class ViewStudents extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(MinGpaField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(FilterButton)
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(FilterButton)
+                    .addComponent(MinGpaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void FilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterButtonActionPerformed
+          @SuppressWarnings("unchecked")
+    TableRowSorter<DefaultTableModel> sorter =
+        (TableRowSorter<DefaultTableModel>) tableStudents.getRowSorter();
+
+    String minTxt = MinGpaField.getText().trim();
+    if (minTxt.isEmpty()) {
+        sorter.setRowFilter(null); // show all if empty
+        return;
+    }
+
+    double min;
+    try { min = Double.parseDouble(minTxt); }
+    catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid number for GPA");
+        return;
+    }
+
+    sorter.setRowFilter(new RowFilter<DefaultTableModel, Integer>() {
+        @Override
+        public boolean include(Entry<? extends DefaultTableModel, ? extends Integer> e) {
+            Object value = e.getValue(5); // column index 5 = GPA
+            try {
+                double gpa = Double.parseDouble(String.valueOf(value));
+                return gpa >= min;
+            } catch (Exception ex) {
+                return false;
+            }
+        }
+    });
+    }//GEN-LAST:event_FilterButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +193,9 @@ public class ViewStudents extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton FilterButton;
+    private javax.swing.JTextField MinGpaField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableStudents;
     // End of variables declaration//GEN-END:variables

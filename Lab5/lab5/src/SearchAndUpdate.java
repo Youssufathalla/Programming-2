@@ -339,8 +339,13 @@ public class SearchAndUpdate extends javax.swing.JFrame {
                         System.out.println(z.getStudentID() + " " + z.getName());
 
                     }
+                } else {
+                    JOptionPane.showMessageDialog(this, "No student found with this name");
                 }
             }
+        }
+        if (SearchIDtext.getText().isEmpty() && !SearchNameText.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter a Valid ID");
         }
     }//GEN-LAST:event_SearchButtonActionPerformed
 

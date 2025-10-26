@@ -7,11 +7,11 @@ import java.util.*;
 
 public abstract class database {
 
-    private ArrayList<Student> records ;
-    private String filename="students.txt";
+    private ArrayList<Student> records;
+    private String filename = "students.txt";
 
     public database() {
-        this.records= new ArrayList<>();
+        this.records = new ArrayList<>();
         readFromFile();
     }
 
@@ -46,7 +46,7 @@ public abstract class database {
         }
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, false))) {
             for (Student p : records) {
-                bw.write( p.LineRepresentation());
+                bw.write(p.LineRepresentation());
                 bw.newLine();
             }
         } catch (IOException e) {
@@ -61,9 +61,9 @@ public abstract class database {
     }
 
     public boolean contains(int id) {
-        int k=id;
+        int k = id;
         for (Student cp : records) {
-            if (cp.getStudentID()==k) {
+            if (cp.getStudentID() == k) {
                 return true;
             }
         }
@@ -77,30 +77,32 @@ public abstract class database {
 
     public void deleteStudent(String key) {
         for (int i = 0; i < records.size(); i++) {
-            if (records.get(i).getStudentID()==Integer.parseInt(key)) {
+            if (records.get(i).getStudentID() == Integer.parseInt(key)) {
                 records.remove(i);
                 saveToFile();
                 break;
             }
         }
-        
+
     }
-    public ArrayList<Student> getRecordByName(String name){
-        ArrayList<Student> students=new ArrayList<>();
-        for(Student s:records){
-        if(s.getName().equals(name))
-        {
-            students.add(s);
+
+    public ArrayList<Student> getRecordByName(String name) {
+        ArrayList<Student> students = new ArrayList<>();
+        for (Student s : records) {
+            if (s.getName().equals(name)) {
+                students.add(s);
+            }
         }
+        if (!students.isEmpty()) {
+            return students;
         }
-       if(!students.isEmpty()){
-       return students;}
-       return null;
+        return null;
     }
+
     public Student getRecord(int key) {
-        
+
         for (Student cp : records) {
-            if (cp.getStudentID()==key) {
+            if (cp.getStudentID() == key) {
                 return cp;
             }
         }

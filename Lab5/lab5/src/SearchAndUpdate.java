@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author omars
  */
-
 public class SearchAndUpdate extends javax.swing.JFrame {
 
     /**
@@ -292,10 +291,8 @@ public class SearchAndUpdate extends javax.swing.JFrame {
                 m.addRow(new Object[]{s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()});
             }
 
-
-        }
-           else {
-            if(!SearchNameText.getText().isEmpty()){
+        } else {
+            if (!SearchNameText.getText().isEmpty()) {
                 foundStudents = sms.getRecordByName(SearchNameText.getText());
                 if (!foundStudents.isEmpty()) {
                     for (int i = 0; i < foundStudents.size(); i++) {
@@ -311,13 +308,9 @@ public class SearchAndUpdate extends javax.swing.JFrame {
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         String name = "", gender = "";
-        int age =0;
+        int age = 0;
         double gpa = 0;
         int selectedRow = SearchTable.getSelectedRow();
-        
-        
-            
-        
 
         if (Name.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a valid Name");
@@ -377,7 +370,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Please select a student to delete.");
             return;
         }
-        
+
         int id = (int) SearchTable.getValueAt(selectedRow, 0);
         String idString = String.valueOf(id);
         Student s = new Student(id, name, age, gender, dep, gpa);
@@ -388,9 +381,9 @@ public class SearchAndUpdate extends javax.swing.JFrame {
                 javax.swing.JOptionPane.YES_NO_OPTION
         );
         if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            sms.update(idString,s);
+            sms.update(idString, s);
             javax.swing.JOptionPane.showMessageDialog(this, "Student updated successfully.");
-           
+
         }
         setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed

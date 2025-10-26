@@ -14,14 +14,11 @@ import java.util.Scanner;
  */
 public class Users {
 
- 
     private ArrayList<User> users = new ArrayList<>();
 
-    public Users(){
-      readFromFile();
+    public Users() {
+        readFromFile();
     }
-
-
 
     public void readFromFile() {
         users.clear();
@@ -54,10 +51,11 @@ public class Users {
         String password = parts[1].trim();
         return new User(username, password);
     }
-     public boolean contains(String uname,String password) {
-        
+
+    public boolean contains(String uname, String password) {
+
         for (User u : users) {
-            if (u.getUsername().equals(uname)&&u.getPassword().equals(password)) {
+            if (u.getUsername().equals(uname) && u.getPassword().equals(password)) {
                 return true;
             }
         }

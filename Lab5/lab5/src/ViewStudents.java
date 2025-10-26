@@ -1,3 +1,4 @@
+
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -27,11 +28,10 @@ public class ViewStudents extends javax.swing.JFrame {
         this.parent = parent;
         this.sms = s;
         loadTable();
-         tableStudents.setAutoCreateRowSorter(true);
-         DefaultTableModel model = (DefaultTableModel) tableStudents.getModel();
-TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
-tableStudents.setRowSorter(sorter);
-         
+        tableStudents.setAutoCreateRowSorter(true);
+        DefaultTableModel model = (DefaultTableModel) tableStudents.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+        tableStudents.setRowSorter(sorter);
 
     }
 
@@ -40,11 +40,10 @@ tableStudents.setRowSorter(sorter);
         DefaultTableModel m = (DefaultTableModel) tableStudents.getModel();
 
         ArrayList<Student> x = sms.returnAllRecords();
-     
+
         for (int i = 0; i < x.size(); i++) {
             Student s = x.get(i);
             m.addRow(new Object[]{s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()});
-           
 
         }
     }
@@ -126,35 +125,36 @@ tableStudents.setRowSorter(sorter);
     }// </editor-fold>//GEN-END:initComponents
 
     private void FilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterButtonActionPerformed
-          @SuppressWarnings("unchecked")
-    TableRowSorter<DefaultTableModel> sorter =
-        (TableRowSorter<DefaultTableModel>) tableStudents.getRowSorter();
+        @SuppressWarnings("unchecked")
+        TableRowSorter<DefaultTableModel> sorter
+                = (TableRowSorter<DefaultTableModel>) tableStudents.getRowSorter();
 
-    String minTxt = MinGpaField.getText().trim();
-    if (minTxt.isEmpty()) {
-        sorter.setRowFilter(null); // show all if empty
-        return;
-    }
-
-    double min;
-    try { min = Double.parseDouble(minTxt); }
-    catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Please enter a valid number for GPA");
-        return;
-    }
-
-    sorter.setRowFilter(new RowFilter<DefaultTableModel, Integer>() {
-        @Override
-        public boolean include(Entry<? extends DefaultTableModel, ? extends Integer> e) {
-            Object value = e.getValue(5); // column index 5 = GPA
-            try {
-                double gpa = Double.parseDouble(String.valueOf(value));
-                return gpa >= min;
-            } catch (Exception ex) {
-                return false;
-            }
+        String minTxt = MinGpaField.getText().trim();
+        if (minTxt.isEmpty()) {
+            sorter.setRowFilter(null); // show all if empty
+            return;
         }
-    });
+
+        double min;
+        try {
+            min = Double.parseDouble(minTxt);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for GPA");
+            return;
+        }
+
+        sorter.setRowFilter(new RowFilter<DefaultTableModel, Integer>() {
+            @Override
+            public boolean include(Entry<? extends DefaultTableModel, ? extends Integer> e) {
+                Object value = e.getValue(5); // column index 5 = GPA
+                try {
+                    double gpa = Double.parseDouble(String.valueOf(value));
+                    return gpa >= min;
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
+        });
     }//GEN-LAST:event_FilterButtonActionPerformed
 
     /**

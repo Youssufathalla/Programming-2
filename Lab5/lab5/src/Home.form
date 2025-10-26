@@ -85,9 +85,6 @@
         <Property name="text" type="java.lang.String" value="Add Student"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addstudentbuttonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewstudentsbutton">
       <Properties>
@@ -121,9 +118,6 @@
         <Property name="text" type="java.lang.String" value="Delete  Students"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletestudentsbuttonActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

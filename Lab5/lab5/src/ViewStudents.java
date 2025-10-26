@@ -31,11 +31,11 @@ public class ViewStudents extends javax.swing.JFrame {
         DefaultTableModel m = (DefaultTableModel) tableStudents.getModel();
 
         ArrayList<Student> x = sms.returnAllRecords();
-     
+        System.out.println("" + x.size());
         for (int i = 0; i < x.size(); i++) {
             Student s = x.get(i);
             m.addRow(new Object[]{s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()});
-           
+            System.out.println(s.getStudentID() + " " + s.getName());
 
         }
     }

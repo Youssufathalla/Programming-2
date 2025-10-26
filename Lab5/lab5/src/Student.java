@@ -19,10 +19,7 @@ public class Student {
         this.StudentID = StudentID;
         this.name = name;
         this.age = age;
-        if(gpa<4 && gpa>0)
-            this.gpa = gpa;
-        else
-            this.gpa=0;
+        this.gpa = gpa;
         this.department = department;
         this.gender = gender;
     }

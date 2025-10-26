@@ -109,9 +109,6 @@
         <Property name="text" type="java.lang.String" value="Search And Update"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updatestudentbuttonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="deletestudentsbutton">
       <Properties>

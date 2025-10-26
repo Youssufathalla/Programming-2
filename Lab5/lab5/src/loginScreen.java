@@ -1,4 +1,5 @@
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /*
@@ -124,7 +125,6 @@ public class loginScreen extends javax.swing.JFrame {
         if (usersDb.contains(userName, password)) {
             Home h=new Home();
             h.setVisible(true);
-            setVisible(false);
         } else {
            JOptionPane.showMessageDialog(this, "Incorrect username or password");
         }

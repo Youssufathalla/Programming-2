@@ -5,7 +5,7 @@
 9666,hamed,18,Male,Computer,0.0
 9776,tamer,19,Male,Computer,0.0
 9556,ali,30,Male,Computer,0.0
-9055,somaya,9,Female,Electromechanics,2.5
+9055,sara,9,Female,Electromechanics,2.5
 5905,sara,16,Female,Computer,1.0
 9555,seif,22,Male,Computer,2.0
 9760,tarek,12,Male,Computer,3.0

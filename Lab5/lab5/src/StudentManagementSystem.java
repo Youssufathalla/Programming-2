@@ -34,8 +34,7 @@ public class StudentManagementSystem extends database{
         
         deleteStudent(oldStudent.LineRepresentation());
         addStudent(newStudent);
-        //error if deleted then addf failed due to input error
-    
+        
     }
  
    

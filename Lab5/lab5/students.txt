@@ -13,3 +13,6 @@
 0,seif,22,Male,Computer,2.0
 0,ww,12,Male,Computer,3.0
 0,s,2,Female,Computer,2.0
+5,aa,3,Female,Computer,3.0
+0,ss,3,Female,Computer,3.0
+9555,aa,44,Male,Computer,3.0

@@ -261,11 +261,6 @@ public class AddStudent extends javax.swing.JFrame {
             return;
         }
 
-        if (id < 0) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid ID");
-            return;
-        }
-
         if (!name.matches("[A-Za-z]+")) {
             JOptionPane.showMessageDialog(this, "Please enter a valid Name");
             return;

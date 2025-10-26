@@ -14,6 +14,7 @@ public class AddStudent extends javax.swing.JFrame {
     /**
      * Creates new form AddStudent
      */
+
     StudentManagementSystem sms;
     Home parent;
 

@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author omars
  */
+
 public class SearchAndUpdate extends javax.swing.JFrame {
 
     /**
@@ -46,21 +47,19 @@ public class SearchAndUpdate extends javax.swing.JFrame {
         SearchTable = new javax.swing.JTable();
         SearchButton = new javax.swing.JButton();
         NameLabel = new javax.swing.JLabel();
-        GenderLabel = new javax.swing.JLabel();
         AgeLabel = new javax.swing.JLabel();
-        DepartmentLabel = new javax.swing.JLabel();
-        GPALabel = new javax.swing.JLabel();
         NameText = new javax.swing.JScrollPane();
-        NameText1 = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        DepartmentText = new javax.swing.JTextArea();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        GenderText = new javax.swing.JTextArea();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        GPAText = new javax.swing.JTextArea();
+        Name = new javax.swing.JTextArea();
         AgeText = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
+        Age = new javax.swing.JTextArea();
         UpdateButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        Gpa = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        Male = new javax.swing.JRadioButton();
+        Female = new javax.swing.JRadioButton();
+        Department = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,33 +110,15 @@ public class SearchAndUpdate extends javax.swing.JFrame {
 
         NameLabel.setText("Name");
 
-        GenderLabel.setText("Gender");
-
         AgeLabel.setText("Age");
 
-        DepartmentLabel.setText("Department");
+        Name.setColumns(20);
+        Name.setRows(5);
+        NameText.setViewportView(Name);
 
-        GPALabel.setText("GPA");
-
-        NameText1.setColumns(20);
-        NameText1.setRows(5);
-        NameText.setViewportView(NameText1);
-
-        DepartmentText.setColumns(20);
-        DepartmentText.setRows(5);
-        jScrollPane7.setViewportView(DepartmentText);
-
-        GenderText.setColumns(20);
-        GenderText.setRows(5);
-        jScrollPane8.setViewportView(GenderText);
-
-        GPAText.setColumns(20);
-        GPAText.setRows(5);
-        jScrollPane9.setViewportView(GPAText);
-
-        jTextArea6.setColumns(20);
-        jTextArea6.setRows(5);
-        AgeText.setViewportView(jTextArea6);
+        Age.setColumns(20);
+        Age.setRows(5);
+        AgeText.setViewportView(Age);
 
         UpdateButton.setText("Update");
         UpdateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +127,34 @@ public class SearchAndUpdate extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Enter Gpa");
+
+        Gpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GpaActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Enter Department");
+
+        jLabel13.setText("Enter Gender");
+
+        Male.setText("Male");
+        Male.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaleActionPerformed(evt);
+            }
+        });
+
+        Female.setText("Female");
+        Female.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FemaleActionPerformed(evt);
+            }
+        });
+
+        Department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computer", "Electromechanics", "Mechatronis", "Biomedical" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,14 +162,14 @@ public class SearchAndUpdate extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(SearchButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(SearchButton))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(searchByNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(searchByIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,24 +178,38 @@ public class SearchAndUpdate extends javax.swing.JFrame {
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(GPALabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(DepartmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(GenderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(AgeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(AgeText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(NameText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(UpdateButton)))
-                .addGap(18, 18, 18)
+                                        .addGap(44, 44, 44)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(NameText, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                            .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                .addGap(0, 12, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(UpdateButton)))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(Gpa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(Department, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(Male)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Female)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -210,24 +233,24 @@ public class SearchAndUpdate extends javax.swing.JFrame {
                             .addComponent(NameText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(NameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AgeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(GenderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(DepartmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(GPALabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                        .addGap(1, 1, 1)
+                            .addComponent(AgeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Female, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                                .addComponent(Male)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Gpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
                         .addComponent(UpdateButton))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(32, Short.MAX_VALUE)
@@ -257,7 +280,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
             if (s != null) {
                 m.addRow(new Object[]{s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()});
             }
-         
+
 
         }
            else {
@@ -276,9 +299,82 @@ public class SearchAndUpdate extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        // TODO add your handling code here:
-        //Delete,create then add 
+        String name = "", gender = "";
+        int id = 0, age = 0;
+        double gpa = 0;
+        
+
+        if (Name.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid Name");
+            return;
+        } else {
+            name = Name.getText();
+        }
+
+        if (Age.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter an Age");
+            return;
+        }
+        try {
+            age = Integer.parseInt(Age.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for Age");
+            return;
+        }
+
+        if (Male.isSelected()) {
+            gender = "Male";
+        } else if (Female.isSelected()) {
+            gender = "Female";
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a gender");
+            return;
+        }
+
+        String dep = (String) Department.getSelectedItem();
+
+        if (Gpa.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a GPA");
+            return;
+        }
+        try {
+            gpa = Double.parseDouble(Gpa.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for GPA");
+            return;
+        }
+
+        if (age < 0) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid Age");
+            return;
+        }
+
+        if (gpa > 4 || gpa < 0) {
+            JOptionPane.showMessageDialog(this, "Please enter a GPA between 0 and 4");
+            return;
+        }
+
+        if (!name.matches("[A-Za-z]+")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid Name");
+            return;
+        }
+
+        Student s = new Student(id, name, age, gender, dep, gpa);
+        sms.addStudent(s);
+        setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
+
+    private void GpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GpaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GpaActionPerformed
+
+    private void MaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaleActionPerformed
+
+    private void FemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FemaleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,31 +412,29 @@ public class SearchAndUpdate extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Age;
     private javax.swing.JLabel AgeLabel;
     private javax.swing.JScrollPane AgeText;
-    private javax.swing.JLabel DepartmentLabel;
-    private javax.swing.JTextArea DepartmentText;
-    private javax.swing.JLabel GPALabel;
-    private javax.swing.JTextArea GPAText;
-    private javax.swing.JLabel GenderLabel;
-    private javax.swing.JTextArea GenderText;
+    private javax.swing.JComboBox<String> Department;
+    private javax.swing.JRadioButton Female;
+    private javax.swing.JTextField Gpa;
+    private javax.swing.JRadioButton Male;
+    private javax.swing.JTextArea Name;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JScrollPane NameText;
-    private javax.swing.JTextArea NameText1;
     private javax.swing.JButton SearchButton;
     private javax.swing.JTextArea SearchIDtext;
     private javax.swing.JTextArea SearchNameText;
     private javax.swing.JTable SearchTable;
     private javax.swing.JButton UpdateButton;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea6;
     private javax.swing.JLabel searchByIDLabel;
     private javax.swing.JLabel searchByNameLabel;
     // End of variables declaration//GEN-END:variables

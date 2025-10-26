@@ -300,8 +300,12 @@ public class SearchAndUpdate extends javax.swing.JFrame {
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         String name = "", gender = "";
-        int id = 0, age = 0;
+        int age =0;
         double gpa = 0;
+        int selectedRow = SearchTable.getSelectedRow();
+        
+        
+            
         
 
         if (Name.getText().isEmpty()) {
@@ -358,9 +362,25 @@ public class SearchAndUpdate extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a valid Name");
             return;
         }
-
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a student to delete.");
+            return;
+        }
+        
+        int id = (int) SearchTable.getValueAt(selectedRow, 0);
         Student s = new Student(id, name, age, gender, dep, gpa);
-        sms.addStudent(s);
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to update student with ID: " + id + "?",
+                "Confirm update",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            sms.update(sms.getRecord(id),s);
+            javax.swing.JOptionPane.showMessageDialog(this, "Student deleted successfully.");
+            
+
+        
         setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 

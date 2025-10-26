@@ -1,51 +1,43 @@
-
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 /**
  *
  * @author Lenovo
  */
-public class ViewStudents extends javax.swing.JFrame {
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
+public class DeleteStudent extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewStudents
+     * Creates new form DeleteStudent
      */
     StudentManagementSystem sms;
     Home parent;
 
-    public ViewStudents(StudentManagementSystem s, Home parent) {
+    public DeleteStudent(StudentManagementSystem s, Home parent) {
         initComponents();
         this.parent = parent;
         this.sms = s;
         loadTable();
-
     }
 
     public void loadTable() {
 
         DefaultTableModel m = (DefaultTableModel) tableStudents.getModel();
+        m.setRowCount(0);
 
         ArrayList<Student> x = sms.returnAllRecords();
-     
+
         for (int i = 0; i < x.size(); i++) {
             Student s = x.get(i);
             m.addRow(new Object[]{s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()});
-           
 
         }
     }
-//public static void main(String args[]) {
-//    java.awt.EventQueue.invokeLater(new Runnable() {
-//        public void run() {
-//            new ViewStudents().setVisible(true);
-//        }
-//    });
-//}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +50,7 @@ public class ViewStudents extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableStudents = new javax.swing.JTable();
+        Deletebutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,25 +64,59 @@ public class ViewStudents extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableStudents);
 
+        Deletebutton.setText("Delete");
+        Deletebutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletebuttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Deletebutton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(Deletebutton)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DeletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletebuttonActionPerformed
+        int selectedRow = tableStudents.getSelectedRow();
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a student to delete.");
+            return;
+        }
+        int id = (int) tableStudents.getValueAt(selectedRow, 0);
+        String idString = String.valueOf(id);
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to delete student with ID: " + id + "?",
+                "Confirm Delete",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            sms.deleteStudent(idString);
+            javax.swing.JOptionPane.showMessageDialog(this, "Student deleted successfully.");
+            loadTable();
+        }
+    }//GEN-LAST:event_DeletebuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,25 +135,26 @@ public class ViewStudents extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DeleteStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DeleteStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DeleteStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DeleteStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new ViewStudents().setVisible(true);
+//                new DeleteStudent().setVisible(true);
 //            }
 //        });
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Deletebutton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableStudents;
     // End of variables declaration//GEN-END:variables

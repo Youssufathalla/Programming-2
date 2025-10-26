@@ -27,13 +27,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
         this.sms = sms;
         this.parent = parent;
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
         SearchTable.setAutoCreateRowSorter(true);
-=======
-        DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
-TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-SearchTable.setRowSorter(sorter);
->>>>>>> Stashed changes
 =======
         DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
 TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);

@@ -307,63 +307,58 @@ public class SearchAndUpdate extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-    DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
 
-    // Read & sanitize inputs (JTextArea can include newlines)
-    String idText   = SearchIDtext.getText()   == null ? "" : SearchIDtext.getText().trim();
-    String nameText = SearchNameText.getText() == null ? "" : SearchNameText.getText().trim();
+        String idText = SearchIDtext.getText() == null ? "" : SearchIDtext.getText().trim();
+        String nameText = SearchNameText.getText() == null ? "" : SearchNameText.getText().trim();
 
-    // Allow exactly one of ID or Name
-    boolean hasId   = !idText.isEmpty();
-    boolean hasName = !nameText.isEmpty();
+        boolean hasId = !idText.isEmpty();
+        boolean hasName = !nameText.isEmpty();
 
-    if ((hasId && hasName) || (!hasId && !hasName)) {
-        JOptionPane.showMessageDialog(this, "please enter a name or an id");
-        return;
-    }
-
-    // Clear old results before showing new ones
-    m.setRowCount(0);
-
-    if (hasId) {
-        // ---- Search by ID ----
-        int id;
-        try {
-            id = Integer.parseInt(idText);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Enter a numeric ID");
+        if ((hasId && hasName) || (!hasId && !hasName)) {
+            JOptionPane.showMessageDialog(this, "please enter a name or an id not both or neither");
             return;
         }
 
-        if (!sms.contains(id)) {
-            JOptionPane.showMessageDialog(this, "No Student found with this ID");
-            return;
-        }
+        m.setRowCount(0);
 
-        Student s = sms.getRecord(id);
-        if (s != null) {
-            m.addRow(new Object[]{
-                s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()
-            });
+        if (hasId) {
+            int id;
+            try {
+                id = Integer.parseInt(idText);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Enter a numeric ID");
+                return;
+            }
+
+            if (!sms.contains(id)) {
+                JOptionPane.showMessageDialog(this, "No Student found with this ID");
+                return;
+            }
+
+            Student s = sms.getRecord(id);
+            if (s != null) {
+                m.addRow(new Object[]{
+                    s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()
+                });
+            } else {
+                JOptionPane.showMessageDialog(this, "No Student found with this ID");
+            }
+
         } else {
-            JOptionPane.showMessageDialog(this, "No Student found with this ID");
-        }
+            ArrayList<Student> foundStudents = sms.getRecordByName(nameText);
 
-    } else {
-        // ---- Search by Name ----
-        ArrayList<Student> foundStudents = sms.getRecordByName(nameText);
+            if (foundStudents == null || foundStudents.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No Student found with this name");
+                return;
+            }
 
-        if (foundStudents == null || foundStudents.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No Student found with this name");
-            return;
+            for (Student z : foundStudents) {
+                m.addRow(new Object[]{
+                    z.getStudentID(), z.getName(), z.getAge(), z.getGender(), z.getDepartment(), z.getGpa()
+                });
+            }
         }
-
-        for (Student z : foundStudents) {
-            m.addRow(new Object[]{
-                z.getStudentID(), z.getName(), z.getAge(), z.getGender(), z.getDepartment(), z.getGpa()
-            });
-        }
-    }
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed

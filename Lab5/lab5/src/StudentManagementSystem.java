@@ -31,12 +31,9 @@ public class StudentManagementSystem extends database{
     }
     
     public void update(Student oldStudent,Student newStudent){
-        
         deleteStudent(oldStudent.LineRepresentation());
         addStudent(newStudent);
-        
     }
- 
-   
+    
     
 }

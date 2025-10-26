@@ -79,6 +79,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="UsernameTextField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Seif"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsernameTextFieldActionPerformed"/>
       </Events>
@@ -112,6 +115,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="PasswordField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="9485"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="LoginButton">
       <Properties>

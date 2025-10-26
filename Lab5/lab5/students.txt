@@ -10,5 +10,4 @@
 5,k,5,Female,Computer,1.0
 55,58,6,Female,Computer,1.0
 5,hssan,55,Female,Computer,2.0
-4,3,15,Female,Computer,3.0
-22,aa,2,Female,Computer,2.0
+

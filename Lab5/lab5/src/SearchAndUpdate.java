@@ -242,7 +242,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
 
-        int id = 0;
+        int id = -1;
         ArrayList<Student> foundStudents = new ArrayList<>();
         if (!SearchIDtext.getText().isEmpty()) {
             try {

@@ -267,7 +267,12 @@ public class AddStudent extends javax.swing.JFrame {
         }
 
         Student s = new Student(id, name, age, gender, dep, gpa);
-        sms.addStudent(s);
+        if (!sms.contains(id)) {
+            sms.addStudent(s);
+        } else {
+            JOptionPane.showMessageDialog(this, "Duplicated student");
+            return;
+        }
         setVisible(false);
     }//GEN-LAST:event_addstudentbuttonActionPerformed
 

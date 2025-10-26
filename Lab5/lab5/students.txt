@@ -7,8 +7,8 @@
 9556,ali,30,Male,Computer,0.0
 9055,sara,9,Female,Electromechanics,2.5
 5905,sara,16,Female,Computer,1.0
-9555,seif,22,Male,Computer,2.0
 9760,tarek,12,Male,Computer,3.0
 8900,salma,12,Female,Computer,2.0
 2005,lina,23,Female,Computer,3.0
 1020,judy,13,Female,Computer,3.0
+9555,ibrahim,21,Male,Computer,2.3

@@ -30,8 +30,8 @@ public class StudentManagementSystem extends database{
         return new Student(id, name, age, gender, department,gpa);
     }
     
-    public void update(Student oldStudent,Student newStudent){
-        deleteStudent(oldStudent.LineRepresentation());
+    public void update(String oldStudent,Student newStudent){
+        deleteStudent(oldStudent);
         addStudent(newStudent);
     }
     

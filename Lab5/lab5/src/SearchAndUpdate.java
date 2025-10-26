@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -37,6 +38,13 @@ public class SearchAndUpdate extends javax.swing.JFrame {
 
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
+        buttonGroup7 = new javax.swing.ButtonGroup();
         searchByNameLabel = new javax.swing.JLabel();
         searchByIDLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -139,6 +147,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
 
         jLabel13.setText("Enter Gender");
 
+        buttonGroup1.add(Male);
         Male.setText("Male");
         Male.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +155,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(Female);
         Female.setText("Female");
         Female.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,6 +378,7 @@ public class SearchAndUpdate extends javax.swing.JFrame {
         }
         
         int id = (int) SearchTable.getValueAt(selectedRow, 0);
+        String idString = String.valueOf(id);
         Student s = new Student(id, name, age, gender, dep, gpa);
         int confirm = javax.swing.JOptionPane.showConfirmDialog(
                 this,
@@ -376,11 +387,10 @@ public class SearchAndUpdate extends javax.swing.JFrame {
                 javax.swing.JOptionPane.YES_NO_OPTION
         );
         if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            sms.update(sms.getRecord(id),s);
-            javax.swing.JOptionPane.showMessageDialog(this, "Student deleted successfully.");
-            
-
-        
+            sms.update(idString,s);
+            javax.swing.JOptionPane.showMessageDialog(this, "Student updated successfully.");
+           
+        }
         setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
@@ -447,6 +457,13 @@ public class SearchAndUpdate extends javax.swing.JFrame {
     private javax.swing.JTextArea SearchNameText;
     private javax.swing.JTable SearchTable;
     private javax.swing.JButton UpdateButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
+    private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel9;

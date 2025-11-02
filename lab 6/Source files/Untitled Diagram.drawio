@@ -4,23 +4,23 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-1" value="Student" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="120" height="360" as="geometry" />
-        </mxCell>
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-4" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="GQUT-G1xr9xsF6ugHeWS-1">
-          <mxGeometry x="52.5" y="60" width="15" height="280" as="geometry" />
-        </mxCell>
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-2" value="UserService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
-          <mxGeometry x="360" y="40" width="120" height="360" as="geometry" />
+          <mxGeometry x="320" y="40" width="120" height="360" as="geometry" />
         </mxCell>
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-3" value="CourseService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
-          <mxGeometry x="520" y="40" width="120" height="360" as="geometry" />
+          <mxGeometry x="480" y="40" width="120" height="360" as="geometry" />
         </mxCell>
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-5" value="JsonDatabaseManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
-          <mxGeometry x="680" y="40" width="120" height="360" as="geometry" />
+          <mxGeometry x="640" y="40" width="120" height="360" as="geometry" />
         </mxCell>
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-6" value="User Interface" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
-          <mxGeometry x="200" y="40" width="120" height="360" as="geometry" />
+          <mxGeometry x="160" y="40" width="120" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-9" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="GQUT-G1xr9xsF6ugHeWS-6">
+          <mxGeometry x="55" y="60" width="10" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-10" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" vertex="1" parent="1">
+          <mxGeometry x="70" y="40" width="20" height="360" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

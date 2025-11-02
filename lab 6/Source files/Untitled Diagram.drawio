@@ -90,6 +90,18 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-25" value="Optional" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="10" y="370" width="750" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-26" value="Enrollment Successful" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1" source="GQUT-G1xr9xsF6ugHeWS-9" target="GQUT-G1xr9xsF6ugHeWS-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="290" as="sourcePoint" />
+            <mxPoint x="370" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="160" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

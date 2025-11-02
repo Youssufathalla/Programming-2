@@ -47,11 +47,51 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-20" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.donut;dx=4;" vertex="1" parent="1">
-          <mxGeometry x="200" y="255" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-21" value="Confirm enrollment" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-21" value="Show available Course" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="80" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-22" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="KqNOEjBOV7VcMFSLjmMZ-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="230" as="sourcePoint" />
+            <mxPoint x="280" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-24" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="680" y="350" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-61" value="Login/Register" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="235" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqNOEjBOV7VcMFSLjmMZ-62">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="455" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-65" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="KqNOEjBOV7VcMFSLjmMZ-64">
+          <mxGeometry x="-0.1294" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-67" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqNOEjBOV7VcMFSLjmMZ-62">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="325" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-68" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="KqNOEjBOV7VcMFSLjmMZ-67">
+          <mxGeometry x="-0.0743" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-62" value="Is enrollment open" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="322.5" width="90" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-71" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqNOEjBOV7VcMFSLjmMZ-69">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-69" value="Show Message &quot;Enrollment Closed&quot;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="330" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -57,7 +57,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-18" value="Check Enrollment" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-17" parent="1" source="GQUT-G1xr9xsF6ugHeWS-6">
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-18" value="Check Enrollment (courseID)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-17" parent="1" source="GQUT-G1xr9xsF6ugHeWS-6">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="350" y="230" as="sourcePoint" />
             <mxPoint x="440" y="240" as="targetPoint" />
@@ -74,7 +74,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-21" value="read data" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-20" parent="1" source="GQUT-G1xr9xsF6ugHeWS-17">
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-21" value="read data (userID, courseID)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-20" parent="1" source="GQUT-G1xr9xsF6ugHeWS-17">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="585" y="265" as="sourcePoint" />
             <Array as="points">

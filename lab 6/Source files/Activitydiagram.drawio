@@ -99,9 +99,9 @@
         <mxCell id="KqNOEjBOV7VcMFSLjmMZ-76" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="KqNOEjBOV7VcMFSLjmMZ-73">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="400" y="400" as="sourcePoint" />
-            <mxPoint x="440" y="560" as="targetPoint" />
+            <mxPoint x="440" y="640" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="325" y="560" />
+              <mxPoint x="325" y="640" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -112,19 +112,11 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-78" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="440" y="480" as="sourcePoint" />
-            <mxPoint x="480" y="480" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-81" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqNOEjBOV7VcMFSLjmMZ-79">
+        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-81" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="480" as="sourcePoint" />
             <mxPoint x="640" y="480" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="KqNOEjBOV7VcMFSLjmMZ-79" value="Process payment" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="480" y="450" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="KqNOEjBOV7VcMFSLjmMZ-84" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqNOEjBOV7VcMFSLjmMZ-82">
           <mxGeometry relative="1" as="geometry">

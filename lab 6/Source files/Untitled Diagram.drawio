@@ -25,7 +25,7 @@
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-12" value="Student" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="50" y="10" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-13" value="Click enroll" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" source="GQUT-G1xr9xsF6ugHeWS-10" target="GQUT-G1xr9xsF6ugHeWS-6">
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-13" value="Click enroll (courseID)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" source="GQUT-G1xr9xsF6ugHeWS-10" target="GQUT-G1xr9xsF6ugHeWS-6">
           <mxGeometry width="80" relative="1" as="geometry">
             <mxPoint x="370" y="270" as="sourcePoint" />
             <mxPoint x="450" y="270" as="targetPoint" />
@@ -34,7 +34,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-15" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-14" parent="1" source="GQUT-G1xr9xsF6ugHeWS-9">
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-15" value="get course data (courseID)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-14" parent="1" source="GQUT-G1xr9xsF6ugHeWS-9">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="300" y="235" as="sourcePoint" />
             <Array as="points">
@@ -43,7 +43,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-16" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" source="GQUT-G1xr9xsF6ugHeWS-14" parent="1" target="GQUT-G1xr9xsF6ugHeWS-9">
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-16" value="course data" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" source="GQUT-G1xr9xsF6ugHeWS-14" parent="1" target="GQUT-G1xr9xsF6ugHeWS-9">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="300" y="305" as="targetPoint" />
             <Array as="points">

@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="28.2.8">
   <diagram name="Page-1" id="GszSGoeL98hTdyR8Yb1a">
-    <mxGraphModel dx="3485" dy="1998" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="2772" dy="1638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -28,7 +28,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="oojic54793jgQEpRcdSY-42" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;View Course Detials&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="515" y="-40" width="220" height="57" as="geometry" />
+          <mxGeometry x="515" y="-57" width="220" height="57" as="geometry" />
         </mxCell>
         <mxCell id="oojic54793jgQEpRcdSY-44" value="Earn certificate" style="ellipse;whiteSpace=wrap;html=1;fontSize=20;" vertex="1" parent="1">
           <mxGeometry x="350" y="600" width="220" height="57" as="geometry" />
@@ -37,7 +37,7 @@
           <mxGeometry x="515" y="60" width="220" height="57" as="geometry" />
         </mxCell>
         <mxCell id="oojic54793jgQEpRcdSY-46" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Complete lessons&amp;nbsp;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="515" y="356" width="220" height="57" as="geometry" />
+          <mxGeometry x="515" y="370" width="220" height="57" as="geometry" />
         </mxCell>
         <mxCell id="oojic54793jgQEpRcdSY-47" value="Take Quiz" style="ellipse;whiteSpace=wrap;html=1;fontSize=20;" vertex="1" parent="1">
           <mxGeometry x="515" y="257" width="220" height="57" as="geometry" />
@@ -67,7 +67,7 @@
           <mxGeometry x="515" y="838" width="220" height="56" as="geometry" />
         </mxCell>
         <mxCell id="oojic54793jgQEpRcdSY-56" value="View Quiz Result&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="515" y="457" width="220" height="57" as="geometry" />
+          <mxGeometry x="515" y="480" width="220" height="57" as="geometry" />
         </mxCell>
         <mxCell id="oojic54793jgQEpRcdSY-57" value="&lt;font style=&quot;font-size: 60px;&quot;&gt;User&lt;/font&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
           <mxGeometry x="-150" y="430" width="120" height="240" as="geometry" />
@@ -108,6 +108,24 @@
             <mxPoint x="480" y="207" as="sourcePoint" />
             <mxPoint x="590" y="167.25" as="targetPoint" />
             <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oojic54793jgQEpRcdSY-82" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;rounded=0;fontSize=21;strokeWidth=5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="oojic54793jgQEpRcdSY-47" target="oojic54793jgQEpRcdSY-46">
+          <mxGeometry x="0.2857" y="55" width="160" relative="1" as="geometry">
+            <mxPoint x="625.2" y="333" as="sourcePoint" />
+            <mxPoint x="624.7" y="290" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oojic54793jgQEpRcdSY-83" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;rounded=0;fontSize=21;strokeWidth=5;" edge="1" parent="1">
+          <mxGeometry y="65" width="160" relative="1" as="geometry">
+            <mxPoint x="625.2" y="443" as="sourcePoint" />
+            <mxPoint x="625" y="430" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="625" y="500" />
+            </Array>
+            <mxPoint y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>

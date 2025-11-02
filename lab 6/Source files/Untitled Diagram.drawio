@@ -7,11 +7,17 @@
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-2" value="UserService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
           <mxGeometry x="400" y="40" width="120" height="520" as="geometry" />
         </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-17" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="GQUT-G1xr9xsF6ugHeWS-2">
+          <mxGeometry x="55" y="200" width="10" height="130" as="geometry" />
+        </mxCell>
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-5" value="JsonDatabaseManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
           <mxGeometry x="600" y="40" width="120" height="520" as="geometry" />
         </mxCell>
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-14" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="GQUT-G1xr9xsF6ugHeWS-5">
           <mxGeometry x="55" y="110" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="GQUT-G1xr9xsF6ugHeWS-5">
+          <mxGeometry x="55" y="230" width="10" height="60" as="geometry" />
         </mxCell>
         <mxCell id="GQUT-G1xr9xsF6ugHeWS-6" value="CourseService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
           <mxGeometry x="200" y="40" width="120" height="520" as="geometry" />
@@ -43,11 +49,44 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="GQUT-G1xr9xsF6ugHeWS-16" value="course data" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" source="GQUT-G1xr9xsF6ugHeWS-14" parent="1" target="GQUT-G1xr9xsF6ugHeWS-9">
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-16" value="courseData" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" source="GQUT-G1xr9xsF6ugHeWS-14" parent="1" target="GQUT-G1xr9xsF6ugHeWS-9">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="300" y="305" as="targetPoint" />
             <Array as="points">
               <mxPoint x="300" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-18" value="Check Enrollment" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-17" parent="1" source="GQUT-G1xr9xsF6ugHeWS-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="230" as="sourcePoint" />
+            <mxPoint x="440" y="240" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="360" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-19" value="isEnrolled" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" source="GQUT-G1xr9xsF6ugHeWS-17" parent="1" target="GQUT-G1xr9xsF6ugHeWS-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="360" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="360" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-21" value="read data" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" target="GQUT-G1xr9xsF6ugHeWS-20" parent="1" source="GQUT-G1xr9xsF6ugHeWS-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="585" y="265" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="560" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GQUT-G1xr9xsF6ugHeWS-22" value="enrollmentData" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" source="GQUT-G1xr9xsF6ugHeWS-20" parent="1" target="GQUT-G1xr9xsF6ugHeWS-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="585" y="335" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="560" y="320" />
             </Array>
           </mxGeometry>
         </mxCell>

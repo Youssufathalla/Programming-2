@@ -4,10 +4,6 @@
  */
 package lab.pkg7;
 
-/**
- *
- * @author hassa
- */
 public class loginFrame extends javax.swing.JFrame {
 
     /**
@@ -149,11 +145,11 @@ public class loginFrame extends javax.swing.JFrame {
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
         signupFrame s = new signupFrame();
         this.setVisible(false);
-        s.setVisible(true); 
+        s.setVisible(true);
     }//GEN-LAST:event_signupButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-       // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

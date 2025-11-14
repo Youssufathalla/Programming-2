@@ -8,12 +8,12 @@ package lab.pkg7;
  *
  * @author omars
  */
-public class SignupFrame extends javax.swing.JFrame {
+public class signupFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form SignupFrame
      */
-    public SignupFrame() {
+    public signupFrame() {
         initComponents();
     }
 
@@ -26,21 +26,142 @@ public class SignupFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        emailLabel = new javax.swing.JLabel();
+        signupLabel = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
+        roleLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        usernameText = new javax.swing.JTextArea();
+        passText = new javax.swing.JScrollPane();
+        passwordText = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        emailText = new javax.swing.JTextArea();
+        studentRBtn = new javax.swing.JRadioButton();
+        instructorRBtn = new javax.swing.JRadioButton();
+        signupBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        emailLabel.setText("Email");
+
+        signupLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        signupLabel.setForeground(new java.awt.Color(51, 51, 255));
+        signupLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        signupLabel.setText("SignUp");
+        signupLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        usernameLabel.setText("Username");
+
+        passwordLabel.setText("Password");
+
+        roleLabel.setText("Role");
+
+        usernameText.setColumns(20);
+        usernameText.setRows(5);
+        jScrollPane1.setViewportView(usernameText);
+
+        passwordText.setColumns(20);
+        passwordText.setRows(5);
+        passText.setViewportView(passwordText);
+
+        emailText.setColumns(20);
+        emailText.setRows(5);
+        jScrollPane3.setViewportView(emailText);
+
+        buttonGroup1.add(studentRBtn);
+        studentRBtn.setText("Student");
+        studentRBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentRBtnActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(instructorRBtn);
+        instructorRBtn.setText("Instructor");
+        instructorRBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instructorRBtnActionPerformed(evt);
+            }
+        });
+
+        signupBtn.setText("SignUp");
+        signupBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signupBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(signupLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(signupBtn)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(studentRBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(instructorRBtn)))))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(signupLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(roleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(studentRBtn)
+                    .addComponent(instructorRBtn))
+                .addGap(18, 18, 18)
+                .addComponent(signupBtn)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void studentRBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentRBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentRBtnActionPerformed
+
+    private void instructorRBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructorRBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_instructorRBtnActionPerformed
+
+    private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_signupBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +199,20 @@ public class SignupFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextArea emailText;
+    private javax.swing.JRadioButton instructorRBtn;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane passText;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JTextArea passwordText;
+    private javax.swing.JLabel roleLabel;
+    private javax.swing.JButton signupBtn;
+    private javax.swing.JLabel signupLabel;
+    private javax.swing.JRadioButton studentRBtn;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JTextArea usernameText;
     // End of variables declaration//GEN-END:variables
 }

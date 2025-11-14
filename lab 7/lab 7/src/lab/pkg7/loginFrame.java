@@ -63,8 +63,10 @@ public class loginFrame extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(instructorRadioButton);
         instructorRadioButton.setText("Instructor");
 
+        buttonGroup1.add(studentRadioButton);
         studentRadioButton.setText("Student");
         studentRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

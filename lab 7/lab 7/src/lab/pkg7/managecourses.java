@@ -17,7 +17,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author omars
  */
-public class ViewEnrolledStudents extends javax.swing.JFrame {
+public class managecourses extends javax.swing.JFrame {
 
     /**
      * Creates new form SearchAndUpdate
@@ -25,7 +25,7 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
     private StudentManagementSystem sms;
     private Home parent;
 
-    public ViewEnrolledStudents(StudentManagementSystem sms, Home parent) {
+    public managecourses(StudentManagementSystem sms, Home parent) {
         initComponents();
         this.sms = sms;
         this.parent = parent;
@@ -63,21 +63,23 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         SearchTable = new javax.swing.JTable();
         SearchButton = new javax.swing.JButton();
-        UserId = new javax.swing.JLabel();
-        Role = new javax.swing.JLabel();
+        CourseId = new javax.swing.JLabel();
+        Title = new javax.swing.JLabel();
         NameText = new javax.swing.JScrollPane();
-        Name = new javax.swing.JTextArea();
+        courseId = new javax.swing.JTextArea();
         AgeText = new javax.swing.JScrollPane();
-        Age = new javax.swing.JTextArea();
+        title = new javax.swing.JTextArea();
         UpdateButton = new javax.swing.JButton();
-        Progress = new javax.swing.JLabel();
-        Gpa = new javax.swing.JTextField();
-        EnrolledCourses = new javax.swing.JLabel();
-        Username = new javax.swing.JLabel();
+        Lessons = new javax.swing.JLabel();
+        instructorId = new javax.swing.JTextField();
+        InstructorID = new javax.swing.JLabel();
+        Description = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Gpa1 = new javax.swing.JTextField();
-        Gpa2 = new javax.swing.JTextField();
+        description = new javax.swing.JTextField();
+        lessons = new javax.swing.JTextField();
+        Students = new javax.swing.JLabel();
+        students = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,7 +96,7 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        searchByNameLabel.setText("Search By Name");
+        searchByNameLabel.setText("Search By Title");
 
         searchByIDLabel.setText("Search By ID");
 
@@ -114,7 +116,7 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "UserId", "Role", "Username", "Email", "Enrolled Courses", "Progress"
+                "CourseId", "Title", "Description", "Instructorld", "Lessons", "Students"
             }
         ));
         jScrollPane4.setViewportView(SearchTable);
@@ -126,17 +128,17 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
             }
         });
 
-        UserId.setText("UserId");
+        CourseId.setText("CourseId");
 
-        Role.setText("Role");
+        Title.setText("Title");
 
-        Name.setColumns(20);
-        Name.setRows(5);
-        NameText.setViewportView(Name);
+        courseId.setColumns(20);
+        courseId.setRows(5);
+        NameText.setViewportView(courseId);
 
-        Age.setColumns(20);
-        Age.setRows(5);
-        AgeText.setViewportView(Age);
+        title.setColumns(20);
+        title.setRows(5);
+        AgeText.setViewportView(title);
 
         UpdateButton.setText("Update");
         UpdateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -145,27 +147,35 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
             }
         });
 
-        Progress.setText("Progress");
+        Lessons.setText("Lessons");
 
-        Gpa.addActionListener(new java.awt.event.ActionListener() {
+        instructorId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GpaActionPerformed(evt);
+                instructorIdActionPerformed(evt);
             }
         });
 
-        EnrolledCourses.setText("Enrolled Courses");
+        InstructorID.setText("InstructorID");
 
-        Username.setText("Username");
+        Description.setText("Description");
 
-        Gpa1.addActionListener(new java.awt.event.ActionListener() {
+        description.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Gpa1ActionPerformed(evt);
+                descriptionActionPerformed(evt);
             }
         });
 
-        Gpa2.addActionListener(new java.awt.event.ActionListener() {
+        lessons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Gpa2ActionPerformed(evt);
+                lessonsActionPerformed(evt);
+            }
+        });
+
+        Students.setText("Students");
+
+        students.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentsActionPerformed(evt);
             }
         });
 
@@ -177,19 +187,24 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(UpdateButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(Progress, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Students, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(UpdateButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(62, 62, 62)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Gpa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(instructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel2))
-                                    .addComponent(Gpa2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(6, 6, 6)))
                         .addGap(26, 312, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -207,18 +222,18 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Role, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(UserId, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(CourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(44, 44, 44)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(NameText, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                                         .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(EnrolledCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(InstructorID, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                                .addComponent(Gpa1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -244,28 +259,32 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(NameText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(UserId, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                            .addComponent(CourseId, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Role, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                             .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Gpa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(EnrolledCourses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(InstructorID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
-                                .addComponent(Gpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(instructorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Progress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Gpa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Lessons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lessons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(UpdateButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(UpdateButton)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Students, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(12, 12, 12))))
         );
 
@@ -333,19 +352,19 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
         double gpa = 0;
         int selectedRow = SearchTable.getSelectedRow();
 
-        if (Name.getText().isEmpty()) {
+        if (courseId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a valid Name");
             return;
         } else {
-            name = Name.getText();
+            name = courseId.getText();
         }
 
-        if (Age.getText().isEmpty()) {
+        if (title.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an Age");
             return;
         }
         try {
-            age = Integer.parseInt(Age.getText());
+            age = Integer.parseInt(title.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Please enter a valid number for Age");
             return;
@@ -362,12 +381,12 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
 
         String dep = (String) Department.getSelectedItem();
 
-        if (Gpa.getText().isEmpty()) {
+        if (instructorId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a GPA");
             return;
         }
         try {
-            gpa = Double.parseDouble(Gpa.getText());
+            gpa = Double.parseDouble(instructorId.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Please enter a valid number for GPA");
             return;
@@ -409,17 +428,21 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
-    private void GpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GpaActionPerformed
+    private void instructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructorIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_GpaActionPerformed
+    }//GEN-LAST:event_instructorIdActionPerformed
 
-    private void Gpa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Gpa1ActionPerformed
+    private void descriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Gpa1ActionPerformed
+    }//GEN-LAST:event_descriptionActionPerformed
 
-    private void Gpa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Gpa2ActionPerformed
+    private void lessonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lessonsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Gpa2ActionPerformed
+    }//GEN-LAST:event_lessonsActionPerformed
+
+    private void studentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,23 +480,19 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea Age;
     private javax.swing.JScrollPane AgeText;
-    private javax.swing.JLabel EnrolledCourses;
-    private javax.swing.JTextField Gpa;
-    private javax.swing.JTextField Gpa1;
-    private javax.swing.JTextField Gpa2;
-    private javax.swing.JTextArea Name;
+    private javax.swing.JLabel CourseId;
+    private javax.swing.JLabel Description;
+    private javax.swing.JLabel InstructorID;
+    private javax.swing.JLabel Lessons;
     private javax.swing.JScrollPane NameText;
-    private javax.swing.JLabel Progress;
-    private javax.swing.JLabel Role;
     private javax.swing.JButton SearchButton;
     private javax.swing.JTextArea SearchIDtext;
     private javax.swing.JTextArea SearchNameText;
     private javax.swing.JTable SearchTable;
+    private javax.swing.JLabel Students;
+    private javax.swing.JLabel Title;
     private javax.swing.JButton UpdateButton;
-    private javax.swing.JLabel UserId;
-    private javax.swing.JLabel Username;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -481,6 +500,9 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.ButtonGroup buttonGroup7;
+    private javax.swing.JTextArea courseId;
+    private javax.swing.JTextField description;
+    private javax.swing.JTextField instructorId;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -488,7 +510,10 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField lessons;
     private javax.swing.JLabel searchByIDLabel;
     private javax.swing.JLabel searchByNameLabel;
+    private javax.swing.JTextField students;
+    private javax.swing.JTextArea title;
     // End of variables declaration//GEN-END:variables
 }

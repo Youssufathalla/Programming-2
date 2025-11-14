@@ -64,20 +64,26 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="UpdateButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="Students" min="-2" pref="108" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="students" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="UpdateButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="Progress" min="-2" pref="108" max="-2" attributes="0"/>
+                              <Component id="Lessons" min="-2" pref="108" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="Gpa" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="instructorId" min="-2" pref="120" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel3" min="-2" pref="122" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="Gpa2" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="lessons" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           </Group>
@@ -102,8 +108,8 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="Role" min="-2" pref="102" max="-2" attributes="0"/>
-                                      <Component id="UserId" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <Component id="Title" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <Component id="CourseId" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -114,11 +120,11 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Username" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                                  <Component id="EnrolledCourses" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                                  <Component id="Description" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                                  <Component id="InstructorID" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="62" max="32767" attributes="0"/>
-                              <Component id="Gpa1" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="description" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -153,34 +159,40 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="NameText" pref="0" max="32767" attributes="0"/>
-                          <Component id="UserId" pref="38" max="32767" attributes="0"/>
+                          <Component id="CourseId" pref="38" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="Role" pref="38" max="32767" attributes="0"/>
+                          <Component id="Title" pref="38" max="32767" attributes="0"/>
                           <Component id="AgeText" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="Username" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="Gpa1" min="-2" max="-2" attributes="0"/>
+                          <Component id="Description" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="description" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="EnrolledCourses" alignment="3" max="32767" attributes="0"/>
+                              <Component id="InstructorID" alignment="3" max="32767" attributes="0"/>
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Gpa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="instructorId" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Progress" alignment="3" max="32767" attributes="0"/>
-                          <Component id="Gpa2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Lessons" alignment="3" max="32767" attributes="0"/>
+                          <Component id="lessons" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="UpdateButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="UpdateButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Component id="Students" alignment="3" max="32767" attributes="0"/>
+                              <Component id="students" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -191,7 +203,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="searchByNameLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Search By Name"/>
+        <Property name="text" type="java.lang.String" value="Search By Title"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="searchByIDLabel">
@@ -240,12 +252,12 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
-                <Column editable="true" title="UserId" type="java.lang.Object"/>
-                <Column editable="true" title="Role" type="java.lang.Object"/>
-                <Column editable="true" title="Username" type="java.lang.Object"/>
-                <Column editable="true" title="Email" type="java.lang.Object"/>
-                <Column editable="true" title="Enrolled Courses" type="java.lang.Object"/>
-                <Column editable="true" title="Progress" type="java.lang.Object"/>
+                <Column editable="true" title="CourseId" type="java.lang.Object"/>
+                <Column editable="true" title="Title" type="java.lang.Object"/>
+                <Column editable="true" title="Description" type="java.lang.Object"/>
+                <Column editable="true" title="Instructorld" type="java.lang.Object"/>
+                <Column editable="true" title="Lessons" type="java.lang.Object"/>
+                <Column editable="true" title="Students" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -297,14 +309,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SearchButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="UserId">
+    <Component class="javax.swing.JLabel" name="CourseId">
       <Properties>
-        <Property name="text" type="java.lang.String" value="UserId"/>
+        <Property name="text" type="java.lang.String" value="CourseId"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="Role">
+    <Component class="javax.swing.JLabel" name="Title">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Role"/>
+        <Property name="text" type="java.lang.String" value="Title"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="NameText">
@@ -314,7 +326,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="Name">
+        <Component class="javax.swing.JTextArea" name="courseId">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -329,7 +341,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="Age">
+        <Component class="javax.swing.JTextArea" name="title">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -345,38 +357,48 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="Progress">
+    <Component class="javax.swing.JLabel" name="Lessons">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Progress"/>
+        <Property name="text" type="java.lang.String" value="Lessons"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Gpa">
+    <Component class="javax.swing.JTextField" name="instructorId">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GpaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="instructorIdActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="EnrolledCourses">
+    <Component class="javax.swing.JLabel" name="InstructorID">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enrolled Courses"/>
+        <Property name="text" type="java.lang.String" value="InstructorID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="Username">
+    <Component class="javax.swing.JLabel" name="Description">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Username"/>
+        <Property name="text" type="java.lang.String" value="Description"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
     </Component>
-    <Component class="javax.swing.JTextField" name="Gpa1">
+    <Component class="javax.swing.JTextField" name="description">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Gpa1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descriptionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="Gpa2">
+    <Component class="javax.swing.JTextField" name="lessons">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Gpa2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lessonsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Students">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Students"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="students">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="studentsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

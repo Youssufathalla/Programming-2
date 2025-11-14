@@ -143,7 +143,7 @@ public class loginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_studentRadioButtonActionPerformed
 
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
-        signupFrame s = new signupFrame();
+        SignUpFrame s = new SignUpFrame();
         this.setVisible(false);
         s.setVisible(true);
     }//GEN-LAST:event_signupButtonActionPerformed

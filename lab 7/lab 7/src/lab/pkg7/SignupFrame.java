@@ -8,12 +8,12 @@ package lab.pkg7;
  *
  * @author omars
  */
-public class signupFrame extends javax.swing.JFrame {
+public class SignUpFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form SignupFrame
      */
-    public signupFrame() {
+    public SignUpFrame() {
         initComponents();
     }
 

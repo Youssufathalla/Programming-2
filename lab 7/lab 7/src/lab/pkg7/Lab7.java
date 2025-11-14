@@ -15,6 +15,7 @@ public class Lab7 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //kewijfhbfvnoenfibveb
     }
     
 }

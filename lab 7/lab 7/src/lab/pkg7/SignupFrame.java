@@ -8,12 +8,12 @@ package lab.pkg7;
  *
  * @author omars
  */
-public class SignupFrame extends javax.swing.JFrame {
+public class signupFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form SignupFrame
      */
-    public SignupFrame() {
+    public signupFrame() {
         initComponents();
     }
 
@@ -27,9 +27,6 @@ public class SignupFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
         emailLabel = new javax.swing.JLabel();
         signupLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
@@ -203,9 +200,6 @@ public class SignupFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextArea emailText;
     private javax.swing.JRadioButton instructorRBtn;

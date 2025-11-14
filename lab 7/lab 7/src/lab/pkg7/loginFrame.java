@@ -51,6 +51,11 @@ public class loginFrame extends javax.swing.JFrame {
         jLabel3.setText("Password:");
 
         loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -142,10 +147,14 @@ public class loginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_studentRadioButtonActionPerformed
 
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
-//        signupFrame s=new signupFrame( , this);
-//        this.setVisible(false);
-//        s.setVisible(true);
+        signupFrame s = new signupFrame();
+        this.setVisible(false);
+        s.setVisible(true); 
     }//GEN-LAST:event_signupButtonActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments

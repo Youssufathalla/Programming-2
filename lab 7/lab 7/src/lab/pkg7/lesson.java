@@ -8,12 +8,12 @@ package lab.pkg7;
  *
  * @author youssufathalla
  */
-public class lesson {
+public class Lesson {
     private String lessonId;
     private String title;
     private String content;
 
-    public lesson(String lessonId, String title, String content) {
+    public Lesson(String lessonId, String title, String content) {
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;

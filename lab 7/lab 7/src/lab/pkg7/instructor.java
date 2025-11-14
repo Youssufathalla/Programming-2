@@ -8,13 +8,13 @@ package lab.pkg7;
  *
  * @author youssufathalla
  */
-public class instructor {
+public class Instructor {
      private String name;
     private int id;
     private String department;
     private double salary;
 
-    public instructor(String name, int id, String department, double salary) {
+    public Instructor(String name, int id, String department, double salary) {
         this.name = name;
         this.id = id;
         this.department = department;

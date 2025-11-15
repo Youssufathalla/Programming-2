@@ -8,10 +8,29 @@ package lab.pkg7;
  *
  * @author youssufathalla
  */
-public class Instructor extends User{
+import java.util.ArrayList;
+
+public class Instructor extends User {
+
     private ArrayList<Integer> createdCourses;
 
-    public Instructor(int userId, String role, String username, String email, String passwordHash) {
-        super(userId, role, username, email, passwordHash);
+    public Instructor(int userId, String username, String email, String passwordHash) {
+        super(userId, username, email, passwordHash, "instructor");
+        this.createdCourses = new ArrayList<>();
+    }
+
+    public void addCreatedCourse(int courseId) {
+        if (!createdCourses.contains(courseId)) {
+            createdCourses.add(courseId);
+        }
+    }
+
+    public ArrayList<Integer> getCreatedCourses() {
+        return new ArrayList<>(createdCourses); //encapsulation
+    }
+
+    @Override
+    public void openDashboard() {
+        System.out.println("Opening Instructor Dashboard...");
     }
 }

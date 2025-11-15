@@ -62,6 +62,6 @@ public abstract class User implements Record{
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
-    
+    public abstract void openDashboard();
     
 }

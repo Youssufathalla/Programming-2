@@ -8,7 +8,7 @@ package lab.pkg7;
  *
  * @author youssufathalla
  */
-public abstract class User {
+public abstract class User implements Record{
      private int userId;
     private String role;
     private String username;

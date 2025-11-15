@@ -4,10 +4,19 @@
  */
 package lab.pkg7;
 
+import java.util.*;
+
 /**
  *
  * @author youssufathalla
  */
 public abstract class management {
+private ArrayList<> records;
+
     
+    
+  public void add(Database record) {
+        records.add(record);
+        
+}
 }

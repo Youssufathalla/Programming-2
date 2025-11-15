@@ -13,11 +13,18 @@ import java.util.*;
 public class Student extends User {
    
 
-    private ArrayList<Integer> enrolledCourses = new ArrayList<>(); 
+    private ArrayList<Integer> enrolledCourses;
     private HashMap<Integer,ArrayList> progress;
-//new hashmap??
 
+    
+
+    public Student(HashMap<Integer, ArrayList> progress, int userId, String role, String username, String email, String passwordHash,ArrayList enrolledCourses) {
+        super(userId, role, username, email, passwordHash);
+        this.progress = progress;
+        this.enrolledCourses = enrolledCourses;
+    }
     public Student(int userId, String role, String username, String email, String passwordHash) {
         super(userId, role, username, email, passwordHash);
-    }
+        
+    }   
 }

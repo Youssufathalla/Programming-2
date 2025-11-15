@@ -33,6 +33,7 @@ public abstract class Database {
                 file.createNewFile();
                 return;
             }
+            
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine().trim();

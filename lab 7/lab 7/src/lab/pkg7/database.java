@@ -81,12 +81,12 @@ public abstract class Database {
         return false;
     }
 
-    public void addStudent(Database record) {
+    public void add(Database record) {
         records.add(record);
         saveToFile();
     }
 
-    public void deleteStudent(String key) {
+    public void delete(String key) {
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).getId() == Integer.parseInt(key)) {
                 records.remove(i);

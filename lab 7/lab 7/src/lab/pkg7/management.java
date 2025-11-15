@@ -8,9 +8,6 @@ package lab.pkg7;
  *
  * @author youssufathalla
  */
-public class Instructor extends User{
-
-    public Instructor(int userId, String role, String username, String email, String passwordHash) {
-        super(userId, role, username, email, passwordHash);
-    }
+public abstract class management {
+    
 }

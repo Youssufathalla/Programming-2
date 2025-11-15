@@ -10,70 +10,72 @@ import java.util.*;
  *
  * @author youssufathalla
  */
-public class course implements Record {
+import java.util.ArrayList;
 
-    private String courseId;
+public class Course {
+
+    private int courseId;
     private String title;
     private String description;
-    private String instructorId;
-    private ArrayList<Lesson> lessons;
-    private ArrayList<Student> enrolledStudents;
+    private int instructorId;
 
-    public course(String courseId, String title, String description, String instructorId, ArrayList<Lesson> lessons, ArrayList<Student> enrolledStudents) {
+    private ArrayList<Lesson> lessons;
+    private ArrayList<Integer> enrolledStudents;
+
+    public Course(int courseId, String title, String description, int instructorId) {
         this.courseId = courseId;
         this.title = title;
         this.description = description;
         this.instructorId = instructorId;
-        this.lessons = lessons;
-        this.enrolledStudents = enrolledStudents;
+
+        this.lessons = new ArrayList<>();
+        this.enrolledStudents = new ArrayList<>();
     }
 
-    public String getCourseId() {
+ 
+    public int getCourseId() {
         return courseId;
-    }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getInstructorId() {
+    public int getInstructorId() {
         return instructorId;
     }
 
-    public void setInstructorId(String instructorId) {
-        this.instructorId = instructorId;
-    }
-
     public ArrayList<Lesson> getLessons() {
-        return lessons;
+        return new ArrayList<>(lessons); 
     }
 
-    public void setLessons(ArrayList<Lesson> lessons) {
-        this.lessons = lessons;
+    public ArrayList<Integer> getEnrolledStudents() {
+        return new ArrayList<>(enrolledStudents);
     }
 
-    public ArrayList<Student> getEnrolledStudents() {
-        return enrolledStudents;
+   
+    public void addLesson(Lesson lesson) {
+        lessons.add(lesson);
     }
 
-    public void setEnrolledStudents(ArrayList<Student> enrolledStudents) {
-        this.enrolledStudents = enrolledStudents;
+    public void removeLesson(int lessonId) {
+        lessons.removeIf(l -> l.getLessonId() == lessonId);
     }
 
+    public Lesson getLesson(int lessonId) {
+        for (Lesson l : lessons) {
+            if (l.getLessonId() == lessonId) return l;
+        }
+        return null;
+    }
+
+    public void enrollStudent(int studentId) {
+        if (!enrolledStudents.contains(studentId)) {
+            enrolledStudents.add(studentId);
+        }
+    }
 }

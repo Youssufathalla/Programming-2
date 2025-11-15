@@ -57,25 +57,5 @@ public class Course {
         return new ArrayList<>(enrolledStudents);
     }
 
-   
-    public void addLesson(Lesson lesson) {
-        lessons.add(lesson);
-    }
-
-    public void removeLesson(int lessonId) {
-        lessons.removeIf(l -> l.getLessonId() == lessonId);
-    }
-
-    public Lesson getLesson(int lessonId) {
-        for (Lesson l : lessons) {
-            if (l.getLessonId() == lessonId) return l;
-        }
-        return null;
-    }
-
-    public void enrollStudent(int studentId) {
-        if (!enrolledStudents.contains(studentId)) {
-            enrolledStudents.add(studentId);
-        }
-    }
+       
 }

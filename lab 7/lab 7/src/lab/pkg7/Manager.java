@@ -17,5 +17,5 @@ public interface Manager {
     public abstract void add(Record s);
     public abstract void delete(Record s);
     public abstract void update(Record s);
-    public abstract  search(Record s);
+    public abstract Record search(int id);
 }

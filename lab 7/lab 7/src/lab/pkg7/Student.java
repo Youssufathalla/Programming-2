@@ -4,6 +4,8 @@
  */
 package lab.pkg7;
 
+import java.awt.Desktop;
+import java.lang.invoke.MethodHandles;
 import java.util.*;
 
 /**
@@ -25,6 +27,16 @@ public class Student extends User {
     }
     public Student(int userId, String role, String username, String email, String passwordHash) {
         super(userId, role, username, email, passwordHash);
+        
+        public browseCourse(){}
+        public enrollCourse(){}
+        public accessLesson(){}
+        public trackProgress(){}
+        
+        
+        
+        
+        
         
     }   
 }

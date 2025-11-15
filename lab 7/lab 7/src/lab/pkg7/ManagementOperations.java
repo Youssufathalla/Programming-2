@@ -4,14 +4,18 @@
  */
 package lab.pkg7;
 
+import java.util.*;
+
 /**
  *
  * @author youssufathalla
  */
-public class Instructor extends User{
-    private ArrayList<Integer> createdCourses;
-
-    public Instructor(int userId, String role, String username, String email, String passwordHash) {
-        super(userId, role, username, email, passwordHash);
-    }
+public interface ManagementOperations<T> {
+    void add(T obj);
+    void delete(int id);
+    void update(T obj);
+    T search(int id);
+    ArrayList<T> getAll();
+    void saveToJson();
+    void loadFromJson();
 }

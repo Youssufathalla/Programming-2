@@ -21,7 +21,6 @@ public class managecourses extends javax.swing.JFrame {
     /**
      * Creates new form SearchAndUpdate
      */
-<<<<<<< Updated upstream
     private InstructorManager sms;
     private InstructorDashboard parent;
 
@@ -35,21 +34,6 @@ public class managecourses extends javax.swing.JFrame {
         SearchTable.setRowSorter(sorter);
 
     }
-=======
-   // private StudentManagementSystem sms;
-    //private Home parent;
-
-   //public managecourses(StudentManagementSystem sms, Home parent) {
-//        initComponents();
-//        this.sms = sms;
-//        this.parent = parent;
-//        SearchTable.setAutoCreateRowSorter(true);
-//        DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
-//        TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
-//        SearchTable.setRowSorter(sorter);
-//
- //   }
->>>>>>> Stashed changes
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -296,22 +280,14 @@ public class managecourses extends javax.swing.JFrame {
         boolean hasId = !idText.isEmpty();
  
 
-<<<<<<< HEAD
         if (!(hasId)) {
             JOptionPane.showMessageDialog(this, "Please enter a Course ID ");
             return;
         }
-=======
-//        if ((hasId && hasName) || (!hasId && !hasName)) {
-//            JOptionPane.showMessageDialog(this, "please enter a name or an id not both or neither");
-//            return;
-//        }
->>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
         m.setRowCount(0);
 
-        /*
-if (hasId) {
+        if (hasId) {
             int id;
             try {
                 id = Integer.parseInt(idText);
@@ -337,22 +313,7 @@ if (hasId) {
                 c.getEnrolledStudents().size()
             });
 
-<<<<<<< HEAD
         } 
-=======
-            if (foundStudents == null || foundStudents.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No Student found with this name");
-                return;
-            }
-
-            for (Student z : foundStudents) {
-                m.addRow(new Object[]{
-                    z.getStudentID(), z.getName(), z.getAge(), z.getGender(), z.getDepartment(), z.getGpa()
-                });
-            }
-        }
-*/
->>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
@@ -368,7 +329,6 @@ if (hasId) {
             return;
         }
 
-<<<<<<< HEAD
         int cId;
         try {
             cId = Integer.parseInt(courseId.getText().trim());
@@ -376,26 +336,6 @@ if (hasId) {
             JOptionPane.showMessageDialog(this, "Course ID must be a number.");
             return;
         }
-=======
-<<<<<<< Updated upstream
-    int cId;
-    try {
-        cId = Integer.parseInt(courseId.getText().trim());
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Course ID must be a number.");
-        return;
-    }
-=======
-   /*     if (Male.isSelected()) {
-            gender = "Male";
-        } else if (Female.isSelected()) {
-            gender = "Female";
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a gender");
-            return;
-        }
->>>>>>> Stashed changes
->>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
         String cTitle = title.getText().trim();
         if (cTitle.isEmpty()) {
@@ -422,29 +362,10 @@ if (hasId) {
             return;
         }
 
-<<<<<<< HEAD
         if (lessons.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
             return;
         }
-=======
-<<<<<<< Updated upstream
-    if (lessons.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
-        return;
-    }
-=======
-        if (!name.matches("[A-Za-z]+")) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Name");
-            return;
-        }
-        if (selectedRow == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select a student to delete.");
-            return;
-        }
-        
->>>>>>> Stashed changes
->>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
         int lessonCount;
         try {
@@ -454,18 +375,10 @@ if (hasId) {
             return;
         }
 
-<<<<<<< HEAD
         if (lessonCount < 0) {
             JOptionPane.showMessageDialog(this, "Lessons cannot be negative.");
             return;
         }
-=======
-<<<<<<< Updated upstream
-    if (lessonCount < 0) {
-        JOptionPane.showMessageDialog(this, "Lessons cannot be negative.");
-        return;
-    }
->>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
         if (students.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter number of students.");
@@ -514,16 +427,7 @@ if (hasId) {
 
         JOptionPane.showMessageDialog(this, "Course updated successfully.");
 
-<<<<<<< HEAD
         setVisible(false);
-=======
-    setVisible(false);
-=======
-        }
-        */
-        setVisible(false);
->>>>>>> Stashed changes
->>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void instructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructorIdActionPerformed

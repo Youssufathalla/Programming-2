@@ -11,17 +11,17 @@ package lab.pkg7;
 public class StudentDashboard extends javax.swing.JFrame {
 
     /**
-     * Creates new form StudentDashboard
+     * Creates new form StudentDashboarddddd
      */
-    private Student student;
+    private Student s;
     private InstructorManager im;
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
 
-    public StudentDashboard(Student s) {
-        this.student = s;
-          
+    public StudentDashboard(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm,Student s) {
+        this.s= s;
+          this.im=im;
     this.cm=cm;
     this.sm=sm;
     this.um=um;
@@ -113,53 +113,53 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
         this.dispose();
-        new StudentCourses(this.student, this,).setVisible(true);
+        new StudentCourses(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
     }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
     private void browsenewcoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsenewcoursesbuttonActionPerformed
         this.dispose();
-        new BrowseCourse(this.student).setVisible(true);
+        new BrowseCourse(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
     }//GEN-LAST:event_browsenewcoursesbuttonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed
         this.dispose();
-        new LoginFrame().setVisible(true);
+        new LoginFrame(this.um,this.cm,this.im,this.sm).setVisible(true);
     }//GEN-LAST:event_logoutbuttonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(StudentDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LoginFrame(this.um,this.cm,this.im,this.sm).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browsenewcoursesbutton;

@@ -16,40 +16,41 @@ public class StudentCourses extends javax.swing.JFrame {
     /**
      * Creates new form StudentCourses
      */
-    private StudentDashboard parent;
-    private Student student;
+   private Student s;
     private InstructorManager im;
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
 
-    public StudentCourses(Student s, StudentDashboard p, CourseManager courseManager) {
-        this.student = s;
-        this.parent = p;
-        this.courseManager = courseManager;
-        loadTable();
+    public StudentCourses(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm,Student s) {
+        this.s= s;
+          this.im=im;
+    this.cm=cm;
+    this.sm=sm;
+    this.um=um;
         initComponents();
+
     }
 
-    public void loadTable() {
-
-        DefaultTableModel model = (DefaultTableModel) studentCoursesTable.getModel();
-        model.setRowCount(0);
-
-        for (Integer courseId : enrolledCourses) {
-            Course c = courseManager.getRecord(courseId);
-
-            if (c != null) {
-                model.addRow(new Object[]{
-                    c.getCourseId(),
-                    c.getTitle(),
-                    c.getDescription(),
-                    c.getInstructorId(),
-                    c.getLessons().size(),
-                    c.getEnrolledStudents().size()
-                });
-            }
-        }
+//    public void loadTable() {
+//
+//        DefaultTableModel model = (DefaultTableModel) studentCoursesTable.getModel();
+//        model.setRowCount(0);
+//
+//        for (Integer courseId : enrolledCourses) {
+//            Course c = courseManager.getRecord(courseId);
+//
+//            if (c != null) {
+//                model.addRow(new Object[]{
+//                    c.getCourseId(),
+//                    c.getTitle(),
+//                    c.getDescription(),
+//                    c.getInstructorId(),
+//                    c.getLessons().size(),
+//                    c.getEnrolledStudents().size()
+//                });
+//            }
+//        }
     }
 
     /**
@@ -149,37 +150,38 @@ public class StudentCourses extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
-            }
-        });
-    }
+    
+//public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LoginFrame().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable SearchTable;

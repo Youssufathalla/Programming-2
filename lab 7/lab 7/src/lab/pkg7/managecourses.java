@@ -22,6 +22,7 @@ public class managecourses extends javax.swing.JFrame {
     /**
      * Creates new form SearchAndUpdate
      */
+<<<<<<< Updated upstream
     private InstructorManager sms;
     private InstructorDashboard parent;
 
@@ -35,6 +36,21 @@ public class managecourses extends javax.swing.JFrame {
         SearchTable.setRowSorter(sorter);
 
     }
+=======
+   // private StudentManagementSystem sms;
+    //private Home parent;
+
+   //public managecourses(StudentManagementSystem sms, Home parent) {
+//        initComponents();
+//        this.sms = sms;
+//        this.parent = parent;
+//        SearchTable.setAutoCreateRowSorter(true);
+//        DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
+//        TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+//        SearchTable.setRowSorter(sorter);
+//
+ //   }
+>>>>>>> Stashed changes
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -300,14 +316,15 @@ public class managecourses extends javax.swing.JFrame {
         boolean hasId = !idText.isEmpty();
         boolean hasName = !nameText.isEmpty();
 
-        if ((hasId && hasName) || (!hasId && !hasName)) {
-            JOptionPane.showMessageDialog(this, "please enter a name or an id not both or neither");
-            return;
-        }
+//        if ((hasId && hasName) || (!hasId && !hasName)) {
+//            JOptionPane.showMessageDialog(this, "please enter a name or an id not both or neither");
+//            return;
+//        }
 
         m.setRowCount(0);
 
-        if (hasId) {
+        /*
+if (hasId) {
             int id;
             try {
                 id = Integer.parseInt(idText);
@@ -344,6 +361,7 @@ public class managecourses extends javax.swing.JFrame {
                 });
             }
         }
+*/
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
@@ -359,6 +377,7 @@ public class managecourses extends javax.swing.JFrame {
         return;
     }
 
+<<<<<<< Updated upstream
     int cId;
     try {
         cId = Integer.parseInt(courseId.getText().trim());
@@ -366,6 +385,16 @@ public class managecourses extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Course ID must be a number.");
         return;
     }
+=======
+   /*     if (Male.isSelected()) {
+            gender = "Male";
+        } else if (Female.isSelected()) {
+            gender = "Female";
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a gender");
+            return;
+        }
+>>>>>>> Stashed changes
 
     String cTitle = title.getText().trim();
     if (cTitle.isEmpty()) {
@@ -392,10 +421,22 @@ public class managecourses extends javax.swing.JFrame {
         return;
     }
 
+<<<<<<< Updated upstream
     if (lessons.getText().trim().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
         return;
     }
+=======
+        if (!name.matches("[A-Za-z]+")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid Name");
+            return;
+        }
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a student to delete.");
+            return;
+        }
+        
+>>>>>>> Stashed changes
 
     int lessonCount;
     try {
@@ -405,6 +446,7 @@ public class managecourses extends javax.swing.JFrame {
         return;
     }
 
+<<<<<<< Updated upstream
     if (lessonCount < 0) {
         JOptionPane.showMessageDialog(this, "Lessons cannot be negative.");
         return;
@@ -458,6 +500,11 @@ public class managecourses extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, "Course updated successfully.");
 
     setVisible(false);
+=======
+        }
+        */
+        setVisible(false);
+>>>>>>> Stashed changes
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void instructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructorIdActionPerformed

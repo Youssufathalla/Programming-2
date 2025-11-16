@@ -281,7 +281,7 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
         }
 
         m.setRowCount(0);
-
+/*
         if (hasId) {
             int id;
             try {
@@ -319,6 +319,7 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
                 });
             }
         }
+        */
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
@@ -344,7 +345,7 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a valid number for Age");
             return;
         }
-
+/*
         if (Male.isSelected()) {
             gender = "Male";
         } else if (Female.isSelected()) {
@@ -399,7 +400,7 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
             sms.update(idString, s);
             javax.swing.JOptionPane.showMessageDialog(this, "Student updated successfully.");
 
-        }
+        }*/
         setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 

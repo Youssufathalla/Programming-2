@@ -38,4 +38,5 @@ public class Lesson {
     public void setContent(String content) {
         this.content = content;
     }
+    
 }

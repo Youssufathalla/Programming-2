@@ -347,77 +347,117 @@ public class managecourses extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        String name = "", gender = "";
-        int age = 0;
-        double gpa = 0;
-        int selectedRow = SearchTable.getSelectedRow();
+       int selectedRow = SearchTable.getSelectedRow();
 
-        if (courseId.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Name");
-            return;
-        } else {
-            name = courseId.getText();
-        }
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a course from the table.");
+        return;
+    }
 
-        if (title.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter an Age");
-            return;
-        }
-        try {
-            age = Integer.parseInt(title.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid number for Age");
-            return;
-        }
+    if (courseId.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter Course ID.");
+        return;
+    }
 
+    int cId;
+    try {
+        cId = Integer.parseInt(courseId.getText().trim());
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Course ID must be a number.");
+        return;
+    }
 
-        String dep = (String) Department.getSelectedItem();
+    String cTitle = title.getText().trim();
+    if (cTitle.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter Title.");
+        return;
+    }
 
-        if (instructorId.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a GPA");
-            return;
-        }
-        try {
-            gpa = Double.parseDouble(instructorId.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid number for GPA");
-            return;
-        }
+    String cDescription = description.getText().trim();
+    if (cDescription.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter Description.");
+        return;
+    }
 
-        if (age < 0) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Age");
-            return;
-        }
+    if (instructorId.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter Instructor ID.");
+        return;
+    }
 
-        if (gpa > 4 || gpa < 0) {
-            JOptionPane.showMessageDialog(this, "Please enter a GPA between 0 and 4");
-            return;
-        }
+    int instId;
+    try {
+        instId = Integer.parseInt(instructorId.getText().trim());
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Instructor ID must be a number.");
+        return;
+    }
 
-        if (!description.matches("[A-Za-z]+")) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid desription");
-            return;
-        }
-        if (selectedRow == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select a student to delete.");
-            return;
-        }
+    if (lessons.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
+        return;
+    }
 
-        int id = (int) SearchTable.getValueAt(selectedRow, 0);
-        String idString = String.valueOf(id);
-        Student s = new Student(id, name, age, gender, dep, gpa);
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure you want to update student with ID: " + id + "?",
-                "Confirm update",
-                javax.swing.JOptionPane.YES_NO_OPTION
-        );
-        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            sms.update(idString, s);
-            javax.swing.JOptionPane.showMessageDialog(this, "Student updated successfully.");
+    int lessonCount;
+    try {
+        lessonCount = Integer.parseInt(lessons.getText().trim());
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Lessons must be a number.");
+        return;
+    }
 
-        }
-        setVisible(false);
+    if (lessonCount < 0) {
+        JOptionPane.showMessageDialog(this, "Lessons cannot be negative.");
+        return;
+    }
+
+    if (students.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter number of students.");
+        return;
+    }
+
+    int studentCount;
+    try {
+        studentCount = Integer.parseInt(students.getText().trim());
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Students must be a number.");
+        return;
+    }
+
+    if (studentCount < 0) {
+        JOptionPane.showMessageDialog(this, "Student count cannot be negative.");
+        return;
+    }
+
+    int originalId = (int) SearchTable.getValueAt(selectedRow, 0);
+
+    int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to update course with ID: " + originalId + "?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm != JOptionPane.YES_OPTION) {
+        return;
+    }
+
+    ArrayList<Lesson> lessonList = new ArrayList<>();
+    for (int i = 0; i < lessonCount; i++) {
+        lessonList.add(new Lesson("Lesson " + (i + 1), ""));
+    }
+
+    ArrayList<Integer> studentList = new ArrayList<>();
+    for (int i = 0; i < studentCount; i++) {
+        studentList.add(0);
+    }
+
+    Course updated = new Course(cId, cTitle, cDescription, instId, lessonList, studentList);
+
+    sms.update(updated);
+
+    JOptionPane.showMessageDialog(this, "Course updated successfully.");
+
+    setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void instructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructorIdActionPerformed

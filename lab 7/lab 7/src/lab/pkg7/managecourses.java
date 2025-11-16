@@ -24,15 +24,29 @@ public class managecourses extends javax.swing.JFrame {
     private InstructorDashboard parent;
     private CourseManager courseManager;
 
-    public managecourses(InstructorManager sms, CourseManager CM,InstructorDashboard parent) {
+    public managecourses(InstructorManager sms, CourseManager CM, InstructorDashboard parent) {
         initComponents();
         this.sms = sms;
         this.parent = parent;
-        this.courseManager=CM;
+        this.courseManager = CM;
         SearchTable.setAutoCreateRowSorter(true);
         DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
         SearchTable.setRowSorter(sorter);
+        ArrayList<Course> courses = courseManager.getCourses();
+
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        m.setRowCount(0);
+        for (Course c : courses) {
+            m.addRow(new Object[]{
+                c.getCourseId(),
+                c.getTitle(),
+                c.getDescription(),
+                c.getInstructorId(),
+                c.getLessons().size(),
+                c.getEnrolledStudents().size()
+            });
+        }
 
     }
 
@@ -298,9 +312,7 @@ public class managecourses extends javax.swing.JFrame {
 
         String idText = SearchIDtext.getText() == null ? "" : SearchIDtext.getText().trim();
 
-
         boolean hasId = !idText.isEmpty();
- 
 
         if (!(hasId)) {
             JOptionPane.showMessageDialog(this, "Please enter a Course ID ");
@@ -335,7 +347,7 @@ public class managecourses extends javax.swing.JFrame {
                 c.getEnrolledStudents().size()
             });
 
-        } 
+        }
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
@@ -433,23 +445,33 @@ public class managecourses extends javax.swing.JFrame {
             return;
         }
 //int lessonId, String title, String content, Boolean completed
-        int lid=Integer.parseInt(lessonID.getText());
-        String ltitle=lessonsTitle.getText();
-        String lcontent=lessonsContent.getText();
-        boolean comp=false;
-        Lesson L=new Lesson(lid,ltitle,lcontent,comp);
-                
+        int lid = Integer.parseInt(lessonID.getText());
+        String ltitle = lessonsTitle.getText();
+        String lcontent = lessonsContent.getText();
+        boolean comp = false;
+        Lesson L = new Lesson(lid, ltitle, lcontent, comp);
 
         ArrayList<Integer> studentList = new ArrayList<>();
         for (int i = 0; i < studentCount; i++) {
             studentList.add(0);
         }
-
-        Course updated = new Course(cId, cTitle, cDescription, instId);
-
-        sms.update(updated);
+        Course c = (Course) courseManager.search(cId);
+        c.addLesson(L);
 
         JOptionPane.showMessageDialog(this, "Course updated successfully.");
+        ArrayList<Course> courses = courseManager.getCourses();
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        m.setRowCount(0);
+        for (Course b : courses) {
+            m.addRow(new Object[]{
+                b.getCourseId(),
+                b.getTitle(),
+                b.getDescription(),
+                b.getInstructorId(),
+                b.getLessons().size(),
+                b.getEnrolledStudents().size()
+            });
+        }
 
         setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed

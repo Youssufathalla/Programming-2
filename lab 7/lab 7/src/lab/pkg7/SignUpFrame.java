@@ -15,8 +15,20 @@ public class SignUpFrame extends javax.swing.JFrame {
     /**
      * Creates new form SignupFrame
      */
-   public SignUpFrame() {
-    initComponents();
+   private InstructorManager im;
+    private CourseManager cm;
+    private StudentManager sm;
+    private UserManager um;
+
+    public SignUpFrame(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm) {
+     
+          this.im=im;
+    this.cm=cm;
+    this.sm=sm;
+    this.um=um;
+        initComponents();
+
+    
     buttonGroup1.clearSelection();
 }
    private boolean isValidEmail(String email) {
@@ -239,13 +251,13 @@ public class SignUpFrame extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, "Signup successful!");
 
     this.dispose();
-    new LoginFrame().setVisible(true);
+    new LoginFrame(this.um,this.cm,this.im,this.sm).setVisible(true);
 
     }//GEN-LAST:event_signupBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
        this.dispose();
-    new LoginFrame().setVisible(true);
+    new LoginFrame(this.um,this.cm,this.im,this.sm).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

@@ -154,7 +154,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
                                                     
     this.dispose();
-    new SignUpFrame().setVisible(true);
+    new SignUpFrame(this.um,this.cm,this.im,this.sm).setVisible(true);
 
     }//GEN-LAST:event_signupButtonActionPerformed
 

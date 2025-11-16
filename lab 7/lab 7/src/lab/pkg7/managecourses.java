@@ -22,10 +22,10 @@ public class managecourses extends javax.swing.JFrame {
     /**
      * Creates new form SearchAndUpdate
      */
-    private StudentManagementSystem sms;
-    private Home parent;
+    private InstructorManager sms;
+    private InstructorDashboard parent;
 
-    public managecourses(StudentManagementSystem sms, Home parent) {
+    public managecourses(InstructorManager sms, InstructorDashboard parent) {
         initComponents();
         this.sms = sms;
         this.parent = parent;
@@ -280,11 +280,11 @@ public class managecourses extends javax.swing.JFrame {
                             .addComponent(Lessons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lessons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(UpdateButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(Students, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(UpdateButton))
                         .addGap(12, 12, 12))))
         );
 
@@ -370,14 +370,6 @@ public class managecourses extends javax.swing.JFrame {
             return;
         }
 
-        if (Male.isSelected()) {
-            gender = "Male";
-        } else if (Female.isSelected()) {
-            gender = "Female";
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a gender");
-            return;
-        }
 
         String dep = (String) Department.getSelectedItem();
 
@@ -402,8 +394,8 @@ public class managecourses extends javax.swing.JFrame {
             return;
         }
 
-        if (!name.matches("[A-Za-z]+")) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Name");
+        if (!description.matches("[A-Za-z]+")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid desription");
             return;
         }
         if (selectedRow == -1) {

@@ -14,9 +14,11 @@ public class InstructorDashboard extends javax.swing.JFrame {
      * Creates new form InstructorManagment
      */
     private Instructor instructor;
+    private InstructorManager ins;
     
     public InstructorDashboard(Instructor i) {
         this.instructor = i;
+        this.ins= new InstructorManager();
         initComponents();
     }
 
@@ -102,7 +104,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
 
     private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
  this.dispose();
-    new InstructorCourses(this.instructor).setVisible(true);
+    new managecourses(this.ins,this ).setVisible(true);
     }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
     private void createnewcoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createnewcoursebuttonActionPerformed

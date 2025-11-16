@@ -1,6 +1,5 @@
 package lab.pkg7;
 
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -70,12 +69,9 @@ public class managecourses extends javax.swing.JFrame {
         buttonGroup5 = new javax.swing.ButtonGroup();
         buttonGroup6 = new javax.swing.ButtonGroup();
         buttonGroup7 = new javax.swing.ButtonGroup();
-        searchByNameLabel = new javax.swing.JLabel();
         searchByIDLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         SearchIDtext = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        SearchNameText = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         SearchTable = new javax.swing.JTable();
         SearchButton = new javax.swing.JButton();
@@ -112,17 +108,11 @@ public class managecourses extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        searchByNameLabel.setText("Search By Title");
-
         searchByIDLabel.setText("Search By ID");
 
         SearchIDtext.setColumns(20);
         SearchIDtext.setRows(5);
         jScrollPane1.setViewportView(SearchIDtext);
-
-        SearchNameText.setColumns(20);
-        SearchNameText.setRows(5);
-        jScrollPane2.setViewportView(SearchNameText);
 
         SearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -201,58 +191,51 @@ public class managecourses extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Students, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(UpdateButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(instructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2))
-                                    .addComponent(lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)))
-                        .addGap(26, 312, Short.MAX_VALUE))
+                        .addComponent(Students, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UpdateButton))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(instructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
+                            .addComponent(lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)))
+                .addGap(26, 312, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SearchButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SearchButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(searchByNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(searchByIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(26, 26, 26)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(CourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(44, 44, 44)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(NameText, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                        .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(InstructorID, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                            .addComponent(NameText, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(searchByIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(InstructorID, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,14 +246,11 @@ public class managecourses extends javax.swing.JFrame {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 104, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(searchByIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchByNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchByIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
                         .addComponent(SearchButton)
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -311,15 +291,22 @@ public class managecourses extends javax.swing.JFrame {
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
 
         String idText = SearchIDtext.getText() == null ? "" : SearchIDtext.getText().trim();
-        String nameText = SearchNameText.getText() == null ? "" : SearchNameText.getText().trim();
+
 
         boolean hasId = !idText.isEmpty();
-        boolean hasName = !nameText.isEmpty();
+ 
 
+<<<<<<< HEAD
+        if (!(hasId)) {
+            JOptionPane.showMessageDialog(this, "Please enter a Course ID ");
+            return;
+        }
+=======
 //        if ((hasId && hasName) || (!hasId && !hasName)) {
 //            JOptionPane.showMessageDialog(this, "please enter a name or an id not both or neither");
 //            return;
 //        }
+>>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
         m.setRowCount(0);
 
@@ -329,27 +316,30 @@ if (hasId) {
             try {
                 id = Integer.parseInt(idText);
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Enter a numeric ID");
+                JOptionPane.showMessageDialog(this, "Course ID must be a number.");
                 return;
             }
 
-            if (!sms.contains(id)) {
-                JOptionPane.showMessageDialog(this, "No Student found with this ID");
+            Record r = sms.search(id);
+            if (r == null) {
+                JOptionPane.showMessageDialog(this, "No course found with this ID.");
                 return;
             }
 
-            Student s = sms.getRecord(id);
-            if (s != null) {
-                m.addRow(new Object[]{
-                    s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()
-                });
-            } else {
-                JOptionPane.showMessageDialog(this, "No Student found with this ID");
-            }
+            Course c = (Course) r;
 
-        } else {
-            ArrayList<Student> foundStudents = sms.getRecordByName(nameText);
+            m.addRow(new Object[]{
+                c.getCourseId(),
+                c.getTitle(),
+                c.getDescription(),
+                c.getInstructorId(),
+                c.getLessons().size(),
+                c.getEnrolledStudents().size()
+            });
 
+<<<<<<< HEAD
+        } 
+=======
             if (foundStudents == null || foundStudents.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No Student found with this name");
                 return;
@@ -362,21 +352,31 @@ if (hasId) {
             }
         }
 */
+>>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-       int selectedRow = SearchTable.getSelectedRow();
+        int selectedRow = SearchTable.getSelectedRow();
 
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a course from the table.");
-        return;
-    }
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course from the table.");
+            return;
+        }
 
-    if (courseId.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter Course ID.");
-        return;
-    }
+        if (courseId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Course ID.");
+            return;
+        }
 
+<<<<<<< HEAD
+        int cId;
+        try {
+            cId = Integer.parseInt(courseId.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Course ID must be a number.");
+            return;
+        }
+=======
 <<<<<<< Updated upstream
     int cId;
     try {
@@ -395,32 +395,39 @@ if (hasId) {
             return;
         }
 >>>>>>> Stashed changes
+>>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
-    String cTitle = title.getText().trim();
-    if (cTitle.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter Title.");
-        return;
-    }
+        String cTitle = title.getText().trim();
+        if (cTitle.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Title.");
+            return;
+        }
 
-    String cDescription = description.getText().trim();
-    if (cDescription.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter Description.");
-        return;
-    }
+        String cDescription = description.getText().trim();
+        if (cDescription.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Description.");
+            return;
+        }
 
-    if (instructorId.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter Instructor ID.");
-        return;
-    }
+        if (instructorId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Instructor ID.");
+            return;
+        }
 
-    int instId;
-    try {
-        instId = Integer.parseInt(instructorId.getText().trim());
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Instructor ID must be a number.");
-        return;
-    }
+        int instId;
+        try {
+            instId = Integer.parseInt(instructorId.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Instructor ID must be a number.");
+            return;
+        }
 
+<<<<<<< HEAD
+        if (lessons.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
+            return;
+        }
+=======
 <<<<<<< Updated upstream
     if (lessons.getText().trim().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
@@ -437,74 +444,86 @@ if (hasId) {
         }
         
 >>>>>>> Stashed changes
+>>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
-    int lessonCount;
-    try {
-        lessonCount = Integer.parseInt(lessons.getText().trim());
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Lessons must be a number.");
-        return;
-    }
+        int lessonCount;
+        try {
+            lessonCount = Integer.parseInt(lessons.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Lessons must be a number.");
+            return;
+        }
 
+<<<<<<< HEAD
+        if (lessonCount < 0) {
+            JOptionPane.showMessageDialog(this, "Lessons cannot be negative.");
+            return;
+        }
+=======
 <<<<<<< Updated upstream
     if (lessonCount < 0) {
         JOptionPane.showMessageDialog(this, "Lessons cannot be negative.");
         return;
     }
+>>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
 
-    if (students.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter number of students.");
-        return;
-    }
+        if (students.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter number of students.");
+            return;
+        }
 
-    int studentCount;
-    try {
-        studentCount = Integer.parseInt(students.getText().trim());
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Students must be a number.");
-        return;
-    }
+        int studentCount;
+        try {
+            studentCount = Integer.parseInt(students.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Students must be a number.");
+            return;
+        }
 
-    if (studentCount < 0) {
-        JOptionPane.showMessageDialog(this, "Student count cannot be negative.");
-        return;
-    }
+        if (studentCount < 0) {
+            JOptionPane.showMessageDialog(this, "Student count cannot be negative.");
+            return;
+        }
 
-    int originalId = (int) SearchTable.getValueAt(selectedRow, 0);
+        int originalId = (int) SearchTable.getValueAt(selectedRow, 0);
 
-    int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to update course with ID: " + originalId + "?",
-            "Confirm Update",
-            JOptionPane.YES_NO_OPTION
-    );
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to update course with ID: " + originalId + "?",
+                "Confirm Update",
+                JOptionPane.YES_NO_OPTION
+        );
 
-    if (confirm != JOptionPane.YES_OPTION) {
-        return;
-    }
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
 
-    ArrayList<Lesson> lessonList = new ArrayList<>();
-    for (int i = 0; i < lessonCount; i++) {
-        lessonList.add(new Lesson("Lesson " + (i + 1), ""));
-    }
+        ArrayList<Lesson> lessonList = new ArrayList<>();
+        for (int i = 0; i < lessonCount; i++) {
+            lessonList.add(new Lesson("Lesson " + (i + 1), ""));
+        }
 
-    ArrayList<Integer> studentList = new ArrayList<>();
-    for (int i = 0; i < studentCount; i++) {
-        studentList.add(0);
-    }
+        ArrayList<Integer> studentList = new ArrayList<>();
+        for (int i = 0; i < studentCount; i++) {
+            studentList.add(0);
+        }
 
-    Course updated = new Course(cId, cTitle, cDescription, instId, lessonList, studentList);
+        Course updated = new Course(cId, cTitle, cDescription, instId, lessonList, studentList);
 
-    sms.update(updated);
+        sms.update(updated);
 
-    JOptionPane.showMessageDialog(this, "Course updated successfully.");
+        JOptionPane.showMessageDialog(this, "Course updated successfully.");
 
+<<<<<<< HEAD
+        setVisible(false);
+=======
     setVisible(false);
 =======
         }
         */
         setVisible(false);
 >>>>>>> Stashed changes
+>>>>>>> 22b7d12aba4dcbe34b58a6d31d8392a9f29d2553
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void instructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructorIdActionPerformed
@@ -567,7 +586,6 @@ if (hasId) {
     private javax.swing.JScrollPane NameText;
     private javax.swing.JButton SearchButton;
     private javax.swing.JTextArea SearchIDtext;
-    private javax.swing.JTextArea SearchNameText;
     private javax.swing.JTable SearchTable;
     private javax.swing.JLabel Students;
     private javax.swing.JLabel Title;
@@ -585,13 +603,11 @@ if (hasId) {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField lessons;
     private javax.swing.JLabel searchByIDLabel;
-    private javax.swing.JLabel searchByNameLabel;
     private javax.swing.JTextField students;
     private javax.swing.JTextArea title;
     // End of variables declaration//GEN-END:variables

@@ -18,6 +18,10 @@ public class CourseManager implements Manager {
         courses = new ArrayList<>();
     }
 
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
     @Override
     public void save(ArrayList<Record> s) {
         courses.clear();

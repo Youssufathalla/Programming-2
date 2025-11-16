@@ -29,19 +29,19 @@ public class StudentDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        viewenrolledstudents = new javax.swing.JButton();
+        mycoursesbutton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        managecoursesbutton = new javax.swing.JButton();
-        managelessonsbutton = new javax.swing.JButton();
+        browsenewcoursesbutton = new javax.swing.JButton();
+        logoutbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        viewenrolledstudents.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        viewenrolledstudents.setText("My courses");
-        viewenrolledstudents.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        viewenrolledstudents.addActionListener(new java.awt.event.ActionListener() {
+        mycoursesbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mycoursesbutton.setText("My courses");
+        mycoursesbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mycoursesbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewenrolledstudentsActionPerformed(evt);
+                mycoursesbuttonActionPerformed(evt);
             }
         });
 
@@ -52,21 +52,21 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel1.setText("Student Dashboard");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        managecoursesbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        managecoursesbutton.setText("Browse new courses");
-        managecoursesbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        managecoursesbutton.addActionListener(new java.awt.event.ActionListener() {
+        browsenewcoursesbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        browsenewcoursesbutton.setText("Browse new courses");
+        browsenewcoursesbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        browsenewcoursesbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                managecoursesbuttonActionPerformed(evt);
+                browsenewcoursesbuttonActionPerformed(evt);
             }
         });
 
-        managelessonsbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        managelessonsbutton.setText("Logout");
-        managelessonsbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        managelessonsbutton.addActionListener(new java.awt.event.ActionListener() {
+        logoutbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        logoutbutton.setText("Logout");
+        logoutbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        logoutbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                managelessonsbuttonActionPerformed(evt);
+                logoutbuttonActionPerformed(evt);
             }
         });
 
@@ -80,9 +80,9 @@ public class StudentDashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(managecoursesbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(managelessonsbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(viewenrolledstudents, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(browsenewcoursesbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(logoutbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(mycoursesbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,28 +91,31 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
-                .addComponent(viewenrolledstudents)
+                .addComponent(mycoursesbutton)
                 .addGap(29, 29, 29)
-                .addComponent(managecoursesbutton)
+                .addComponent(browsenewcoursesbutton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(managelessonsbutton)
+                .addComponent(logoutbutton)
                 .addGap(66, 66, 66))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewenrolledstudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewenrolledstudentsActionPerformed
+    private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
+this.dispose();
+    new StudentCourses(this.student).setVisible(true);
+    }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
-    }//GEN-LAST:event_viewenrolledstudentsActionPerformed
+    private void browsenewcoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsenewcoursesbuttonActionPerformed
+this.dispose();
+    new BrowseCourse().setVisible(true);
+    }//GEN-LAST:event_browsenewcoursesbuttonActionPerformed
 
-    private void managecoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managecoursesbuttonActionPerformed
-
-    }//GEN-LAST:event_managecoursesbuttonActionPerformed
-
-    private void managelessonsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managelessonsbuttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_managelessonsbuttonActionPerformed
+    private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed
+        this.dispose();
+    new LoginFrame().setVisible(true);
+    }//GEN-LAST:event_logoutbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,9 +153,9 @@ public class StudentDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton browsenewcoursesbutton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton managecoursesbutton;
-    private javax.swing.JButton managelessonsbutton;
-    private javax.swing.JButton viewenrolledstudents;
+    private javax.swing.JButton logoutbutton;
+    private javax.swing.JButton mycoursesbutton;
     // End of variables declaration//GEN-END:variables
 }

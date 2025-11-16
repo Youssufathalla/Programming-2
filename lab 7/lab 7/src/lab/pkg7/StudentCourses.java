@@ -32,25 +32,25 @@ public class StudentCourses extends javax.swing.JFrame {
 
     }
 
-//    public void loadTable() {
-//
-//        DefaultTableModel model = (DefaultTableModel) studentCoursesTable.getModel();
-//        model.setRowCount(0);
-//
-//        for (Integer courseId : enrolledCourses) {
-//            Course c = courseManager.getRecord(courseId);
-//
-//            if (c != null) {
-//                model.addRow(new Object[]{
-//                    c.getCourseId(),
-//                    c.getTitle(),
-//                    c.getDescription(),
-//                    c.getInstructorId(),
-//                    c.getLessons().size(),
-//                    c.getEnrolledStudents().size()
-//                });
-//            }
-//        }
+    public void loadTable() {
+
+        DefaultTableModel model = (DefaultTableModel) studentCoursesTable.getModel();
+        model.setRowCount(0);
+
+        for (Integer courseId : enrolledCourses) {
+            Course c = courseManager.getRecord(courseId);
+
+            if (c != null) {
+                model.addRow(new Object[]{
+                    c.getCourseId(),
+                    c.getTitle(),
+                    c.getDescription(),
+                    c.getInstructorId(),
+                    c.getLessons().size(),
+                    c.getEnrolledStudents().size()
+                });
+            }
+        }
     }
 
     /**
@@ -144,7 +144,7 @@ public class StudentCourses extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
-        new StudentDashboard(this.student).setVisible(true);
+        new StudentDashboard(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

@@ -10,10 +10,10 @@ package lab.pkg7;
  */
 public class Lab7 {
 
-    public static StudentManager sm;
-    public static InstructorManager im;
-    public static CourseManager cm;
-    public static UserManager um;
+    public static StudentManager studentManager;
+    public static InstructorManager instructorManager;
+    public static CourseManager courseManager;
+    public static UserManager userManager;
 
     public static void main(String[] args) {
         studentManager = new StudentManager();
@@ -25,6 +25,6 @@ public class Lab7 {
 
         userManager = new UserManager(studentManager, instructorManager);
 
-        new LoginFrame(um,cm,im,sm).setVisible(true);
+        new LoginFrame(userManager,courseManager,instructorManager,studentManager).setVisible(true);
     }
 }

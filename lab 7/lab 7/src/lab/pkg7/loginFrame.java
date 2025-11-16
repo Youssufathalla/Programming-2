@@ -181,7 +181,7 @@ public class LoginFrame extends javax.swing.JFrame {
         return;
     }
 
-    String hashed = Lab7.um.hashPassword(password);
+    String hashed = um.hashPassword(password);
 
     if (role.equals("student")) {
         for (Record r : sm.read()) {
@@ -189,19 +189,19 @@ public class LoginFrame extends javax.swing.JFrame {
             if (s.getEmail().equals(email) && s.getPasswordHash().equals(hashed)) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 this.dispose();
-                new StudentDashboard(um,cm,im,sm,s).setVisible(true);
+                new StudentDashboard(this.um,this.cm,this.im,this.sm,s).setVisible(true);
                 return;
             }
         }
     }
 
     if (role.equals("instructor")) {
-        for (Record r : Lab7.im.read()) {
+        for (Record r : im.read()) {
             Instructor i = (Instructor) r;
             if (i.getEmail().equals(email) && i.getPasswordHash().equals(hashed)) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 this.dispose();
-                new InstructorDashboard(um,cm,im,sm,i).setVisible(true);
+                new InstructorDashboard(this.um,this.cm,this.im,this.sm,i).setVisible(true);
                 return;
             }
         }

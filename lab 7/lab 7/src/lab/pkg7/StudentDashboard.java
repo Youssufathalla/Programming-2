@@ -14,9 +14,17 @@ public class StudentDashboard extends javax.swing.JFrame {
      * Creates new form StudentDashboard
      */
     private Student student;
+    private InstructorManager im;
+    private CourseManager cm;
+    private StudentManager sm;
+    private UserManager um;
 
     public StudentDashboard(Student s) {
         this.student = s;
+          
+    this.cm=cm;
+    this.sm=sm;
+    this.um=um;
         initComponents();
 
     }
@@ -105,7 +113,7 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
         this.dispose();
-        new StudentCourses(this.student, this).setVisible(true);
+        new StudentCourses(this.student, this,).setVisible(true);
     }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
     private void browsenewcoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsenewcoursesbuttonActionPerformed

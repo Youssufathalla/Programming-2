@@ -17,26 +17,38 @@ public class StudentCourses extends javax.swing.JFrame {
      * Creates new form StudentCourses
      */
     private StudentDashboard parent;
-    private StudentManager sm;
     private Student student;
+    private InstructorManager im;
+    private CourseManager cm;
+    private StudentManager sm;
+    private UserManager um;
 
-    public StudentCourses(Student s, StudentDashboard p) {
+    public StudentCourses(Student s, StudentDashboard p, CourseManager courseManager) {
         this.student = s;
         this.parent = p;
+        this.courseManager = courseManager;
         loadTable();
         initComponents();
     }
 
     public void loadTable() {
 
-        DefaultTableModel m = (DefaultTableModel) LessonsTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) studentCoursesTable.getModel();
+        model.setRowCount(0);
 
-        ArrayList<Student> x = sms.returnAllRecords();
+        for (Integer courseId : enrolledCourses) {
+            Course c = courseManager.getRecord(courseId);
 
-        for (int i = 0; i < x.size(); i++) {
-            Student s = x.get(i);
-            m.addRow(new Object[]{});
-
+            if (c != null) {
+                model.addRow(new Object[]{
+                    c.getCourseId(),
+                    c.getTitle(),
+                    c.getDescription(),
+                    c.getInstructorId(),
+                    c.getLessons().size(),
+                    c.getEnrolledStudents().size()
+                });
+            }
         }
     }
 

@@ -8,8 +8,17 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form loginFrame
      */
-    public LoginFrame() {
-    initComponents();
+    private InstructorManager im;
+    private CourseManager cm;
+    private StudentManager sm;
+    private UserManager um;
+    
+    public LoginFrame(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm) {
+    this.im=im;
+    this.cm=cm;
+    this.sm=sm;
+    this.um=um;
+        initComponents();
     buttonGroup1.clearSelection();
 }
 
@@ -172,27 +181,27 @@ public class LoginFrame extends javax.swing.JFrame {
         return;
     }
 
-    String hashed = Lab7.userManager.hashPassword(password);
+    String hashed = Lab7.um.hashPassword(password);
 
     if (role.equals("student")) {
-        for (Record r : Lab7.studentManager.read()) {
+        for (Record r : sm.read()) {
             Student s = (Student) r;
             if (s.getEmail().equals(email) && s.getPasswordHash().equals(hashed)) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 this.dispose();
-                new StudentDashboard(s).setVisible(true);
+                new StudentDashboard(um,cm,im,sm,s).setVisible(true);
                 return;
             }
         }
     }
 
     if (role.equals("instructor")) {
-        for (Record r : Lab7.instructorManager.read()) {
+        for (Record r : Lab7.im.read()) {
             Instructor i = (Instructor) r;
             if (i.getEmail().equals(email) && i.getPasswordHash().equals(hashed)) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 this.dispose();
-                new InstructorDashboard(i).setVisible(true);
+                new InstructorDashboard(um,cm,im,sm,i).setVisible(true);
                 return;
             }
         }

@@ -36,6 +36,13 @@ public class StudentManager implements Manager {
         ArrayList<Record> copy = new ArrayList<>();
         for (Student st : students) {
             copy.add(st);
+            
+            
+            
+            
+            
+            
+            
         }
         return copy;
     }

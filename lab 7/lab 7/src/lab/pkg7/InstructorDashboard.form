@@ -28,11 +28,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="managelessonsbutton" alignment="0" max="32767" attributes="0"/>
-                      <Component id="viewenrolledstudents" alignment="0" max="32767" attributes="0"/>
-                      <Component id="managecoursesbutton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="createnewcoursebutton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="logoutbutton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="mycoursesbutton" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="132" max="32767" attributes="0"/>
+                  <EmptySpace pref="158" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -47,11 +47,11 @@
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                  <Component id="managecoursesbutton" min="-2" max="-2" attributes="0"/>
+                  <Component id="mycoursesbutton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Component id="managelessonsbutton" min="-2" max="-2" attributes="0"/>
+                  <Component id="createnewcoursebutton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="viewenrolledstudents" min="-2" max="-2" attributes="0"/>
+                  <Component id="logoutbutton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="128" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -75,40 +75,40 @@
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="managecoursesbutton">
+    <Component class="javax.swing.JButton" name="mycoursesbutton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Manage courses"/>
+        <Property name="text" type="java.lang.String" value="My courses"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managecoursesbuttonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mycoursesbuttonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="managelessonsbutton">
+    <Component class="javax.swing.JButton" name="createnewcoursebutton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Manage lessons"/>
+        <Property name="text" type="java.lang.String" value="Create new course"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managelessonsbuttonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createnewcoursebuttonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="viewenrolledstudents">
+    <Component class="javax.swing.JButton" name="logoutbutton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="View enrolled students"/>
+        <Property name="text" type="java.lang.String" value="Logout"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewenrolledstudentsActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutbuttonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

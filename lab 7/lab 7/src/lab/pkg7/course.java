@@ -56,6 +56,8 @@ public class Course implements Record{
     public ArrayList<Integer> getEnrolledStudents() {
         return new ArrayList<>(enrolledStudents);
     }
-
+public void addLesson(Lesson lesson) {
+    lessons.add(lesson);
+}
        
 }

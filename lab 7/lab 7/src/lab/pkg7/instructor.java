@@ -17,8 +17,8 @@ public class Instructor extends User implements Record {
     public Instructor(int userId, String username, String email, String passwordHash) {
         super(userId, "instructor", username, email, passwordHash);
         this.createdCourses = new ArrayList<>();
+    
     }
-
     public void addCreatedCourse(int courseId) {
         if (!createdCourses.contains(courseId)) {
             createdCourses.add(courseId);

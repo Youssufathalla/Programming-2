@@ -65,7 +65,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         studentRBtn = new javax.swing.JRadioButton();
         instructorRBtn = new javax.swing.JRadioButton();
         signupBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,10 +118,10 @@ public class SignUpFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -156,7 +156,7 @@ public class SignUpFrame extends javax.swing.JFrame {
                                         .addComponent(instructorRBtn))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jButton1)))
+                        .addComponent(backButton)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,7 +183,7 @@ public class SignUpFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(signupBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(backButton)
                 .addContainerGap())
         );
 
@@ -243,10 +243,10 @@ public class SignUpFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_signupBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
        this.dispose();
     new LoginFrame().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,11 +284,11 @@ public class SignUpFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextArea emailText;
     private javax.swing.JRadioButton instructorRBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane passText;

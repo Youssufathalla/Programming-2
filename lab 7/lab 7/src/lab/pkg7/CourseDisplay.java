@@ -6,11 +6,15 @@ package lab.pkg7;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import lab.pkg7.StudentDashboard;
 
 /**
  *
  * @author youssufathalla
  */
+
+StudentCourses parent;
+
 public class CourseDisplay extends javax.swing.JFrame {
 
     /**
@@ -24,12 +28,11 @@ public class CourseDisplay extends javax.swing.JFrame {
 
         DefaultTableModel m = (DefaultTableModel) LessonsTable.getModel();
 
-        ArrayList<Student> x = sms.returnAllRecords();
+        ArrayList<Lesson> x = sms.returnAllRecords();
 
         for (int i = 0; i < x.size(); i++) {
-            Student s = x.get(i);
-            m.addRow(new Object[]{s.getStudentID(), s.getName(), s.getAge(), s.getGender(), s.getDepartment(), s.getGpa()});
-
+            Lesson l = x.get(i);
+            m.addRow(new Object[]{l.getLessonId(), l.getTitle(), l.getCompleted(), l.getCompleted()});
         }
     }
 
@@ -44,6 +47,7 @@ public class CourseDisplay extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         LessonsTable = new javax.swing.JTable();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,24 +64,42 @@ public class CourseDisplay extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(LessonsTable);
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(backButton)
+                .addGap(29, 309, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(backButton)
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+         this.dispose();
+        new StudentCourses(this.user).setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,6 +138,7 @@ public class CourseDisplay extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable LessonsTable;
+    private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

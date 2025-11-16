@@ -4,6 +4,10 @@
  */
 package lab.pkg7;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author youssufathalla
@@ -13,20 +17,32 @@ public class BrowseCourse extends javax.swing.JFrame {
     /**
      * Creates new form BrowseCourse
      */
- private Student s;
+    private Student s;
     private InstructorManager im;
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
 
-    public BrowseCourse(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm,Student s) {
-        this.s= s;
-          this.im=im;
-    this.cm=cm;
-    this.sm=sm;
-    this.um=um;
+    public BrowseCourse(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Student s) {
+        this.s = s;
+        this.im = im;
+        this.cm = cm;
+        this.sm = sm;
+        this.um = um;
         initComponents();
 
+    }
+
+    public void loadTable() {
+
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+
+        ArrayList<Course> x = sms.returnAllRecords();
+
+        for (int i = 0; i < x.size(); i++) {
+            Course c = x.get(i);
+            m.addRow(new Object[]{c.getCourseId(), c.getTitle(), c.getDescription(), c.getInstructorId(), c.getLessons(), c.getEnrolledStudents()});
+        }
     }
 
     /**
@@ -42,6 +58,8 @@ public class BrowseCourse extends javax.swing.JFrame {
         SearchTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
         enrollincoursebutton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
+        searchTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +71,7 @@ public class BrowseCourse extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "CourseId", "Title", "Description", "Instructor", "Lessons"
+                "CourseId", "Title", "Description", "InstructorID", "Lessons"
             }
         ));
         jScrollPane4.setViewportView(SearchTable);
@@ -74,18 +92,35 @@ public class BrowseCourse extends javax.swing.JFrame {
             }
         });
 
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        searchTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(backButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(413, Short.MAX_VALUE)
+                .addContainerGap(414, Short.MAX_VALUE)
                 .addComponent(enrollincoursebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(22, 22, 22))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -95,11 +130,15 @@ public class BrowseCourse extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
+                .addContainerGap(318, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchButton)
+                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(enrollincoursebutton)
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backButton)
-                .addGap(15, 15, 15))
+                .addGap(20, 20, 20))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -112,13 +151,62 @@ public class BrowseCourse extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
-        new StudentDashboard(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
+        new StudentDashboard(this.um, this.cm, this.im, this.sm, this.s).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void enrollincoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollincoursebuttonActionPerformed
         this.dispose();
         new CourseDisplay().setVisible(true);
     }//GEN-LAST:event_enrollincoursebuttonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+
+        String idText = searchTextField.getText() == null ? "" : searchTextField.getText().trim();
+
+        boolean hasId = !idText.isEmpty();
+
+        if (!hasId) {
+            JOptionPane.showMessageDialog(this,"Please enter a Course ID");
+            return;
+        }
+
+        m.setRowCount(0);
+
+        if (hasId) {
+            int id;
+            try {
+                id = Integer.parseInt(idText);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Course ID must be numeric");
+                return;
+            }
+
+            if (!cm.contains(id)) {
+                JOptionPane.showMessageDialog(this, "No Course found with this ID");
+                return;
+            }
+
+            Course c = cm.getRecord(id);
+
+            if (c != null) {
+                m.addRow(new Object[]{
+                    c.getCourseId(),
+                    c.getTitle(),
+                    c.getDescription(),
+                    c.getInstructorId(),
+                    (c.getLessons() == null ? 0 : c.getLessons().size())
+                });
+            } else {
+                JOptionPane.showMessageDialog(this, "No Course found with this ID");
+            }
+
+        } 
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextFieldActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -160,5 +248,7 @@ public class BrowseCourse extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton enrollincoursebutton;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchTextField;
     // End of variables declaration//GEN-END:variables
 }

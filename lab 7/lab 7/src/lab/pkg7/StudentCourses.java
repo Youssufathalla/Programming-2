@@ -16,41 +16,47 @@ public class StudentCourses extends javax.swing.JFrame {
     /**
      * Creates new form StudentCourses
      */
-   private Student s;
+    private Student s;
     private InstructorManager im;
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
 
-    public StudentCourses(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm,Student s) {
-        this.s= s;
-          this.im=im;
-    this.cm=cm;
-    this.sm=sm;
-    this.um=um;
+    public StudentCourses(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Student s) {
+        this.s = s;
+        this.im = im;
+        this.cm = cm;
+        this.sm = sm;
+        this.um = um;
         initComponents();
 
     }
 
     public void loadTable() {
 
-        DefaultTableModel model = (DefaultTableModel) studentCoursesTable.getModel();
-        model.setRowCount(0);
+        DefaultTableModel m = (DefaultTableModel) studentCoursesTable.getModel();
+        m.setRowCount(0);
 
-        for (Integer courseId : enrolledCourses) {
-            Course c = courseManager.getRecord(courseId);
+        ArrayList<Integer> enrolled = s.getEnrolledCourses();
 
-            if (c != null) {
-                model.addRow(new Object[]{
-                    c.getCourseId(),
-                    c.getTitle(),
-                    c.getDescription(),
-                    c.getInstructorId(),
-                    c.getLessons().size(),
-                    c.getEnrolledStudents().size()
-                });
+        for (int courseId : enrolled) {
+            Record r = cm.search(courseId);
+            if (r == null) {
+                continue;
             }
+
+            Course c = (Course) r;
+
+            m.addRow(new Object[]{
+                c.getCourseId(),
+                c.getTitle(),
+                c.getDescription(),
+                c.getInstructorId(),
+                c.getLessons().size(),
+                c.getEnrolledStudents().size()
+            });
         }
+
     }
 
     /**
@@ -63,14 +69,14 @@ public class StudentCourses extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane4 = new javax.swing.JScrollPane();
-        SearchTable = new javax.swing.JTable();
+        studentCoursesTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         opencoursebutton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+        studentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -81,7 +87,7 @@ public class StudentCourses extends javax.swing.JFrame {
                 "CourseId", "Title", "Description", "Instructor", "Lessons", "Progress"
             }
         ));
-        jScrollPane4.setViewportView(SearchTable);
+        jScrollPane4.setViewportView(studentCoursesTable);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -144,13 +150,12 @@ public class StudentCourses extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
-        new StudentDashboard(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
+        new StudentDashboard(this.um, this.cm, this.im, this.sm, this.s).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 //public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -184,10 +189,10 @@ public class StudentCourses extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable SearchTable;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton opencoursebutton;
+    private javax.swing.JTable studentCoursesTable;
     // End of variables declaration//GEN-END:variables
 }

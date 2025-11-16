@@ -14,11 +14,12 @@ public class StudentDashboard extends javax.swing.JFrame {
      * Creates new form StudentDashboard
      */
     private Student student;
-  public StudentDashboard(Student s) {
-    this.student = s;
-    initComponents();
-    
-}
+
+    public StudentDashboard(Student s) {
+        this.student = s;
+        initComponents();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,18 +104,18 @@ public class StudentDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
-this.dispose();
-    new StudentCourses(this.student).setVisible(true);
+        this.dispose();
+        new StudentCourses(this.student, this).setVisible(true);
     }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
     private void browsenewcoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsenewcoursesbuttonActionPerformed
-this.dispose();
-    new BrowseCourse(this.student).setVisible(true);
+        this.dispose();
+        new BrowseCourse(this.student).setVisible(true);
     }//GEN-LAST:event_browsenewcoursesbuttonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed
         this.dispose();
-    new LoginFrame().setVisible(true);
+        new LoginFrame().setVisible(true);
     }//GEN-LAST:event_logoutbuttonActionPerformed
 
     /**

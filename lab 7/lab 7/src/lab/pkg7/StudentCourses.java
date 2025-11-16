@@ -4,6 +4,9 @@
  */
 package lab.pkg7;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author youssufathalla
@@ -13,10 +16,28 @@ public class StudentCourses extends javax.swing.JFrame {
     /**
      * Creates new form StudentCourses
      */
-     private Student student;
-    public StudentCourses(Student s) {
+    private StudentDashboard parent;
+    private StudentManager sm;
+    private Student student;
+
+    public StudentCourses(Student s, StudentDashboard p) {
         this.student = s;
+        this.parent = p;
+        loadTable();
         initComponents();
+    }
+
+    public void loadTable() {
+
+        DefaultTableModel m = (DefaultTableModel) LessonsTable.getModel();
+
+        ArrayList<Student> x = sms.returnAllRecords();
+
+        for (int i = 0; i < x.size(); i++) {
+            Student s = x.get(i);
+            m.addRow(new Object[]{});
+
+        }
     }
 
     /**

@@ -74,19 +74,25 @@
                       <Component id="Lessons" min="-2" pref="108" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="instructorId" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" pref="122" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lessons" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lessonID" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lessonsTitle" min="-2" pref="120" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="26" pref="312" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lessonsContent" min="-2" pref="120" max="-2" attributes="0"/>
+              <EmptySpace pref="174" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -167,7 +173,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Lessons" alignment="3" max="32767" attributes="0"/>
-                          <Component id="lessons" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lessonID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lessonsTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lessonsContent" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -350,9 +358,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descriptionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="lessons">
+    <Component class="javax.swing.JTextField" name="lessonID">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lessonsActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lessonIDActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="Students">
@@ -363,6 +371,16 @@
     <Component class="javax.swing.JTextField" name="students">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="studentsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="lessonsTitle">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lessonsTitleActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="lessonsContent">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lessonsContentActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

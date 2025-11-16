@@ -2,7 +2,6 @@ package lab.pkg7;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -23,11 +22,13 @@ public class managecourses extends javax.swing.JFrame {
      */
     private InstructorManager sms;
     private InstructorDashboard parent;
+    private CourseManager courseManager;
 
-    public managecourses(InstructorManager sms, InstructorDashboard parent) {
+    public managecourses(InstructorManager sms, CourseManager CM,InstructorDashboard parent) {
         initComponents();
         this.sms = sms;
         this.parent = parent;
+        this.courseManager=CM;
         SearchTable.setAutoCreateRowSorter(true);
         DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
@@ -73,9 +74,11 @@ public class managecourses extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         description = new javax.swing.JTextField();
-        lessons = new javax.swing.JTextField();
+        lessonID = new javax.swing.JTextField();
         Students = new javax.swing.JLabel();
         students = new javax.swing.JTextField();
+        lessonsTitle = new javax.swing.JTextField();
+        lessonsContent = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,9 +158,9 @@ public class managecourses extends javax.swing.JFrame {
             }
         });
 
-        lessons.addActionListener(new java.awt.event.ActionListener() {
+        lessonID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lessonsActionPerformed(evt);
+                lessonIDActionPerformed(evt);
             }
         });
 
@@ -166,6 +169,18 @@ public class managecourses extends javax.swing.JFrame {
         students.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentsActionPerformed(evt);
+            }
+        });
+
+        lessonsTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lessonsTitleActionPerformed(evt);
+            }
+        });
+
+        lessonsContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lessonsContentActionPerformed(evt);
             }
         });
 
@@ -192,9 +207,14 @@ public class managecourses extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2))
-                            .addComponent(lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)))
-                .addGap(26, 312, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lessonID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(2, 2, 2)))
+                .addGap(18, 18, 18)
+                .addComponent(lessonsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(174, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(SearchButton, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -258,7 +278,9 @@ public class managecourses extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Lessons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lessons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lessonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lessonsContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -362,14 +384,14 @@ public class managecourses extends javax.swing.JFrame {
             return;
         }
 
-        if (lessons.getText().trim().isEmpty()) {
+        if (lessonID.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
             return;
         }
 
         int lessonCount;
         try {
-            lessonCount = Integer.parseInt(lessons.getText().trim());
+            lessonCount = Integer.parseInt(lessonID.getText().trim());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Lessons must be a number.");
             return;
@@ -410,18 +432,20 @@ public class managecourses extends javax.swing.JFrame {
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
-
-        ArrayList<Lesson> lessonList = new ArrayList<>();
-        for (int i = 0; i < lessonCount; i++) {
-            lessonList.add(new Lesson("Lesson " + (i + 1), ""));
-        }
+//int lessonId, String title, String content, Boolean completed
+        int lid=Integer.parseInt(lessonID.getText());
+        String ltitle=lessonsTitle.getText();
+        String lcontent=lessonsContent.getText();
+        boolean comp=false;
+        Lesson L=new Lesson(lid,ltitle,lcontent,comp);
+                
 
         ArrayList<Integer> studentList = new ArrayList<>();
         for (int i = 0; i < studentCount; i++) {
             studentList.add(0);
         }
 
-        Course updated = new Course(cId, cTitle, cDescription, instId, lessonList, studentList);
+        Course updated = new Course(cId, cTitle, cDescription, instId);
 
         sms.update(updated);
 
@@ -438,13 +462,21 @@ public class managecourses extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_descriptionActionPerformed
 
-    private void lessonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lessonsActionPerformed
+    private void lessonIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lessonIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lessonsActionPerformed
+    }//GEN-LAST:event_lessonIDActionPerformed
 
     private void studentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_studentsActionPerformed
+
+    private void lessonsTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lessonsTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lessonsTitleActionPerformed
+
+    private void lessonsContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lessonsContentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lessonsContentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,7 +542,9 @@ public class managecourses extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField lessons;
+    private javax.swing.JTextField lessonID;
+    private javax.swing.JTextField lessonsContent;
+    private javax.swing.JTextField lessonsTitle;
     private javax.swing.JLabel searchByIDLabel;
     private javax.swing.JTextField students;
     private javax.swing.JTextArea title;

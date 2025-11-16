@@ -9,6 +9,7 @@ package lab.pkg7;
  * @author youssufathalla
  */
 public class Lesson {
+
     private int lessonId;
     private String title;
     private String content;
@@ -40,8 +41,6 @@ public class Lesson {
     public void setContent(String content) {
         this.content = content;
     }
-<<<<<<< Updated upstream
-=======
 
     public Boolean getCompleted() {
         return completed;
@@ -50,6 +49,5 @@ public class Lesson {
     public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
->>>>>>> Stashed changes
-    
+
 }

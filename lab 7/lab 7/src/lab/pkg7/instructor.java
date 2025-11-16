@@ -28,9 +28,9 @@ public class Instructor extends User implements Record {
     public ArrayList<Integer> getCreatedCourses() {
         return new ArrayList<>(createdCourses);
     }
-    public void addLessonToCourse(Course course, String title, String content) {
+    public void addLessonToCourse(Course course, String title, String content,Boolean completed) {
     int newId = course.getLessons().size() + 1;
-    Lesson lesson = new Lesson(newId, title, content);
+    Lesson lesson = new Lesson(newId, title, content,completed);
     course.addLesson(lesson);
 }
 

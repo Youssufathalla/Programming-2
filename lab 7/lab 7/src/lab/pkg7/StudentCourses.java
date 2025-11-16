@@ -16,27 +16,40 @@ public class StudentCourses extends javax.swing.JFrame {
     /**
      * Creates new form StudentCourses
      */
-    private StudentDashboard parent;
+   private Student s;
+    private InstructorManager im;
+    private CourseManager cm;
     private StudentManager sm;
-    private Student student;
+    private UserManager um;
 
-    public StudentCourses(Student s, StudentDashboard p) {
-        this.student = s;
-        this.parent = p;
-        loadTable();
+    public StudentCourses(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm,Student s) {
+        this.s= s;
+          this.im=im;
+    this.cm=cm;
+    this.sm=sm;
+    this.um=um;
         initComponents();
+
     }
 
     public void loadTable() {
 
-        DefaultTableModel m = (DefaultTableModel) LessonsTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) studentCoursesTable.getModel();
+        model.setRowCount(0);
 
-        ArrayList<Student> x = sms.returnAllRecords();
+        for (Integer courseId : enrolledCourses) {
+            Course c = courseManager.getRecord(courseId);
 
-        for (int i = 0; i < x.size(); i++) {
-            Student s = x.get(i);
-            m.addRow(new Object[]{});
-
+            if (c != null) {
+                model.addRow(new Object[]{
+                    c.getCourseId(),
+                    c.getTitle(),
+                    c.getDescription(),
+                    c.getInstructorId(),
+                    c.getLessons().size(),
+                    c.getEnrolledStudents().size()
+                });
+            }
         }
     }
 
@@ -131,43 +144,44 @@ public class StudentCourses extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
-        new StudentDashboard(this.student).setVisible(true);
+        new StudentDashboard(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
-            }
-        });
-    }
+    
+//public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(StudentCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LoginFrame().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable SearchTable;

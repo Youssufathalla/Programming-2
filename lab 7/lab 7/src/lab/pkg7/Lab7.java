@@ -25,6 +25,6 @@ public class Lab7 {
 
         userManager = new UserManager(studentManager, instructorManager);
 
-        new LoginFrame().setVisible(true);
+        new LoginFrame(userManager,courseManager,instructorManager,studentManager).setVisible(true);
     }
 }

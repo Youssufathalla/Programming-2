@@ -28,6 +28,12 @@ public class Instructor extends User implements Record {
     public ArrayList<Integer> getCreatedCourses() {
         return new ArrayList<>(createdCourses);
     }
+    public void addLessonToCourse(Course course, String title, String content) {
+    int newId = course.getLessons().size() + 1;
+    Lesson lesson = new Lesson(newId, title, content);
+    course.addLesson(lesson);
+}
+
 
     @Override
     public void openDashboard() {

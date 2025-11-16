@@ -155,7 +155,8 @@ public class JsonDatabase {
                     int lid = lobj.getInt("lessonId");
                     String ltitle = lobj.getString("title");
                     String lcontent = lobj.getString("content");
-                    c.getLessons().add(new Lesson(lid, ltitle, lcontent));
+                    Boolean lcompleted = lobj.getBoolean("completed");
+                    c.getLessons().add(new Lesson(lid, ltitle, lcontent, lcompleted));
                 }
 
                 JSONArray enrollArr = obj.getJSONArray("enrolledStudents");

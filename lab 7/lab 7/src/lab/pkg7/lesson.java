@@ -12,11 +12,13 @@ public class Lesson {
     private int lessonId;
     private String title;
     private String content;
+    private Boolean completed;
 
-    public Lesson(int lessonId, String title, String content) {
+    public Lesson(int lessonId, String title, String content, Boolean completed) {
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;
+        this.completed = false;
     }
 
     public int getLessonId() {
@@ -38,4 +40,16 @@ public class Lesson {
     public void setContent(String content) {
         this.content = content;
     }
+<<<<<<< Updated upstream
+=======
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+>>>>>>> Stashed changes
+    
 }

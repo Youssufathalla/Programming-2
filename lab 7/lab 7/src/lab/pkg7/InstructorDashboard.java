@@ -101,13 +101,13 @@ public class InstructorDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
-this.dispose();
-    new InstructorCourses().setVisible(true);
+ this.dispose();
+    new InstructorCourses(this.instructor).setVisible(true);
     }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
     private void createnewcoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createnewcoursebuttonActionPerformed
       this.dispose();
-    new CreateCourse().setVisible(true);
+    new CreateCourse(this.instructor).setVisible(true);
     }//GEN-LAST:event_createnewcoursebuttonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed

@@ -109,7 +109,7 @@ this.dispose();
 
     private void browsenewcoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsenewcoursesbuttonActionPerformed
 this.dispose();
-    new BrowseCourse().setVisible(true);
+    new BrowseCourse(this.student).setVisible(true);
     }//GEN-LAST:event_browsenewcoursesbuttonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed

@@ -22,13 +22,10 @@ public class ViewEnrolledStudents extends javax.swing.JFrame {
     /**
      * Creates new form SearchAndUpdate
      */
-    private StudentManagementSystem sms;
-    private Home parent;
+  
 
-    public ViewEnrolledStudents(StudentManagementSystem sms, Home parent) {
+    public ViewEnrolledStudents() {
         initComponents();
-        this.sms = sms;
-        this.parent = parent;
         SearchTable.setAutoCreateRowSorter(true);
         DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);

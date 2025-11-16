@@ -13,7 +13,10 @@ public class InstructorCourses extends javax.swing.JFrame {
     /**
      * Creates new form InstructorCourses
      */
-    public InstructorCourses() {
+    private Instructor instructor;
+    
+    public InstructorCourses(Instructor i) {
+        this.instructor = i;
         initComponents();
     }
 
@@ -26,21 +29,112 @@ public class InstructorCourses extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        SearchTable = new javax.swing.JTable();
+        viewenrolledstudentsbutton = new javax.swing.JButton();
+        EditButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "CourseId", "Title", "Description", "Instructorld", "Lessons", "Students"
+            }
+        ));
+        jScrollPane4.setViewportView(SearchTable);
+
+        viewenrolledstudentsbutton.setText("View enrolled students");
+        viewenrolledstudentsbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewenrolledstudentsbuttonActionPerformed(evt);
+            }
+        });
+
+        EditButton.setText("Edit Course Details");
+        EditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Add lesson");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addComponent(viewenrolledstudentsbutton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EditButton)))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(294, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EditButton)
+                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(backButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(viewenrolledstudentsbutton)))
+                .addGap(16, 16, 16))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(113, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.dispose();
+        new InstructorDashboard(this.instructor).setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void viewenrolledstudentsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewenrolledstudentsbuttonActionPerformed
+        this.dispose();
+        new ViewEnrolledStudents().setVisible(true);
+    }//GEN-LAST:event_viewenrolledstudentsbuttonActionPerformed
+
+    private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
+        this.dispose();
+        new EditCourse().setVisible(true);
+    }//GEN-LAST:event_EditButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -72,11 +166,17 @@ public class InstructorCourses extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InstructorCourses().setVisible(true);
+                new LoginFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EditButton;
+    private javax.swing.JTable SearchTable;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton viewenrolledstudentsbutton;
     // End of variables declaration//GEN-END:variables
 }

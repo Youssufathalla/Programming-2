@@ -13,8 +13,11 @@ public class BrowseCourse extends javax.swing.JFrame {
     /**
      * Creates new form BrowseCourse
      */
-    public BrowseCourse() {
-        initComponents();
+     private Student student;
+  public BrowseCourse(Student s) {
+    this.student = s;
+    initComponents();
+    
     }
 
     /**
@@ -26,21 +29,87 @@ public class BrowseCourse extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
+        SearchTable = new javax.swing.JTable();
+        backButton = new javax.swing.JButton();
+        enrollincoursebutton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "CourseId", "Title", "Description", "Instructor", "Lessons"
+            }
+        ));
+        jScrollPane4.setViewportView(SearchTable);
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        enrollincoursebutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        enrollincoursebutton.setText("Enroll in course");
+        enrollincoursebutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        enrollincoursebutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrollincoursebuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(backButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(413, Short.MAX_VALUE)
+                .addComponent(enrollincoursebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(324, Short.MAX_VALUE)
+                .addComponent(enrollincoursebutton)
+                .addGap(46, 46, 46)
+                .addComponent(backButton)
+                .addGap(15, 15, 15))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(131, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.dispose();
+        new StudentDashboard(this.student).setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void enrollincoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollincoursebuttonActionPerformed
+        this.dispose();
+        new CourseDisplay().setVisible(true);
+    }//GEN-LAST:event_enrollincoursebuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -72,11 +141,15 @@ public class BrowseCourse extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BrowseCourse().setVisible(true);
+                new LoginFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable SearchTable;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton enrollincoursebutton;
+    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 }

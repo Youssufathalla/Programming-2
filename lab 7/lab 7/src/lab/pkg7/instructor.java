@@ -10,12 +10,12 @@ package lab.pkg7;
  */
 import java.util.ArrayList;
 
-public class Instructor extends User {
+public class Instructor extends User implements Record {
 
     private ArrayList<Integer> createdCourses;
 
     public Instructor(int userId, String username, String email, String passwordHash) {
-        super(userId, username, email, passwordHash, "instructor");
+        super(userId, "instructor", username, email, passwordHash);
         this.createdCourses = new ArrayList<>();
     }
 
@@ -26,11 +26,10 @@ public class Instructor extends User {
     }
 
     public ArrayList<Integer> getCreatedCourses() {
-        return new ArrayList<>(createdCourses); //encapsulation
+        return new ArrayList<>(createdCourses);
     }
 
     @Override
     public void openDashboard() {
-        System.out.println("Opening Instructor Dashboard...");
     }
 }

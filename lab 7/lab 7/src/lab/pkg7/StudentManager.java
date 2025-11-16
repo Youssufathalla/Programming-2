@@ -10,9 +10,11 @@ import java.util.ArrayList;
  *
  * @author hassa
  */
+import java.util.ArrayList;
+
 public class StudentManager implements Manager {
 
-   private ArrayList<Student> students;
+    private ArrayList<Student> students;
 
     public StudentManager() {
         students = new ArrayList<>();
@@ -25,8 +27,6 @@ public class StudentManager implements Manager {
         for (Record r : s) {
             if (r instanceof Student) {
                 students.add((Student) r);
-            } else {
-                System.out.println("Error: Non-student object passed to save().");
             }
         }
     }
@@ -39,21 +39,17 @@ public class StudentManager implements Manager {
         }
         return copy;
     }
- @Override
+
+    @Override
     public void add(Record s) {
         if (s instanceof Student) {
             students.add((Student) s);
-        } else {
-            System.out.println("Error: Only Student objects can be added.");
         }
     }
 
     @Override
     public void delete(Record s) {
-        if (!(s instanceof Student)) {
-            System.out.println("Error: Cannot delete non-student object.");
-            return;
-        }
+        if (!(s instanceof Student)) return;
 
         Student target = (Student) s;
 
@@ -62,11 +58,9 @@ public class StudentManager implements Manager {
 
     @Override
     public void update(Record s) {
-        if (!(s instanceof Student)) {
-            System.out.println("Error: Cannot update non-student object.");
-            return;
-        }
-  Student updated = (Student) s;
+        if (!(s instanceof Student)) return;
+
+        Student updated = (Student) s;
 
         for (int i = 0; i < students.size(); i++) {
             Student st = students.get(i);
@@ -85,7 +79,6 @@ public class StudentManager implements Manager {
                 return st;
             }
         }
-     return null;
+        return null;
     }
 }
-

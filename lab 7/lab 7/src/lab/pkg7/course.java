@@ -12,7 +12,7 @@ import java.util.*;
  */
 import java.util.ArrayList;
 
-public class Course {
+public class Course implements Record{
 
     private int courseId;
     private String title;

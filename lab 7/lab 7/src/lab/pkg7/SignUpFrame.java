@@ -4,6 +4,8 @@
  */
 package lab.pkg7;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author omars
@@ -13,9 +15,31 @@ public class SignUpFrame extends javax.swing.JFrame {
     /**
      * Creates new form SignupFrame
      */
-    public SignUpFrame() {
-        initComponents();
+   public SignUpFrame() {
+    initComponents();
+    buttonGroup1.clearSelection();
+}
+   private boolean isValidEmail(String email) {
+    return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+}
+   private int generateUniqueID() {
+    int id = (int)(Math.random() * 1000000);
+    while (idExists(id)) {
+        id = (int)(Math.random() * 1000000);
     }
+    return id;
+}
+   private boolean idExists(int id) {
+    for (Record r : Lab7.studentManager.read()) {
+        Student s = (Student) r;
+        if (s.getUserId() == id) return true;
+    }
+    for (Record r : Lab7.instructorManager.read()) {
+        Instructor i = (Instructor) r;
+        if (i.getUserId() == id) return true;
+    }
+    return false;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,7 +184,48 @@ public class SignUpFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_instructorRBtnActionPerformed
 
     private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
-        // TODO add your handling code here:
+                                             
+
+    String username = usernameText.getText().trim();
+    String email = emailText.getText().trim();
+    String password = passwordText.getText().trim();
+
+    if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "All fields are required.");
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid email address.");
+        return;
+    }
+
+    String role = "";
+    if (studentRBtn.isSelected()) {
+        role = "student";
+    } else if (instructorRBtn.isSelected()) {
+        role = "instructor";
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a role.");
+        return;
+    }
+
+    int id = generateUniqueID();
+
+    boolean ok = Lab7.userManager.signup(role, id, username, email, password);
+
+    if (!ok) {
+        JOptionPane.showMessageDialog(this, "Signup failed. Please try again.");
+        return;
+    }
+
+    JsonDatabase.saveUsers(Lab7.studentManager, Lab7.instructorManager);
+
+    JOptionPane.showMessageDialog(this, "Signup successful!");
+
+    this.dispose();
+    new LoginFrame().setVisible(true);
+
     }//GEN-LAST:event_signupBtnActionPerformed
 
     /**

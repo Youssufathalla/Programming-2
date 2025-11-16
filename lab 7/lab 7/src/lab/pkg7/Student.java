@@ -4,40 +4,35 @@
  */
 package lab.pkg7;
 
-import java.awt.Desktop;
-import java.lang.invoke.MethodHandles;
-import java.util.*;
 
 /**
  *
  * @author youssufathalla
  */
-public class Student extends User {
-   
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Student extends User implements Record {
 
     private ArrayList<Integer> enrolledCourses;
-    private HashMap<Integer,Double> progress;
+    private HashMap<Integer, Double> progress;
 
-    
-
-    public Student(HashMap<Integer, ArrayList> progress, int userId, String role, String username, String email, String passwordHash,ArrayList enrolledCourses) {
-        super(userId, role, username, email, passwordHash);
-        this.progress = new HashMap<>();
+    public Student(int userId, String username, String email, String passwordHash) {
+        super(userId, "student", username, email, passwordHash);
         this.enrolledCourses = new ArrayList<>();
+        this.progress = new HashMap<>();
     }
-    public Student(int userId, String role, String username, String email, String passwordHash) {
-        super(userId, role, username, email, passwordHash);
-    }        
-            public void enrollCourse(int courseId) {
+
+    public void enrollCourse(int courseId) {
         if (!enrolledCourses.contains(courseId)) {
             enrolledCourses.add(courseId);
-            progress.put(courseId,Double.valueOf(0));
+            progress.put(courseId, 0.0);
         }
     }
 
     public void updateProgress(int courseId, int lessonIndex) {
         if (progress.containsKey(courseId)) {
-            progress.put(courseId,Double.valueOf(lessonIndex));
+            progress.put(courseId, (double) lessonIndex);
         }
     }
 
@@ -46,18 +41,11 @@ public class Student extends User {
     }
 
     public ArrayList<Integer> getEnrolledCourses() {
-        return new ArrayList<>(enrolledCourses); //encapsulation
+        return new ArrayList<>(enrolledCourses);
     }
 
     @Override
     public void openDashboard() {
-        System.out.println("Opening Student Dashboard...");
+       
     }
 }
-        
-        
-        
-        
-        
-    
-

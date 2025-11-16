@@ -25,8 +25,6 @@ public class InstructorManager implements Manager {
         for (Record r : s) {
             if (r instanceof Instructor) {
                 instructors.add((Instructor) r);
-            } else {
-                System.out.println("Error: Non-instructor object passed to save().");
             }
         }
     }
@@ -44,17 +42,12 @@ public class InstructorManager implements Manager {
     public void add(Record s) {
         if (s instanceof Instructor) {
             instructors.add((Instructor) s);
-        } else {
-            System.out.println("Error: Only Instructor objects can be added.");
         }
     }
 
     @Override
     public void delete(Record s) {
-        if (!(s instanceof Instructor)) {
-            System.out.println("Error: Cannot delete non-instructor object.");
-            return;
-        }
+        if (!(s instanceof Instructor)) return;
 
         Instructor target = (Instructor) s;
 
@@ -63,10 +56,7 @@ public class InstructorManager implements Manager {
 
     @Override
     public void update(Record s) {
-        if (!(s instanceof Instructor)) {
-            System.out.println("Error: Cannot update non-instructor object.");
-            return;
-        }
+        if (!(s instanceof Instructor)) return;
 
         Instructor updated = (Instructor) s;
 

@@ -25,8 +25,6 @@ public class CourseManager implements Manager {
         for (Record r : s) {
             if (r instanceof Course) {
                 courses.add((Course) r);
-            } else {
-                System.out.println("Error: Non-course object passed to save().");
             }
         }
     }
@@ -35,7 +33,7 @@ public class CourseManager implements Manager {
     public ArrayList<Record> read() {
         ArrayList<Record> copy = new ArrayList<>();
         for (Course c : courses) {
-            copy.add((Record) c);
+            copy.add(c);
         }
         return copy;
     }
@@ -44,29 +42,20 @@ public class CourseManager implements Manager {
     public void add(Record s) {
         if (s instanceof Course) {
             courses.add((Course) s);
-        } else {
-            System.out.println("Error: Only Course objects can be added.");
         }
     }
 
     @Override
     public void delete(Record s) {
-        if (!(s instanceof Course)) {
-            System.out.println("Error: Cannot delete non-course object.");
-            return;
-        }
+        if (!(s instanceof Course)) return;
 
         Course target = (Course) s;
-
         courses.removeIf(c -> c.getCourseId() == target.getCourseId());
     }
 
     @Override
     public void update(Record s) {
-        if (!(s instanceof Course)) {
-            System.out.println("Error: Cannot update non-course object.");
-            return;
-        }
+        if (!(s instanceof Course)) return;
 
         Course updated = (Course) s;
 
@@ -84,7 +73,7 @@ public class CourseManager implements Manager {
     public Record search(int id) {
         for (Course c : courses) {
             if (c.getCourseId() == id) {
-                return (Record) c;
+                return c;
             }
         }
         return null;

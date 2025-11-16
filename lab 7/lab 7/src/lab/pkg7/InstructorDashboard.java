@@ -8,12 +8,15 @@ package lab.pkg7;
  *
  * @author Lenovo
  */
-public class InstructorManagment extends javax.swing.JFrame {
+public class InstructorDashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form InstructorManagment
      */
-    public InstructorManagment() {
+    private Instructor instructor;
+    
+    public InstructorDashboard(Instructor i) {
+        this.instructor = i;
         initComponents();
     }
 
@@ -131,20 +134,21 @@ public class InstructorManagment extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InstructorManagment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InstructorDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InstructorManagment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InstructorDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InstructorManagment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InstructorDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InstructorManagment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InstructorDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InstructorManagment().setVisible(true);
+                new InstructorDashboard().setVisible(true);
             }
         });
     }

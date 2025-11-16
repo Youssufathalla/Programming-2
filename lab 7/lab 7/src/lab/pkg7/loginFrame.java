@@ -1,17 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package lab.pkg7;
 
-public class loginFrame extends javax.swing.JFrame {
+import javax.swing.JOptionPane;
+
+public class LoginFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form loginFrame
      */
-    public loginFrame() {
-        initComponents();
-    }
+    public LoginFrame() {
+    initComponents();
+    buttonGroup1.clearSelection();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,13 +143,63 @@ public class loginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_studentRadioButtonActionPerformed
 
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
-        SignUpFrame s = new SignUpFrame();
-        this.setVisible(false);
-        s.setVisible(true);
+                                                    
+    this.dispose();
+    new SignUpFrame().setVisible(true);
+
     }//GEN-LAST:event_signupButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
+ 
+                                            
+
+  
+    String email = emailField.getText().trim();
+    String password = new String(passwordField.getPassword());
+
+    if (email.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Email and password cannot be empty.");
+        return;
+    }
+
+    String role = "";
+    if (studentRadioButton.isSelected()) {
+        role = "student";
+    } else if (instructorRadioButton.isSelected()) {
+        role = "instructor";
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a role.");
+        return;
+    }
+
+    String hashed = Lab7.userManager.hashPassword(password);
+
+    if (role.equals("student")) {
+        for (Record r : Lab7.studentManager.read()) {
+            Student s = (Student) r;
+            if (s.getEmail().equals(email) && s.getPasswordHash().equals(hashed)) {
+                JOptionPane.showMessageDialog(this, "Login successful!");
+                this.dispose();
+                new StudentDashboard(s).setVisible(true);
+                return;
+            }
+        }
+    }
+
+    if (role.equals("instructor")) {
+        for (Record r : Lab7.instructorManager.read()) {
+            Instructor i = (Instructor) r;
+            if (i.getEmail().equals(email) && i.getPasswordHash().equals(hashed)) {
+                JOptionPane.showMessageDialog(this, "Login successful!");
+                this.dispose();
+                new InstructorDashboard(i).setVisible(true);
+                return;
+            }
+        }
+    }
+
+    JOptionPane.showMessageDialog(this, "Incorrect email/password for the selected role.");
+
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
@@ -169,20 +219,21 @@ public class loginFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new loginFrame().setVisible(true);
+                new LoginFrame().setVisible(true);
             }
         });
     }

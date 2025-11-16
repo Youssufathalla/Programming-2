@@ -10,12 +10,21 @@ package lab.pkg7;
  */
 public class Lab7 {
 
-    /**
-     * @param args the command line arguments
-     */
+    public static StudentManager studentManager;
+    public static InstructorManager instructorManager;
+    public static CourseManager courseManager;
+    public static UserManager userManager;
+
     public static void main(String[] args) {
-        // TODO code application logic here
-        //kewijfhbfvnoenfibveb
+        studentManager = new StudentManager();
+        instructorManager = new InstructorManager();
+        courseManager = new CourseManager();
+
+        JsonDatabase.loadUsers(studentManager, instructorManager);
+        JsonDatabase.loadCourses(courseManager);
+
+        userManager = new UserManager(studentManager, instructorManager);
+
+        new LoginFrame().setVisible(true);
     }
-    
 }

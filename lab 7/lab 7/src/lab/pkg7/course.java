@@ -33,6 +33,30 @@ public class Course implements Record {
         this.enrolledStudents = new ArrayList<>();
     }
 
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setInstructorId(int instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    public void setLessons(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    public void setEnrolledStudents(ArrayList<Integer> enrolledStudents) {
+        this.enrolledStudents = enrolledStudents;
+    }
+
     public int getCourseId() {
         return courseId;
     }

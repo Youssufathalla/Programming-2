@@ -5,65 +5,56 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-//s
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-/**
- *
- * @author omars
- */
 public class managecourses extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SearchAndUpdate
-     */
-    private InstructorManager sms;
+    private InstructorManager im;
     private InstructorDashboard parent;
-    private CourseManager courseManager;
+    private CourseManager cm;
     private Instructor ins;
-    StudentManager sm;
+    private StudentManager sm;
 
-    public managecourses(StudentManager sm,Instructor ins,InstructorManager sms, CourseManager CM, InstructorDashboard parent) {
+    public managecourses(StudentManager sm, Instructor ins, InstructorManager im, CourseManager cm, InstructorDashboard parent) {
         initComponents();
-        this.sms = sms;
+        this.im = im;
         this.parent = parent;
-        this.courseManager = CM;
-        this.ins=ins;
+        this.cm = cm;
+        this.ins = ins;
         this.sm = sm;
+
         SearchTable.setAutoCreateRowSorter(true);
         DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
-        SearchTable.setRowSorter(sorter);
-        loadInstructorCourses();
+        SearchTable.setRowSorter(new TableRowSorter<TableModel>(model));
 
+        loadInstructorCourses();
     }
-    
-private void loadInstructorCourses() {
+
+    private void loadInstructorCourses() {
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
         m.setRowCount(0);
 
-        if (ins == null) return;
+        if (ins == null) {
+            return;
+        }
 
         ArrayList<Integer> created = ins.getCreatedCourses();
-        if (created == null || created.isEmpty()) return;
+        if (created == null || created.isEmpty()) {
+            return;
+        }
 
         for (int cid : created) {
-            Record r = courseManager.search(cid);
+            Record r = cm.search(cid);
             if (r instanceof Course) {
                 Course c = (Course) r;
-
-                int lessonCount = (c.getLessons() == null) ? 0 : c.getLessons().size();
+                int lessonCount = c.getLessons() == null ? 0 : c.getLessons().size();
                 String studentsStr = buildStudentsString(c);
 
                 m.addRow(new Object[]{
-                        c.getCourseId(),
-                        c.getTitle(),
-                        c.getDescription(),
-                        lessonCount,
-                        studentsStr
+                    c.getCourseId(),
+                    c.getTitle(),
+                    c.getDescription(),
+                    lessonCount,
+                    studentsStr
                 });
             }
         }
@@ -71,50 +62,45 @@ private void loadInstructorCourses() {
 
     private String buildStudentsString(Course c) {
         ArrayList<Integer> enrolled = c.getEnrolledStudents();
-        if (enrolled == null || enrolled.isEmpty()) return "-";
+        if (enrolled == null || enrolled.isEmpty()) {
+            return "-";
+        }
 
         StringBuilder sb = new StringBuilder();
         boolean first = true;
 
         for (int sid : enrolled) {
-            if (!first) sb.append(", ");
+            if (!first) {
+                sb.append(", ");
+            }
             first = false;
 
             String name = "Unknown";
-            if (sm != null) {
-                Record r = sm.search(sid);
-                if (r instanceof Student) {
-                    name = ((Student) r).getName();
-                }
+            Record r = sm.search(sid);
+            if (r instanceof Student) {
+                name = ((Student) r).getUsername();
             }
+
             sb.append(sid).append("-").append(name);
         }
         return sb.toString();
     }
 
-    // Refresh table with a SINGLE course (used after search/update/delete)
     private void refreshTableWithSingleCourse(Course c) {
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
         m.setRowCount(0);
 
-        if (c == null) {
-            return;
-        }
-
-        int lessonCount = (c.getLessons() == null) ? 0 : c.getLessons().size();
+        int lessonCount = c.getLessons() == null ? 0 : c.getLessons().size();
         String studentsStr = buildStudentsString(c);
 
         m.addRow(new Object[]{
-                c.getCourseId(),
-                c.getTitle(),
-                c.getDescription(),
-                lessonCount,
-                studentsStr
+            c.getCourseId(),
+            c.getTitle(),
+            c.getDescription(),
+            lessonCount,
+            studentsStr
         });
     }
-
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -400,7 +386,7 @@ private void loadInstructorCourses() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-     String idText = SearchIDtext.getText().trim();
+        String idText = SearchIDtext.getText().trim();
 
         if (idText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter a Course ID");
@@ -408,13 +394,14 @@ private void loadInstructorCourses() {
         }
 
         int id;
-        try { id = Integer.parseInt(idText); }
-        catch (NumberFormatException ex) {
+        try {
+            id = Integer.parseInt(idText);
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Course ID must be numeric");
             return;
         }
 
-        Record r = courseManager.search(id);
+        Record r = cm.search(id);
         if (!(r instanceof Course)) {
             JOptionPane.showMessageDialog(this, "Course not found");
             return;
@@ -443,52 +430,37 @@ private void loadInstructorCourses() {
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-       String idText = SearchIDtext.getText().trim();
-        if (idText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Search for a course first");
-            return;
-        }
+         String idText = SearchIDtext.getText().trim();
+    if (idText.isEmpty()) return;
 
-        int id;
-        try { id = Integer.parseInt(idText); }
-        catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Course ID must be numeric");
-            return;
-        }
+    int id = Integer.parseInt(idText);
+    Record r = cm.search(id);
+    if (!(r instanceof Course)) return;
 
-        Record r = courseManager.search(id);
-        if (!(r instanceof Course)) {
-            JOptionPane.showMessageDialog(this, "Course not found");
-            return;
-        }
+    Course c = (Course) r;
 
-        Course c = (Course) r;
+    if (c.getInstructorId() != ins.getUserId()) return;
 
-        if (c.getInstructorId() != ins.getUserId()) {
-            JOptionPane.showMessageDialog(this, "You can only edit your courses");
-            return;
-        }
+    // UPDATE COURSE FIELDS
+    c.setTitle(title.getText().trim());
+    c.setDescription(description.getText().trim());
 
-        if (lessonID.getText().trim().isEmpty() ||
-            lessonsTitle.getText().trim().isEmpty() ||
-            lessonsContent.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Enter lesson ID, title and content");
-            return;
-        }
-
-        int lid;
-        try { lid = Integer.parseInt(lessonID.getText().trim()); }
-        catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Lesson ID must be numeric");
-            return;
-        }
-
+    // ADD LESSON IF FILLED
+    if (!lessonID.getText().trim().isEmpty() &&
+        !lessonsTitle.getText().trim().isEmpty() &&
+        !lessonsContent.getText().trim().isEmpty()) 
+    {
+        int lid = Integer.parseInt(lessonID.getText().trim());
         Lesson L = new Lesson(lid, lessonsTitle.getText().trim(), lessonsContent.getText().trim(), false);
-        c.addLesson(L);
+        c.getLessons().add(L);
+    }
 
-        JOptionPane.showMessageDialog(this, "Lesson added");
-        refreshTableWithSingleCourse(c);
-        setVisible(false);
+    JsonDatabase.saveCourses(cm);
+    JsonDatabase.saveUsers(sm, im);
+
+    JOptionPane.showMessageDialog(this, "Course updated!");
+    refreshTableWithSingleCourse(c);
+
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void instructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructorIdActionPerformed
@@ -516,57 +488,62 @@ private void loadInstructorCourses() {
     }//GEN-LAST:event_lessonsContentActionPerformed
 
     private void deletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebuttonActionPerformed
-int row = SearchTable.getSelectedRow();
+         int row = SearchTable.getSelectedRow();
     if (row == -1) {
-        JOptionPane.showMessageDialog(this, "Select a course");
+        JOptionPane.showMessageDialog(this, "Select a course first");
         return;
     }
 
     row = SearchTable.convertRowIndexToModel(row);
     int cId = (int) SearchTable.getModel().getValueAt(row, 0);
 
-    Record r = courseManager.search(cId);
-    if (!(r instanceof Course)) {
-        JOptionPane.showMessageDialog(this, "Course not found");
+    Course c = cm.getCourseById(cId);
+    if (c == null) {
+        JOptionPane.showMessageDialog(this, "Error: Course not found in manager");
         return;
     }
-
-    Course c = (Course) r;
 
     if (c.getInstructorId() != ins.getUserId()) {
-        JOptionPane.showMessageDialog(this, "You can only delete your courses");
+        JOptionPane.showMessageDialog(this, "You can only delete YOUR courses");
         return;
     }
 
-    int confirm = JOptionPane.showConfirmDialog(this, "Delete course " + cId + "?", "Confirm", JOptionPane.YES_NO_OPTION);
+    int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Delete course " + cId + "?",
+            "Confirm",
+            JOptionPane.YES_NO_OPTION
+    );
+
     if (confirm != JOptionPane.YES_OPTION) return;
 
-    courseManager.getCourses().remove(c);
+    cm.getCourses().remove(c);
     ins.getCreatedCourses().remove(Integer.valueOf(cId));
 
-    JOptionPane.showMessageDialog(this, "Course deleted");
+    JsonDatabase.saveCourses(cm);
+    JsonDatabase.saveUsers(sm, im);
+
+    JOptionPane.showMessageDialog(this, "Course deleted successfully");
+
     loadInstructorCourses();    }//GEN-LAST:event_deletebuttonActionPerformed
 
     private void ViewenrolledStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewenrolledStudentsActionPerformed
-       
-       int row = SearchTable.getSelectedRow();
+
+        int row = SearchTable.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Select a course");
             return;
         }
 
         row = SearchTable.convertRowIndexToModel(row);
         int cId = (int) SearchTable.getModel().getValueAt(row, 0);
 
-        Record r = courseManager.search(cId);
+        Record r = cm.search(cId);
         if (!(r instanceof Course)) {
-            JOptionPane.showMessageDialog(this, "Course not found");
             return;
         }
 
         Course c = (Course) r;
         ArrayList<Integer> enrolled = c.getEnrolledStudents();
-
         if (enrolled == null || enrolled.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No students enrolled");
             return;
@@ -576,11 +553,14 @@ int row = SearchTable.getSelectedRow();
         for (int sid : enrolled) {
             String name = "Unknown";
             Record sr = sm.search(sid);
-            if (sr instanceof Student) name = ((Student) sr).getName();
+            if (sr instanceof Student) {
+                name = ((Student) sr).getUsername();
+            }
             sb.append(sid).append(" - ").append(name).append("\n");
         }
 
-        JOptionPane.showMessageDialog(this, sb.toString());  // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, sb.toString());
+        
     }//GEN-LAST:event_ViewenrolledStudentsActionPerformed
 
     /**

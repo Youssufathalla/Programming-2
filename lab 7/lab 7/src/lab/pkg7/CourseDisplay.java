@@ -141,9 +141,11 @@ public class CourseDisplay extends javax.swing.JFrame {
                 break;
             }
         }
-
+        JsonDatabase.saveCourses(cm);
+JsonDatabase.saveUsers(sm, im);
         loadTable();
         JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
+
     }//GEN-LAST:event_completeBtnActionPerformed
 
     /**

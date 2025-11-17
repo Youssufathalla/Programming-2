@@ -53,4 +53,16 @@ public class CourseManager {
         }
         return list;
     }
+public Course getCourseById(int id) {
+    for (Record r : records) {
+        if (r instanceof Course) {
+            Course c = (Course) r;
+            if (c.getCourseId() == id) {
+                return c;
+            }
+        }
+    }
+    return null;
+}
+    
 }

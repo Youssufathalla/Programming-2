@@ -193,6 +193,8 @@ public class BrowseCourse extends javax.swing.JFrame {
     s.enrollCourse(courseId);  
     selectedCourse.getEnrolledStudents().add(s.getUserId()); 
 
+    JsonDatabase.saveUsers(sm, im);
+    JsonDatabase.saveCourses(cm);
     JOptionPane.showMessageDialog(this, "Successfully enrolled in course: " + selectedCourse.getTitle());
 
         

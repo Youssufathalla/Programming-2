@@ -42,7 +42,7 @@ public class Lesson {
         this.content = content;
     }
 
-    public Boolean getCompleted() {
+    public Boolean isCompleted() {
         return completed;
     }
 

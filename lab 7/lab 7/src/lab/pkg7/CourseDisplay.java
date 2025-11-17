@@ -4,35 +4,47 @@
  */
 package lab.pkg7;
 
-import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import lab.pkg7.StudentDashboard;
 
 /**
  *
  * @author youssufathalla
  */
-
-StudentCourses parent;
-
 public class CourseDisplay extends javax.swing.JFrame {
+
+    private Student s;
+    private InstructorManager im;
+    private CourseManager cm;
+    private StudentManager sm;
+    private UserManager um;
+    private Course c;
 
     /**
      * Creates new form CourseDisplay
      */
-    public CourseDisplay() {
+    public CourseDisplay(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Student s, Course c) {
+        this.s = s;
+        this.im = im;
+        this.cm = cm;
+        this.sm = sm;
+        this.um = um;
+        this.c = c;
         initComponents();
+        loadTable();
     }
 
     public void loadTable() {
-
         DefaultTableModel m = (DefaultTableModel) LessonsTable.getModel();
+        m.setRowCount(0);
 
-        ArrayList<Lesson> x = sms.returnAllRecords();
-
-        for (int i = 0; i < x.size(); i++) {
-            Lesson l = x.get(i);
-            m.addRow(new Object[]{l.getLessonId(), l.getTitle(), l.getCompleted(), l.getCompleted()});
+        for (Lesson l : c.getLessons()) {
+            m.addRow(new Object[]{
+                l.getLessonId(),
+                l.getTitle(),
+                l.getContent(),
+                l.isCompleted() ? "Yes" : "No"
+            });
         }
     }
 
@@ -48,6 +60,7 @@ public class CourseDisplay extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         LessonsTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
+        completeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +84,13 @@ public class CourseDisplay extends javax.swing.JFrame {
             }
         });
 
+        completeBtn.setText("Completed");
+        completeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                completeBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,14 +102,18 @@ public class CourseDisplay extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(backButton)
-                .addGap(29, 309, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addComponent(completeBtn)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(backButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton)
+                    .addComponent(completeBtn))
                 .addGap(23, 23, 23))
         );
 
@@ -97,9 +121,30 @@ public class CourseDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-         this.dispose();
-        new StudentCourses(this.user).setVisible(true);
+        this.dispose();
+        new StudentCourses(this.um, this.cm, this.im, this.sm, this.s).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void completeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeBtnActionPerformed
+        int selectedRow = LessonsTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Select a lesson first.");
+            return;
+        }
+
+        int lessonId = (int) LessonsTable.getValueAt(selectedRow, 0);
+
+        for (Lesson l : c.getLessons()) {
+            if (l.getLessonId() == lessonId) {
+                l.setCompleted(true);
+                break;
+            }
+        }
+
+        loadTable();
+        JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
+    }//GEN-LAST:event_completeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +184,7 @@ public class CourseDisplay extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable LessonsTable;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton completeBtn;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

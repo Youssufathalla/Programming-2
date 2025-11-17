@@ -52,7 +52,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                      <Component id="addstudentbutton" min="-2" max="-2" attributes="0"/>
+                      <Component id="createCoursebutton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="CourseId" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                   <Component id="Description" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="addstudentbutton" min="-2" max="-2" attributes="0"/>
+                      <Component id="createCoursebutton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -108,12 +108,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="addstudentbutton">
+    <Component class="javax.swing.JButton" name="createCoursebutton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addstudentbuttonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createCoursebuttonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -125,7 +125,7 @@
           <Color blue="fb" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Add Student"/>
+        <Property name="text" type="java.lang.String" value="Create Course"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="CourseId">

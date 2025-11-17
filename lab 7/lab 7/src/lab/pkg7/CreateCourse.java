@@ -195,8 +195,9 @@ public class CreateCourse extends javax.swing.JFrame {
   
     courseManager.add(c);
     ins.addCreatedCourse(courseId);
-
+JsonDatabase.saveCourses(courseManager);
     JOptionPane.showMessageDialog(this, "Course created successfully");
+    
     setVisible(false);
     }//GEN-LAST:event_createCoursebuttonActionPerformed
 

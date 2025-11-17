@@ -116,7 +116,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
 
     private void createnewcoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createnewcoursebuttonActionPerformed
       this.dispose();
-    new CreateCourse(this.im,this.cm,this).setVisible(true);
+    new CreateCourse(this.i,this.im,this.cm,this).setVisible(true);
     }//GEN-LAST:event_createnewcoursebuttonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed

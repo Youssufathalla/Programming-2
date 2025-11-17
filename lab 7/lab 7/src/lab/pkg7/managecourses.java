@@ -141,8 +141,6 @@ public class managecourses extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         description = new javax.swing.JTextField();
         lessonID = new javax.swing.JTextField();
-        Students = new javax.swing.JLabel();
-        students = new javax.swing.JTextField();
         lessonsTitle = new javax.swing.JTextField();
         lessonsContent = new javax.swing.JTextField();
         deletebutton = new javax.swing.JButton();
@@ -233,14 +231,6 @@ public class managecourses extends javax.swing.JFrame {
             }
         });
 
-        Students.setText("Students");
-
-        students.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                studentsActionPerformed(evt);
-            }
-        });
-
         lessonsTitle.setText("title");
         lessonsTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,26 +267,20 @@ public class managecourses extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(Students, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(instructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lessonID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(6, 6, 6)))
+                                .addComponent(instructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lessonID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lessonsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(UpdateButton))
@@ -375,10 +359,7 @@ public class managecourses extends javax.swing.JFrame {
                             .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lessonsContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Students, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(students, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UpdateButton))
+                        .addComponent(UpdateButton)
                         .addGap(12, 12, 12))))
         );
 
@@ -475,10 +456,6 @@ public class managecourses extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lessonIDActionPerformed
 
-    private void studentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_studentsActionPerformed
-
     private void lessonsTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lessonsTitleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lessonsTitleActionPerformed
@@ -535,37 +512,48 @@ public class managecourses extends javax.swing.JFrame {
 
     private void ViewenrolledStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewenrolledStudentsActionPerformed
 
-        int row = SearchTable.getSelectedRow();
-        if (row == -1) {
-            return;
-        }
+        int selected = SearchTable.getSelectedRow();
+    if (selected == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course first.");
+        return;
+    }
 
-        row = SearchTable.convertRowIndexToModel(row);
-        int cId = (int) SearchTable.getModel().getValueAt(row, 0);
+    selected = SearchTable.convertRowIndexToModel(selected);
 
-        Record r = cm.search(cId);
-        if (!(r instanceof Course)) {
-            return;
-        }
+    Object val = SearchTable.getModel().getValueAt(selected, 0);
+    if (val == null) {
+        JOptionPane.showMessageDialog(this, "Invalid course ID.");
+        return;
+    }
 
-        Course c = (Course) r;
-        ArrayList<Integer> enrolled = c.getEnrolledStudents();
-        if (enrolled == null || enrolled.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No students enrolled");
-            return;
-        }
+    int courseId;
+    try {
+        courseId = Integer.parseInt(val.toString());
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Invalid course ID format.");
+        return;
+    }
 
-        StringBuilder sb = new StringBuilder("Enrolled Students:\n\n");
-        for (int sid : enrolled) {
-            String name = "Unknown";
-            Record sr = sm.search(sid);
-            if (sr instanceof Student) {
-                name = ((Student) sr).getUsername();
-            }
-            sb.append(sid).append(" - ").append(name).append("\n");
-        }
+    Course c = cm.getCourseById(courseId);
+    if (c == null) {
+        JOptionPane.showMessageDialog(this, "Course not found in course manager.");
+        return;
+    }
 
-        JOptionPane.showMessageDialog(this, sb.toString());
+    ArrayList<Integer> enrolled = c.getEnrolledStudents();
+    if (enrolled == null || enrolled.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No students enrolled.");
+        return;
+    }
+
+    StringBuilder sb = new StringBuilder("Enrolled Students:\n\n");
+    for (int sid : enrolled) {
+        Record sr = sm.search(sid);
+        String name = (sr instanceof Student) ? ((Student) sr).getUsername() : "Unknown";
+        sb.append(sid).append(" - ").append(name).append("\n");
+    }
+
+    JOptionPane.showMessageDialog(this, sb.toString());
         
     }//GEN-LAST:event_ViewenrolledStudentsActionPerformed
 
@@ -614,7 +602,6 @@ public class managecourses extends javax.swing.JFrame {
     private javax.swing.JButton SearchButton;
     private javax.swing.JTextArea SearchIDtext;
     private javax.swing.JTable SearchTable;
-    private javax.swing.JLabel Students;
     private javax.swing.JLabel Title;
     private javax.swing.JButton UpdateButton;
     private javax.swing.JButton ViewenrolledStudents;
@@ -639,7 +626,6 @@ public class managecourses extends javax.swing.JFrame {
     private javax.swing.JTextField lessonsContent;
     private javax.swing.JTextField lessonsTitle;
     private javax.swing.JLabel searchByIDLabel;
-    private javax.swing.JTextField students;
     private javax.swing.JTextArea title;
     // End of variables declaration//GEN-END:variables
 }

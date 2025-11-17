@@ -14,9 +14,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BrowseCourse extends javax.swing.JFrame {
 
-    /**
-     * Creates new form BrowseCourse
-     */
     private Student s;
     private InstructorManager im;
     private CourseManager cm;
@@ -34,16 +31,22 @@ public class BrowseCourse extends javax.swing.JFrame {
     }
 
     public void loadTable() {
+    DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+    m.setRowCount(0); 
 
-        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+    ArrayList<Course> list = cm.getCourses(); 
 
-        ArrayList<Course> x = cm.returnAllRecords();
-
-        for (int i = 0; i < x.size(); i++) {
-            Course c = x.get(i);
-            m.addRow(new Object[]{c.getCourseId(), c.getTitle(), c.getDescription(), c.getInstructorId(), c.getLessons(), c.getEnrolledStudents()});
-        }
+    for (Course c : list) {
+        m.addRow(new Object[]{
+            c.getCourseId(),
+            c.getTitle(),
+            c.getDescription(),
+            c.getInstructorId(),
+            (c.getLessons() == null ? 0 : c.getLessons().size())
+        });
     }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,53 +158,78 @@ public class BrowseCourse extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void enrollincoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollincoursebuttonActionPerformed
-        this.dispose();
-        new CourseDisplay().setVisible(true);
+        
+        int selectedRow = SearchTable.getSelectedRow();
+    
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a course to enroll in.");
+        return;
+    }
+
+    DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+    int courseId = (int) m.getValueAt(selectedRow, 0); 
+
+    
+    Course selectedCourse = null;
+    for (Course c : cm.getCourses()) {
+        if (c.getCourseId() == courseId) {
+            selectedCourse = c;
+            break;
+        }
+    }
+
+    if (selectedCourse == null) {
+        JOptionPane.showMessageDialog(this, "Selected course not found.");
+        return;
+    }
+
+    if (selectedCourse.getEnrolledStudents().contains(s.getUserId())) {
+        JOptionPane.showMessageDialog(this, "You are already enrolled in this course.");
+        return;
+    }
+
+    s.enrollCourse(courseId);  
+    selectedCourse.getEnrolledStudents().add(s.getUserId()); 
+
+    JOptionPane.showMessageDialog(this, "Successfully enrolled in course: " + selectedCourse.getTitle());
+
+        
     }//GEN-LAST:event_enrollincoursebuttonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
 
-        String idText = searchTextField.getText() == null ? "" : searchTextField.getText().trim();
+    String idText = searchTextField.getText() == null ? "" : searchTextField.getText().trim();
 
-        boolean hasId = !idText.isEmpty();
+    if (idText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter a Course ID");
+        return;
+    }
 
-        if (!hasId) {
-            JOptionPane.showMessageDialog(this,"Please enter a Course ID");
-            return;
-        }
+    m.setRowCount(0); 
 
-        m.setRowCount(0);
+    int id;
+    try {
+        id = Integer.parseInt(idText);
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Course ID must be numeric");
+        return;
+    }
 
-        if (hasId) {
-            int id;
-            try {
-                id = Integer.parseInt(idText);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Course ID must be numeric");
-                return;
-            }
+    Course c = (Course) cm.search(id);
 
-            if (!cm.contains(id)) {
-                JOptionPane.showMessageDialog(this, "No Course found with this ID");
-                return;
-            }
+    if (c == null) {
+        JOptionPane.showMessageDialog(this, "No Course found with this ID");
+        return;
+    }
 
-            Course c = cm.getRecord(id);
-
-            if (c != null) {
-                m.addRow(new Object[]{
-                    c.getCourseId(),
-                    c.getTitle(),
-                    c.getDescription(),
-                    c.getInstructorId(),
-                    (c.getLessons() == null ? 0 : c.getLessons().size())
-                });
-            } else {
-                JOptionPane.showMessageDialog(this, "No Course found with this ID");
-            }
-
-        } 
+    m.addRow(new Object[]{
+        c.getCourseId(),
+        c.getTitle(),
+        c.getDescription(),
+        c.getInstructorId(),
+        (c.getLessons() == null ? 0 : c.getLessons().size())
+    });
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed

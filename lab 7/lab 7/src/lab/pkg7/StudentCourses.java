@@ -5,6 +5,7 @@
 package lab.pkg7;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,7 +30,7 @@ public class StudentCourses extends javax.swing.JFrame {
         this.sm = sm;
         this.um = um;
         initComponents();
-
+        loadTable();
     }
 
     public void loadTable() {
@@ -144,8 +145,23 @@ public class StudentCourses extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void opencoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opencoursebuttonActionPerformed
+        int selectedRow = studentCoursesTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course from the table.");
+            return;
+        }
+
+        int courseId = (int) studentCoursesTable.getValueAt(selectedRow, 0);
+
+        Course selected = (Course) cm.search(courseId);
+
+        if (selected == null) {
+            JOptionPane.showMessageDialog(this, "Course not found.");
+            return;
+        }
         this.dispose();
-        new CourseDisplay().setVisible(true);
+        new CourseDisplay(this.um, this.cm, this.im, this.sm, this.s, selected).setVisible(true);
     }//GEN-LAST:event_opencoursebuttonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

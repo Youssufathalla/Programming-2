@@ -24,20 +24,96 @@ public class managecourses extends javax.swing.JFrame {
     private InstructorDashboard parent;
     private CourseManager courseManager;
     private Instructor ins;
+    StudentManager sm;
 
-    public managecourses(Instructor ins,InstructorManager sms, CourseManager CM, InstructorDashboard parent) {
+    public managecourses(StudentManager sm,Instructor ins,InstructorManager sms, CourseManager CM, InstructorDashboard parent) {
         initComponents();
         this.sms = sms;
         this.parent = parent;
         this.courseManager = CM;
         this.ins=ins;
+        this.sm = sm;
         SearchTable.setAutoCreateRowSorter(true);
         DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
         SearchTable.setRowSorter(sorter);
-        loadinstructortable();
+        loadInstructorCourses();
 
     }
+    
+private void loadInstructorCourses() {
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        m.setRowCount(0);
+
+        if (ins == null) return;
+
+        ArrayList<Integer> created = ins.getCreatedCourses();
+        if (created == null || created.isEmpty()) return;
+
+        for (int cid : created) {
+            Record r = courseManager.search(cid);
+            if (r instanceof Course) {
+                Course c = (Course) r;
+
+                int lessonCount = (c.getLessons() == null) ? 0 : c.getLessons().size();
+                String studentsStr = buildStudentsString(c);
+
+                m.addRow(new Object[]{
+                        c.getCourseId(),
+                        c.getTitle(),
+                        c.getDescription(),
+                        lessonCount,
+                        studentsStr
+                });
+            }
+        }
+    }
+
+    private String buildStudentsString(Course c) {
+        ArrayList<Integer> enrolled = c.getEnrolledStudents();
+        if (enrolled == null || enrolled.isEmpty()) return "-";
+
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+
+        for (int sid : enrolled) {
+            if (!first) sb.append(", ");
+            first = false;
+
+            String name = "Unknown";
+            if (sm != null) {
+                Record r = sm.search(sid);
+                if (r instanceof Student) {
+                    name = ((Student) r).getName();
+                }
+            }
+            sb.append(sid).append("-").append(name);
+        }
+        return sb.toString();
+    }
+
+    // Refresh table with a SINGLE course (used after search/update/delete)
+    private void refreshTableWithSingleCourse(Course c) {
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        m.setRowCount(0);
+
+        if (c == null) {
+            return;
+        }
+
+        int lessonCount = (c.getLessons() == null) ? 0 : c.getLessons().size();
+        String studentsStr = buildStudentsString(c);
+
+        m.addRow(new Object[]{
+                c.getCourseId(),
+                c.getTitle(),
+                c.getDescription(),
+                lessonCount,
+                studentsStr
+        });
+    }
+
+
     
 
     /**
@@ -84,7 +160,7 @@ public class managecourses extends javax.swing.JFrame {
         lessonsTitle = new javax.swing.JTextField();
         lessonsContent = new javax.swing.JTextField();
         deletebutton = new javax.swing.JButton();
-        deletebutton1 = new javax.swing.JButton();
+        ViewenrolledStudents = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,13 +185,13 @@ public class managecourses extends javax.swing.JFrame {
 
         SearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "CourseId", "Title", "Description", "Instructorld", "Lessons", "Students"
+                "CourseId", "Title", "Description", "Lessons", "Students"
             }
         ));
         jScrollPane4.setViewportView(SearchTable);
@@ -200,10 +276,10 @@ public class managecourses extends javax.swing.JFrame {
             }
         });
 
-        deletebutton1.setText("View Enrolled Students");
-        deletebutton1.addActionListener(new java.awt.event.ActionListener() {
+        ViewenrolledStudents.setText("View Enrolled Students");
+        ViewenrolledStudents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deletebutton1ActionPerformed(evt);
+                ViewenrolledStudentsActionPerformed(evt);
             }
         });
 
@@ -241,7 +317,7 @@ public class managecourses extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(deletebutton, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(deletebutton1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(ViewenrolledStudents, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(SearchButton, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -278,7 +354,7 @@ public class managecourses extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(deletebutton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deletebutton1)
+                        .addComponent(ViewenrolledStudents)
                         .addContainerGap(13, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -324,171 +400,94 @@ public class managecourses extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+     String idText = SearchIDtext.getText().trim();
 
-        String idText = SearchIDtext.getText() == null ? "" : SearchIDtext.getText().trim();
-
-        boolean hasId = !idText.isEmpty();
-
-        if (!(hasId)) {
-            JOptionPane.showMessageDialog(this, "Please enter a Course ID ");
+        if (idText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter a Course ID");
             return;
         }
 
-        m.setRowCount(0);
-
-        if (hasId) {
-            int id;
-            try {
-                id = Integer.parseInt(idText);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Course ID must be a number.");
-                return;
-            }
-
-            Record r = sms.search(id);
-            if (r == null) {
-                JOptionPane.showMessageDialog(this, "No course found with this ID.");
-                return;
-            }
-
-            Course c = (Course) r;
-
-            m.addRow(new Object[]{
-                c.getCourseId(),
-                c.getTitle(),
-                c.getDescription(),
-                c.getInstructorId(),
-                c.getLessons().size(),
-                c.getEnrolledStudents().size()
-            });
-
+        int id;
+        try { id = Integer.parseInt(idText); }
+        catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Course ID must be numeric");
+            return;
         }
+
+        Record r = courseManager.search(id);
+        if (!(r instanceof Course)) {
+            JOptionPane.showMessageDialog(this, "Course not found");
+            return;
+        }
+
+        Course c = (Course) r;
+
+        if (c.getInstructorId() != ins.getUserId()) {
+            JOptionPane.showMessageDialog(this, "You can only manage your courses");
+            return;
+        }
+
+        refreshTableWithSingleCourse(c);
+
+        courseId.setText(String.valueOf(c.getCourseId()));
+        title.setText(c.getTitle());
+        description.setText(c.getDescription());
+        instructorId.setText(String.valueOf(c.getInstructorId()));
+
+        int studentCount = (c.getEnrolledStudents() == null) ? 0 : c.getEnrolledStudents().size();
+        students.setText(String.valueOf(studentCount));
+
+        lessonID.setText("");
+        lessonsTitle.setText("");
+        lessonsContent.setText("");
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        int selectedRow = SearchTable.getSelectedRow();
-
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a course from the table.");
+       String idText = SearchIDtext.getText().trim();
+        if (idText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Search for a course first");
             return;
         }
 
-        if (courseId.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter Course ID.");
+        int id;
+        try { id = Integer.parseInt(idText); }
+        catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Course ID must be numeric");
             return;
         }
 
-        int cId;
-        try {
-            cId = Integer.parseInt(courseId.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Course ID must be a number.");
+        Record r = courseManager.search(id);
+        if (!(r instanceof Course)) {
+            JOptionPane.showMessageDialog(this, "Course not found");
             return;
         }
 
-        String cTitle = title.getText().trim();
-        if (cTitle.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter Title.");
+        Course c = (Course) r;
+
+        if (c.getInstructorId() != ins.getUserId()) {
+            JOptionPane.showMessageDialog(this, "You can only edit your courses");
             return;
         }
 
-        String cDescription = description.getText().trim();
-        if (cDescription.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter Description.");
+        if (lessonID.getText().trim().isEmpty() ||
+            lessonsTitle.getText().trim().isEmpty() ||
+            lessonsContent.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter lesson ID, title and content");
             return;
         }
 
-        if (instructorId.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter Instructor ID.");
+        int lid;
+        try { lid = Integer.parseInt(lessonID.getText().trim()); }
+        catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Lesson ID must be numeric");
             return;
         }
 
-        int instId;
-        try {
-            instId = Integer.parseInt(instructorId.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Instructor ID must be a number.");
-            return;
-        }
-
-        if (lessonID.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter number of lessons.");
-            return;
-        }
-
-        int lessonCount;
-        try {
-            lessonCount = Integer.parseInt(lessonID.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Lessons must be a number.");
-            return;
-        }
-
-        if (lessonCount < 0) {
-            JOptionPane.showMessageDialog(this, "Lessons cannot be negative.");
-            return;
-        }
-
-        if (students.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter number of students.");
-            return;
-        }
-
-        int studentCount;
-        try {
-            studentCount = Integer.parseInt(students.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Students must be a number.");
-            return;
-        }
-
-        if (studentCount < 0) {
-            JOptionPane.showMessageDialog(this, "Student count cannot be negative.");
-            return;
-        }
-
-        int originalId = (int) SearchTable.getValueAt(selectedRow, 0);
-
-        int confirm = JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure you want to update course with ID: " + originalId + "?",
-                "Confirm Update",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        if (confirm != JOptionPane.YES_OPTION) {
-            return;
-        }
-//int lessonId, String title, String content, Boolean completed
-        int lid = Integer.parseInt(lessonID.getText());
-        String ltitle = lessonsTitle.getText();
-        String lcontent = lessonsContent.getText();
-        boolean comp = false;
-        Lesson L = new Lesson(lid, ltitle, lcontent, comp);
-
-        ArrayList<Integer> studentList = new ArrayList<>();
-        for (int i = 0; i < studentCount; i++) {
-            studentList.add(0);
-        }
-        Course c = (Course) courseManager.search(cId);
+        Lesson L = new Lesson(lid, lessonsTitle.getText().trim(), lessonsContent.getText().trim(), false);
         c.addLesson(L);
 
-        JOptionPane.showMessageDialog(this, "Course updated successfully.");
-        ArrayList<Course> courses = courseManager.getCourses();
-        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
-        m.setRowCount(0);
-        for (Course b : courses) {
-            m.addRow(new Object[]{
-                b.getCourseId(),
-                b.getTitle(),
-                b.getDescription(),
-                b.getInstructorId(),
-                b.getLessons().size(),
-                b.getEnrolledStudents().size()
-            });
-        }
-
+        JOptionPane.showMessageDialog(this, "Lesson added");
+        refreshTableWithSingleCourse(c);
         setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
@@ -517,12 +516,72 @@ public class managecourses extends javax.swing.JFrame {
     }//GEN-LAST:event_lessonsContentActionPerformed
 
     private void deletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebuttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deletebuttonActionPerformed
+int row = SearchTable.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course");
+        return;
+    }
 
-    private void deletebutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebutton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deletebutton1ActionPerformed
+    row = SearchTable.convertRowIndexToModel(row);
+    int cId = (int) SearchTable.getModel().getValueAt(row, 0);
+
+    Record r = courseManager.search(cId);
+    if (!(r instanceof Course)) {
+        JOptionPane.showMessageDialog(this, "Course not found");
+        return;
+    }
+
+    Course c = (Course) r;
+
+    if (c.getInstructorId() != ins.getUserId()) {
+        JOptionPane.showMessageDialog(this, "You can only delete your courses");
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this, "Delete course " + cId + "?", "Confirm", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) return;
+
+    courseManager.getCourses().remove(c);
+    ins.getCreatedCourses().remove(Integer.valueOf(cId));
+
+    JOptionPane.showMessageDialog(this, "Course deleted");
+    loadInstructorCourses();    }//GEN-LAST:event_deletebuttonActionPerformed
+
+    private void ViewenrolledStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewenrolledStudentsActionPerformed
+       
+       int row = SearchTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Select a course");
+            return;
+        }
+
+        row = SearchTable.convertRowIndexToModel(row);
+        int cId = (int) SearchTable.getModel().getValueAt(row, 0);
+
+        Record r = courseManager.search(cId);
+        if (!(r instanceof Course)) {
+            JOptionPane.showMessageDialog(this, "Course not found");
+            return;
+        }
+
+        Course c = (Course) r;
+        ArrayList<Integer> enrolled = c.getEnrolledStudents();
+
+        if (enrolled == null || enrolled.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No students enrolled");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("Enrolled Students:\n\n");
+        for (int sid : enrolled) {
+            String name = "Unknown";
+            Record sr = sm.search(sid);
+            if (sr instanceof Student) name = ((Student) sr).getName();
+            sb.append(sid).append(" - ").append(name).append("\n");
+        }
+
+        JOptionPane.showMessageDialog(this, sb.toString());  // TODO add your handling code here:
+    }//GEN-LAST:event_ViewenrolledStudentsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -572,6 +631,7 @@ public class managecourses extends javax.swing.JFrame {
     private javax.swing.JLabel Students;
     private javax.swing.JLabel Title;
     private javax.swing.JButton UpdateButton;
+    private javax.swing.JButton ViewenrolledStudents;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -581,7 +641,6 @@ public class managecourses extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JTextArea courseId;
     private javax.swing.JButton deletebutton;
-    private javax.swing.JButton deletebutton1;
     private javax.swing.JTextField description;
     private javax.swing.JTextField instructorId;
     private javax.swing.JLabel jLabel2;

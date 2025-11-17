@@ -210,6 +210,7 @@ public class CreateCourse extends javax.swing.JFrame {
 
   
     courseManager.add(c);
+    ins.addCreatedCourse(courseId);
 
     JOptionPane.showMessageDialog(this, "Course created successfully");
     setVisible(false);

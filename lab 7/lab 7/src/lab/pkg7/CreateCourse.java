@@ -45,8 +45,6 @@ public class CreateCourse extends javax.swing.JFrame {
         CourseId = new javax.swing.JTextField();
         Title = new javax.swing.JTextField();
         Description = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        Lessons = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -89,14 +87,6 @@ public class CreateCourse extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Lessons");
-
-        Lessons.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LessonsActionPerformed(evt);
-            }
-        });
-
         jLabel11.setText("Enter ID");
 
         jLabel12.setText("Title");
@@ -122,8 +112,7 @@ public class CreateCourse extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -132,8 +121,7 @@ public class CreateCourse extends javax.swing.JFrame {
                     .addComponent(CourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InstructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(InstructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,11 +150,7 @@ public class CreateCourse extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                             .addComponent(InstructorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(69, 69, 69))))
+                        .addGap(109, 109, 109))))
         );
 
         pack();
@@ -229,10 +213,6 @@ public class CreateCourse extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DescriptionActionPerformed
 
-    private void LessonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LessonsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LessonsActionPerformed
-
     private void InstructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstructorIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InstructorIdActionPerformed
@@ -276,7 +256,6 @@ public class CreateCourse extends javax.swing.JFrame {
     private javax.swing.JTextField CourseId;
     private javax.swing.JTextField Description;
     private javax.swing.JTextField InstructorId;
-    private javax.swing.JTextField Lessons;
     private javax.swing.JTextField Title;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton createCoursebutton;
@@ -286,7 +265,6 @@ public class CreateCourse extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
 //

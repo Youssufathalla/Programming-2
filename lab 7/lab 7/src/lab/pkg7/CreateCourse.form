@@ -46,7 +46,6 @@
                   <Component id="jLabel11" min="-2" pref="108" max="-2" attributes="0"/>
                   <Component id="jLabel14" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                  <Component id="jLabel9" min="-2" pref="108" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -58,7 +57,6 @@
                   <Component id="Description" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                   <Component id="Title" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                   <Component id="InstructorId" min="-2" pref="120" max="-2" attributes="0"/>
-                  <Component id="Lessons" min="-2" pref="120" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
           </Group>
@@ -95,12 +93,7 @@
                           <Component id="jLabel13" alignment="3" pref="25" max="32767" attributes="0"/>
                           <Component id="InstructorId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel9" alignment="3" max="32767" attributes="0"/>
-                          <Component id="Lessons" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -141,16 +134,6 @@
     <Component class="javax.swing.JTextField" name="Description">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DescriptionActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Lessons"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="Lessons">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LessonsActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">

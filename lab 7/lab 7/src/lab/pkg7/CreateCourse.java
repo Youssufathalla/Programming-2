@@ -39,7 +39,7 @@ public class CreateCourse extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        addstudentbutton = new javax.swing.JButton();
+        createCoursebutton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         CourseId = new javax.swing.JTextField();
         Title = new javax.swing.JTextField();
@@ -58,17 +58,17 @@ public class CreateCourse extends javax.swing.JFrame {
         setBackground(new java.awt.Color(102, 255, 255));
         setForeground(java.awt.Color.black);
 
-        addstudentbutton.setText("Add");
-        addstudentbutton.addActionListener(new java.awt.event.ActionListener() {
+        createCoursebutton.setText("Create");
+        createCoursebutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addstudentbuttonActionPerformed(evt);
+                createCoursebuttonActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 251));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Add Student");
+        jLabel2.setText("Create Course");
 
         CourseId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +127,7 @@ public class CreateCourse extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
-                        .addComponent(addstudentbutton))
+                        .addComponent(createCoursebutton))
                     .addComponent(CourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,7 +154,7 @@ public class CreateCourse extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addstudentbutton)
+                        .addComponent(createCoursebutton)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -171,7 +171,7 @@ public class CreateCourse extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addstudentbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudentbuttonActionPerformed
+    private void createCoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCoursebuttonActionPerformed
         int courseId, instructorId;
     String title, description;
 
@@ -209,11 +209,11 @@ public class CreateCourse extends javax.swing.JFrame {
     c.getEnrolledStudents().clear();
 
   
-    ins.addCreatedCourse(courseId);
+    courseManager.add(c);
 
     JOptionPane.showMessageDialog(this, "Course created successfully");
     setVisible(false);
-    }//GEN-LAST:event_addstudentbuttonActionPerformed
+    }//GEN-LAST:event_createCoursebuttonActionPerformed
 
     private void CourseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourseIdActionPerformed
         // TODO add your handling code here:
@@ -276,8 +276,8 @@ public class CreateCourse extends javax.swing.JFrame {
     private javax.swing.JTextField InstructorId;
     private javax.swing.JTextField Lessons;
     private javax.swing.JTextField Title;
-    private javax.swing.JButton addstudentbutton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton createCoursebutton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

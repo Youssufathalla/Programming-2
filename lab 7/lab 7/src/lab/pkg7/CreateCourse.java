@@ -27,6 +27,14 @@ public class CreateCourse extends javax.swing.JFrame {
         this.courseManager = CM;
         this.ins = ins;
     }
+   private boolean idExists(int id) {
+    for (Record r : Lab7.courseManager.read()) {
+        Course c = (Course) r; 
+        if (c.getCourseId() == id) return true;
+    }
+    return false;
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,10 +149,12 @@ public class CreateCourse extends javax.swing.JFrame {
 
         try {
             courseId = Integer.parseInt(CourseId.getText().trim());
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Course ID must be numeric");
             return;
         }
+      
 
         title = Title.getText().trim();
         if (title.isEmpty()) {
@@ -166,14 +176,17 @@ public class CreateCourse extends javax.swing.JFrame {
 
         Course c = new Course(courseId, title, description, instructorId);
 
+          if (idExists(courseId)){
+            JOptionPane.showMessageDialog(this, "courseID already in use.");
+            }
+          else{
         courseManager.add(c);
         ins.addCreatedCourse(courseId);
         JsonDatabase.saveCourses(courseManager);
         JOptionPane.showMessageDialog(this, "Course created successfully");
-
         this.dispose();
         parent.setVisible(true);
-
+          }
 
     }//GEN-LAST:event_createCoursebuttonActionPerformed
 

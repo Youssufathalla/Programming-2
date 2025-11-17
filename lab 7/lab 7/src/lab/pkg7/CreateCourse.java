@@ -26,6 +26,7 @@ public class CreateCourse extends javax.swing.JFrame {
          this.sms = sms;
         this.parent = parent;
         this.courseManager = CM;
+        this.ins =ins;
     }
 
     /**

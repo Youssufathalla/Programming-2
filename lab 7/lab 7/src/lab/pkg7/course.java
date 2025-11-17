@@ -28,8 +28,8 @@ public class Course implements Record{
         this.description = description;
         this.instructorId = instructorId;
 
-        this.lessons = new ArrayList<>();
-        this.enrolledStudents = new ArrayList<>();
+        this.lessons = null;
+        this.enrolledStudents = null;
     }
 
  

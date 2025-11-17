@@ -48,7 +48,8 @@ public class JsonDatabase {
 
         try (FileWriter fw = new FileWriter(USERS_FILE)) {
             fw.write(usersArr.toString());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public static void loadUsers(StudentManager sm, InstructorManager im) {
@@ -59,7 +60,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(USERS_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
@@ -91,7 +94,8 @@ public class JsonDatabase {
             sm.save(students);
             im.save(instructors);
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public static void saveCourses(CourseManager cm) {
@@ -123,7 +127,8 @@ public class JsonDatabase {
 
         try (FileWriter fw = new FileWriter(COURSES_FILE)) {
             fw.write(coursesArr.toString());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public static void loadCourses(CourseManager cm) {
@@ -133,7 +138,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(COURSES_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
@@ -149,19 +156,38 @@ public class JsonDatabase {
 
                 Course c = new Course(cid, title, desc, instructorId);
 
+                // ------------------------------
+                // FIX #1: Load lessons (reflection)
+                // ------------------------------
                 JSONArray lessonsArr = obj.getJSONArray("lessons");
+
                 for (int j = 0; j < lessonsArr.length(); j++) {
                     JSONObject lobj = lessonsArr.getJSONObject(j);
+
                     int lid = lobj.getInt("lessonId");
                     String ltitle = lobj.getString("title");
                     String lcontent = lobj.getString("content");
-                    Boolean lcompleted = lobj.getBoolean("completed");
-                    c.getLessons().add(new Lesson(lid, ltitle, lcontent, lcompleted));
+
+                    // Lesson in your code has NO completed field
+                    Lesson lesson = new Lesson(lid, ltitle, lcontent, false);
+
+                    // Inject into private lessons list inside Course
+                    java.lang.reflect.Field f = Course.class.getDeclaredField("lessons");
+                    f.setAccessible(true);
+                    ArrayList<Lesson> internalLessons = (ArrayList<Lesson>) f.get(c);
+                    internalLessons.add(lesson);
                 }
 
+                // ------------------------------
+                // FIX #2: Load enrolled students (reflection)
+                // ------------------------------
                 JSONArray enrollArr = obj.getJSONArray("enrolledStudents");
+
                 for (int j = 0; j < enrollArr.length(); j++) {
-                    c.getEnrolledStudents().add(enrollArr.getInt(j));
+                    java.lang.reflect.Field f2 = Course.class.getDeclaredField("enrolledStudents");
+                    f2.setAccessible(true);
+                    ArrayList<Integer> internalEnroll = (ArrayList<Integer>) f2.get(c);
+                    internalEnroll.add(enrollArr.getInt(j));
                 }
 
                 courses.add(c);
@@ -169,6 +195,9 @@ public class JsonDatabase {
 
             cm.save(courses);
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            // ignore first-run errors
+        }
     }
+
 }

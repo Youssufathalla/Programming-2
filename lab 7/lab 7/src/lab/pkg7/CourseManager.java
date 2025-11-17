@@ -22,9 +22,11 @@ public class CourseManager {
 
     public Record search(int courseId) {
         for (Record r : records) {
-            Course c = (Course) r;
-            if (c.getCourseId() == courseId) {
-                return c;
+            if (r instanceof Course) {
+                Course c = (Course) r;
+                if (c.getCourseId() == courseId) {
+                    return c;
+                }
             }
         }
         return null;
@@ -49,20 +51,22 @@ public class CourseManager {
     public ArrayList<Course> getCourses() {
         ArrayList<Course> list = new ArrayList<>();
         for (Record r : records) {
-            list.add((Course) r);
+            if (r instanceof Course) {
+                list.add((Course) r);
+            }
         }
         return list;
     }
-public Course getCourseById(int id) {
-    for (Record r : records) {
-        if (r instanceof Course) {
-            Course c = (Course) r;
-            if (c.getCourseId() == id) {
-                return c;
+
+    public Course getCourseById(int id) {
+        for (Record r : records) {
+            if (r instanceof Course) {
+                Course c = (Course) r;
+                if (c.getCourseId() == id) {
+                    return c;
+                }
             }
         }
+        return null;
     }
-    return null;
-}
-    
 }

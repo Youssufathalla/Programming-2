@@ -488,7 +488,7 @@ public class managecourses extends javax.swing.JFrame {
     }//GEN-LAST:event_lessonsContentActionPerformed
 
     private void deletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebuttonActionPerformed
-         int row = SearchTable.getSelectedRow();
+            int row = SearchTable.getSelectedRow();
     if (row == -1) {
         JOptionPane.showMessageDialog(this, "Select a course first");
         return;
@@ -497,14 +497,16 @@ public class managecourses extends javax.swing.JFrame {
     row = SearchTable.convertRowIndexToModel(row);
     int cId = (int) SearchTable.getModel().getValueAt(row, 0);
 
-    Course c = cm.getCourseById(cId);
+    // Get real course
+    Course c = (Course) cm.search(cId);
     if (c == null) {
-        JOptionPane.showMessageDialog(this, "Error: Course not found in manager");
+        JOptionPane.showMessageDialog(this, "Course not found");
         return;
     }
 
+    // Check instructor privileges
     if (c.getInstructorId() != ins.getUserId()) {
-        JOptionPane.showMessageDialog(this, "You can only delete YOUR courses");
+        JOptionPane.showMessageDialog(this, "You can only delete your courses");
         return;
     }
 
@@ -517,9 +519,13 @@ public class managecourses extends javax.swing.JFrame {
 
     if (confirm != JOptionPane.YES_OPTION) return;
 
-    cm.getCourses().remove(c);
+    // REMOVE FROM REAL LIST — THIS FIXES YOUR BUG
+    cm.read().remove(c);
+
+    // Remove from instructor list
     ins.getCreatedCourses().remove(Integer.valueOf(cId));
 
+    // Save JSON
     JsonDatabase.saveCourses(cm);
     JsonDatabase.saveUsers(sm, im);
 

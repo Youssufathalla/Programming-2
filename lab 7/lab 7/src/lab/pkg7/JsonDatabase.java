@@ -31,6 +31,16 @@ public class JsonDatabase {
             obj.put("email", s.getEmail());
             obj.put("passwordHash", s.getPasswordHash());
             obj.put("enrolledCourses", new JSONArray(s.getEnrolledCourses()));
+
+            JSONObject progObj = new JSONObject();
+            for (Integer cid : s.getEnrolledCourses()) {
+                Double p = s.getProgress(cid);
+                if (p != null) {
+                    progObj.put(String.valueOf(cid), p);
+                }
+            }
+            obj.put("progress", progObj);
+
             usersArr.put(obj);
         }
 
@@ -59,7 +69,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(USERS_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
@@ -76,14 +88,50 @@ public class JsonDatabase {
                     String username = obj.getString("username");
                     String email = obj.getString("email");
                     String pw = obj.getString("passwordHash");
+
                     Student s = new Student(id, username, email, pw);
+<<<<<<< Updated upstream
+=======
+
+                    if (obj.has("enrolledCourses")) {
+                        JSONArray ec = obj.getJSONArray("enrolledCourses");
+                        for (int j = 0; j < ec.length(); j++) {
+                            int cid = ec.getInt(j);
+                            s.enrollCourse(cid);
+                        }
+                    }
+
+                    if (obj.has("progress")) {
+                        JSONObject prog = obj.getJSONObject("progress");
+                        for (String key : prog.keySet()) {
+                            int cid = Integer.parseInt(key);
+                            double p = prog.getDouble(key);
+                            s.updateProgress(cid, (int) p);
+                        }
+                    }
+
+>>>>>>> Stashed changes
                     students.add(s);
-                } else if (type.equals("instructor")) {
+                }
+
+                if (type.equals("instructor")) {
                     int id = obj.getInt("userId");
                     String username = obj.getString("username");
                     String email = obj.getString("email");
                     String pw = obj.getString("passwordHash");
+
                     Instructor inst = new Instructor(id, username, email, pw);
+<<<<<<< Updated upstream
+=======
+
+                    if (obj.has("createdCourses")) {
+                        JSONArray cc = obj.getJSONArray("createdCourses");
+                        for (int j = 0; j < cc.length(); j++) {
+                            inst.getCreatedCourses().add(cc.getInt(j));
+                        }
+                    }
+
+>>>>>>> Stashed changes
                     instructors.add(inst);
                 }
             }
@@ -91,7 +139,12 @@ public class JsonDatabase {
             sm.save(students);
             im.save(instructors);
 
+<<<<<<< Updated upstream
         } catch (Exception e) {}
+=======
+        } catch (Exception e) {
+        }
+>>>>>>> Stashed changes
     }
 
     public static void saveCourses(CourseManager cm) {
@@ -133,7 +186,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(COURSES_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());

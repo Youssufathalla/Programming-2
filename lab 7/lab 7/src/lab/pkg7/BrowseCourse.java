@@ -21,13 +21,15 @@ public class BrowseCourse extends javax.swing.JFrame {
     private UserManager um;
 
     public BrowseCourse(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Student s) {
+       initComponents();
         this.s = s;
         this.im = im;
         this.cm = cm;
         this.sm = sm;
         this.um = um;
-        initComponents();
-
+        loadTable();
+        
+        
     }
 
     public void loadTable() {
@@ -42,7 +44,7 @@ public class BrowseCourse extends javax.swing.JFrame {
             c.getTitle(),
             c.getDescription(),
             c.getInstructorId(),
-            (c.getLessons() == null ? 0 : c.getLessons().size())
+            c.getLessons().size()
         });
     }
 }

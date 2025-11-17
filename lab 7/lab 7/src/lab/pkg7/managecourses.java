@@ -35,7 +35,7 @@ public class managecourses extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
         SearchTable.setRowSorter(sorter);
-        loadinstructortable();
+//        loadinstructortable();
 
     }
     

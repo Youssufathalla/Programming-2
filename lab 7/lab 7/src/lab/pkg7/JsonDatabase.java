@@ -1,17 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package lab.pkg7;
 
-/**
- *
- * @author youssufathalla
- */
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class JsonDatabase {
@@ -48,7 +42,8 @@ public class JsonDatabase {
 
         try (FileWriter fw = new FileWriter(USERS_FILE)) {
             fw.write(usersArr.toString());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public static void loadUsers(StudentManager sm, InstructorManager im) {
@@ -77,6 +72,15 @@ public class JsonDatabase {
                     String email = obj.getString("email");
                     String pw = obj.getString("passwordHash");
                     Student s = new Student(id, username, email, pw);
+
+                    if (obj.has("enrolledCourses")) {
+                        JSONArray ec = obj.getJSONArray("enrolledCourses");
+                        for (int j = 0; j < ec.length(); j++) {
+                            int cid = ec.getInt(j);
+                            s.getEnrolledCourses().add(cid);
+                        }
+                    }
+
                     students.add(s);
                 } else if (type.equals("instructor")) {
                     int id = obj.getInt("userId");
@@ -84,6 +88,15 @@ public class JsonDatabase {
                     String email = obj.getString("email");
                     String pw = obj.getString("passwordHash");
                     Instructor inst = new Instructor(id, username, email, pw);
+
+                    if (obj.has("createdCourses")) {
+                        JSONArray cc = obj.getJSONArray("createdCourses");
+                        for (int j = 0; j < cc.length(); j++) {
+                            int cid = cc.getInt(j);
+                            inst.getCreatedCourses().add(cid);
+                        }
+                    }
+
                     instructors.add(inst);
                 }
             }
@@ -91,7 +104,9 @@ public class JsonDatabase {
             sm.save(students);
             im.save(instructors);
 
-        } catch (Exception e) {}
+        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
+        }
     }
 
     public static void saveCourses(CourseManager cm) {
@@ -107,23 +122,33 @@ public class JsonDatabase {
             obj.put("instructorId", c.getInstructorId());
 
             JSONArray lessonsArr = new JSONArray();
-            for (Lesson l : c.getLessons()) {
-                JSONObject lobj = new JSONObject();
-                lobj.put("lessonId", l.getLessonId());
-                lobj.put("title", l.getTitle());
-                lobj.put("content", l.getContent());
-                lessonsArr.put(lobj);
+            if (c.getLessons() != null) {
+                for (Lesson l : c.getLessons()) {
+                    JSONObject lobj = new JSONObject();
+                    lobj.put("lessonId", l.getLessonId());
+                    lobj.put("title", l.getTitle());
+                    lobj.put("content", l.getContent());
+                    lobj.put("completed", l.isCompleted());
+                    lessonsArr.put(lobj);
+                }
             }
-
             obj.put("lessons", lessonsArr);
-            obj.put("enrolledStudents", new JSONArray(c.getEnrolledStudents()));
+
+            JSONArray enrolled = new JSONArray();
+            if (c.getEnrolledStudents() != null) {
+                for (Integer sid : c.getEnrolledStudents()) {
+                    enrolled.put(sid);
+                }
+            }
+            obj.put("enrolledStudents", enrolled);
 
             coursesArr.put(obj);
         }
 
         try (FileWriter fw = new FileWriter(COURSES_FILE)) {
             fw.write(coursesArr.toString());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public static void loadCourses(CourseManager cm) {
@@ -149,19 +174,26 @@ public class JsonDatabase {
 
                 Course c = new Course(cid, title, desc, instructorId);
 
-                JSONArray lessonsArr = obj.getJSONArray("lessons");
-                for (int j = 0; j < lessonsArr.length(); j++) {
-                    JSONObject lobj = lessonsArr.getJSONObject(j);
-                    int lid = lobj.getInt("lessonId");
-                    String ltitle = lobj.getString("title");
-                    String lcontent = lobj.getString("content");
-                    Boolean lcompleted = lobj.getBoolean("completed");
-                    c.getLessons().add(new Lesson(lid, ltitle, lcontent, lcompleted));
+                if (obj.has("lessons")) {
+                    JSONArray lessonsArr = obj.getJSONArray("lessons");
+                    for (int j = 0; j < lessonsArr.length(); j++) {
+                        JSONObject lobj = lessonsArr.getJSONObject(j);
+                        int lid = lobj.getInt("lessonId");
+                        String ltitle = lobj.getString("title");
+                        String lcontent = lobj.getString("content");
+                        boolean lcompleted = lobj.optBoolean("completed", false);
+
+                        Lesson lesson = new Lesson(lid, ltitle, lcontent, lcompleted);
+                        c.addLesson(lesson);
+                    }
                 }
 
-                JSONArray enrollArr = obj.getJSONArray("enrolledStudents");
-                for (int j = 0; j < enrollArr.length(); j++) {
-                    c.getEnrolledStudents().add(enrollArr.getInt(j));
+                if (obj.has("enrolledStudents")) {
+                    JSONArray enrollArr = obj.getJSONArray("enrolledStudents");
+                    for (int j = 0; j < enrollArr.length(); j++) {
+                        int sid = enrollArr.getInt(j);
+                        c.addStudent(sid);
+                    }
                 }
 
                 courses.add(c);
@@ -169,6 +201,8 @@ public class JsonDatabase {
 
             cm.save(courses);
 
-        } catch (Exception e) {}
+        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
+        }
     }
 }

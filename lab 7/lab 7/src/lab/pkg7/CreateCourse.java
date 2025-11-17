@@ -190,8 +190,7 @@ public class CreateCourse extends javax.swing.JFrame {
 
     
     Course c = new Course(courseId, title, description, instructorId);
-    c.getLessons().clear();
-    c.getEnrolledStudents().clear();
+
 
   
     courseManager.add(c);

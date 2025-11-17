@@ -1,6 +1,5 @@
 package lab.pkg7;
 
-
 import javax.swing.JOptionPane;
 
 /*
@@ -21,12 +20,12 @@ public class CreateCourse extends javax.swing.JFrame {
     private CourseManager courseManager;
     private Instructor ins;
 
-    public CreateCourse(Instructor ins,InstructorManager sms, CourseManager CM, InstructorDashboard parent) {
+    public CreateCourse(Instructor ins, InstructorManager sms, CourseManager CM, InstructorDashboard parent) {
         initComponents();
-         this.sms = sms;
+        this.sms = sms;
         this.parent = parent;
         this.courseManager = CM;
-        this.ins =ins;
+        this.ins = ins;
     }
 
     /**
@@ -47,9 +46,7 @@ public class CreateCourse extends javax.swing.JFrame {
         Description = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        InstructorId = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -91,15 +88,7 @@ public class CreateCourse extends javax.swing.JFrame {
 
         jLabel12.setText("Title");
 
-        jLabel13.setText("Instructor ID");
-
         jLabel14.setText("Description");
-
-        InstructorId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InstructorIdActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,8 +100,7 @@ public class CreateCourse extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -120,8 +108,7 @@ public class CreateCourse extends javax.swing.JFrame {
                         .addComponent(createCoursebutton))
                     .addComponent(CourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InstructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -140,17 +127,9 @@ public class CreateCourse extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createCoursebutton)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                            .addComponent(InstructorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(109, 109, 109))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addComponent(createCoursebutton)
+                .addContainerGap())
         );
 
         pack();
@@ -158,47 +137,44 @@ public class CreateCourse extends javax.swing.JFrame {
 
     private void createCoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCoursebuttonActionPerformed
         int courseId, instructorId;
-    String title, description;
+        String title, description;
+
+        try {
+            courseId = Integer.parseInt(CourseId.getText().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Course ID must be numeric");
+            return;
+        }
+
+        title = Title.getText().trim();
+        if (title.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Title");
+            return;
+        }
+
+        description = Description.getText().trim();
+        if (description.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Description");
+            return;
+        }
+        try {
+            instructorId = ins.getUserId();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Instructor ID must be numeric");
+            return;
+        }
+
+        Course c = new Course(courseId, title, description, instructorId);
+
+        courseManager.add(c);
+        ins.addCreatedCourse(courseId);
+        JsonDatabase.saveCourses(courseManager);
+        JOptionPane.showMessageDialog(this, "Course created successfully");
+
+        this.dispose();
+        parent.setVisible(true);
 
 
-    try {
-        courseId = Integer.parseInt(CourseId.getText().trim());
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Course ID must be numeric");
-        return;
-    }
-
-    
-    title = Title.getText().trim();
-    if (title.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter Title");
-        return;
-    }
-
-   
-    description = Description.getText().trim();
-    if (description.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter Description");
-        return;
-    }
-    try {
-        instructorId = Integer.parseInt(InstructorId.getText().trim());
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Instructor ID must be numeric");
-        return;
-    }
-
-    
-    Course c = new Course(courseId, title, description, instructorId);
-
-
-  
-    courseManager.add(c);
-    ins.addCreatedCourse(courseId);
-JsonDatabase.saveCourses(courseManager);
-    JOptionPane.showMessageDialog(this, "Course created successfully");
-    
-    setVisible(false);
     }//GEN-LAST:event_createCoursebuttonActionPerformed
 
     private void CourseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourseIdActionPerformed
@@ -212,10 +188,6 @@ JsonDatabase.saveCourses(courseManager);
     private void DescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescriptionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DescriptionActionPerformed
-
-    private void InstructorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstructorIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_InstructorIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,14 +227,12 @@ JsonDatabase.saveCourses(courseManager);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CourseId;
     private javax.swing.JTextField Description;
-    private javax.swing.JTextField InstructorId;
     private javax.swing.JTextField Title;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton createCoursebutton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

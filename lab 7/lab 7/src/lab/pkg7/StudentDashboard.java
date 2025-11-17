@@ -19,13 +19,15 @@ public class StudentDashboard extends javax.swing.JFrame {
     private StudentManager sm;
     private UserManager um;
 
-    public StudentDashboard(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm,Student s) {
-        this.s= s;
-          this.im=im;
-    this.cm=cm;
-    this.sm=sm;
-    this.um=um;
+    public StudentDashboard(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Student s) {
         initComponents();
+        this.s = s;
+        this.im = im;
+        this.cm = cm;
+        this.sm = sm;
+        this.um = um;
+
+        userIdTextField.setText("ID:" + String.valueOf(s.getUserId()));
 
     }
 
@@ -42,6 +44,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         browsenewcoursesbutton = new javax.swing.JButton();
         logoutbutton = new javax.swing.JButton();
+        userIdTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +82,8 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
+        userIdTextField.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,13 +98,19 @@ public class StudentDashboard extends javax.swing.JFrame {
                     .addComponent(logoutbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addComponent(mycoursesbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(mycoursesbutton)
                 .addGap(29, 29, 29)
                 .addComponent(browsenewcoursesbutton)
@@ -113,17 +124,17 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
         this.dispose();
-        new StudentCourses(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
+        new StudentCourses(this.um, this.cm, this.im, this.sm, this.s).setVisible(true);
     }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
     private void browsenewcoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsenewcoursesbuttonActionPerformed
         this.dispose();
-        new BrowseCourse(this.um,this.cm,this.im,this.sm,this.s).setVisible(true);
+        new BrowseCourse(this.um, this.cm, this.im, this.sm, this.s).setVisible(true);
     }//GEN-LAST:event_browsenewcoursesbuttonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed
         this.dispose();
-        new LoginFrame(this.um,this.cm,this.im,this.sm).setVisible(true);
+        new LoginFrame(this.um, this.cm, this.im, this.sm).setVisible(true);
     }//GEN-LAST:event_logoutbuttonActionPerformed
 
     /**
@@ -166,5 +177,6 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logoutbutton;
     private javax.swing.JButton mycoursesbutton;
+    private javax.swing.JTextField userIdTextField;
     // End of variables declaration//GEN-END:variables
 }

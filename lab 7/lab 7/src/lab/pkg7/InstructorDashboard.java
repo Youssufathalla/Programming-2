@@ -13,20 +13,20 @@ public class InstructorDashboard extends javax.swing.JFrame {
     /**
      * Creates new form InstructorManagment
      */
-   private Instructor i;
+    private Instructor i;
     private InstructorManager im;
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
 
-    public InstructorDashboard(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm,Instructor i) {
-        this.i=i;
-          this.im=im;
-    this.cm=cm;
-    this.sm=sm;
-    this.um=um;
+    public InstructorDashboard(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Instructor i) {
         initComponents();
-
+        this.i = i;
+        this.im = im;
+        this.cm = cm;
+        this.sm = sm;
+        this.um = um;
+        userIdTextField.setText("ID:"+String.valueOf(i.getUserId()));
     }
 
     /**
@@ -42,6 +42,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
         mycoursesbutton = new javax.swing.JButton();
         createnewcoursebutton = new javax.swing.JButton();
         logoutbutton = new javax.swing.JButton();
+        userIdTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +80,8 @@ public class InstructorDashboard extends javax.swing.JFrame {
             }
         });
 
+        userIdTextField.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,13 +94,19 @@ public class InstructorDashboard extends javax.swing.JFrame {
                     .addComponent(createnewcoursebutton)
                     .addComponent(logoutbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(mycoursesbutton)
                 .addGap(33, 33, 33)
                 .addComponent(createnewcoursebutton)
@@ -110,32 +119,30 @@ public class InstructorDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mycoursesbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mycoursesbuttonActionPerformed
- this.dispose();
-    new managecourses(this.im,this.cm,this).setVisible(true);
+        this.dispose();
+        new managecourses(this.im, this.cm, this).setVisible(true);
     }//GEN-LAST:event_mycoursesbuttonActionPerformed
 
     private void createnewcoursebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createnewcoursebuttonActionPerformed
-      this.dispose();
-    new CreateCourse(this.i,this.im,this.cm,this).setVisible(true);
+        this.dispose();
+        new CreateCourse(this.i, this.im, this.cm, this).setVisible(true);
     }//GEN-LAST:event_createnewcoursebuttonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed
-this.dispose();
-    new LoginFrame(this.um,this.cm,this.im,this.sm).setVisible(true);
+        this.dispose();
+        new LoginFrame(this.um, this.cm, this.im, this.sm).setVisible(true);
     }//GEN-LAST:event_logoutbuttonActionPerformed
 
     /**
      * @param args the command line arguments
      */
 // 
-    
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createnewcoursebutton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logoutbutton;
     private javax.swing.JButton mycoursesbutton;
+    private javax.swing.JTextField userIdTextField;
     // End of variables declaration//GEN-END:variables
 }

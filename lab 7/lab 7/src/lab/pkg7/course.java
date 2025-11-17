@@ -12,7 +12,7 @@ import java.util.*;
  */
 import java.util.ArrayList;
 
-public class Course implements Record{
+public class Course implements Record {
 
     private int courseId;
     private String title;
@@ -28,11 +28,11 @@ public class Course implements Record{
         this.description = description;
         this.instructorId = instructorId;
 
-        this.lessons = null;
-        this.enrolledStudents = null;
+        // Empty lists instead of null
+        this.lessons = new ArrayList<>();
+        this.enrolledStudents = new ArrayList<>();
     }
 
- 
     public int getCourseId() {
         return courseId;
     }
@@ -50,14 +50,18 @@ public class Course implements Record{
     }
 
     public ArrayList<Lesson> getLessons() {
-        return new ArrayList<>(lessons); 
+        if (lessons == null) lessons = new ArrayList<>();
+        return lessons;
     }
 
     public ArrayList<Integer> getEnrolledStudents() {
-        return new ArrayList<>(enrolledStudents);
+        if (enrolledStudents == null) enrolledStudents = new ArrayList<>();
+        return enrolledStudents;
     }
-public void addLesson(Lesson lesson) {
-    lessons.add(lesson);
+
+    public void addLesson(Lesson lesson) {
+        if (lessons == null) lessons = new ArrayList<>();
+        lessons.add(lesson);
+    }
 }
-       
-}
+

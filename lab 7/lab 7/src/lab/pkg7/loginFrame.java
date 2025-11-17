@@ -13,11 +13,14 @@ public class LoginFrame extends javax.swing.JFrame {
     private StudentManager sm;
     private UserManager um;
     
+    
     public LoginFrame(UserManager um,CourseManager cm,InstructorManager im,StudentManager sm) {
     this.im=im;
     this.cm=cm;
     this.sm=sm;
     this.um=um;
+        JsonDatabase.loadUsers(sm, im);
+    JsonDatabase.loadCourses(cm);
         initComponents();
     buttonGroup1.clearSelection();
 }

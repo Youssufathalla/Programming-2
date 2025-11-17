@@ -11,9 +11,13 @@ public class JsonDatabase {
     private static final String USERS_FILE = "users.json";
     private static final String COURSES_FILE = "courses.json";
 
+    // ==============================
+    //  SAVE USERS
+    // ==============================
     public static void saveUsers(StudentManager sm, InstructorManager im) {
-        JSONArray usersArr = new JSONArray();
+        JSONArray arr = new JSONArray();
 
+        // STUDENTS
         for (Record r : sm.read()) {
             Student s = (Student) r;
             JSONObject obj = new JSONObject();
@@ -23,9 +27,11 @@ public class JsonDatabase {
             obj.put("email", s.getEmail());
             obj.put("passwordHash", s.getPasswordHash());
             obj.put("enrolledCourses", new JSONArray(s.getEnrolledCourses()));
-            usersArr.put(obj);
+
+            arr.put(obj);
         }
 
+        // INSTRUCTORS
         for (Record r : im.read()) {
             Instructor inst = (Instructor) r;
             JSONObject obj = new JSONObject();
@@ -35,15 +41,19 @@ public class JsonDatabase {
             obj.put("email", inst.getEmail());
             obj.put("passwordHash", inst.getPasswordHash());
             obj.put("createdCourses", new JSONArray(inst.getCreatedCourses()));
-            usersArr.put(obj);
+
+            arr.put(obj);
         }
 
         try (FileWriter fw = new FileWriter(USERS_FILE)) {
-            fw.write(usersArr.toString());
+            fw.write(arr.toString());
         } catch (Exception e) {
         }
     }
 
+    // ==============================
+    //  LOAD USERS
+    // ==============================
     public static void loadUsers(StudentManager sm, InstructorManager im) {
         sm.save(new ArrayList<>());
         im.save(new ArrayList<>());
@@ -52,13 +62,10 @@ public class JsonDatabase {
             FileReader fr = new FileReader(USERS_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) {
-                sb.append((char) ch);
-            }
+            while ((ch = fr.read()) != -1) sb.append((char) ch);
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
-
             ArrayList<Record> students = new ArrayList<>();
             ArrayList<Record> instructors = new ArrayList<>();
 
@@ -66,9 +73,6 @@ public class JsonDatabase {
                 JSONObject obj = arr.getJSONObject(i);
                 String type = obj.getString("type");
 
-                // ------------------
-                // LOAD STUDENT
-                // ------------------
                 if (type.equals("student")) {
                     int id = obj.getInt("userId");
                     String username = obj.getString("username");
@@ -77,24 +81,17 @@ public class JsonDatabase {
 
                     Student s = new Student(id, username, email, pw);
 
-                    // restore enrolledCourses
-                    JSONArray ecArr = obj.optJSONArray("enrolledCourses");
-                    if (ecArr != null) {
-                        try {
-                            java.lang.reflect.Field f = Student.class.getDeclaredField("enrolledCourses");
-                            f.setAccessible(true);
-                            @SuppressWarnings("unchecked")
-                            ArrayList<Integer> realList = (ArrayList<Integer>) f.get(s);
-
-                            for (int j = 0; j < ecArr.length(); j++) {
-                                realList.add(ecArr.getInt(j));
-                            }
-                        } catch (Exception ex) {
+                    JSONArray ec = obj.optJSONArray("enrolledCourses");
+                    if (ec != null) {
+                        for (int j = 0; j < ec.length(); j++) {
+                            s.enrollCourse(ec.getInt(j));
                         }
                     }
 
                     students.add(s);
-                } else if (type.equals("instructor")) {
+                }
+
+                if (type.equals("instructor")) {
                     int id = obj.getInt("userId");
                     String username = obj.getString("username");
                     String email = obj.getString("email");
@@ -102,18 +99,10 @@ public class JsonDatabase {
 
                     Instructor inst = new Instructor(id, username, email, pw);
 
-                    JSONArray ccArr = obj.optJSONArray("createdCourses");
-                    if (ccArr != null) {
-                        try {
-                            java.lang.reflect.Field f = Instructor.class.getDeclaredField("createdCourses");
-                            f.setAccessible(true);
-                            @SuppressWarnings("unchecked")
-                            ArrayList<Integer> realList = (ArrayList<Integer>) f.get(inst);
-
-                            for (int j = 0; j < ccArr.length(); j++) {
-                                realList.add(ccArr.getInt(j));
-                            }
-                        } catch (Exception ex) {
+                    JSONArray cc = obj.optJSONArray("createdCourses");
+                    if (cc != null) {
+                        for (int j = 0; j < cc.length(); j++) {
+                            inst.getCreatedCourses().add(cc.getInt(j));
                         }
                     }
 
@@ -128,8 +117,11 @@ public class JsonDatabase {
         }
     }
 
+    // ==============================
+    //  SAVE COURSES
+    // ==============================
     public static void saveCourses(CourseManager cm) {
-        JSONArray coursesArr = new JSONArray();
+        JSONArray arr = new JSONArray();
 
         for (Record r : cm.read()) {
             Course c = (Course) r;
@@ -140,29 +132,34 @@ public class JsonDatabase {
             obj.put("description", c.getDescription());
             obj.put("instructorId", c.getInstructorId());
 
-            // lessons
+            // LESSONS
             JSONArray lessonsArr = new JSONArray();
             for (Lesson l : c.getLessons()) {
                 JSONObject lobj = new JSONObject();
                 lobj.put("lessonId", l.getLessonId());
                 lobj.put("title", l.getTitle());
                 lobj.put("content", l.getContent());
+                lobj.put("completed", l.isCompleted());
+
                 lessonsArr.put(lobj);
             }
             obj.put("lessons", lessonsArr);
 
-            // enrolled students
+            // ENROLLED STUDENTS
             obj.put("enrolledStudents", new JSONArray(c.getEnrolledStudents()));
 
-            coursesArr.put(obj);
+            arr.put(obj);
         }
 
         try (FileWriter fw = new FileWriter(COURSES_FILE)) {
-            fw.write(coursesArr.toString());
+            fw.write(arr.toString());
         } catch (Exception e) {
         }
     }
 
+    // ==============================
+    //  LOAD COURSES
+    // ==============================
     public static void loadCourses(CourseManager cm) {
         cm.save(new ArrayList<>());
 
@@ -170,13 +167,11 @@ public class JsonDatabase {
             FileReader fr = new FileReader(COURSES_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) {
-                sb.append((char) ch);
-            }
+            while ((ch = fr.read()) != -1) sb.append((char) ch);
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
-            ArrayList<Record> courses = new ArrayList<>();
+            ArrayList<Record> list = new ArrayList<>();
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
@@ -188,9 +183,7 @@ public class JsonDatabase {
 
                 Course c = new Course(cid, title, desc, instructorId);
 
-                // ------------------------------
-                // Load lessons using reflection
-                // ------------------------------
+                // LESSONS
                 JSONArray lessonsArr = obj.getJSONArray("lessons");
                 for (int j = 0; j < lessonsArr.length(); j++) {
                     JSONObject lobj = lessonsArr.getJSONObject(j);
@@ -198,35 +191,21 @@ public class JsonDatabase {
                     int lid = lobj.getInt("lessonId");
                     String ltitle = lobj.getString("title");
                     String lcontent = lobj.getString("content");
+                    boolean completed = lobj.getBoolean("completed");
 
-                    Lesson lesson = new Lesson(lid, ltitle, lcontent, false);
-
-                    try {
-                        java.lang.reflect.Field f = Course.class.getDeclaredField("lessons");
-                        f.setAccessible(true);
-                        @SuppressWarnings("unchecked")
-                        ArrayList<Lesson> internalLessons = (ArrayList<Lesson>) f.get(c);
-                        internalLessons.add(lesson);
-                    } catch (Exception ex) {
-                    }
+                    c.getLessons().add(new Lesson(lid, ltitle, lcontent, completed));
                 }
 
+                // ENROLLED STUDENTS
                 JSONArray enrollArr = obj.getJSONArray("enrolledStudents");
                 for (int j = 0; j < enrollArr.length(); j++) {
-                    try {
-                        java.lang.reflect.Field f2 = Course.class.getDeclaredField("enrolledStudents");
-                        f2.setAccessible(true);
-                        @SuppressWarnings("unchecked")
-                        ArrayList<Integer> internalEnroll = (ArrayList<Integer>) f2.get(c);
-                        internalEnroll.add(enrollArr.getInt(j));
-                    } catch (Exception ex) {
-                    }
+                    c.getEnrolledStudents().add(enrollArr.getInt(j));
                 }
 
-                courses.add(c);
+                list.add(c);
             }
 
-            cm.save(courses);
+            cm.save(list);
 
         } catch (Exception e) {
         }

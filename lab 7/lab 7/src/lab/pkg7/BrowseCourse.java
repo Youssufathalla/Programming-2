@@ -37,7 +37,7 @@ public class BrowseCourse extends javax.swing.JFrame {
 
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
 
-        ArrayList<Course> x = sms.returnAllRecords();
+        ArrayList<Course> x = cm.returnAllRecords();
 
         for (int i = 0; i < x.size(); i++) {
             Course c = x.get(i);

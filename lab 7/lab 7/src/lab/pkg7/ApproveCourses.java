@@ -4,29 +4,50 @@
  */
 package lab.pkg7;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author youssufathalla
  */
 public class ApproveCourses extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ApproveCourses
-     */
-     private admin a;
+    private admin a;
     private InstructorManager im;
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
 
-
-    public ApproveCourses(InstructorManager im, CourseManager cm, StudentManager sm, UserManager u,admin a) {
-         initComponents();
+    public ApproveCourses(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, admin a) {
         this.a = a;
         this.im = im;
         this.cm = cm;
         this.sm = sm;
         this.um = um;
+        initComponents();
+        loadTable();
+    }
+
+    public void loadTable() {
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        m.setRowCount(0);
+
+        ArrayList<Course> list = cm.getCourses();
+
+for (Course c : list) {
+    if ("PENDING".equals(c.getApproval())) {
+        m.addRow(new Object[]{
+            c.getCourseId(),
+            c.getTitle(),
+            c.getDescription(),
+            c.getInstructorId(),
+            (c.getLessons() == null ? 0 : c.getLessons().size())
+        });
+    }
+}
+
     }
 
     /**
@@ -38,25 +59,235 @@ public class ApproveCourses extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
+        SearchTable = new javax.swing.JTable();
+        backButton = new javax.swing.JButton();
+        ApproveCourseButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
+        searchTextField = new javax.swing.JTextField();
+        RejectCourseButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "CourseId", "Title", "Description", "InstructorID", "Lessons"
+            }
+        ));
+        jScrollPane4.setViewportView(SearchTable);
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        ApproveCourseButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ApproveCourseButton.setText("Approve Course");
+        ApproveCourseButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ApproveCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApproveCourseButtonActionPerformed(evt);
+            }
+        });
+
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        searchTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextFieldActionPerformed(evt);
+            }
+        });
+
+        RejectCourseButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RejectCourseButton.setText("Reject Course");
+        RejectCourseButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        RejectCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RejectCourseButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ApproveCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RejectCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(318, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchButton)
+                            .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addComponent(backButton)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(ApproveCourseButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(RejectCourseButton)
+                        .addGap(34, 34, 34))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(131, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.dispose();
+        new adminDashboard(this.um, this.cm, this.im, this.sm, this.a).setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void ApproveCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveCourseButtonActionPerformed
+
+        int selectedRow = SearchTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to approve.");
+            return;
+        }
+
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        int courseId = (int) m.getValueAt(selectedRow, 0);
+
+        Course selectedCourse = null;
+        for (Record r : cm.read()) {
+            Course c = (Course) r;
+            if (c.getCourseId() == courseId) {
+                selectedCourse = c;
+                break;
+            }
+        }
+
+        if (selectedCourse == null) {
+            JOptionPane.showMessageDialog(this, "Selected course not found.");
+            return;
+        }
+
+        
+
+        a.approve(selectedCourse);
+        JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
+        JOptionPane.showMessageDialog(this, "Successfully Approved: " + selectedCourse.getTitle());
+
+
+    }//GEN-LAST:event_ApproveCourseButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+
+        String idText = searchTextField.getText() == null ? "" : searchTextField.getText().trim();
+
+        if (idText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a Course ID");
+            return;
+        }
+
+        m.setRowCount(0);
+
+        int id;
+        try {
+            id = Integer.parseInt(idText);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Course ID must be numeric");
+            return;
+        }
+
+        Course c = (Course) cm.search(id);
+
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "No Course found with this ID");
+            return;
+        }
+
+        m.addRow(new Object[]{
+            c.getCourseId(),
+            c.getTitle(),
+            c.getDescription(),
+            c.getInstructorId(),
+            (c.getLessons() == null ? 0 : c.getLessons().size())
+        });
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextFieldActionPerformed
+
+    private void RejectCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectCourseButtonActionPerformed
+           int selectedRow = SearchTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to reject.");
+            return;
+        }
+
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        int courseId = (int) m.getValueAt(selectedRow, 0);
+
+        Course selectedCourse = null;
+        for (Record r : cm.read()) {
+            Course c = (Course) r;
+            if (c.getCourseId() == courseId) {
+                selectedCourse = c;
+                break;
+            }
+        }
+
+        if (selectedCourse == null) {
+            JOptionPane.showMessageDialog(this, "Selected course not found.");
+            return;
+        }
+
+        
+
+        a.approve(selectedCourse);
+        JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
+        JOptionPane.showMessageDialog(this, "Successfully Rejected: " + selectedCourse.getTitle());
+
+
+    }//GEN-LAST:event_RejectCourseButtonActionPerformed
+
+//    /**
+//     * @param args the command line arguments
+//     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -71,24 +302,31 @@ public class ApproveCourses extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ApproveCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BrowseCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ApproveCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BrowseCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ApproveCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BrowseCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ApproveCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BrowseCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new ApproveCourses().setVisible(true);
+//                new LoginFrame().setVisible(true);
 //            }
 //        });
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ApproveCourseButton;
+    private javax.swing.JButton RejectCourseButton;
+    private javax.swing.JTable SearchTable;
+    private javax.swing.JButton backButton;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchTextField;
     // End of variables declaration//GEN-END:variables
 }

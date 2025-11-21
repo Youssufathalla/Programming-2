@@ -223,7 +223,7 @@ public class LoginFrame extends javax.swing.JFrame {
             if (a.getEmail().equals(email) && a.getPasswordHash().equals(hashed)) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 this.dispose();
-                new AdminDashboard(this.um,this.cm,this.im,this.sm,a).setVisible(true);
+                new adminDashboard(this.um,this.cm,this.im,this.sm,a).setVisible(true);
                 return;
             }
         }

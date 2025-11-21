@@ -181,17 +181,16 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     String role = "";
-    if (studentRadioButton.isSelected()) {
-        role = "student";
-    } else if (instructorRadioButton.isSelected()) {
-        role = "instructor";
-    } 
-        if (adminRadioButton.isSelected()) {
-        role = "admin";
-    }else {
-        JOptionPane.showMessageDialog(this, "Please select a role.");
-        return;
-    }
+if (studentRadioButton.isSelected()) {
+    role = "student";
+} else if (instructorRadioButton.isSelected()) {
+    role = "instructor";
+} else if (adminRadioButton.isSelected()) {
+    role = "admin";
+} else {
+    JOptionPane.showMessageDialog(this, "Please select a role.");
+    return;
+}
 
     String hashed = um.hashPassword(password);
 

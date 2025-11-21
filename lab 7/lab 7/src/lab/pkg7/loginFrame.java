@@ -46,6 +46,7 @@ public class LoginFrame extends javax.swing.JFrame {
         studentRadioButton = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
+        adminRadioButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +90,8 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Role:");
 
+        adminRadioButton.setText("Admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,7 +119,8 @@ public class LoginFrame extends javax.swing.JFrame {
                             .addComponent(studentRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .addComponent(instructorRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordField))))
+                            .addComponent(passwordField)
+                            .addComponent(adminRadioButton))))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -132,10 +136,12 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(studentRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminRadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(studentRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(instructorRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -178,7 +184,10 @@ public class LoginFrame extends javax.swing.JFrame {
         role = "student";
     } else if (instructorRadioButton.isSelected()) {
         role = "instructor";
-    } else {
+    } 
+        if (adminRadioButton.isSelected()) {
+        role = "admin";
+    }else {
         JOptionPane.showMessageDialog(this, "Please select a role.");
         return;
     }
@@ -204,6 +213,17 @@ public class LoginFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 this.dispose();
                 new InstructorDashboard(this.um,this.cm,this.im,this.sm,i).setVisible(true);
+                return;
+            }
+        }
+    }
+        if (role.equals("admin")) {
+        for (Record r : sm.read()) {
+            admin a = (admin) r;
+            if (a.getEmail().equals(email) && a.getPasswordHash().equals(hashed)) {
+                JOptionPane.showMessageDialog(this, "Login successful!");
+                this.dispose();
+                new AdminDashboard(this.um,this.cm,this.im,this.sm,a).setVisible(true);
                 return;
             }
         }
@@ -250,6 +270,7 @@ public class LoginFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton adminRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField emailField;
     private javax.swing.JRadioButton instructorRadioButton;

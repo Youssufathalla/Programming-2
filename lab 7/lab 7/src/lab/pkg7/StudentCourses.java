@@ -34,7 +34,7 @@ public class StudentCourses extends javax.swing.JFrame {
     }
 
     public void loadTable() {
-
+        String prog;
         DefaultTableModel m = (DefaultTableModel) studentCoursesTable.getModel();
         m.setRowCount(0);
 
@@ -48,16 +48,24 @@ public class StudentCourses extends javax.swing.JFrame {
 
             Course c = (Course) r;
 
+            int x = 0, y = (c.getLessons() == null ? 0 : c.getLessons().size());
+            if (c.getLessons() != null) {
+                for (Lesson lesson : c.getLessons()) {
+                    if (lesson.isCompleted()) {
+                        x++;
+                    }
+                }
+            }
+            prog = x + "/" + y;
             m.addRow(new Object[]{
                 c.getCourseId(),
                 c.getTitle(),
                 c.getDescription(),
                 c.getInstructorId(),
                 c.getLessons().size(),
-                c.getEnrolledStudents().size()
+                prog
             });
         }
-
     }
 
     /**

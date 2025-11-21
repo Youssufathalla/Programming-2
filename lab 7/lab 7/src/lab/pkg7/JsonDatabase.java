@@ -11,13 +11,9 @@ public class JsonDatabase {
     private static final String USERS_FILE = "users.json";
     private static final String COURSES_FILE = "courses.json";
 
-    // ==============================
-    //  SAVE USERS
-    // ==============================
     public static void saveUsers(StudentManager sm, InstructorManager im) {
         JSONArray arr = new JSONArray();
 
-        // STUDENTS
         for (Record r : sm.read()) {
             Student s = (Student) r;
             JSONObject obj = new JSONObject();
@@ -31,7 +27,6 @@ public class JsonDatabase {
             arr.put(obj);
         }
 
-        // INSTRUCTORS
         for (Record r : im.read()) {
             Instructor inst = (Instructor) r;
             JSONObject obj = new JSONObject();
@@ -51,9 +46,6 @@ public class JsonDatabase {
         }
     }
 
-    // ==============================
-    //  LOAD USERS
-    // ==============================
     public static void loadUsers(StudentManager sm, InstructorManager im) {
         sm.save(new ArrayList<>());
         im.save(new ArrayList<>());
@@ -62,7 +54,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(USERS_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
@@ -117,9 +111,6 @@ public class JsonDatabase {
         }
     }
 
-    // ==============================
-    //  SAVE COURSES
-    // ==============================
     public static void saveCourses(CourseManager cm) {
         JSONArray arr = new JSONArray();
 
@@ -145,7 +136,6 @@ public class JsonDatabase {
             }
             obj.put("lessons", lessonsArr);
 
-            // ENROLLED STUDENTS
             obj.put("enrolledStudents", new JSONArray(c.getEnrolledStudents()));
 
             arr.put(obj);
@@ -157,9 +147,6 @@ public class JsonDatabase {
         }
     }
 
-    // ==============================
-    //  LOAD COURSES
-    // ==============================
     public static void loadCourses(CourseManager cm) {
         cm.save(new ArrayList<>());
 
@@ -167,7 +154,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(COURSES_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
@@ -183,7 +172,6 @@ public class JsonDatabase {
 
                 Course c = new Course(cid, title, desc, instructorId);
 
-                // LESSONS
                 JSONArray lessonsArr = obj.getJSONArray("lessons");
                 for (int j = 0; j < lessonsArr.length(); j++) {
                     JSONObject lobj = lessonsArr.getJSONObject(j);
@@ -196,7 +184,6 @@ public class JsonDatabase {
                     c.getLessons().add(new Lesson(lid, ltitle, lcontent, completed));
                 }
 
-                // ENROLLED STUDENTS
                 JSONArray enrollArr = obj.getJSONArray("enrolledStudents");
                 for (int j = 0; j < enrollArr.length(); j++) {
                     c.getEnrolledStudents().add(enrollArr.getInt(j));

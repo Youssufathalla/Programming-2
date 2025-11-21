@@ -32,7 +32,7 @@ public class SignUpFrame extends javax.swing.JFrame {
     buttonGroup1.clearSelection();
 }
    private boolean isValidEmail(String email) {
-    return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+.[A-Za-z0-9.-]$");
 }
    private int generateUniqueID() {
     int id = (int)(Math.random() * 1000000);
@@ -55,11 +55,11 @@ public class SignUpFrame extends javax.swing.JFrame {
     private boolean emailExists (String email) {
     for (Record r : Lab7.studentManager.read()) {
         Student s = (Student) r;
-        if (s.getEmail.equals(email)) return true;
+        if (s.getEmail().equals(email)) return true;
     }
     for (Record r : Lab7.instructorManager.read()) {
         Instructor i = (Instructor) r;
-        if (i.getEmail.equals(email) return true;
+        if (i.getEmail().equals(email))  return true;
     }
     return false;
 }
@@ -81,14 +81,13 @@ public class SignUpFrame extends javax.swing.JFrame {
         roleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usernameText = new javax.swing.JTextArea();
-        passText = new javax.swing.JScrollPane();
-        passwordText = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         emailText = new javax.swing.JTextArea();
         studentRBtn = new javax.swing.JRadioButton();
         instructorRBtn = new javax.swing.JRadioButton();
         signupBtn = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        passText = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,10 +108,6 @@ public class SignUpFrame extends javax.swing.JFrame {
         usernameText.setColumns(20);
         usernameText.setRows(5);
         jScrollPane1.setViewportView(usernameText);
-
-        passwordText.setColumns(20);
-        passwordText.setRows(5);
-        passText.setViewportView(passwordText);
 
         emailText.setColumns(20);
         emailText.setRows(5);
@@ -167,16 +162,18 @@ public class SignUpFrame extends javax.swing.JFrame {
                                     .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(45, 45, 45)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
                                         .addComponent(studentRBtn)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(instructorRBtn))))))
+                                        .addComponent(instructorRBtn))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(backButton)))
@@ -195,10 +192,10 @@ public class SignUpFrame extends javax.swing.JFrame {
                     .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(roleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(studentRBtn)
@@ -226,7 +223,7 @@ public class SignUpFrame extends javax.swing.JFrame {
 
     String username = usernameText.getText().trim();
     String email = emailText.getText().trim();
-    String password = passwordText.getText().trim();
+    String password = passText.getText().trim();
 
     if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
         JOptionPane.showMessageDialog(this, "All fields are required.");
@@ -235,6 +232,10 @@ public class SignUpFrame extends javax.swing.JFrame {
 
     if (!isValidEmail(email)) {
         JOptionPane.showMessageDialog(this, "Please enter a valid email address.");
+        return;
+    }
+        if (emailExists(email)) {
+        JOptionPane.showMessageDialog(this, "Please use a new email address.");
         return;
     }
 
@@ -314,9 +315,8 @@ public class SignUpFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton instructorRBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane passText;
+    private javax.swing.JPasswordField passText;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JTextArea passwordText;
     private javax.swing.JLabel roleLabel;
     private javax.swing.JButton signupBtn;
     private javax.swing.JLabel signupLabel;

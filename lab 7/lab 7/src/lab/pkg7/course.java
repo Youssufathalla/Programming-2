@@ -18,6 +18,15 @@ public class Course implements Record {
     private String title;
     private String description;
     private int instructorId;
+    private String approval;
+
+    public String getApproval() {
+        return approval;
+    }
+
+    public void setApproval(String approval) {
+        this.approval = approval;
+    }
 
     private ArrayList<Lesson> lessons;
     private ArrayList<Integer> enrolledStudents;

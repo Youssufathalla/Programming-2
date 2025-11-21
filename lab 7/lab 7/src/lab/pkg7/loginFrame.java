@@ -218,7 +218,7 @@ if (studentRadioButton.isSelected()) {
         }
     }
         if (role.equals("admin")) {
-        for (Record r : sm.read()) {
+        for (Record r : Lab7.am.read()) {
             admin a = (admin) r;
             if (a.getEmail().equals(email) && a.getPasswordHash().equals(hashed)) {
                 JOptionPane.showMessageDialog(this, "Login successful!");

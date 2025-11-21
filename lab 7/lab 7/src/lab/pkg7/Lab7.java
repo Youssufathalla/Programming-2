@@ -14,11 +14,14 @@ public class Lab7 {
     public static InstructorManager instructorManager;
     public static CourseManager courseManager;
     public static UserManager userManager;
+    public static AdminManager am;
+    
 
     public static void main(String[] args) {
         studentManager = new StudentManager();
         instructorManager = new InstructorManager();
         courseManager = new CourseManager();
+        am = new AdminManager();
 
         JsonDatabase.loadUsers(studentManager, instructorManager);
         JsonDatabase.loadCourses(courseManager);

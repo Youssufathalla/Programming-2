@@ -90,6 +90,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Role:");
 
+        buttonGroup1.add(adminRadioButton);
         adminRadioButton.setText("Admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

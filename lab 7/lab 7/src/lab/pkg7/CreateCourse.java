@@ -186,7 +186,7 @@ public class CreateCourse extends javax.swing.JFrame {
         }
 
         Course c = new Course(courseId, title, description, instructorId);
-
+c.setApproval("Pending");
           if (idExists(courseId)){
             JOptionPane.showMessageDialog(this, "courseID already in use.");
             }

@@ -8,13 +8,27 @@ package lab.pkg7;
  *
  * @author youssufathalla
  */
-public class admin extends User {
+
+public class admin extends User implements Record{
 
     public admin(int userId, String role, String username, String email, String passwordHash) {
         super(userId, role, username, email, passwordHash);
     }
+    public Course approve(Course c){
+    c.setApproval("APPROVED") ;
+    return c;
+    }
+    public Course reject(Course c){
+    c.setApproval("REJECTED") ;
+    return c;
+    }
+    
+    
+    
+    
        @Override
     public void openDashboard() {
        
     }
+    
 }

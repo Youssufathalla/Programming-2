@@ -61,6 +61,7 @@ public class CourseDisplay extends javax.swing.JFrame {
         LessonsTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
         completeBtn = new javax.swing.JButton();
+        quizBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +92,13 @@ public class CourseDisplay extends javax.swing.JFrame {
             }
         });
 
+        quizBtn.setText("Take Quiz");
+        quizBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quizBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,7 +110,9 @@ public class CourseDisplay extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
+                .addComponent(quizBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(completeBtn)
                 .addGap(18, 18, 18))
         );
@@ -113,7 +123,8 @@ public class CourseDisplay extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
-                    .addComponent(completeBtn))
+                    .addComponent(completeBtn)
+                    .addComponent(quizBtn))
                 .addGap(23, 23, 23))
         );
 
@@ -142,11 +153,37 @@ public class CourseDisplay extends javax.swing.JFrame {
             }
         }
         JsonDatabase.saveCourses(cm);
-JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveUsers(sm, im);
         loadTable();
         JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
 
     }//GEN-LAST:event_completeBtnActionPerformed
+
+    private void quizBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizBtnActionPerformed
+        int row = LessonsTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Select a lesson first.");
+            return;
+        }
+
+        int lessonId = (int) LessonsTable.getValueAt(row, 0);
+
+        Lesson selectedLesson = null;
+        for (Lesson l : c.getLessons()) {
+            if (l.getLessonId() == lessonId) {
+                selectedLesson = l;
+                break;
+            }
+        }
+
+        if (selectedLesson == null) {
+            JOptionPane.showMessageDialog(this, "Lesson not found.");
+            return;
+        }
+
+        new QuizFrame(um, cm, im, sm, s, c, selectedLesson).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_quizBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,5 +225,6 @@ JsonDatabase.saveUsers(sm, im);
     private javax.swing.JButton backButton;
     private javax.swing.JButton completeBtn;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton quizBtn;
     // End of variables declaration//GEN-END:variables
 }

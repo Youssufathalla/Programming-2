@@ -4,20 +4,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class JsonDatabase {
 
     private static final String USERS_FILE = "users.json";
     private static final String COURSES_FILE = "courses.json";
 
-    // ==============================
-    //  SAVE USERS
-    // ==============================
     public static void saveUsers(StudentManager sm, InstructorManager im) {
         JSONArray arr = new JSONArray();
 
-        // STUDENTS
         for (Record r : sm.read()) {
             Student s = (Student) r;
             JSONObject obj = new JSONObject();
@@ -28,10 +26,19 @@ public class JsonDatabase {
             obj.put("passwordHash", s.getPasswordHash());
             obj.put("enrolledCourses", new JSONArray(s.getEnrolledCourses()));
 
+            JSONObject qs = new JSONObject();
+            for (Integer cid : s.getQuizScores().keySet()) {
+                JSONObject inner = new JSONObject();
+                for (Integer lid : s.getQuizScores().get(cid).keySet()) {
+                    inner.put(String.valueOf(lid), s.getQuizScores().get(cid).get(lid));
+                }
+                qs.put(String.valueOf(cid), inner);
+            }
+            obj.put("quizScores", qs);
+
             arr.put(obj);
         }
 
-        // INSTRUCTORS
         for (Record r : im.read()) {
             Instructor inst = (Instructor) r;
             JSONObject obj = new JSONObject();
@@ -41,7 +48,6 @@ public class JsonDatabase {
             obj.put("email", inst.getEmail());
             obj.put("passwordHash", inst.getPasswordHash());
             obj.put("createdCourses", new JSONArray(inst.getCreatedCourses()));
-
             arr.put(obj);
         }
 
@@ -51,9 +57,6 @@ public class JsonDatabase {
         }
     }
 
-    // ==============================
-    //  LOAD USERS
-    // ==============================
     public static void loadUsers(StudentManager sm, InstructorManager im) {
         sm.save(new ArrayList<>());
         im.save(new ArrayList<>());
@@ -62,7 +65,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(USERS_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
@@ -78,13 +83,31 @@ public class JsonDatabase {
                     String username = obj.getString("username");
                     String email = obj.getString("email");
                     String pw = obj.getString("passwordHash");
-
                     Student s = new Student(id, username, email, pw);
 
                     JSONArray ec = obj.optJSONArray("enrolledCourses");
                     if (ec != null) {
                         for (int j = 0; j < ec.length(); j++) {
                             s.enrollCourse(ec.getInt(j));
+                        }
+                    }
+
+                    JSONObject qsObj = obj.optJSONObject("quizScores");
+                    if (qsObj != null) {
+                        Field f = Student.class.getDeclaredField("quizScores");
+                        f.setAccessible(true);
+                        HashMap<Integer, HashMap<Integer, Integer>> realQS
+                                = (HashMap<Integer, HashMap<Integer, Integer>>) f.get(s);
+
+                        for (String courseKey : qsObj.keySet()) {
+                            int cid = Integer.parseInt(courseKey);
+                            JSONObject inner = qsObj.getJSONObject(courseKey);
+
+                            HashMap<Integer, Integer> lessonMap = new HashMap<>();
+                            for (String lessonKey : inner.keySet()) {
+                                lessonMap.put(Integer.parseInt(lessonKey), inner.getInt(lessonKey));
+                            }
+                            realQS.put(cid, lessonMap);
                         }
                     }
 
@@ -96,7 +119,6 @@ public class JsonDatabase {
                     String username = obj.getString("username");
                     String email = obj.getString("email");
                     String pw = obj.getString("passwordHash");
-
                     Instructor inst = new Instructor(id, username, email, pw);
 
                     JSONArray cc = obj.optJSONArray("createdCourses");
@@ -117,9 +139,6 @@ public class JsonDatabase {
         }
     }
 
-    // ==============================
-    //  SAVE COURSES
-    // ==============================
     public static void saveCourses(CourseManager cm) {
         JSONArray arr = new JSONArray();
 
@@ -132,7 +151,6 @@ public class JsonDatabase {
             obj.put("description", c.getDescription());
             obj.put("instructorId", c.getInstructorId());
 
-            // LESSONS
             JSONArray lessonsArr = new JSONArray();
             for (Lesson l : c.getLessons()) {
                 JSONObject lobj = new JSONObject();
@@ -141,13 +159,23 @@ public class JsonDatabase {
                 lobj.put("content", l.getContent());
                 lobj.put("completed", l.isCompleted());
 
+                JSONArray quizArr = new JSONArray();
+                Quiz q = l.getQuiz();
+
+                for (int qIndex = 0; qIndex < q.getQuestions().size(); qIndex++) {
+                    JSONObject qObj = new JSONObject();
+                    qObj.put("question", q.getQuestions().get(qIndex));
+                    qObj.put("correct", q.getCorrectAnswers().get(qIndex));
+                    qObj.put("options", new JSONArray(q.getOptions().get(qIndex)));
+                    quizArr.put(qObj);
+                }
+
+                lobj.put("quiz", quizArr);
                 lessonsArr.put(lobj);
             }
+
             obj.put("lessons", lessonsArr);
-
-            // ENROLLED STUDENTS
             obj.put("enrolledStudents", new JSONArray(c.getEnrolledStudents()));
-
             arr.put(obj);
         }
 
@@ -157,9 +185,6 @@ public class JsonDatabase {
         }
     }
 
-    // ==============================
-    //  LOAD COURSES
-    // ==============================
     public static void loadCourses(CourseManager cm) {
         cm.save(new ArrayList<>());
 
@@ -167,7 +192,9 @@ public class JsonDatabase {
             FileReader fr = new FileReader(COURSES_FILE);
             StringBuilder sb = new StringBuilder();
             int ch;
-            while ((ch = fr.read()) != -1) sb.append((char) ch);
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
             fr.close();
 
             JSONArray arr = new JSONArray(sb.toString());
@@ -183,7 +210,6 @@ public class JsonDatabase {
 
                 Course c = new Course(cid, title, desc, instructorId);
 
-                // LESSONS
                 JSONArray lessonsArr = obj.getJSONArray("lessons");
                 for (int j = 0; j < lessonsArr.length(); j++) {
                     JSONObject lobj = lessonsArr.getJSONObject(j);
@@ -193,10 +219,33 @@ public class JsonDatabase {
                     String lcontent = lobj.getString("content");
                     boolean completed = lobj.getBoolean("completed");
 
-                    c.getLessons().add(new Lesson(lid, ltitle, lcontent, completed));
+                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed);
+
+                    if (lobj.has("quiz")) {
+                        JSONArray quizArr = lobj.getJSONArray("quiz");
+                        Quiz q = new Quiz();
+
+                        for (int qIndex = 0; qIndex < quizArr.length(); qIndex++) {
+                            JSONObject qObj = quizArr.getJSONObject(qIndex);
+
+                            String qText = qObj.getString("question");
+                            int correct = qObj.getInt("correct");
+
+                            JSONArray optArr = qObj.getJSONArray("options");
+                            ArrayList<String> opts = new ArrayList<>();
+                            for (int t = 0; t < optArr.length(); t++) {
+                                opts.add(optArr.getString(t));
+                            }
+
+                            q.addQuestion(qText, opts, correct);
+                        }
+
+                        lesson.setQuiz(q);
+                    }
+
+                    c.getLessons().add(lesson);
                 }
 
-                // ENROLLED STUDENTS
                 JSONArray enrollArr = obj.getJSONArray("enrolledStudents");
                 for (int j = 0; j < enrollArr.length(); j++) {
                     c.getEnrolledStudents().add(enrollArr.getInt(j));

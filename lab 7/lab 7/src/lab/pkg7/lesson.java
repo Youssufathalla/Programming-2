@@ -14,12 +14,14 @@ public class Lesson {
     private String title;
     private String content;
     private Boolean completed;
+    private Quiz quiz;
 
     public Lesson(int lessonId, String title, String content, Boolean completed) {
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;
-        this.completed = false;
+        this.completed = completed;
+        this.quiz = new Quiz();
     }
 
     public int getLessonId() {
@@ -50,4 +52,11 @@ public class Lesson {
         this.completed = completed;
     }
 
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz q) {
+        this.quiz = q;
+    }
 }

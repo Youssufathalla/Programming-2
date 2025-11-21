@@ -52,6 +52,17 @@ public class SignUpFrame extends javax.swing.JFrame {
     }
     return false;
 }
+    private boolean emailExists (String email) {
+    for (Record r : Lab7.studentManager.read()) {
+        Student s = (Student) r;
+        if (s.getEmail.equals(email)) return true;
+    }
+    for (Record r : Lab7.instructorManager.read()) {
+        Instructor i = (Instructor) r;
+        if (i.getEmail.equals(email) return true;
+    }
+    return false;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -146,7 +146,6 @@ public class managecourses extends javax.swing.JFrame {
         deletebutton = new javax.swing.JButton();
         ViewenrolledStudents = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        insightsButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -268,13 +267,6 @@ public class managecourses extends javax.swing.JFrame {
             }
         });
 
-        insightsButton.setText("Insights");
-        insightsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insightsButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -305,12 +297,9 @@ public class managecourses extends javax.swing.JFrame {
                                 .addComponent(backButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(UpdateButton)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(insightsButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deletebutton))
+                            .addComponent(deletebutton, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ViewenrolledStudents, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -346,9 +335,7 @@ public class managecourses extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(deletebutton)
-                            .addComponent(insightsButton))
+                        .addComponent(deletebutton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ViewenrolledStudents)
                         .addContainerGap(13, Short.MAX_VALUE))
@@ -478,12 +465,14 @@ public class managecourses extends javax.swing.JFrame {
     row = SearchTable.convertRowIndexToModel(row);
     int cId = (int) SearchTable.getModel().getValueAt(row, 0);
 
+    // Get real course
     Course c = (Course) cm.search(cId);
     if (c == null) {
         JOptionPane.showMessageDialog(this, "Course not found");
         return;
     }
 
+    // Check instructor privileges
     if (c.getInstructorId() != ins.getUserId()) {
         JOptionPane.showMessageDialog(this, "You can only delete your courses");
         return;
@@ -498,10 +487,13 @@ public class managecourses extends javax.swing.JFrame {
 
     if (confirm != JOptionPane.YES_OPTION) return;
 
+    // REMOVE FROM REAL LIST — THIS FIXES YOUR BUG
     cm.read().remove(c);
 
+    // Remove from instructor list
     ins.getCreatedCourses().remove(Integer.valueOf(cId));
 
+    // Save JSON
     JsonDatabase.saveCourses(cm);
     JsonDatabase.saveUsers(sm, im);
 
@@ -562,19 +554,6 @@ public class managecourses extends javax.swing.JFrame {
         parent.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void insightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insightsButtonActionPerformed
-          int selectedRow = SearchTable.getSelectedRow();
-
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a course from the table.");
-            return;
-        }
-        
-        this.dispose();
-        new InsightsFrame(this).setVisible(true);
-
-    }//GEN-LAST:event_insightsButtonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -634,7 +613,6 @@ public class managecourses extends javax.swing.JFrame {
     private javax.swing.JTextArea courseId;
     private javax.swing.JButton deletebutton;
     private javax.swing.JTextField description;
-    private javax.swing.JButton insightsButton;
     private javax.swing.JTextField instructorId;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

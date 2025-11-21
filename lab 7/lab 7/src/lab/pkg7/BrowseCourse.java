@@ -36,15 +36,18 @@ public class BrowseCourse extends javax.swing.JFrame {
 
         ArrayList<Course> list = cm.getCourses();
 
-        for (Course c : list) {
-            m.addRow(new Object[]{
-                c.getCourseId(),
-                c.getTitle(),
-                c.getDescription(),
-                c.getInstructorId(),
-                (c.getLessons() == null ? 0 : c.getLessons().size())
-            });
-        }
+for (Course c : list) {
+    if ("APPROVED".equals(c.getApproval())) {
+        m.addRow(new Object[]{
+            c.getCourseId(),
+            c.getTitle(),
+            c.getDescription(),
+            c.getInstructorId(),
+            (c.getLessons() == null ? 0 : c.getLessons().size())
+        });
+    }
+}
+
     }
 
     /**

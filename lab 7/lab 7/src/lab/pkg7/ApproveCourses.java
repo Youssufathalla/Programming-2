@@ -20,12 +20,13 @@ public class ApproveCourses extends javax.swing.JFrame {
     private StudentManager sm;
     private UserManager um;
 
-    public ApproveCourses(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, admin a) {
-        this.a = a;
+    public ApproveCourses(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm) {
+        
         this.im = im;
         this.cm = cm;
         this.sm = sm;
         this.um = um;
+        JsonDatabase.loadCourses(cm);
         initComponents();
         loadTable();
     }
@@ -48,6 +49,14 @@ for (Course c : list) {
     }
 }
 
+    }
+    public Course approve(Course c){
+    c.setApproval("APPROVED") ;
+    return c;
+    }
+    public Course reject(Course c){
+    c.setApproval("REJECTED") ;
+    return c;
     }
 
     /**
@@ -171,7 +180,7 @@ for (Course c : list) {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
-        new adminDashboard(this.um, this.cm, this.im, this.sm, this.a).setVisible(true);
+        new adminDashboard(this.um, this.cm, this.im, this.sm).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void ApproveCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveCourseButtonActionPerformed
@@ -202,11 +211,12 @@ for (Course c : list) {
 
         
 
-        a.approve(selectedCourse);
+        approve(selectedCourse);
         JsonDatabase.saveUsers(sm, im);
         JsonDatabase.saveCourses(cm);
         JOptionPane.showMessageDialog(this, "Successfully Approved: " + selectedCourse.getTitle());
-
+this.dispose();
+        new ApproveCourses(this.um, this.cm, this.im, this.sm).setVisible(true);
 
     }//GEN-LAST:event_ApproveCourseButtonActionPerformed
 
@@ -277,11 +287,12 @@ for (Course c : list) {
 
         
 
-        a.approve(selectedCourse);
+        reject(selectedCourse);
         JsonDatabase.saveUsers(sm, im);
         JsonDatabase.saveCourses(cm);
         JOptionPane.showMessageDialog(this, "Successfully Rejected: " + selectedCourse.getTitle());
-
+this.dispose();
+        new ApproveCourses(this.um, this.cm, this.im, this.sm).setVisible(true);
 
     }//GEN-LAST:event_RejectCourseButtonActionPerformed
 

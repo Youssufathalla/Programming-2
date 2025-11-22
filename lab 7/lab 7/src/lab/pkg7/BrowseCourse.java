@@ -26,6 +26,7 @@ public class BrowseCourse extends javax.swing.JFrame {
         this.cm = cm;
         this.sm = sm;
         this.um = um;
+           JsonDatabase.loadCourses(cm);
         initComponents();
         loadTable();
     }
@@ -221,7 +222,7 @@ for (Course c : list) {
 
         Course c = (Course) cm.search(id);
 
-        if (c == null) {
+        if (c == null|| c.getApproval().equals("PENDING")|| c.getApproval().equals("REJECTED")) {
             JOptionPane.showMessageDialog(this, "No Course found with this ID");
             return;
         }

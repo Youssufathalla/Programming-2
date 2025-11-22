@@ -13,21 +13,21 @@ public class adminDashboard extends javax.swing.JFrame {
     /**
      * Creates new form StudentDashboarddddd
      */
-    private admin a;
+   
     private InstructorManager im;
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
 
-    public adminDashboard(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, admin a) {
+    public adminDashboard(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm) {
         initComponents();
-        this.a = a;
+       
         this.im = im;
         this.cm = cm;
         this.sm = sm;
         this.um = um;
 
-        userIdTextField.setText("ID:" + String.valueOf(a.getUserId()));
+        userIdTextField.setText("ID:" +9575);
 
     }
 
@@ -111,7 +111,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void ApproveCoursesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveCoursesButtonActionPerformed
         this.dispose();
-        new ApproveCourses(this.um, this.cm, this.im, this.sm, this.a).setVisible(true);
+        new ApproveCourses(this.um, this.cm, this.im, this.sm).setVisible(true);
     }//GEN-LAST:event_ApproveCoursesButtonActionPerformed
 
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed

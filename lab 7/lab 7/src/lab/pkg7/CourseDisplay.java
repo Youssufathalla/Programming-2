@@ -30,6 +30,7 @@ public class CourseDisplay extends javax.swing.JFrame {
         this.sm = sm;
         this.um = um;
         this.c = c;
+           JsonDatabase.loadCourses(cm);
         initComponents();
         loadTable();
     }

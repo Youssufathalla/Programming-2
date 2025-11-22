@@ -14,20 +14,24 @@ public class managecourses extends javax.swing.JFrame {
     private Instructor ins;
     private StudentManager sm;
 
-    public managecourses(StudentManager sm, Instructor ins, InstructorManager im, CourseManager cm, InstructorDashboard parent) {
-        initComponents();
-        this.im = im;
-        this.parent = parent;
-        this.cm = cm;
-        this.ins = ins;
-        this.sm = sm;
+public managecourses(StudentManager sm, Instructor ins, InstructorManager im, CourseManager cm, InstructorDashboard parent) {
+    initComponents();
+    this.im = im;
+    this.parent = parent;
+    this.cm = cm;
+    this.ins = ins;
+    this.sm = sm;
+    this.ins = (Instructor) im.search(ins.getUserId());
 
-        SearchTable.setAutoCreateRowSorter(true);
-        DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
-        SearchTable.setRowSorter(new TableRowSorter<TableModel>(model));
+    JsonDatabase.loadCourses(cm);   
+    JsonDatabase.loadUsers(sm, im); 
 
-        loadInstructorCourses();
-    }
+    SearchTable.setAutoCreateRowSorter(true);
+    DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
+    SearchTable.setRowSorter(new TableRowSorter<TableModel>(model));
+
+    loadInstructorCourses();
+}
 
     private void loadInstructorCourses() {
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();

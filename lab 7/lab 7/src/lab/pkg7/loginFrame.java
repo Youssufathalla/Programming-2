@@ -219,15 +219,14 @@ if (studentRadioButton.isSelected()) {
         }
     }
         if (role.equals("admin")) {
-        for (Record r : Lab7.am.read()) {
-            admin a = (admin) r;
-            if (a.getEmail().equals(email) && a.getPasswordHash().equals(hashed)) {
+        
+            if (email.equals("y@a.c") && password.equals("123")) {
                 JOptionPane.showMessageDialog(this, "Login successful!");
                 this.dispose();
-                new adminDashboard(this.um,this.cm,this.im,this.sm,a).setVisible(true);
+                new adminDashboard(this.um,this.cm,this.im,this.sm).setVisible(true);
                 return;
             }
-        }
+        
     }
 
     JOptionPane.showMessageDialog(this, "Incorrect email/password for the selected role.");

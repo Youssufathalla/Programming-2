@@ -194,6 +194,8 @@ public class CreateCourse extends javax.swing.JFrame {
             courseManager.add(c);
             ins.addCreatedCourse(courseId);
             JsonDatabase.saveCourses(courseManager);
+            JsonDatabase.saveUsers(Lab7.studentManager, sms);
+            
             JOptionPane.showMessageDialog(this, "Course created successfully");
             this.dispose();
             parent.setVisible(true);

@@ -11,11 +11,14 @@ public class Student extends User implements Record {
 
     private ArrayList<Integer> enrolledCourses;
     private HashMap<Integer, HashMap<Integer, Integer>> quizScores;
+    private ArrayList<Certificate> certificates;
 
     public Student(int userId, String username, String email, String passwordHash) {
         super(userId, "student", username, email, passwordHash);
         this.enrolledCourses = new ArrayList<>();
         this.quizScores = new HashMap<>();
+        this.certificates = new ArrayList<>();
+
     }
 
     public void enrollCourse(int courseId) {
@@ -44,6 +47,23 @@ public class Student extends User implements Record {
         }
         return quizScores.get(courseId).get(lessonId);
     }
+    public ArrayList<Certificate> getCertificates() {
+    if (certificates == null) {
+        certificates = new ArrayList<>();
+    }
+    return certificates;
+}
+
+public void addCertificate(Certificate c) {
+    getCertificates().add(c);
+}
+
+public boolean hasCertificateForCourse(int courseId) {
+    for (Certificate c : getCertificates()) {
+        if (c.getCourseId() == courseId) return true;
+    }
+    return false;
+}
 
     @Override
     public void openDashboard() {

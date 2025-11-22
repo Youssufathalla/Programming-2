@@ -45,6 +45,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         browsenewcoursesbutton = new javax.swing.JButton();
         logoutbutton = new javax.swing.JButton();
         userIdTextField = new javax.swing.JTextField();
+        browsenewcoursesbutton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +66,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         browsenewcoursesbutton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        browsenewcoursesbutton.setText("Browse new courses");
+        browsenewcoursesbutton.setText("Browse courses");
         browsenewcoursesbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         browsenewcoursesbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +85,15 @@ public class StudentDashboard extends javax.swing.JFrame {
 
         userIdTextField.setEditable(false);
 
+        browsenewcoursesbutton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        browsenewcoursesbutton1.setText("Certificates Earned");
+        browsenewcoursesbutton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        browsenewcoursesbutton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browsenewcoursesbutton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +106,8 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(browsenewcoursesbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addComponent(logoutbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(mycoursesbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(mycoursesbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(browsenewcoursesbutton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -114,9 +125,11 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addComponent(mycoursesbutton)
                 .addGap(29, 29, 29)
                 .addComponent(browsenewcoursesbutton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(browsenewcoursesbutton1)
+                .addGap(18, 18, 18)
                 .addComponent(logoutbutton)
-                .addGap(66, 66, 66))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -136,6 +149,11 @@ public class StudentDashboard extends javax.swing.JFrame {
         this.dispose();
         new LoginFrame(this.um, this.cm, this.im, this.sm).setVisible(true);
     }//GEN-LAST:event_logoutbuttonActionPerformed
+
+    private void browsenewcoursesbutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsenewcoursesbutton1ActionPerformed
+       this.dispose();
+        new CertificateFrame(this.um, this.cm, this.im, this.sm, this.s).setVisible(true);
+    }//GEN-LAST:event_browsenewcoursesbutton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +192,7 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browsenewcoursesbutton;
+    private javax.swing.JButton browsenewcoursesbutton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logoutbutton;
     private javax.swing.JButton mycoursesbutton;

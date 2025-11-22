@@ -21,6 +21,7 @@ public class LoginFrame extends javax.swing.JFrame {
     this.um=um;
         JsonDatabase.loadUsers(sm, im);
     JsonDatabase.loadCourses(cm);
+    JsonDatabase.loadAdmins(Lab7.am);
         initComponents();
     buttonGroup1.clearSelection();
 }

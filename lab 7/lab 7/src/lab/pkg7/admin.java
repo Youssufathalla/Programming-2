@@ -11,8 +11,8 @@ package lab.pkg7;
 
 public class admin extends User implements Record{
 
-    public admin(int userId, String role, String username, String email, String passwordHash) {
-        super(userId, role, username, email, passwordHash);
+    public admin(int userId, String username, String email, String passwordHash) {
+         super(userId, "admin", username, email, passwordHash);
     }
     public Course approve(Course c){
     c.setApproval("APPROVED") ;

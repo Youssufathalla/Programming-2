@@ -96,6 +96,8 @@ public class JsonDatabase {
                     if (qsObj != null) {
                         Field f = Student.class.getDeclaredField("quizScores");
                         f.setAccessible(true);
+
+                        @SuppressWarnings("unchecked")
                         HashMap<Integer, HashMap<Integer, Integer>> realQS
                                 = (HashMap<Integer, HashMap<Integer, Integer>>) f.get(s);
 
@@ -139,6 +141,42 @@ public class JsonDatabase {
         }
     }
 
+    public static void loadAdmins(AdminManager am) {
+        am.save(new ArrayList<>());
+
+        try {
+            FileReader fr = new FileReader(USERS_FILE);
+            StringBuilder sb = new StringBuilder();
+            int ch;
+            while ((ch = fr.read()) != -1) {
+                sb.append((char) ch);
+            }
+            fr.close();
+
+            JSONArray arr = new JSONArray(sb.toString());
+            ArrayList<Record> admins = new ArrayList<>();
+
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject obj = arr.getJSONObject(i);
+                String type = obj.optString("type", "");
+
+                if (type.equals("admin")) {
+                    int id = obj.getInt("userId");
+                    String username = obj.getString("username");
+                    String email = obj.getString("email");
+                    String pw = obj.getString("passwordHash");
+
+                    admin a = new admin(id, username, email, pw);
+                    admins.add(a);
+                }
+            }
+
+            am.save(admins);
+
+        } catch (Exception e) {
+        }
+    }
+
     public static void saveCourses(CourseManager cm) {
         JSONArray arr = new JSONArray();
 
@@ -150,6 +188,7 @@ public class JsonDatabase {
             obj.put("title", c.getTitle());
             obj.put("description", c.getDescription());
             obj.put("instructorId", c.getInstructorId());
+            obj.put("approval", c.getApproval());
 
             JSONArray lessonsArr = new JSONArray();
             for (Lesson l : c.getLessons()) {
@@ -207,8 +246,10 @@ public class JsonDatabase {
                 String title = obj.getString("title");
                 String desc = obj.getString("description");
                 int instructorId = obj.getInt("instructorId");
+                String approval = obj.optString("approval", "");
 
                 Course c = new Course(cid, title, desc, instructorId);
+                c.setApproval(approval);
 
                 JSONArray lessonsArr = obj.getJSONArray("lessons");
                 for (int j = 0; j < lessonsArr.length(); j++) {

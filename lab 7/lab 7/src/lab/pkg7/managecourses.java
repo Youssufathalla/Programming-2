@@ -21,7 +21,7 @@ public managecourses(StudentManager sm, Instructor ins, InstructorManager im, Co
     this.cm = cm;
     this.ins = ins;
     this.sm = sm;
-    this.ins = (Instructor) im.search(ins.getUserId());
+    
 
     JsonDatabase.loadCourses(cm);   
     JsonDatabase.loadUsers(sm, im); 

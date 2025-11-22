@@ -17,19 +17,19 @@ public class CreateCourse extends javax.swing.JFrame {
      */
     private InstructorManager sms;
     private InstructorDashboard parent;
-    private CourseManager courseManager;
+    private CourseManager cm;
     private Instructor ins;
 
-    public CreateCourse(Instructor ins, InstructorManager sms, CourseManager CM, InstructorDashboard parent) {
+    public CreateCourse(Instructor ins, InstructorManager sms, CourseManager cm, InstructorDashboard parent) {
         initComponents();
         this.sms = sms;
         this.parent = parent;
-        this.courseManager = CM;
+        this.cm=cm;
         this.ins = ins;
     }
 
     private boolean idExists(int id) {
-        for (Record r : Lab7.courseManager.read()) {
+        for (Record r : cm.read()) {
             Course c = (Course) r;
             if (c.getCourseId() == id) {
                 return true;
@@ -191,9 +191,9 @@ public class CreateCourse extends javax.swing.JFrame {
         if (idExists(courseId)) {
             JOptionPane.showMessageDialog(this, "courseID already in use.");
         } else {
-            courseManager.add(c);
+            cm.add(c);
             ins.addCreatedCourse(courseId);
-            JsonDatabase.saveCourses(courseManager);
+            JsonDatabase.saveCourses(cm);
             JsonDatabase.saveUsers(Lab7.studentManager, sms);
             
             JOptionPane.showMessageDialog(this, "Course created successfully");

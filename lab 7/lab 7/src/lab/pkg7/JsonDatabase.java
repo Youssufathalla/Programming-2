@@ -260,7 +260,7 @@ public class JsonDatabase {
                     String lcontent = lobj.getString("content");
                     boolean completed = lobj.getBoolean("completed");
 
-                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed);
+                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed,0,0);
 
                     if (lobj.has("quiz")) {
                         JSONArray quizArr = lobj.getJSONArray("quiz");

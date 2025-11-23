@@ -4,6 +4,15 @@
  */
 package lab.pkg7;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JFrame;
+
 /**
  *
  * @author hassa
@@ -11,12 +20,70 @@ package lab.pkg7;
 public class InsightsFrame extends javax.swing.JFrame {
 
     private managecourses parent;
+    private InstructorManager im;
+    private UserManager um;
+    private CourseManager cm;
+    private Instructor ins;
+    private StudentManager sm;
+    private Course c;
+
     /**
      * Creates new form InsightsFrame
      */
-    public InsightsFrame(managecourses parent) {
+ 
+    public InsightsFrame(managecourses parent, CourseManager cm, InstructorManager im, StudentManager sm, Course c) {
         initComponents();
-        this.parent=parent;
+        this.parent = parent;
+        this.um = Lab7.userManager;
+        this.c = c;
+        this.parent = parent;
+        JsonDatabase.loadCourses(cm);
+        loadTable();
+    }
+
+    public void loadTable() {
+        DefaultTableModel m = (DefaultTableModel) progressTable.getModel();
+        m.setRowCount(0);
+
+        for (Lesson l : c.getLessons()) {
+            m.addRow(new Object[]{
+                l.getLessonId(),
+            l.getQuizAvg(),
+            });
+        }
+    }
+
+    public void displayInsights() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        for (Lesson l : c.getLessons()) {
+            dataset.addValue((Number) l.getQuizAvg(), "Quiz Average", l.getLessonId());
+
+        };
+
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Quiz Averages per Lesson",
+                "Lesson ID",
+                "Average Score",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        CategoryPlot plot = (CategoryPlot) barChart.getPlot();
+        plot.setRangeGridlinePaint(java.awt.Color.GRAY);
+
+        JFrame frame = new JFrame("Instructor Dashboard - Quiz Bar Chart");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 500);
+
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        frame.add(chartPanel);
+
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     /**
@@ -50,6 +117,11 @@ public class InsightsFrame extends javax.swing.JFrame {
         jLabel1.setText("Insights");
 
         chartButton.setText("Student Performance Chart");
+        chartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chartButtonActionPerformed(evt);
+            }
+        });
 
         progressTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,9 +175,13 @@ public class InsightsFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         this.dispose();
+        this.dispose();
         parent.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void chartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chartButtonActionPerformed
+        displayInsights();
+    }//GEN-LAST:event_chartButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +217,7 @@ public class InsightsFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chartButton;

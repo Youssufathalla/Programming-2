@@ -32,7 +32,7 @@ public class Instructor extends User implements Record {
     
     public void addLessonToCourse(Course course, String title, String content,Boolean completed) {
     int newId = course.getLessons().size() + 1;
-    Lesson lesson = new Lesson(newId, title, content,completed);
+    Lesson lesson = new Lesson(newId, title, content,completed,0,0);
     course.addLesson(lesson);
 }
 

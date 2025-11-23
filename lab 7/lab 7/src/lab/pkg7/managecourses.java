@@ -426,7 +426,7 @@ public class managecourses extends javax.swing.JFrame {
                 lid,
                 lessonsTitle.getText().trim(),
                 lessonsContent.getText().trim(),
-                false
+                false,0,0
         );
 
         c.getLessons().add(newLesson);
@@ -579,8 +579,15 @@ public class managecourses extends javax.swing.JFrame {
             return;
         }
 
+        int courseId= (int) SearchTable.getValueAt(selectedRow, 0);
+        Course selected = (Course) cm.search(courseId);
+        
+        if(selected == null){
+        JOptionPane.showMessageDialog(this, "Course not found.");
+        return;
+        }
         this.dispose();
-        new InsightsFrame(this).setVisible(true);
+        new InsightsFrame(this,this.cm,this.im,this.sm,selected).setVisible(true);
 
     }//GEN-LAST:event_insightsButtonActionPerformed
 

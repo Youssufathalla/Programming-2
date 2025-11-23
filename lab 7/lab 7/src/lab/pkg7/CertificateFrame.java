@@ -44,7 +44,7 @@ public class CertificateFrame extends javax.swing.JFrame {
         m.setRowCount(0);
 
         ArrayList<Certificate> list = mc.getCertificates();
-//         if (list == null) return;
+
 for (Certificate c : list) {
     if (s.getProgress()==1) {
         m.addRow(new Object[]{

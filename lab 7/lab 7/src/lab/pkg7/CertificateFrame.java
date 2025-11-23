@@ -226,7 +226,7 @@ JOptionPane.showMessageDialog(this, sb.toString());
     }//GEN-LAST:event_viewActionPerformed
 
     private void DownloadjsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadjsonActionPerformed
-    int selectedRow = SearchTable.getSelectedRow();
+  int selectedRow = SearchTable.getSelectedRow();
     if (selectedRow == -1) {
         JOptionPane.showMessageDialog(this, "Please select a certificate.");
         return;
@@ -248,14 +248,21 @@ JOptionPane.showMessageDialog(this, sb.toString());
         return;
     }
 
-    // Call your JSON writer class here
     CertificateJsonWriter.generateJsonCertificate(
             selectedCertificate.getStudentId(),
             selectedCertificate.getCourseId(),
             selectedCertificate.getCertificateId()
     );
 
-    JOptionPane.showMessageDialog(this, "JSON Certificate Downloaded!");
+    try {
+        java.awt.Desktop.getDesktop().open(
+            new File("certificate_" + selectedCertificate.getCertificateId() + ".json")
+        );
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    JOptionPane.showMessageDialog(this, "JSON downloaded and opened!");
         
    
     }//GEN-LAST:event_DownloadjsonActionPerformed
@@ -267,7 +274,7 @@ JOptionPane.showMessageDialog(this, sb.toString());
         return;
     }
 
-    // read certificateId from table
+  
     String certificateId = SearchTable.getModel().getValueAt(selectedRow, 0).toString();
 
     Certificate selectedCertificate = null;
@@ -284,14 +291,14 @@ JOptionPane.showMessageDialog(this, sb.toString());
         return;
     }
 
-    // Generate the PDF
+  
     PdfBoxCreator.generatePDFCertificate(
             selectedCertificate.getStudentId(),
             selectedCertificate.getCourseId(),
             selectedCertificate.getCertificateId()
     );
 
-    // Open the PDF automatically
+
     try {
         java.awt.Desktop.getDesktop().open(
             new File("certificate_" + selectedCertificate.getCertificateId() + ".pdf")

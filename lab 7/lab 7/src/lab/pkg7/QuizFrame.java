@@ -194,7 +194,20 @@ public class QuizFrame extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this,
                 "Quiz completed! Your score: " + score);
-
+//         ArrayList<Record> allstudents = sm.read();
+//           int totalscore;
+//        int totalstudents;
+//
+//        for (Record r : allstudents) {
+//            if (r instanceof Student) {
+//                Student x = (Student) r;
+//                if (x.)
+//                        totalscore=1;
+//                
+//                                }}
+//      
+//            
+//x.getQuizScore(c.getCourseId(), lesson.getLessonId())
         this.dispose();
         new CourseDisplay(um, cm, im, sm, s, c).setVisible(true);
     }

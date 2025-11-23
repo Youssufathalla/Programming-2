@@ -14,53 +14,53 @@ public class managecourses extends javax.swing.JFrame {
     private Instructor ins;
     private StudentManager sm;
 
-public managecourses(StudentManager sm, Instructor ins, InstructorManager im, CourseManager cm, InstructorDashboard parent) {
-    initComponents();
-    this.im = im;
-    this.parent = parent;
-    this.cm = cm;
-    this.ins = ins;
-    this.sm = sm;
-    
+    public managecourses(StudentManager sm, Instructor ins, InstructorManager im, CourseManager cm, InstructorDashboard parent) {
+        initComponents();
+        this.im = im;
+        this.parent = parent;
+        this.cm = cm;
+        this.ins = ins;
+        this.sm = sm;
 
-    JsonDatabase.loadCourses(cm);   
-    JsonDatabase.loadUsers(sm, im); 
+        JsonDatabase.loadCourses(cm);
+        JsonDatabase.loadUsers(sm, im);
 
-    SearchTable.setAutoCreateRowSorter(true);
-    DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
-    SearchTable.setRowSorter(new TableRowSorter<TableModel>(model));
+        SearchTable.setAutoCreateRowSorter(true);
+        DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
+        SearchTable.setRowSorter(new TableRowSorter<TableModel>(model));
 
-    loadInstructorCourses();
-}
+        loadInstructorCourses();
+    }
 
-private void loadInstructorCourses() {
-    DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
-    m.setRowCount(0);
+    private void loadInstructorCourses() {
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        m.setRowCount(0);
 
-    if (ins == null) return;
+        if (ins == null) {
+            return;
+        }
 
-    ArrayList<Record> allCourses = cm.read();
+        ArrayList<Record> allCourses = cm.read();
 
-    for (Record r : allCourses) {
-        if (r instanceof Course) {
-            Course c = (Course) r;
+        for (Record r : allCourses) {
+            if (r instanceof Course) {
+                Course c = (Course) r;
 
-            if (c.getInstructorId() == ins.getUserId()) {
-                int lessonCount = (c.getLessons() == null) ? 0 : c.getLessons().size();
-                String studentsStr = buildStudentsString(c);
+                if (c.getInstructorId() == ins.getUserId()) {
+                    int lessonCount = (c.getLessons() == null) ? 0 : c.getLessons().size();
+                    String studentsStr = buildStudentsString(c);
 
-                m.addRow(new Object[]{
-                    c.getCourseId(),
-                    c.getTitle(),
-                    c.getDescription(),
-                    lessonCount,
-                    studentsStr
-                });
+                    m.addRow(new Object[]{
+                        c.getCourseId(),
+                        c.getTitle(),
+                        c.getDescription(),
+                        lessonCount,
+                        studentsStr
+                    });
+                }
             }
         }
     }
-}
-
 
     private String buildStudentsString(Course c) {
         ArrayList<Integer> enrolled = c.getEnrolledStudents();
@@ -289,21 +289,25 @@ private void loadInstructorCourses() {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(Lessons, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
+                                .addGap(62, 62, 62))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(backButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lessonID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
                                 .addComponent(lessonsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(backButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(306, 306, 306)
                                 .addComponent(UpdateButton)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(insightsButton)
@@ -338,53 +342,64 @@ private void loadInstructorCourses() {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lessons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lessonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lessonsContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(UpdateButton)
+                                .addGap(6, 6, 6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(backButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(deletebutton)
                             .addComponent(insightsButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ViewenrolledStudents)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lessons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lessonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lessonsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lessonsContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(UpdateButton)
-                        .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(backButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-       String txt = SearchIDtext.getText().trim();
-        if (txt.isEmpty()) return;
+        String txt = SearchIDtext.getText().trim();
+        if (txt.isEmpty()) {
+            return;
+        }
 
         int id;
-        try { id = Integer.parseInt(txt); }
-        catch (Exception e) { return; }
+        try {
+            id = Integer.parseInt(txt);
+        } catch (Exception e) {
+            return;
+        }
 
         Course c = cm.getCourseById(id);
-        if (c == null) return;
-        if (c.getInstructorId() != ins.getUserId()) return;
+        if (c == null) {
+            return;
+        }
+        if (c.getInstructorId() != ins.getUserId()) {
+            return;
+        }
 
         refreshTableWithSingleCourse(c);
 
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-         String idText = SearchIDtext.getText().trim();
+    String idText = SearchIDtext.getText().trim();
     if (idText.isEmpty()) return;
 
     int id = Integer.parseInt(idText);
@@ -395,26 +410,53 @@ private void loadInstructorCourses() {
 
     if (c.getInstructorId() != ins.getUserId()) return;
 
-    // UPDATE COURSE FIELDS
     c.setTitle(title.getText().trim());
     c.setDescription(description.getText().trim());
 
-    // ADD LESSON IF FILLED
-    if (!lessonID.getText().trim().isEmpty() &&
-        !lessonsTitle.getText().trim().isEmpty() &&
-        !lessonsContent.getText().trim().isEmpty()) 
-    {
+    Lesson newLesson = null;
+
+
+    if (!lessonID.getText().trim().isEmpty()
+            && !lessonsTitle.getText().trim().isEmpty()
+            && !lessonsContent.getText().trim().isEmpty()) {
+
         int lid = Integer.parseInt(lessonID.getText().trim());
-        Lesson L = new Lesson(lid, lessonsTitle.getText().trim(), lessonsContent.getText().trim(), false);
-        c.getLessons().add(L);
+
+        newLesson = new Lesson(
+                lid,
+                lessonsTitle.getText().trim(),
+                lessonsContent.getText().trim(),
+                false,0,0
+        );
+
+        c.getLessons().add(newLesson);
+
+ 
+        JsonDatabase.saveCourses(cm);
+        JsonDatabase.saveUsers(sm, im);
+
+
+        AddQuizFrame qf = new AddQuizFrame(
+                Lab7.userManager, 
+                cm,
+                im,
+                sm,
+                c,
+                newLesson,
+                this
+        );
+        qf.setVisible(true);
+
+        JOptionPane.showMessageDialog(this, "Lesson added! Now add quiz.");
+        return;
     }
+
 
     JsonDatabase.saveCourses(cm);
     JsonDatabase.saveUsers(sm, im);
 
     JOptionPane.showMessageDialog(this, "Course updated!");
     refreshTableWithSingleCourse(c);
-
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void descriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionActionPerformed
@@ -434,109 +476,118 @@ private void loadInstructorCourses() {
     }//GEN-LAST:event_lessonsContentActionPerformed
 
     private void deletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebuttonActionPerformed
-            int row = SearchTable.getSelectedRow();
-    if (row == -1) {
-        JOptionPane.showMessageDialog(this, "Select a course first");
-        return;
-    }
+        int row = SearchTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Select a course first");
+            return;
+        }
 
-    row = SearchTable.convertRowIndexToModel(row);
-    int cId = (int) SearchTable.getModel().getValueAt(row, 0);
+        row = SearchTable.convertRowIndexToModel(row);
+        int cId = (int) SearchTable.getModel().getValueAt(row, 0);
 
-    Course c = (Course) cm.search(cId);
-    if (c == null) {
-        JOptionPane.showMessageDialog(this, "Course not found");
-        return;
-    }
+        Course c = (Course) cm.search(cId);
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "Course not found");
+            return;
+        }
 
-    if (c.getInstructorId() != ins.getUserId()) {
-        JOptionPane.showMessageDialog(this, "You can only delete your courses");
-        return;
-    }
+        if (c.getInstructorId() != ins.getUserId()) {
+            JOptionPane.showMessageDialog(this, "You can only delete your courses");
+            return;
+        }
 
-    int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Delete course " + cId + "?",
-            "Confirm",
-            JOptionPane.YES_NO_OPTION
-    );
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Delete course " + cId + "?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION
+        );
 
-    if (confirm != JOptionPane.YES_OPTION) return;
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
 
-    cm.read().remove(c);
+        cm.read().remove(c);
 
-    ins.getCreatedCourses().remove(Integer.valueOf(cId));
+        ins.getCreatedCourses().remove(Integer.valueOf(cId));
 
-    JsonDatabase.saveCourses(cm);
-    JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
+        JsonDatabase.saveUsers(sm, im);
 
-    JOptionPane.showMessageDialog(this, "Course deleted successfully");
+        JOptionPane.showMessageDialog(this, "Course deleted successfully");
 
     loadInstructorCourses();    }//GEN-LAST:event_deletebuttonActionPerformed
 
     private void ViewenrolledStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewenrolledStudentsActionPerformed
 
         int selected = SearchTable.getSelectedRow();
-    if (selected == -1) {
-        JOptionPane.showMessageDialog(this, "Select a course first.");
-        return;
-    }
+        if (selected == -1) {
+            JOptionPane.showMessageDialog(this, "Select a course first.");
+            return;
+        }
 
-    selected = SearchTable.convertRowIndexToModel(selected);
+        selected = SearchTable.convertRowIndexToModel(selected);
 
-    Object val = SearchTable.getModel().getValueAt(selected, 0);
-    if (val == null) {
-        JOptionPane.showMessageDialog(this, "Invalid course ID.");
-        return;
-    }
+        Object val = SearchTable.getModel().getValueAt(selected, 0);
+        if (val == null) {
+            JOptionPane.showMessageDialog(this, "Invalid course ID.");
+            return;
+        }
 
-    int courseId;
-    try {
-        courseId = Integer.parseInt(val.toString());
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Invalid course ID format.");
-        return;
-    }
+        int courseId;
+        try {
+            courseId = Integer.parseInt(val.toString());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Invalid course ID format.");
+            return;
+        }
 
-    Course c = cm.getCourseById(courseId);
-    if (c == null) {
-        JOptionPane.showMessageDialog(this, "Course not found in course manager.");
-        return;
-    }
+        Course c = cm.getCourseById(courseId);
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "Course not found in course manager.");
+            return;
+        }
 
-    ArrayList<Integer> enrolled = c.getEnrolledStudents();
-    if (enrolled == null || enrolled.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No students enrolled.");
-        return;
-    }
+        ArrayList<Integer> enrolled = c.getEnrolledStudents();
+        if (enrolled == null || enrolled.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No students enrolled.");
+            return;
+        }
 
-    StringBuilder sb = new StringBuilder("Enrolled Students:\n\n");
-    for (int sid : enrolled) {
-        Record sr = sm.search(sid);
-        String name = (sr instanceof Student) ? ((Student) sr).getUsername() : "Unknown";
-        sb.append(sid).append(" - ").append(name).append("\n");
-    }
+        StringBuilder sb = new StringBuilder("Enrolled Students:\n\n");
+        for (int sid : enrolled) {
+            Record sr = sm.search(sid);
+            String name = (sr instanceof Student) ? ((Student) sr).getUsername() : "Unknown";
+            sb.append(sid).append(" - ").append(name).append("\n");
+        }
 
-    JOptionPane.showMessageDialog(this, sb.toString());
-       
+        JOptionPane.showMessageDialog(this, sb.toString());
+
     }//GEN-LAST:event_ViewenrolledStudentsActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        
+
         this.dispose();
         parent.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void insightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insightsButtonActionPerformed
-          int selectedRow = SearchTable.getSelectedRow();
+        int selectedRow = SearchTable.getSelectedRow();
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select a course from the table.");
             return;
         }
+
+        int courseId= (int) SearchTable.getValueAt(selectedRow, 0);
+        Course selected = (Course) cm.search(courseId);
         
+        if(selected == null){
+        JOptionPane.showMessageDialog(this, "Course not found.");
+        return;
+        }
         this.dispose();
-        new InsightsFrame(this).setVisible(true);
+        new InsightsFrame(this,this.cm,this.im,this.sm,selected).setVisible(true);
 
     }//GEN-LAST:event_insightsButtonActionPerformed
 

@@ -15,15 +15,32 @@ public class Lesson {
     private String content;
     private Boolean completed;
     private Quiz quiz;
+    private double quizAvg;
+    private double completionPercentage;
 
-    public Lesson(int lessonId, String title, String content, Boolean completed) {
+    public Lesson(int lessonId, String title, String content, Boolean completed, double quizAvg,double completionPercentage) {
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;
         this.completed = completed;
         this.quiz = new Quiz();
+        this.quizAvg = quizAvg;
+    }
+        public double getCompletionPercentage() {
+        return completionPercentage;
     }
 
+    public void setCompletionPercentage(double completionPercentage) {
+        this.completionPercentage = completionPercentage;
+    }
+
+public double getQuizAvg() {
+        return quizAvg;
+    }
+
+    public void setQuizAvg(double quizAvg) {
+        this.quizAvg = quizAvg;
+    }
     public int getLessonId() {
         return lessonId;
     }

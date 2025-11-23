@@ -177,6 +177,9 @@ public class JsonDatabase {
         }
     }
 
+    // ============================================================
+    // SAVE COURSES (added quizCompleted)
+    // ============================================================
     public static void saveCourses(CourseManager cm) {
         JSONArray arr = new JSONArray();
 
@@ -198,15 +201,23 @@ public class JsonDatabase {
                 lobj.put("content", l.getContent());
                 lobj.put("completed", l.isCompleted());
 
+                // --- ADDED ---
+                if (l.getQuiz() != null) {
+                    lobj.put("quizCompleted", l.getQuiz().isQuizCompleted());
+                }
+                // -------------
+
                 JSONArray quizArr = new JSONArray();
                 Quiz q = l.getQuiz();
 
-                for (int qIndex = 0; qIndex < q.getQuestions().size(); qIndex++) {
-                    JSONObject qObj = new JSONObject();
-                    qObj.put("question", q.getQuestions().get(qIndex));
-                    qObj.put("correct", q.getCorrectAnswers().get(qIndex));
-                    qObj.put("options", new JSONArray(q.getOptions().get(qIndex)));
-                    quizArr.put(qObj);
+                if (q != null) {
+                    for (int qIndex = 0; qIndex < q.getQuestions().size(); qIndex++) {
+                        JSONObject qObj = new JSONObject();
+                        qObj.put("question", q.getQuestions().get(qIndex));
+                        qObj.put("correct", q.getCorrectAnswers().get(qIndex));
+                        qObj.put("options", new JSONArray(q.getOptions().get(qIndex)));
+                        quizArr.put(qObj);
+                    }
                 }
 
                 lobj.put("quiz", quizArr);
@@ -224,6 +235,9 @@ public class JsonDatabase {
         }
     }
 
+    // ============================================================
+    // LOAD COURSES  (added quizCompleted)
+    // ============================================================
     public static void loadCourses(CourseManager cm) {
         cm.save(new ArrayList<>());
 
@@ -260,7 +274,7 @@ public class JsonDatabase {
                     String lcontent = lobj.getString("content");
                     boolean completed = lobj.getBoolean("completed");
 
-                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed,0,0);
+                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed, 0, 0);
 
                     if (lobj.has("quiz")) {
                         JSONArray quizArr = lobj.getJSONArray("quiz");
@@ -280,6 +294,11 @@ public class JsonDatabase {
 
                             q.addQuestion(qText, opts, correct);
                         }
+
+                        // --- ADDED ---
+                        boolean quizCompleted = lobj.optBoolean("quizCompleted", false);
+                        q.setQuizCompleted(quizCompleted);
+                        // -------------
 
                         lesson.setQuiz(q);
                     }

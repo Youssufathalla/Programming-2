@@ -30,7 +30,7 @@ public class CourseDisplay extends javax.swing.JFrame {
         this.sm = sm;
         this.um = um;
         this.c = c;
-           JsonDatabase.loadCourses(cm);
+        JsonDatabase.loadCourses(cm);
         initComponents();
         loadTable();
     }
@@ -149,12 +149,23 @@ public class CourseDisplay extends javax.swing.JFrame {
 
         for (Lesson l : c.getLessons()) {
             if (l.getLessonId() == lessonId) {
+
+                if (l.getQuiz() != null && !l.getQuiz().isQuizCompleted()) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "You must complete the quiz before marking this lesson completed."
+                    );
+                    return;
+                }
+
                 l.setCompleted(true);
                 break;
             }
         }
+
         JsonDatabase.saveCourses(cm);
         JsonDatabase.saveUsers(sm, im);
+
         loadTable();
         JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
 
@@ -179,6 +190,11 @@ public class CourseDisplay extends javax.swing.JFrame {
 
         if (selectedLesson == null) {
             JOptionPane.showMessageDialog(this, "Lesson not found.");
+            return;
+        }
+
+        if (selectedLesson.getQuiz() != null && selectedLesson.getQuiz().isQuizCompleted()) {
+            JOptionPane.showMessageDialog(this, "You have already completed this quiz.");
             return;
         }
 

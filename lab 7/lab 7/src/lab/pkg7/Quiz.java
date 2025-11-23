@@ -7,11 +7,13 @@ public class Quiz {
     private ArrayList<String> questions;
     private ArrayList<ArrayList<String>> options;
     private ArrayList<Integer> correctAnswers;
+    private boolean quizCompleted;
 
     public Quiz() {
         questions = new ArrayList<>();
         options = new ArrayList<>();
         correctAnswers = new ArrayList<>();
+        quizCompleted = false;
     }
 
     public void addQuestion(String question, ArrayList<String> opts, int correctIndex) {
@@ -30,5 +32,13 @@ public class Quiz {
 
     public ArrayList<Integer> getCorrectAnswers() {
         return correctAnswers;
+    }
+
+    public boolean isQuizCompleted() {
+        return quizCompleted;
+    }
+
+    public void setQuizCompleted(boolean quizCompleted) {
+        this.quizCompleted = quizCompleted;
     }
 }

@@ -188,9 +188,11 @@ public class QuizFrame extends javax.swing.JFrame {
     }
 
     private void finishQuiz() {
+        lesson.getQuiz().setQuizCompleted(true);
 
         s.saveQuizScore(c.getCourseId(), lesson.getLessonId(), score);
         JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
 
         JOptionPane.showMessageDialog(this,
                 "Quiz completed! Your score: " + score);

@@ -11,15 +11,12 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 
 public class PdfBoxCreator {
 
-    public static void main(String[] args) {
-        
-        String certificateId = "CERT-00123";
-        int studentId = 101;
-        int courseId = 555;
-        String dateIssued = LocalDate.now().toString();  
-        
+    public static void generatePDFCertificate(int studentId, int courseId, String certificateId) {
+
+        String dateIssued = LocalDate.now().toString();
+
         try (PDDocument document = new PDDocument()) {
-            
+
             PDPage page = new PDPage(PDRectangle.A4);
             document.addPage(page);
 
@@ -32,7 +29,6 @@ public class PdfBoxCreator {
                 contentStream.showText("Course Completion Certificate");
                 contentStream.newLineAtOffset(0, -40);
 
-                // Switch to normal text size
                 contentStream.setFont(PDType1Font.HELVETICA, 14);
 
                 contentStream.showText("Certificate ID: " + certificateId);
@@ -48,13 +44,12 @@ public class PdfBoxCreator {
                 contentStream.newLineAtOffset(0, -40);
 
                 contentStream.showText("Congratulations! You have successfully completed the course.");
-                
+
                 contentStream.endText();
             }
 
-            document.save(new File("Certificate.pdf"));
-
-            System.out.println("Certificate created successfully!");
+            document.save(new File("certificate_" + certificateId + ".pdf"));
+            System.out.println("PDF certificate created successfully!");
 
         } catch (IOException e) {
             e.printStackTrace();

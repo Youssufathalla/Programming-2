@@ -13,10 +13,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class CertificateManager {
+public class CertificateManager implements Manager {
 
     private CourseManager cm;
     private StudentManager sm;
+    
     
     private ArrayList<Certificate> certificates;
 
@@ -34,6 +35,7 @@ public class CertificateManager {
     public CertificateManager(CourseManager cm, StudentManager sm) {
         this.cm = cm;
         this.sm = sm;
+        this.certificates = new ArrayList<>();
     }
 
     public boolean isCourseCompleted(Student s, Course c) {
@@ -76,4 +78,71 @@ public class CertificateManager {
 
         return cert;
     }
+    @Override
+    public void save(ArrayList<Record> list) {
+        certificates.clear();
+
+        for (Record r : list) {
+            if (r instanceof Certificate) {
+                certificates.add((Certificate) r);
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Record> read() {
+        ArrayList<Record> copy = new ArrayList<>();
+        for (Certificate c : certificates) {
+            copy.add(c);
+        }
+        return copy;
+    }
+
+    @Override
+    public void add(Record r) {
+        if (r instanceof Certificate) {
+            certificates.add((Certificate) r);
+        }
+    }
+
+    @Override
+    public void delete(Record r) {
+        if (!(r instanceof Certificate)) return;
+
+        Certificate target = (Certificate) r;
+
+        certificates.removeIf(c -> c.getCertificateId().equals(target.getCertificateId()));
+    }
+
+    @Override
+    public void update(Record r) {
+        if (!(r instanceof Certificate)) return;
+
+        Certificate updated = (Certificate) r;
+
+        for (int i = 0; i < certificates.size(); i++) {
+            Certificate c = certificates.get(i);
+
+            if (c.getCertificateId().equals(updated.getCertificateId())) {
+                certificates.set(i, updated);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public Record search(int id) {
+    
+        String target = String.valueOf(id);
+
+        for (Certificate c : certificates) {
+            if (c.getCertificateId().equals(target)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    
 }
+

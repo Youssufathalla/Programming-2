@@ -32,6 +32,7 @@ public class CertificateFrame extends javax.swing.JFrame {
         this.cm = cm;
         this.sm = sm;
         this.um = um;
+        this.mc = Lab7.mc;
         JsonDatabase.loadUsers(sm, im);
            JsonDatabase.loadCourses(cm);
         initComponents();
@@ -43,7 +44,7 @@ public class CertificateFrame extends javax.swing.JFrame {
         m.setRowCount(0);
 
         ArrayList<Certificate> list = mc.getCertificates();
-
+//         if (list == null) return;
 for (Certificate c : list) {
     if (s.getProgress()==1) {
         m.addRow(new Object[]{
@@ -194,7 +195,7 @@ for (Certificate c : list) {
         int CertificateId = (int) m.getValueAt(selectedRow, 0);
 
         Certificate selectedCertificate= null;
-        for (Record r : cm.read()) {
+        for (Record r : mc.read()) {
             Certificate c = (Certificate) r;
             if (c.getCertificateId().equals( CertificateId)) {
                 selectedCertificate= c;
@@ -235,7 +236,7 @@ JOptionPane.showMessageDialog(this, sb.toString());
         int CertificateId = (int) m.getValueAt(selectedRow, 0);
 
         Certificate selectedCertificate= null;
-        for (Record r : cm.read()) {
+        for (Record r : mc.read()) {
             Certificate c = (Certificate) r;
             if (c.getCertificateId().equals( CertificateId)) {
                 selectedCertificate= c;
@@ -269,7 +270,7 @@ JOptionPane.showMessageDialog(this, sb.toString());
         int CertificateId = (int) m.getValueAt(selectedRow, 0);
 
         Certificate selectedCertificate= null;
-        for (Record r : cm.read()) {
+        for (Record r : mc.read()) {
             Certificate c = (Certificate) r;
             if (c.getCertificateId().equals( CertificateId)) {
                 selectedCertificate= c;

@@ -26,6 +26,8 @@ public class JsonDatabase {
             obj.put("passwordHash", s.getPasswordHash());
             obj.put("enrolledCourses", new JSONArray(s.getEnrolledCourses()));
 
+            obj.put("progress", s.getProgress());
+
             JSONObject qs = new JSONObject();
             for (Integer cid : s.getQuizScores().keySet()) {
                 JSONObject inner = new JSONObject();
@@ -35,6 +37,20 @@ public class JsonDatabase {
                 qs.put(String.valueOf(cid), inner);
             }
             obj.put("quizScores", qs);
+
+            JSONArray certArr = new JSONArray();
+            if (s.getCertificates() != null) {
+                for (Certificate cert : s.getCertificates()) {
+                    JSONObject cObj = new JSONObject();
+                    cObj.put("certificateId", cert.getCertificateId());
+                    cObj.put("studentId", cert.getStudentId());
+                    cObj.put("courseId", cert.getCourseId());
+                    cObj.put("issueDate", cert.getIssueDate());
+                    cObj.put("message", "Congratulations! You have successfully completed the course.");
+                    certArr.put(cObj);
+                }
+            }
+            obj.put("certificates", certArr);
 
             arr.put(obj);
         }
@@ -92,6 +108,12 @@ public class JsonDatabase {
                         }
                     }
 
+                    double progress = obj.optDouble("progress", 0.0);
+                    try {
+                        s.setProgress(progress);
+                    } catch (Exception ignored) {
+                    }
+
                     JSONObject qsObj = obj.optJSONObject("quizScores");
                     if (qsObj != null) {
                         Field f = Student.class.getDeclaredField("quizScores");
@@ -110,6 +132,22 @@ public class JsonDatabase {
                                 lessonMap.put(Integer.parseInt(lessonKey), inner.getInt(lessonKey));
                             }
                             realQS.put(cid, lessonMap);
+                        }
+                    }
+
+                    JSONArray certArr = obj.optJSONArray("certificates");
+                    if (certArr != null) {
+                        for (int j = 0; j < certArr.length(); j++) {
+                            JSONObject cObj = certArr.getJSONObject(j);
+                            String certId = cObj.getString("certificateId");
+                            int sid = cObj.getInt("studentId");
+                            int cid = cObj.getInt("courseId");
+                            String issueDate = cObj.getString("issueDate");
+                            Certificate cert = new Certificate(certId, sid, cid, issueDate);
+                            try {
+                                s.getCertificates().add(cert);
+                            } catch (Exception ignored) {
+                            }
                         }
                     }
 
@@ -177,9 +215,6 @@ public class JsonDatabase {
         }
     }
 
-    // ============================================================
-    // SAVE COURSES (added quizCompleted)
-    // ============================================================
     public static void saveCourses(CourseManager cm) {
         JSONArray arr = new JSONArray();
 
@@ -201,11 +236,12 @@ public class JsonDatabase {
                 lobj.put("content", l.getContent());
                 lobj.put("completed", l.isCompleted());
 
-                // --- ADDED ---
+                lobj.put("quizAvg", l.getQuizAvg());
+                lobj.put("completionPercentage", l.getCompletionPercentage());
+
                 if (l.getQuiz() != null) {
                     lobj.put("quizCompleted", l.getQuiz().isQuizCompleted());
                 }
-                // -------------
 
                 JSONArray quizArr = new JSONArray();
                 Quiz q = l.getQuiz();
@@ -235,9 +271,6 @@ public class JsonDatabase {
         }
     }
 
-    // ============================================================
-    // LOAD COURSES  (added quizCompleted)
-    // ============================================================
     public static void loadCourses(CourseManager cm) {
         cm.save(new ArrayList<>());
 
@@ -274,7 +307,10 @@ public class JsonDatabase {
                     String lcontent = lobj.getString("content");
                     boolean completed = lobj.getBoolean("completed");
 
-                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed, 0, 0);
+                    double quizAvg = lobj.optDouble("quizAvg", 0.0);
+                    double completionPercentage = lobj.optDouble("completionPercentage", 0.0);
+
+                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed, quizAvg, completionPercentage);
 
                     if (lobj.has("quiz")) {
                         JSONArray quizArr = lobj.getJSONArray("quiz");
@@ -295,10 +331,8 @@ public class JsonDatabase {
                             q.addQuestion(qText, opts, correct);
                         }
 
-                        // --- ADDED ---
                         boolean quizCompleted = lobj.optBoolean("quizCompleted", false);
                         q.setQuizCompleted(quizCompleted);
-                        // -------------
 
                         lesson.setQuiz(q);
                     }

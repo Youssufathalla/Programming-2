@@ -55,6 +55,7 @@ int x = 0, y = (c.getLessons() == null ? 0 : c.getLessons().size());
                     }
                 }
             }
+            s.setProgress((double)(x/y));
             prog = x + "/" + y;
 
             m.addRow(new Object[]{

@@ -4,6 +4,10 @@
  */
 package lab.pkg7;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author youssufathalla
@@ -20,6 +24,7 @@ public class CertificateFrame extends javax.swing.JFrame {
     private CourseManager cm;
     private StudentManager sm;
     private UserManager um;
+    private CertificateManager mc;
 
     public CertificateFrame(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Student s) {
         this.s = s;
@@ -27,9 +32,30 @@ public class CertificateFrame extends javax.swing.JFrame {
         this.cm = cm;
         this.sm = sm;
         this.um = um;
+        JsonDatabase.loadUsers(sm, im);
            JsonDatabase.loadCourses(cm);
         initComponents();
+        loadTable();
         
+    }
+     public void loadTable() {
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        m.setRowCount(0);
+
+        ArrayList<Certificate> list = mc.getCertificates();
+
+for (Certificate c : list) {
+    if (s.getProgress()==1) {
+        m.addRow(new Object[]{
+            c.getCertificateId(),
+            c.getStudentId(),
+            c.getCourseId(),
+            c.getIssueDate()
+           
+        });
+    }
+}
+
     }
 
     /**
@@ -42,6 +68,12 @@ public class CertificateFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         backButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        SearchTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        view = new javax.swing.JButton();
+        Downloadjson = new javax.swing.JButton();
+        Downloadpdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,19 +84,91 @@ public class CertificateFrame extends javax.swing.JFrame {
             }
         });
 
+        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "CertificateId", "StudentId", "CourseId", "Issue Date"
+            }
+        ));
+        jScrollPane4.setViewportView(SearchTable);
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("My Certificates");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        view.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        view.setText("View Certificate");
+        view.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewActionPerformed(evt);
+            }
+        });
+
+        Downloadjson.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Downloadjson.setText("Download Json Certificate");
+        Downloadjson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Downloadjson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DownloadjsonActionPerformed(evt);
+            }
+        });
+
+        Downloadpdf.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Downloadpdf.setText("Download PDF Certificate");
+        Downloadpdf.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Downloadpdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DownloadpdfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(backButton)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(backButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Downloadpdf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Downloadjson, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(view, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(261, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(view)
+                .addGap(18, 18, 18)
+                .addComponent(Downloadjson)
+                .addGap(18, 18, 18)
+                .addComponent(Downloadpdf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backButton)
                 .addGap(16, 16, 16))
         );
@@ -76,6 +180,116 @@ public class CertificateFrame extends javax.swing.JFrame {
         this.dispose();
         new StudentDashboard(this.um, this.cm, this.im, this.sm, this.s).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
+
+        int selectedRow = SearchTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to enroll in.");
+            return;
+        }
+
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        int CertificateId = (int) m.getValueAt(selectedRow, 0);
+
+        Certificate selectedCertificate= null;
+        for (Record r : cm.read()) {
+            Certificate c = (Certificate) r;
+            if (c.getCertificateId().equals( CertificateId)) {
+                selectedCertificate= c;
+                break;
+            }
+        }
+
+        if (selectedCertificate == null) {
+            JOptionPane.showMessageDialog(this, "Selected course not found.");
+            return;
+        }
+       StringBuilder sb = new StringBuilder("Certificate Details:\n\n");
+
+sb.append("Certificate ID: ").append(selectedCertificate.getCertificateId()).append("\n");
+sb.append("Student ID: ").append(selectedCertificate.getStudentId()).append("\n");
+sb.append("Course ID: ").append(selectedCertificate.getCourseId()).append("\n");
+sb.append("Issue Date: ").append(selectedCertificate.getIssueDate()).append("\n");
+
+JOptionPane.showMessageDialog(this, sb.toString());
+
+
+       
+        JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
+   
+
+    }//GEN-LAST:event_viewActionPerformed
+
+    private void DownloadjsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadjsonActionPerformed
+              int selectedRow = SearchTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to enroll in.");
+            return;
+        }
+
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        int CertificateId = (int) m.getValueAt(selectedRow, 0);
+
+        Certificate selectedCertificate= null;
+        for (Record r : cm.read()) {
+            Certificate c = (Certificate) r;
+            if (c.getCertificateId().equals( CertificateId)) {
+                selectedCertificate= c;
+                break;
+            }
+        }
+
+        if (selectedCertificate == null) {
+            JOptionPane.showMessageDialog(this, "Selected course not found.");
+            return;
+        }
+        selectedCertificate.downloadJsoncertificate();
+        
+
+
+       
+        JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
+   
+    }//GEN-LAST:event_DownloadjsonActionPerformed
+
+    private void DownloadpdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadpdfActionPerformed
+              int selectedRow = SearchTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to enroll in.");
+            return;
+        }
+
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        int CertificateId = (int) m.getValueAt(selectedRow, 0);
+
+        Certificate selectedCertificate= null;
+        for (Record r : cm.read()) {
+            Certificate c = (Certificate) r;
+            if (c.getCertificateId().equals( CertificateId)) {
+                selectedCertificate= c;
+                break;
+            }
+        }
+
+        if (selectedCertificate == null) {
+            JOptionPane.showMessageDialog(this, "Selected course not found.");
+            return;
+        }
+        selectedCertificate.downloadPDFcertificate();
+        
+
+
+       
+        JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
+   
+    }//GEN-LAST:event_DownloadpdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,6 +327,12 @@ public class CertificateFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Downloadjson;
+    private javax.swing.JButton Downloadpdf;
+    private javax.swing.JTable SearchTable;
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton view;
     // End of variables declaration//GEN-END:variables
 }

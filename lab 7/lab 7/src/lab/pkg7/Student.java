@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class Student extends User implements Record {
 
     private ArrayList<Integer> enrolledCourses;
+    private double progress;
     private HashMap<Integer, HashMap<Integer, Integer>> quizScores;
     private ArrayList<Certificate> certificates;
 
@@ -27,6 +28,15 @@ public class Student extends User implements Record {
 
         }
     }
+
+    public double getProgress() {
+        return progress;
+    }
+
+    public void setProgress(double progress) {
+        this.progress = progress;
+    }
+    
 
     public ArrayList<Integer> getEnrolledCourses() {
         return new ArrayList<>(enrolledCourses);

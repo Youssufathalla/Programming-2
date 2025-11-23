@@ -17,8 +17,19 @@ public class CertificateManager {
 
     private CourseManager cm;
     private StudentManager sm;
+    
+    private ArrayList<Certificate> certificates;
+
+    public ArrayList<Certificate> getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(ArrayList<Certificate> certificates) {
+        this.certificates = certificates;
+    }
 
     private static final int PASS_SCORE = 50;
+    
 
     public CertificateManager(CourseManager cm, StudentManager sm) {
         this.cm = cm;

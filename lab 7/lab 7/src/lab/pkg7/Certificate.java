@@ -4,7 +4,7 @@
  */
 package lab.pkg7;
 
-public class Certificate {
+public class Certificate implements Record{
 
     private String certificateId;
     private int studentId;
@@ -49,4 +49,8 @@ public class Certificate {
     public String getIssueDate() {
         return issueDate;
     }
+    public void viewCertificate(){}
+     public void downloadJsoncertificate(){}
+     public void downloadPDFcertificate(){}
+     
 }

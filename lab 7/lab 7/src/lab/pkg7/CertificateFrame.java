@@ -188,7 +188,7 @@ for (Certificate c : list) {
         int selectedRow = SearchTable.getSelectedRow();
 
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a course to enroll in.");
+            JOptionPane.showMessageDialog(this, "Please select a certificate.");
             return;
         }
 

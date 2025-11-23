@@ -1,4 +1,4 @@
-package lab.pkg7f;
+package lab.pkg7;
 
 import java.io.File;
 import java.io.IOException;

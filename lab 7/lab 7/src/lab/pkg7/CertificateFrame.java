@@ -7,7 +7,6 @@ package lab.pkg7;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
-import java.io.File;
 
 /**
  *
@@ -33,7 +32,6 @@ public class CertificateFrame extends javax.swing.JFrame {
         this.cm = cm;
         this.sm = sm;
         this.um = um;
-        this.mc = Lab7.mc;
         JsonDatabase.loadUsers(sm, im);
            JsonDatabase.loadCourses(cm);
         initComponents();
@@ -196,7 +194,7 @@ for (Certificate c : list) {
         int CertificateId = (int) m.getValueAt(selectedRow, 0);
 
         Certificate selectedCertificate= null;
-        for (Record r : mc.read()) {
+        for (Record r : cm.read()) {
             Certificate c = (Certificate) r;
             if (c.getCertificateId().equals( CertificateId)) {
                 selectedCertificate= c;
@@ -226,81 +224,70 @@ JOptionPane.showMessageDialog(this, sb.toString());
     }//GEN-LAST:event_viewActionPerformed
 
     private void DownloadjsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadjsonActionPerformed
-    int selectedRow = SearchTable.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a certificate.");
-        return;
-    }
+              int selectedRow = SearchTable.getSelectedRow();
 
-    String certificateId = SearchTable.getModel().getValueAt(selectedRow, 0).toString();
-
-    Certificate selectedCertificate = null;
-    for (Record r : mc.read()) {
-        Certificate c = (Certificate) r;
-        if (c.getCertificateId().equals(certificateId)) {
-            selectedCertificate = c;
-            break;
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to enroll in.");
+            return;
         }
-    }
 
-    if (selectedCertificate == null) {
-        JOptionPane.showMessageDialog(this, "Certificate not found.");
-        return;
-    }
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        int CertificateId = (int) m.getValueAt(selectedRow, 0);
 
-    // Call your JSON writer class here
-    CertificateJsonWriter.generateJsonCertificate(
-            selectedCertificate.getStudentId(),
-            selectedCertificate.getCourseId(),
-            selectedCertificate.getCertificateId()
-    );
+        Certificate selectedCertificate= null;
+        for (Record r : cm.read()) {
+            Certificate c = (Certificate) r;
+            if (c.getCertificateId().equals( CertificateId)) {
+                selectedCertificate= c;
+                break;
+            }
+        }
 
-    JOptionPane.showMessageDialog(this, "JSON Certificate Downloaded!");
+        if (selectedCertificate == null) {
+            JOptionPane.showMessageDialog(this, "Selected course not found.");
+            return;
+        }
+        selectedCertificate.downloadJsoncertificate();
         
+
+
+       
+        JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
    
     }//GEN-LAST:event_DownloadjsonActionPerformed
 
     private void DownloadpdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadpdfActionPerformed
-            int selectedRow = SearchTable.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a certificate.");
-        return;
-    }
+              int selectedRow = SearchTable.getSelectedRow();
 
-    // read certificateId from table
-    String certificateId = SearchTable.getModel().getValueAt(selectedRow, 0).toString();
-
-    Certificate selectedCertificate = null;
-    for (Record r : mc.read()) {
-        Certificate c = (Certificate) r;
-        if (c.getCertificateId().equals(certificateId)) {
-            selectedCertificate = c;
-            break;
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course to enroll in.");
+            return;
         }
-    }
 
-    if (selectedCertificate == null) {
-        JOptionPane.showMessageDialog(this, "Certificate not found.");
-        return;
-    }
+        DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
+        int CertificateId = (int) m.getValueAt(selectedRow, 0);
 
-    // Generate the PDF
-    PdfBoxCreator.generatePDFCertificate(
-            selectedCertificate.getStudentId(),
-            selectedCertificate.getCourseId(),
-            selectedCertificate.getCertificateId()
-    );
+        Certificate selectedCertificate= null;
+        for (Record r : cm.read()) {
+            Certificate c = (Certificate) r;
+            if (c.getCertificateId().equals( CertificateId)) {
+                selectedCertificate= c;
+                break;
+            }
+        }
 
-    // Open the PDF automatically
-    try {
-        java.awt.Desktop.getDesktop().open(
-            new File("certificate_" + selectedCertificate.getCertificateId() + ".pdf")
-        );
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+        if (selectedCertificate == null) {
+            JOptionPane.showMessageDialog(this, "Selected course not found.");
+            return;
+        }
+        selectedCertificate.downloadPDFcertificate();
+        
 
-    JOptionPane.showMessageDialog(this, "PDF downloaded and opened!");
+
+       
+        JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveCourses(cm);
    
     }//GEN-LAST:event_DownloadpdfActionPerformed
 

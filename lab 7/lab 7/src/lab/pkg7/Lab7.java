@@ -15,8 +15,6 @@ public class Lab7 {
     public static CourseManager courseManager;
     public static UserManager userManager;
     public static AdminManager am;
-    public static CertificateManager mc;
-    
     
 
     public static void main(String[] args) {
@@ -24,7 +22,7 @@ public class Lab7 {
         instructorManager = new InstructorManager();
         courseManager = new CourseManager();
         am = new AdminManager();
-        mc = new CertificateManager(courseManager,studentManager);
+
         JsonDatabase.loadUsers(studentManager, instructorManager);
         JsonDatabase.loadCourses(courseManager);
 

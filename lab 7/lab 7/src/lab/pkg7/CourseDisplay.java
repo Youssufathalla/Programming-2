@@ -148,6 +148,7 @@ public class CourseDisplay extends javax.swing.JFrame {
         int lessonId = (int) LessonsTable.getValueAt(selectedRow, 0);
 
         for (Lesson l : c.getLessons()) {
+
             if (l.getLessonId() == lessonId) {
 
                 if (l.getQuiz() != null && !l.getQuiz().isQuizCompleted()) {
@@ -165,10 +166,8 @@ public class CourseDisplay extends javax.swing.JFrame {
 
         JsonDatabase.saveCourses(cm);
         JsonDatabase.saveUsers(sm, im);
-
         loadTable();
         JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
-
     }//GEN-LAST:event_completeBtnActionPerformed
 
     private void quizBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizBtnActionPerformed

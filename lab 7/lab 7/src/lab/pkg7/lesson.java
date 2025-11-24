@@ -1,46 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package lab.pkg7;
 
-/**
- *
- * @author youssufathalla
- */
 public class Lesson {
 
     private int lessonId;
     private String title;
     private String content;
-    private Boolean completed;
+    private boolean completed;
     private Quiz quiz;
     private double quizAvg;
     private double completionPercentage;
 
-    public Lesson(int lessonId, String title, String content, Boolean completed, double quizAvg,double completionPercentage) {
+    public Lesson(int lessonId, String title, String content, boolean completed,
+                  double quizAvg, double completionPercentage) {
+
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;
         this.completed = completed;
         this.quiz = new Quiz();
         this.quizAvg = quizAvg;
-    }
-        public double getCompletionPercentage() {
-        return completionPercentage;
-    }
-
-    public void setCompletionPercentage(double completionPercentage) {
         this.completionPercentage = completionPercentage;
     }
 
-public double getQuizAvg() {
-        return quizAvg;
-    }
-
-    public void setQuizAvg(double quizAvg) {
-        this.quizAvg = quizAvg;
-    }
     public int getLessonId() {
         return lessonId;
     }
@@ -61,11 +42,11 @@ public double getQuizAvg() {
         this.content = content;
     }
 
-    public Boolean isCompleted() {
+    public boolean isCompleted() {
         return completed;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 
@@ -75,5 +56,21 @@ public double getQuizAvg() {
 
     public void setQuiz(Quiz q) {
         this.quiz = q;
+    }
+
+    public double getQuizAvg() {
+        return quizAvg;
+    }
+
+    public void setQuizAvg(double quizAvg) {
+        this.quizAvg = quizAvg;
+    }
+
+    public double getCompletionPercentage() {
+        return completionPercentage;
+    }
+
+    public void setCompletionPercentage(double completionPercentage) {
+        this.completionPercentage = completionPercentage;
     }
 }

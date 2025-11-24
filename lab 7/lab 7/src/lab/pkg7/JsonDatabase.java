@@ -25,7 +25,6 @@ public class JsonDatabase {
             obj.put("email", s.getEmail());
             obj.put("passwordHash", s.getPasswordHash());
             obj.put("enrolledCourses", new JSONArray(s.getEnrolledCourses()));
-
             obj.put("progress", s.getProgress());
 
             JSONObject qs = new JSONObject();
@@ -108,11 +107,7 @@ public class JsonDatabase {
                         }
                     }
 
-                    double progress = obj.optDouble("progress", 0.0);
-                    try {
-                        s.setProgress(progress);
-                    } catch (Exception ignored) {
-                    }
+                    s.setProgress(obj.optDouble("progress", 0.0));
 
                     JSONObject qsObj = obj.optJSONObject("quizScores");
                     if (qsObj != null) {
@@ -139,15 +134,13 @@ public class JsonDatabase {
                     if (certArr != null) {
                         for (int j = 0; j < certArr.length(); j++) {
                             JSONObject cObj = certArr.getJSONObject(j);
-                            String certId = cObj.getString("certificateId");
-                            int sid = cObj.getInt("studentId");
-                            int cid = cObj.getInt("courseId");
-                            String issueDate = cObj.getString("issueDate");
-                            Certificate cert = new Certificate(certId, sid, cid, issueDate);
-                            try {
-                                s.getCertificates().add(cert);
-                            } catch (Exception ignored) {
-                            }
+                            Certificate cert = new Certificate(
+                                    cObj.getString("certificateId"),
+                                    cObj.getInt("studentId"),
+                                    cObj.getInt("courseId"),
+                                    cObj.getString("issueDate")
+                            );
+                            s.getCertificates().add(cert);
                         }
                     }
 
@@ -196,15 +189,13 @@ public class JsonDatabase {
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
-                String type = obj.optString("type", "");
-
-                if (type.equals("admin")) {
-                    int id = obj.getInt("userId");
-                    String username = obj.getString("username");
-                    String email = obj.getString("email");
-                    String pw = obj.getString("passwordHash");
-
-                    admin a = new admin(id, username, email, pw);
+                if (obj.optString("type", "").equals("admin")) {
+                    admin a = new admin(
+                            obj.getInt("userId"),
+                            obj.getString("username"),
+                            obj.getString("email"),
+                            obj.getString("passwordHash")
+                    );
                     admins.add(a);
                 }
             }
@@ -235,7 +226,6 @@ public class JsonDatabase {
                 lobj.put("title", l.getTitle());
                 lobj.put("content", l.getContent());
                 lobj.put("completed", l.isCompleted());
-
                 lobj.put("quizAvg", l.getQuizAvg());
                 lobj.put("completionPercentage", l.getCompletionPercentage());
 
@@ -245,13 +235,12 @@ public class JsonDatabase {
 
                 JSONArray quizArr = new JSONArray();
                 Quiz q = l.getQuiz();
-
                 if (q != null) {
-                    for (int qIndex = 0; qIndex < q.getQuestions().size(); qIndex++) {
+                    for (int i2 = 0; i2 < q.getQuestions().size(); i2++) {
                         JSONObject qObj = new JSONObject();
-                        qObj.put("question", q.getQuestions().get(qIndex));
-                        qObj.put("correct", q.getCorrectAnswers().get(qIndex));
-                        qObj.put("options", new JSONArray(q.getOptions().get(qIndex)));
+                        qObj.put("question", q.getQuestions().get(i2));
+                        qObj.put("correct", q.getCorrectAnswers().get(i2));
+                        qObj.put("options", new JSONArray(q.getOptions().get(i2)));
                         quizArr.put(qObj);
                     }
                 }
@@ -289,35 +278,33 @@ public class JsonDatabase {
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
 
-                int cid = obj.getInt("courseId");
-                String title = obj.getString("title");
-                String desc = obj.getString("description");
-                int instructorId = obj.getInt("instructorId");
-                String approval = obj.optString("approval", "");
-
-                Course c = new Course(cid, title, desc, instructorId);
-                c.setApproval(approval);
+                Course c = new Course(
+                        obj.getInt("courseId"),
+                        obj.getString("title"),
+                        obj.getString("description"),
+                        obj.getInt("instructorId")
+                );
+                c.setApproval(obj.optString("approval", ""));
 
                 JSONArray lessonsArr = obj.getJSONArray("lessons");
                 for (int j = 0; j < lessonsArr.length(); j++) {
                     JSONObject lobj = lessonsArr.getJSONObject(j);
 
-                    int lid = lobj.getInt("lessonId");
-                    String ltitle = lobj.getString("title");
-                    String lcontent = lobj.getString("content");
-                    boolean completed = lobj.getBoolean("completed");
-
-                    double quizAvg = lobj.optDouble("quizAvg", 0.0);
-                    double completionPercentage = lobj.optDouble("completionPercentage", 0.0);
-
-                    Lesson lesson = new Lesson(lid, ltitle, lcontent, completed, quizAvg, completionPercentage);
+                    Lesson lesson = new Lesson(
+                            lobj.getInt("lessonId"),
+                            lobj.getString("title"),
+                            lobj.getString("content"),
+                            lobj.getBoolean("completed"),
+                            lobj.optDouble("quizAvg", 0.0),
+                            lobj.optDouble("completionPercentage", 0.0)
+                    );
 
                     if (lobj.has("quiz")) {
                         JSONArray quizArr = lobj.getJSONArray("quiz");
                         Quiz q = new Quiz();
 
-                        for (int qIndex = 0; qIndex < quizArr.length(); qIndex++) {
-                            JSONObject qObj = quizArr.getJSONObject(qIndex);
+                        for (int k = 0; k < quizArr.length(); k++) {
+                            JSONObject qObj = quizArr.getJSONObject(k);
 
                             String qText = qObj.getString("question");
                             int correct = qObj.getInt("correct");

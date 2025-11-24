@@ -50,12 +50,17 @@ public class StudentCourses extends javax.swing.JFrame {
 int x = 0, y = (c.getLessons() == null ? 0 : c.getLessons().size());
             if (c.getLessons() != null) {
                 for (Lesson lesson : c.getLessons()) {
-                    if (lesson.isCompleted()) {
+                    if (s.isLessonCompleted(c.getCourseId(),lesson.getLessonId())) {
                         x++;
                     }
                 }
             }
             s.setProgress((double)(x/y));
+            
+JsonDatabase.saveUsers(sm, im); 
+JsonDatabase.loadUsers(sm, im);
+
+
             prog = x + "/" + y;
 
             m.addRow(new Object[]{

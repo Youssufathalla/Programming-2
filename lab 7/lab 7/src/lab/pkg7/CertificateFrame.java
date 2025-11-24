@@ -197,7 +197,7 @@ for (Certificate c : list) {
 
 
         Certificate selectedCertificate= null;
-        for (Certificate c : s.getCertificates()) {
+       for (Certificate c : s.getCertificates()) {
     if (c.getCertificateId().equals(certificateId)) {
         selectedCertificate = c;
         break;
@@ -236,20 +236,19 @@ JOptionPane.showMessageDialog(this, sb.toString());
     String certificateId = SearchTable.getModel().getValueAt(selectedRow, 0).toString();
 
     Certificate selectedCertificate = null;
-    for (Record r : mc.read()) {
-        Certificate c = (Certificate) r;
-        if (c.getCertificateId().equals(certificateId)) {
-            selectedCertificate = c;
-            break;
-        }
+    for (Certificate c : s.getCertificates()) {
+    if (c.getCertificateId().equals(certificateId)) {
+        selectedCertificate = c;
+        break;
     }
+}
 
     if (selectedCertificate == null) {
         JOptionPane.showMessageDialog(this, "Certificate not found.");
         return;
     }
 
-    // Call your JSON writer class here
+  
     CertificateJsonWriter.generateJsonCertificate(
             selectedCertificate.getStudentId(),
             selectedCertificate.getCourseId(),
@@ -268,31 +267,30 @@ JOptionPane.showMessageDialog(this, sb.toString());
         return;
     }
 
-    // read certificateId from table
+    
     String certificateId = SearchTable.getModel().getValueAt(selectedRow, 0).toString();
 
     Certificate selectedCertificate = null;
-    for (Record r : mc.read()) {
-        Certificate c = (Certificate) r;
-        if (c.getCertificateId().equals(certificateId)) {
-            selectedCertificate = c;
-            break;
-        }
+    for (Certificate c : s.getCertificates()) {
+    if (c.getCertificateId().equals(certificateId)) {
+        selectedCertificate = c;
+        break;
     }
+}
 
     if (selectedCertificate == null) {
         JOptionPane.showMessageDialog(this, "Certificate not found.");
         return;
     }
 
-    // Generate the PDF
+   
     PdfBoxCreator.generatePDFCertificate(
             selectedCertificate.getStudentId(),
             selectedCertificate.getCourseId(),
             selectedCertificate.getCertificateId()
     );
 
-    // Open the PDF automatically
+  
     try {
         java.awt.Desktop.getDesktop().open(
             new File("certificate_" + selectedCertificate.getCertificateId() + ".pdf")

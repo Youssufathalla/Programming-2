@@ -44,7 +44,7 @@ public class CertificateFrame extends javax.swing.JFrame {
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
         m.setRowCount(0);
 
-        ArrayList<Certificate> list = mc.getCertificates();
+        ArrayList<Certificate> list = s.getCertificates();
 
 for (Certificate c : list) {
     if (s.getProgress()==1) {
@@ -193,12 +193,13 @@ for (Certificate c : list) {
         }
 
         DefaultTableModel m = (DefaultTableModel) SearchTable.getModel();
-        int CertificateId = (int) m.getValueAt(selectedRow, 0);
+        String certificateId = m.getValueAt(selectedRow, 0).toString();
+
 
         Certificate selectedCertificate= null;
         for (Record r : mc.read()) {
             Certificate c = (Certificate) r;
-            if (c.getCertificateId().equals( CertificateId)) {
+            if (c.getCertificateId().equals( certificateId)) {
                 selectedCertificate= c;
                 break;
             }

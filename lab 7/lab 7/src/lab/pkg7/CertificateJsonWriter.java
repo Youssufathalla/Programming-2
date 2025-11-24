@@ -10,7 +10,7 @@ public class CertificateJsonWriter {
 
         String dateIssued = LocalDate.now().toString();
 
-        // Build JSON manually
+        // Build JSON 
         String json = "{\n"
                 + "  \"certificateId\": \"" + certificateId + "\",\n"
                 + "  \"studentId\": " + studentId + ",\n"

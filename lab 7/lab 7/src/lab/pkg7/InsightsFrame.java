@@ -4,6 +4,7 @@
  */
 package lab.pkg7;
 
+import java.util.ArrayList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -47,19 +48,61 @@ public class InsightsFrame extends javax.swing.JFrame {
     
 
     public void loadTable() {
-        DefaultTableModel m = (DefaultTableModel) progressTable.getModel();
-        m.setRowCount(0);
-        
-        
-        for (Lesson l : c.getLessons()) {
-            
-            m.addRow(new Object[]{
-                l.getLessonId(),
-           String.format("%.2f%%", l.getQuizAvg()),    
-    String.format("%.2f%%", l.getCompletionPercentage())
-            });
+    DefaultTableModel m = (DefaultTableModel) progressTable.getModel();
+    m.setRowCount(0);
+
+    int courseId = c.getCourseId();
+    ArrayList<Record> allStudents = sm.read();
+
+    for (Lesson l : c.getLessons()) {
+        int lessonId = l.getLessonId();
+
+        double totalScore = 0;
+        int totalCompleted = 0;
+        int totalEnrolled = 0;
+
+        for (Record r : allStudents) {
+            if (!(r instanceof Student)) continue;
+
+            Student stu = (Student) r;
+
+            if (stu.isEnrolled(courseId)) {
+                totalEnrolled++;
+
+                if (stu.isLessonCompleted(courseId, lessonId)) {
+                    Integer sScore = stu.getQuizScore(courseId, lessonId);
+                    if (sScore != null) {
+                        totalScore += sScore;
+                        totalCompleted++;
+                    }
+                }
+            }
         }
+
+        int totalQuestions = l.getQuiz().getQuestions().size();
+
+        double avgScorePercent = 0;
+        if (totalCompleted > 0) {
+            avgScorePercent = (totalScore / (totalCompleted * totalQuestions)) * 100;
+        }
+
+        double completionPercentage = 0;
+        if (totalEnrolled > 0) {
+            completionPercentage = (totalCompleted / (double) totalEnrolled) * 100;
+        }
+
+  
+        l.setQuizAvg(avgScorePercent);
+        l.setCompletionPercentage(completionPercentage);
+
+        m.addRow(new Object[]{
+            lessonId,
+            String.format("%.2f%%", avgScorePercent),
+            String.format("%.2f%%", completionPercentage)
+        });
     }
+}
+
 
     public void displayInsights() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();

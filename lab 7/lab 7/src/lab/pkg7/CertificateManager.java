@@ -59,7 +59,6 @@ public class CertificateManager implements Manager {
             return null;
         }
         if (!isCourseCompleted(s, c)) {
-            System.out.println("2");
             return null;
         }
 

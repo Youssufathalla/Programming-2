@@ -193,43 +193,43 @@ public class QuizFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,
                 "Quiz completed! Your score: " + score);
 
-        int courseId = c.getCourseId();
-        int CourseId = c.getCourseId();
-        ArrayList<Record> allStudents = sm.read();
-
-        for (Lesson l : c.getLessons()) {
-
-            double totalScore = 0;
-            double countCompleted = 0;
-            double totalEnrolled = 0;
-            int lessonId = l.getLessonId();
-
-            for (Record r : allStudents) {
-                if (r instanceof Student) {
-                    Student stu = (Student) r;
-
-                    if (stu.isEnrolled(CourseId)) {
-                        totalEnrolled++;
-
-                        if (stu.isLessonCompleted(courseId, lessonId)) {
-                            Integer studentScore = stu.getQuizScore(courseId, lessonId);
-                            if (studentScore != null) {
-                                totalScore += studentScore;
-                                countCompleted++;
-                            }
-                        }
-                    }
-                }
-            }
-            int totalQuestions = lesson.getQuiz().getQuestions().size();
-            double average = (countCompleted > 0) ?(( totalScore / countCompleted)*100)/totalQuestions : 0;
-            
-            l.setQuizAvg(average);
-            
-            double completionPercentage = (totalEnrolled > 0) ? (countCompleted / totalEnrolled) * 100 : 0;
-            l.setCompletionPercentage(completionPercentage);
-            
-        }
+//        int courseId = c.getCourseId();
+//        int CourseId = c.getCourseId();
+//        ArrayList<Record> allStudents = sm.read();
+//
+//        for (Lesson l : c.getLessons()) {
+//
+//            double totalScore = 0;
+//            double countCompleted = 0;
+//            double totalEnrolled = 0;
+//            int lessonId = l.getLessonId();
+//
+//            for (Record r : allStudents) {
+//                if (r instanceof Student) {
+//                    Student stu = (Student) r;
+//
+//                    if (stu.isEnrolled(CourseId)) {
+//                        totalEnrolled++;
+//
+//                        if (stu.isLessonCompleted(courseId, lessonId)) {
+//                            Integer studentScore = stu.getQuizScore(courseId, lessonId);
+//                            if (studentScore != null) {
+//                                totalScore += studentScore;
+//                                countCompleted++;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            int totalQuestions = lesson.getQuiz().getQuestions().size();
+//            double average = (countCompleted > 0) ?(( totalScore / countCompleted)*100)/totalQuestions : 0;
+//            
+//            l.setQuizAvg(average);
+//            
+//            double completionPercentage = (totalEnrolled > 0) ? (countCompleted / totalEnrolled) * 100 : 0;
+//            l.setCompletionPercentage(completionPercentage);
+//            
+//        }
 
         JsonDatabase.saveCourses(cm);
 

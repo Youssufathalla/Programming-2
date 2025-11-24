@@ -197,13 +197,13 @@ for (Certificate c : list) {
 
 
         Certificate selectedCertificate= null;
-        for (Record r : mc.read()) {
-            Certificate c = (Certificate) r;
-            if (c.getCertificateId().equals( certificateId)) {
-                selectedCertificate= c;
-                break;
-            }
-        }
+        for (Certificate c : s.getCertificates()) {
+    if (c.getCertificateId().equals(certificateId)) {
+        selectedCertificate = c;
+        break;
+    }
+}
+
 
         if (selectedCertificate == null) {
             JOptionPane.showMessageDialog(this, "Selected course not found.");

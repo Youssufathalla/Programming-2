@@ -184,18 +184,56 @@ public class QuizFrame extends javax.swing.JFrame {
         optionsGroup.clearSelection();
     }
 
-    private void finishQuiz() {
-        s.saveQuizScore(c.getCourseId(), lesson.getLessonId(), score);
-        s.markQuizCompleted(c.getCourseId(), lesson.getLessonId());
+  private void finishQuiz() {
+    s.saveQuizScore(c.getCourseId(), lesson.getLessonId(), score);
+    s.markQuizCompleted(c.getCourseId(), lesson.getLessonId());
 
-        JsonDatabase.saveUsers(sm, im);
+    JsonDatabase.saveUsers(sm, im);
 
-        JOptionPane.showMessageDialog(this,
-                "Quiz completed! Your score: " + score);
+    JOptionPane.showMessageDialog(this,
+            "Quiz completed! Your score: " + score);
 
-        this.dispose();
-        new CourseDisplay(um, cm, im, sm, s, c).setVisible(true);
+    int courseId = c.getCourseId();
+    String CourseId = String.valueOf(c.getCourseId());
+    ArrayList<Record> allStudents = sm.read();
+
+    for (Lesson l : c.getLessons()) {
+
+        double totalScore = 0;
+        double countCompleted = 0;
+        double totalEnrolled = 0;
+        int lessonId = l.getLessonId();
+
+        for (Record r : allStudents) {
+            if (r instanceof Student) {
+                Student stu = (Student) r;
+
+                if (stu.isEnrolled(CourseId)) {
+                    totalEnrolled++;
+
+                    if (stu.isLessonCompleted(courseId, lessonId)) {
+                        Integer studentScore = stu.getQuizScore(courseId, lessonId);
+                        if (studentScore != null) {
+                            totalScore += studentScore;
+                            countCompleted++;
+                        }
+                    }
+                }
+            }
+        }
+
+        double average = (countCompleted > 0) ? totalScore / countCompleted : 0;
+        l.setQuizAvg(average);
+
+        double completionPercentage = (totalEnrolled > 0) ? (countCompleted / totalEnrolled) * 100 : 0;
+        l.setCompletionPercentage(completionPercentage);
     }
+
+    JsonDatabase.saveCourses(cm);
+
+    this.dispose();
+    new CourseDisplay(um, cm, im, sm, s, c).setVisible(true);
+}
     /**
      * @param args the command line arguments
      */

@@ -29,7 +29,7 @@ public class CertificateManager implements Manager {
         this.certificates = certificates;
     }
 
-    private static final int PASS_SCORE = 50;
+    private static final int PASS_SCORE = 0;
     
 
     public CertificateManager(CourseManager cm, StudentManager sm) {
@@ -55,9 +55,11 @@ public class CertificateManager implements Manager {
 
     public Certificate issueCertificateIfEligible(Student s, Course c) {
         if (s.hasCertificateForCourse(c.getCourseId())) {
+            System.out.println("1");
             return null;
         }
         if (!isCourseCompleted(s, c)) {
+            System.out.println("2");
             return null;
         }
 
@@ -73,7 +75,7 @@ public class CertificateManager implements Manager {
 
         s.addCertificate(cert);
         this.certificates.add(cert); 
-        
+        System.out.println("3");
 
         JsonDatabase.saveUsers(sm, Lab7.instructorManager);
         JsonDatabase.saveCourses(cm);

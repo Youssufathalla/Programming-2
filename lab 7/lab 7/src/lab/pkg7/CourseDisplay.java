@@ -167,6 +167,16 @@ public class CourseDisplay extends javax.swing.JFrame {
                 break;
             }
         }
+        Certificate cert = Lab7.mc.issueCertificateIfEligible(s, c);
+
+        JsonDatabase.saveUsers(sm, im);
+        loadTable();
+        JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
+        if (cert != null) {
+            JOptionPane.showMessageDialog(this,
+                    "Congratulations! You completed the course.\nCertificate ID: " + cert.getCertificateId());
+        }
+          
 
         JsonDatabase.saveUsers(sm, im);
         loadTable();

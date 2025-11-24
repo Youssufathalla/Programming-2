@@ -24,9 +24,6 @@ public class QuizFrame extends javax.swing.JFrame {
     private int currentQuestion = 0;
     private int score = 0;
 
-    /**
-     * Creates new form QuizFrame
-     */
     public QuizFrame(UserManager um, CourseManager cm, InstructorManager im,
             StudentManager sm, Student s, Course c, Lesson lesson) {
 
@@ -189,27 +186,13 @@ public class QuizFrame extends javax.swing.JFrame {
 
     private void finishQuiz() {
         s.saveQuizScore(c.getCourseId(), lesson.getLessonId(), score);
-        lesson.getQuiz().setQuizCompleted(true);
+        s.markQuizCompleted(c.getCourseId(), lesson.getLessonId());
 
-        JsonDatabase.saveCourses(cm);
         JsonDatabase.saveUsers(sm, im);
 
         JOptionPane.showMessageDialog(this,
                 "Quiz completed! Your score: " + score);
-//         ArrayList<Record> allstudents = sm.read();
-//           int totalscore;
-//        int totalstudents;
-//
-//        for (Record r : allstudents) {
-//            if (r instanceof Student) {
-//                Student x = (Student) r;
-//                if (x.)
-//                        totalscore=1;
-//                
-//                                }}
-//      
-//            
-//x.getQuizScore(c.getCourseId(), lesson.getLessonId())
+
         this.dispose();
         new CourseDisplay(um, cm, im, sm, s, c).setVisible(true);
     }

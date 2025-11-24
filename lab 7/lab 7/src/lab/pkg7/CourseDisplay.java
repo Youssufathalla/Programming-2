@@ -20,9 +20,6 @@ public class CourseDisplay extends javax.swing.JFrame {
     private UserManager um;
     private Course c;
 
-    /**
-     * Creates new form CourseDisplay
-     */
     public CourseDisplay(UserManager um, CourseManager cm, InstructorManager im, StudentManager sm, Student s, Course c) {
         this.s = s;
         this.im = im;
@@ -44,7 +41,7 @@ public class CourseDisplay extends javax.swing.JFrame {
                 l.getLessonId(),
                 l.getTitle(),
                 l.getContent(),
-                l.isCompleted() ? "Yes" : "No"
+                s.isLessonCompleted(c.getCourseId(), l.getLessonId()) ? "Yes" : "No"
             });
         }
     }
@@ -148,23 +145,19 @@ public class CourseDisplay extends javax.swing.JFrame {
         int lessonId = (int) LessonsTable.getValueAt(selectedRow, 0);
 
         for (Lesson l : c.getLessons()) {
-
             if (l.getLessonId() == lessonId) {
-
-                if (l.getQuiz() != null && !l.getQuiz().isQuizCompleted()) {
+                if (l.getQuiz() != null && !s.isQuizCompleted(c.getCourseId(), l.getLessonId())) {
                     JOptionPane.showMessageDialog(
                             this,
                             "You must complete the quiz before marking this lesson completed."
                     );
                     return;
                 }
-
-                l.setCompleted(true);
+                s.markLessonCompleted(c.getCourseId(), lessonId);
                 break;
             }
         }
 
-        JsonDatabase.saveCourses(cm);
         JsonDatabase.saveUsers(sm, im);
         loadTable();
         JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
@@ -192,7 +185,7 @@ public class CourseDisplay extends javax.swing.JFrame {
             return;
         }
 
-        if (selectedLesson.getQuiz() != null && selectedLesson.getQuiz().isQuizCompleted()) {
+        if (selectedLesson.getQuiz() != null && s.isQuizCompleted(c.getCourseId(), selectedLesson.getLessonId())) {
             JOptionPane.showMessageDialog(this, "You have already completed this quiz.");
             return;
         }

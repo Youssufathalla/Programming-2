@@ -12,7 +12,6 @@ public class Lesson {
 
     public Lesson(int lessonId, String title, String content, boolean completed,
                   double quizAvg, double completionPercentage) {
-
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;

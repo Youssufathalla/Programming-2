@@ -37,6 +37,26 @@ public class JsonDatabase {
             }
             obj.put("quizScores", qs);
 
+            JSONObject lc = new JSONObject();
+            for (Integer cid : s.getLessonCompleted().keySet()) {
+                JSONObject inner = new JSONObject();
+                for (Integer lid : s.getLessonCompleted().get(cid).keySet()) {
+                    inner.put(String.valueOf(lid), s.getLessonCompleted().get(cid).get(lid));
+                }
+                lc.put(String.valueOf(cid), inner);
+            }
+            obj.put("lessonCompleted", lc);
+
+            JSONObject qc = new JSONObject();
+            for (Integer cid : s.getQuizCompletedMap().keySet()) {
+                JSONObject inner = new JSONObject();
+                for (Integer lid : s.getQuizCompletedMap().get(cid).keySet()) {
+                    inner.put(String.valueOf(lid), s.getQuizCompletedMap().get(cid).get(lid));
+                }
+                qc.put(String.valueOf(cid), inner);
+            }
+            obj.put("quizCompleted", qc);
+
             JSONArray certArr = new JSONArray();
             if (s.getCertificates() != null) {
                 for (Certificate cert : s.getCertificates()) {
@@ -127,6 +147,36 @@ public class JsonDatabase {
                                 lessonMap.put(Integer.parseInt(lessonKey), inner.getInt(lessonKey));
                             }
                             realQS.put(cid, lessonMap);
+                        }
+                    }
+
+                    JSONObject lcObj = obj.optJSONObject("lessonCompleted");
+                    if (lcObj != null) {
+                        for (String courseKey : lcObj.keySet()) {
+                            int cid = Integer.parseInt(courseKey);
+                            JSONObject inner = lcObj.getJSONObject(courseKey);
+                            for (String lessonKey : inner.keySet()) {
+                                int lid = Integer.parseInt(lessonKey);
+                                boolean val = inner.getBoolean(lessonKey);
+                                if (val) {
+                                    s.markLessonCompleted(cid, lid);
+                                }
+                            }
+                        }
+                    }
+
+                    JSONObject qcObj = obj.optJSONObject("quizCompleted");
+                    if (qcObj != null) {
+                        for (String courseKey : qcObj.keySet()) {
+                            int cid = Integer.parseInt(courseKey);
+                            JSONObject inner = qcObj.getJSONObject(courseKey);
+                            for (String lessonKey : inner.keySet()) {
+                                int lid = Integer.parseInt(lessonKey);
+                                boolean val = inner.getBoolean(lessonKey);
+                                if (val) {
+                                    s.markQuizCompleted(cid, lid);
+                                }
+                            }
                         }
                     }
 
@@ -225,13 +275,8 @@ public class JsonDatabase {
                 lobj.put("lessonId", l.getLessonId());
                 lobj.put("title", l.getTitle());
                 lobj.put("content", l.getContent());
-                lobj.put("completed", l.isCompleted());
                 lobj.put("quizAvg", l.getQuizAvg());
                 lobj.put("completionPercentage", l.getCompletionPercentage());
-
-                if (l.getQuiz() != null) {
-                    lobj.put("quizCompleted", l.getQuiz().isQuizCompleted());
-                }
 
                 JSONArray quizArr = new JSONArray();
                 Quiz q = l.getQuiz();
@@ -294,7 +339,7 @@ public class JsonDatabase {
                             lobj.getInt("lessonId"),
                             lobj.getString("title"),
                             lobj.getString("content"),
-                            lobj.getBoolean("completed"),
+                            false,
                             lobj.optDouble("quizAvg", 0.0),
                             lobj.optDouble("completionPercentage", 0.0)
                     );
@@ -317,9 +362,6 @@ public class JsonDatabase {
 
                             q.addQuestion(qText, opts, correct);
                         }
-
-                        boolean quizCompleted = lobj.optBoolean("quizCompleted", false);
-                        q.setQuizCompleted(quizCompleted);
 
                         lesson.setQuiz(q);
                     }

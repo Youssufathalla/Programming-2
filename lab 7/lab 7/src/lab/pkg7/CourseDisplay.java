@@ -27,12 +27,22 @@ public class CourseDisplay extends javax.swing.JFrame {
         this.sm = sm;
         this.um = um;
         this.c = c;
+
+        JsonDatabase.loadUsers(sm, im);
         JsonDatabase.loadCourses(cm);
+
+        this.s = (Student) sm.search(s.getUserId());
+        this.c = (Course) cm.search(c.getCourseId());
+
         initComponents();
         loadTable();
     }
 
     public void loadTable() {
+
+        JsonDatabase.loadUsers(sm, im);
+        this.s = (Student) sm.search(s.getUserId());
+
         DefaultTableModel m = (DefaultTableModel) LessonsTable.getModel();
         m.setRowCount(0);
 

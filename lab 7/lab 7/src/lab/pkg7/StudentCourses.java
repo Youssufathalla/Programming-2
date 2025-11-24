@@ -29,6 +29,12 @@ public class StudentCourses extends javax.swing.JFrame {
         this.cm = cm;
         this.sm = sm;
         this.um = um;
+
+        JsonDatabase.loadUsers(sm, im);
+        JsonDatabase.loadCourses(cm);
+
+        this.s = (Student) sm.search(s.getUserId());
+
         initComponents();
         loadTable();
     }
@@ -47,19 +53,18 @@ public class StudentCourses extends javax.swing.JFrame {
             }
 
             Course c = (Course) r;
-int x = 0, y = (c.getLessons() == null ? 0 : c.getLessons().size());
+            int x = 0, y = (c.getLessons() == null ? 0 : c.getLessons().size());
             if (c.getLessons() != null) {
                 for (Lesson lesson : c.getLessons()) {
-                    if (s.isLessonCompleted(c.getCourseId(),lesson.getLessonId())) {
+                    if (s.isLessonCompleted(c.getCourseId(), lesson.getLessonId())) {
                         x++;
                     }
                 }
             }
-            s.setProgress((double)(x/y));
-            
-JsonDatabase.saveUsers(sm, im); 
-JsonDatabase.loadUsers(sm, im);
+            s.setProgress((double) (x / y));
 
+            JsonDatabase.saveUsers(sm, im);
+            JsonDatabase.loadUsers(sm, im);
 
             prog = x + "/" + y;
 

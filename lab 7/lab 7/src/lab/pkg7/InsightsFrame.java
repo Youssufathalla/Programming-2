@@ -36,6 +36,7 @@ public class InsightsFrame extends javax.swing.JFrame {
         this.parent = parent;
         this.um = Lab7.userManager;
         this.c = c;
+        this.sm =sm;
         this.parent = parent;
         JsonDatabase.loadCourses(cm);
         loadTable();
@@ -44,11 +45,13 @@ public class InsightsFrame extends javax.swing.JFrame {
     public void loadTable() {
         DefaultTableModel m = (DefaultTableModel) progressTable.getModel();
         m.setRowCount(0);
-
+        
         for (Lesson l : c.getLessons()) {
+            
             m.addRow(new Object[]{
                 l.getLessonId(),
-            l.getQuizAvg(),
+           String.format("%.2f%%", l.getQuizAvg()),    
+    String.format("%.2f%%", l.getCompletionPercentage())
             });
         }
     }
@@ -57,8 +60,8 @@ public class InsightsFrame extends javax.swing.JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (Lesson l : c.getLessons()) {
-            dataset.addValue((Number) l.getQuizAvg(), "Quiz Average", l.getLessonId());
-
+            double avg = Double.parseDouble(String.valueOf(l.getQuizAvg()));
+            dataset.addValue((Number) avg, (Comparable) "Quiz Average", (Comparable) String.valueOf(l.getLessonId()));
         };
 
         JFreeChart barChart = ChartFactory.createBarChart(
@@ -73,6 +76,7 @@ public class InsightsFrame extends javax.swing.JFrame {
         );
 
         CategoryPlot plot = (CategoryPlot) barChart.getPlot();
+        plot.getRangeAxis().setRange(0, 100);
         plot.setRangeGridlinePaint(java.awt.Color.GRAY);
 
         JFrame frame = new JFrame("Instructor Dashboard - Quiz Bar Chart");

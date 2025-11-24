@@ -103,6 +103,10 @@ public class Student extends User implements Record {
                 && quizCompleted.get(courseId).getOrDefault(lessonId, false);
     }
 
+    public boolean isEnrolled(String courseId) {
+    return enrolledCourses.contains(courseId);
+}
+    
     @Override
     public void openDashboard() {
     }

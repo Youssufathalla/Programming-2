@@ -476,45 +476,53 @@ public class managecourses extends javax.swing.JFrame {
     }//GEN-LAST:event_lessonsContentActionPerformed
 
     private void deletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebuttonActionPerformed
-        int row = SearchTable.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Select a course first");
-            return;
-        }
+ int row = SearchTable.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course first");
+        return;
+    }
 
-        row = SearchTable.convertRowIndexToModel(row);
-        int cId = (int) SearchTable.getModel().getValueAt(row, 0);
+    row = SearchTable.convertRowIndexToModel(row);
+    int cId = (int) SearchTable.getModel().getValueAt(row, 0);
 
-        Course c = (Course) cm.search(cId);
-        if (c == null) {
-            JOptionPane.showMessageDialog(this, "Course not found");
-            return;
-        }
+    Course c = (Course) cm.search(cId);
+    if (c == null) {
+        JOptionPane.showMessageDialog(this, "Course not found");
+        return;
+    }
 
-        if (c.getInstructorId() != ins.getUserId()) {
-            JOptionPane.showMessageDialog(this, "You can only delete your courses");
-            return;
-        }
+    if (c.getInstructorId() != ins.getUserId()) {
+        JOptionPane.showMessageDialog(this, "You can only delete your courses");
+        return;
+    }
 
-        int confirm = JOptionPane.showConfirmDialog(
-                this,
-                "Delete course " + cId + "?",
-                "Confirm",
-                JOptionPane.YES_NO_OPTION
-        );
+    int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Delete course " + cId + "?",
+            "Confirm",
+            JOptionPane.YES_NO_OPTION
+    );
 
-        if (confirm != JOptionPane.YES_OPTION) {
-            return;
-        }
+    if (confirm != JOptionPane.YES_OPTION) return;
 
-        cm.read().remove(c);
+    // Remove from CourseManager
+    cm.read().remove(c);
 
-        ins.getCreatedCourses().remove(Integer.valueOf(cId));
+    // Remove from instructor list
+    ins.getCreatedCourses().remove(Integer.valueOf(cId));
 
-        JsonDatabase.saveCourses(cm);
-        JsonDatabase.saveUsers(sm, im);
+    // Remove from all students
+    for (Record rr : sm.read()) {
+        Student st = (Student) rr;
+        st.getEnrolledCourses().remove(Integer.valueOf(cId));
+    }
 
-        JOptionPane.showMessageDialog(this, "Course deleted successfully");
+    // Save
+    JsonDatabase.saveCourses(cm);
+    JsonDatabase.saveUsers(sm, im);
+
+    JOptionPane.showMessageDialog(this, "Course deleted successfully");
+    loadInstructorCourses();  
 
     loadInstructorCourses();    }//GEN-LAST:event_deletebuttonActionPerformed
 

@@ -38,13 +38,18 @@ public class InsightsFrame extends javax.swing.JFrame {
         this.c = c;
         this.sm =sm;
         this.parent = parent;
-        JsonDatabase.loadCourses(cm);
+        this.cm =cm;
+        this.im=im;
+        
         loadTable();
+        
     }
+    
 
     public void loadTable() {
         DefaultTableModel m = (DefaultTableModel) progressTable.getModel();
         m.setRowCount(0);
+        
         
         for (Lesson l : c.getLessons()) {
             
@@ -62,7 +67,7 @@ public class InsightsFrame extends javax.swing.JFrame {
         for (Lesson l : c.getLessons()) {
             double avg = Double.parseDouble(String.valueOf(l.getQuizAvg()));
             dataset.addValue((Number) avg, (Comparable) "Quiz Average", (Comparable) String.valueOf(l.getLessonId()));
-        };
+        }
 
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Quiz Averages per Lesson",

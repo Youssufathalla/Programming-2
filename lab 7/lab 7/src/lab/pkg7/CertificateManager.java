@@ -75,7 +75,7 @@ public class CertificateManager implements Manager {
 
         s.addCertificate(cert);
         this.certificates.add(cert); 
-        System.out.println("3");
+   
 
         JsonDatabase.saveUsers(sm, Lab7.instructorManager);
         JsonDatabase.saveCourses(cm);

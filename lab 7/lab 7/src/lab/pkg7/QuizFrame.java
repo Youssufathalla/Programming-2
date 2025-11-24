@@ -184,56 +184,58 @@ public class QuizFrame extends javax.swing.JFrame {
         optionsGroup.clearSelection();
     }
 
-  private void finishQuiz() {
-    s.saveQuizScore(c.getCourseId(), lesson.getLessonId(), score);
-    s.markQuizCompleted(c.getCourseId(), lesson.getLessonId());
+    private void finishQuiz() {
+        s.saveQuizScore(c.getCourseId(), lesson.getLessonId(), score);
+        s.markQuizCompleted(c.getCourseId(), lesson.getLessonId());
 
-    JsonDatabase.saveUsers(sm, im);
+        JsonDatabase.saveUsers(sm, im);
 
-    JOptionPane.showMessageDialog(this,
-            "Quiz completed! Your score: " + score);
+        JOptionPane.showMessageDialog(this,
+                "Quiz completed! Your score: " + score);
 
-    int courseId = c.getCourseId();
-    String CourseId = String.valueOf(c.getCourseId());
-    ArrayList<Record> allStudents = sm.read();
+        int courseId = c.getCourseId();
+        int CourseId = c.getCourseId();
+        ArrayList<Record> allStudents = sm.read();
 
-    for (Lesson l : c.getLessons()) {
+        for (Lesson l : c.getLessons()) {
 
-        double totalScore = 0;
-        double countCompleted = 0;
-        double totalEnrolled = 0;
-        int lessonId = l.getLessonId();
+            double totalScore = 0;
+            double countCompleted = 0;
+            double totalEnrolled = 0;
+            int lessonId = l.getLessonId();
 
-        for (Record r : allStudents) {
-            if (r instanceof Student) {
-                Student stu = (Student) r;
+            for (Record r : allStudents) {
+                if (r instanceof Student) {
+                    Student stu = (Student) r;
 
-                if (stu.isEnrolled(CourseId)) {
-                    totalEnrolled++;
+                    if (stu.isEnrolled(CourseId)) {
+                        totalEnrolled++;
 
-                    if (stu.isLessonCompleted(courseId, lessonId)) {
-                        Integer studentScore = stu.getQuizScore(courseId, lessonId);
-                        if (studentScore != null) {
-                            totalScore += studentScore;
-                            countCompleted++;
+                        if (stu.isLessonCompleted(courseId, lessonId)) {
+                            Integer studentScore = stu.getQuizScore(courseId, lessonId);
+                            if (studentScore != null) {
+                                totalScore += studentScore;
+                                countCompleted++;
+                            }
                         }
                     }
                 }
             }
+            int totalQuestions = lesson.getQuiz().getQuestions().size();
+            double average = (countCompleted > 0) ?(( totalScore / countCompleted)*100)/totalQuestions : 0;
+            
+            l.setQuizAvg(average);
+            
+            double completionPercentage = (totalEnrolled > 0) ? (countCompleted / totalEnrolled) * 100 : 0;
+            l.setCompletionPercentage(completionPercentage);
+            
         }
 
-        double average = (countCompleted > 0) ? totalScore / countCompleted : 0;
-        l.setQuizAvg(average);
+        JsonDatabase.saveCourses(cm);
 
-        double completionPercentage = (totalEnrolled > 0) ? (countCompleted / totalEnrolled) * 100 : 0;
-        l.setCompletionPercentage(completionPercentage);
+        this.dispose();
+        new CourseDisplay(um, cm, im, sm, s, c).setVisible(true);
     }
-
-    JsonDatabase.saveCourses(cm);
-
-    this.dispose();
-    new CourseDisplay(um, cm, im, sm, s, c).setVisible(true);
-}
     /**
      * @param args the command line arguments
      */

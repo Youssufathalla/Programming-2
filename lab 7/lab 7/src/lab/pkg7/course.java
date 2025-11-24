@@ -37,7 +37,7 @@ public class Course implements Record {
         this.description = description;
         this.instructorId = instructorId;
 
-        // Empty lists instead of null
+
         this.lessons = new ArrayList<>();
         this.enrolledStudents = new ArrayList<>();
     }

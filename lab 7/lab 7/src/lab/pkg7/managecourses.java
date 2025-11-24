@@ -522,7 +522,7 @@ public class managecourses extends javax.swing.JFrame {
     JsonDatabase.saveUsers(sm, im);
 
     JOptionPane.showMessageDialog(this, "Course deleted successfully");
-    loadInstructorCourses();  
+  
 
     loadInstructorCourses();    }//GEN-LAST:event_deletebuttonActionPerformed
 

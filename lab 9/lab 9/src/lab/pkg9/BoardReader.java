@@ -1,24 +1,60 @@
 package lab.pkg9;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class BoardReader {
 
-    public static int[][] read(String path) throws Exception {
+    public static int[][] read(String file) throws Exception {
+
         int[][] board = new int[9][9];
-        BufferedReader br = new BufferedReader(new FileReader(path));
+        BufferedReader br = new BufferedReader(new FileReader(file));
 
         for (int i = 0; i < 9; i++) {
+
             String line = br.readLine();
+
             if (line == null) {
-                throw new RuntimeException("File has less than 9 lines");
+                for (int j = 0; j < 9; j++) {
+                    board[i][j] = 0;
+                }
+                continue;
             }
+
             String[] parts = line.split(",");
-            if (parts.length != 9) {
-                throw new RuntimeException("Line " + (i + 1) + " does not have 9 values");
-            }
+
             for (int j = 0; j < 9; j++) {
-                board[i][j] = Integer.parseInt(parts[j].trim());
+
+                if (j >= parts.length) {
+ 
+                    board[i][j] = 0;
+                    continue;
+                }
+
+                String cell = parts[j].trim();
+
+   
+                if (cell.isEmpty()) {
+                    board[i][j] = 0;
+                    continue;
+                }
+
+                int val;
+
+                try {
+                    val = Integer.parseInt(cell);
+                } catch (Exception e) {
+                    br.close();
+                    throw new Exception("INVALID INPUT");
+                }
+
+
+                if (val < 1 || val > 9) {
+                    br.close();
+                    throw new Exception("INVALID INPUT");
+                }
+
+                board[i][j] = val;
             }
         }
 

@@ -1,19 +1,26 @@
 package lab.pkg9;
+
 public class Main {
-   
     public static void main(String[] args) throws Exception {
+
         if (args.length != 2) {
-            System.out.println("Usage: java -jar app.jar <file.csv> <mode>");
+            System.out.println("Usage: java -jar Sudoku.jar <csvfile> <mode>");
             return;
         }
 
-        String path = args[0];
-        int mode = Integer.parseInt(args[1]); 
+        String file = args[0];
+        int mode = Integer.parseInt(args[1]);
 
-        int[][] board = BoardReader.read(path);
-        Verifier verifier = new Verifier(board);
+        int[][] board;
 
-        String result = verifier.run(mode);
-        System.out.print(result);
+        try {
+            board = BoardReader.read(file);
+        } catch (Exception e) {
+            System.out.println("INVALID INPUT");
+            return;
+        }
+
+        Verifier v = new Verifier(board);
+        System.out.println(v.run(mode));
     }
 }

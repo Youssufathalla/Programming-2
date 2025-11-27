@@ -1,27 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package lab.pkg9;
-
-/**
- *
- * @author Lenovo
- */
 
 public abstract class AbstractChecker implements Runnable {
 
-    protected int[][] board;
-    protected DuplicateResult result;
-    protected Checker checker;
+    protected final int[][] board;
+    protected final DuplicateResult result;
+    protected final int index;
 
-    public AbstractChecker(int[][] board, DuplicateResult result) {
+    public AbstractChecker(int[][] board, DuplicateResult result, int index) {
         this.board = board;
         this.result = result;
-        this.checker = new Checker();
+        this.index = index;
     }
 
     @Override
     public abstract void run();
-
 }

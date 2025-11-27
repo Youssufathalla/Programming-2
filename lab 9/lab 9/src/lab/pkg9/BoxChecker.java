@@ -1,41 +1,34 @@
 package lab.pkg9;
+
 public class BoxChecker extends AbstractChecker {
 
-    public BoxChecker(int[][] board, DuplicateResult result) {
-        super(board, result);
+    public BoxChecker(int[][] board, DuplicateResult result, int boxIndex) {
+        super(board, result, boxIndex);
     }
-    //ss
 
     @Override
     public void run() {
+        int[] count = new int[10];
+        StringBuilder[] positions = new StringBuilder[10];
 
-        int boxNumber = 1;
+        int startRow = (index / 3) * 3;
+        int startCol = (index % 3) * 3;
 
-        for (int br = 0; br < 3; br++) {
-            for (int bc = 0; bc < 3; bc++) {
+        int pos = 1;
+        for (int r = startRow; r < startRow + 3; r++) {
+            for (int c = startCol; c < startCol + 3; c++) {
+                int v = board[r][c];
+                count[v]++;
+                if (positions[v] == null) positions[v] = new StringBuilder();
+                if (positions[v].length() > 0) positions[v].append(",");
+                positions[v].append(pos);
+                pos++;
+            }
+        }
 
-                int[] values = new int[9];
-                int pos = 0;
-
-                for (int r = br * 3; r < br * 3 + 3; r++) {
-                    for (int c = bc * 3; c < bc * 3 + 3; c++) {
-                        values[pos++] = board[r][c];
-                    }
-                }
-
-                int[] dup = checker.findDuplicatePositions(values);
-
-                if (dup != null) {
-                    int duplicateValue = values[dup[0] - 1];
-
-                    result.addError(
-                        "BOX " + boxNumber +
-                        " #" + duplicateValue +
-                        " [" + dup[0] + "," + dup[1] + "]"
-                    );
-                }
-
-                boxNumber++;
+        for (int digit = 1; digit <= 9; digit++) {
+            if (count[digit] > 1) {
+                result.addError("BOX " + (index + 1) + " #" + digit + " [" + positions[digit] + "]");
             }
         }
     }

@@ -2,31 +2,26 @@ package lab.pkg9;
 
 public class ColumnChecker extends AbstractChecker {
 
-    public ColumnChecker(int[][] board, DuplicateResult result) {
-        super(board, result);
+    public ColumnChecker(int[][] board, DuplicateResult result, int colIndex) {
+        super(board, result, colIndex);
     }
 
     @Override
     public void run() {
+        int[] count = new int[10];
+        StringBuilder[] positions = new StringBuilder[10];
 
-        for (int c = 0; c < 9; c++) {
+        for (int row = 0; row < 9; row++) {
+            int v = board[row][index];
+            count[v]++;
+            if (positions[v] == null) positions[v] = new StringBuilder();
+            if (positions[v].length() > 0) positions[v].append(",");
+            positions[v].append(row + 1);
+        }
 
-            int[] values = new int[9];
-
-            for (int r = 0; r < 9; r++) {
-                values[r] = board[r][c];
-            }
-
-            int[] dup = checker.findDuplicatePositions(values);
-
-            if (dup != null) {
-                int duplicateValue = values[dup[0] - 1];
-
-                result.addError(
-                        "COL " + (c + 1)
-                        + " #" + duplicateValue
-                        + " [" + dup[0] + "," + dup[1] + "]"
-                );
+        for (int digit = 1; digit <= 9; digit++) {
+            if (count[digit] > 1) {
+                result.addError("COL " + (index + 1) + " #" + digit + " [" + positions[digit] + "]");
             }
         }
     }

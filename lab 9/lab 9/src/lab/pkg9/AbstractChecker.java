@@ -8,7 +8,7 @@ package lab.pkg9;
  *
  * @author Lenovo
  */
-//kk
+
 public abstract class AbstractChecker implements Runnable {
 
     protected int[][] board;

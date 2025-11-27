@@ -1,4 +1,5 @@
 package lab.pkg9;
+
 public class ColumnChecker extends AbstractChecker {
 
     public ColumnChecker(int[][] board, DuplicateResult result) {
@@ -22,9 +23,9 @@ public class ColumnChecker extends AbstractChecker {
                 int duplicateValue = values[dup[0] - 1];
 
                 result.addError(
-                    "COL " + (c + 1) +
-                    " #" + duplicateValue +
-                    " [" + dup[0] + "," + dup[1] + "]"
+                        "COL " + (c + 1)
+                        + " #" + duplicateValue
+                        + " [" + dup[0] + "," + dup[1] + "]"
                 );
             }
         }

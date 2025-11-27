@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class BoardReader {
- 
+
     public static int[][] read(String path) throws Exception {
         int[][] board = new int[9][9];
         BufferedReader br = new BufferedReader(new FileReader(path));

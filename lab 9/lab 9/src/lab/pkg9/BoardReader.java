@@ -3,8 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class BoardReader {
-
-    // Reads a 9x9 CSV file, values 1–9 (no sanitization needed as per lab)
+ 
     public static int[][] read(String path) throws Exception {
         int[][] board = new int[9][9];
         BufferedReader br = new BufferedReader(new FileReader(path));

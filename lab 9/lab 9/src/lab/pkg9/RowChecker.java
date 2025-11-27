@@ -1,4 +1,5 @@
 package lab.pkg9;
+
 public class RowChecker extends AbstractChecker {
 
     public RowChecker(int[][] board, DuplicateResult result) {
@@ -22,9 +23,9 @@ public class RowChecker extends AbstractChecker {
                 int duplicateValue = values[dup[0] - 1];
 
                 result.addError(
-                    "ROW " + (r + 1) +
-                    " #" + duplicateValue +
-                    " [" + dup[0] + "," + dup[1] + "]"
+                        "ROW " + (r + 1)
+                        + " #" + duplicateValue
+                        + " [" + dup[0] + "," + dup[1] + "]"
                 );
             }
         }

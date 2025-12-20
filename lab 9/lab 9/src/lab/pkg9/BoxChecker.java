@@ -21,7 +21,7 @@ public class BoxChecker extends AbstractChecker {
                 if (v == 0) {
                     pos++;
                     continue;
-                } // IMPORTANT
+                }
                 count[v]++;
                 if (positions[v] == null) {
                     positions[v] = new StringBuilder();

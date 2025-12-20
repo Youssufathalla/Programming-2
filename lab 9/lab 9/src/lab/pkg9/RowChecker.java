@@ -14,7 +14,7 @@ public class RowChecker extends AbstractChecker {
         for (int col = 0; col < 9; col++) {
             int v = board[index][col];
             if (v == 0) {
-                continue;   // IMPORTANT
+                continue;   
             }
             count[v]++;
             if (positions[v] == null) {

@@ -1,4 +1,4 @@
-package lab.pkg9;
+package lab10;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class DuplicateResult {
     private final List<String> errors = new ArrayList<>();
     private boolean valid = true;
 
-    public synchronized void addError(String s) {
+    public void addError(String s) {
         errors.add(s);
         valid = false;
     }

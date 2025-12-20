@@ -12,7 +12,7 @@ public class Verifier {
 
         DuplicateResult result = new DuplicateResult();
 
-        // sequential only (Lab 10)
+        
         for (int i = 0; i < 9; i++) {
             new RowChecker(board, result, i).run();
             new ColumnChecker(board, result, i).run();
@@ -23,7 +23,7 @@ public class Verifier {
             return GameState.INVALID;
         }
 
-        // detect incomplete
+        
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == 0) {

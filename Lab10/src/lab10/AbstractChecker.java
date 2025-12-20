@@ -1,4 +1,4 @@
-package lab.pkg9;
+package lab10;
 
 public abstract class AbstractChecker implements Runnable {
 

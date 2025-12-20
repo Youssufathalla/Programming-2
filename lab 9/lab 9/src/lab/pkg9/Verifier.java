@@ -8,11 +8,10 @@ public class Verifier {
         this.board = board;
     }
 
-    public GameState run() {
+    public String run() {
 
         DuplicateResult result = new DuplicateResult();
 
-        
         for (int i = 0; i < 9; i++) {
             new RowChecker(board, result, i).run();
             new ColumnChecker(board, result, i).run();
@@ -23,7 +22,6 @@ public class Verifier {
             return GameState.INVALID;
         }
 
-        
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == 0) {

@@ -12,6 +12,6 @@ public class Main {
         int[][] board = BoardReader.read(args[0]);
         Verifier verifier = new Verifier(board);
 
-        System.out.println(verifier.run());
+        System.out.println(verifier.run()); 
     }
 }

@@ -1,4 +1,5 @@
-package lab.pkg9;
+package lab10;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,12 +17,13 @@ public class RandomPairs {
     }
 
     /**
-     * Generate n distinct random pairs (x, y) where 0 <= x <= 8 and 0 <= y <= 8.
+     * Generate n distinct random pairs (x, y) where 0 <= x <= 8 and 0 <= y <=
+     * 8.
      */
     public List<int[]> generateDistinctPairs(int n) {
         if (n < 0 || n > MAX_UNIQUE_PAIRS) {
             throw new IllegalArgumentException(
-                "n must be between 0 and " + MAX_UNIQUE_PAIRS + " (inclusive)"
+                    "n must be between 0 and " + MAX_UNIQUE_PAIRS + " (inclusive)"
             );
         }
 
@@ -35,7 +37,7 @@ public class RandomPairs {
             // Encode pair (x, y) as a single int to track uniqueness
             int key = x * (MAX_COORD + 1) + y;
             if (used.add(key)) {
-                result.add(new int[] { x, y });
+                result.add(new int[]{x, y});
             }
         }
 

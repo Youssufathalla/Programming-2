@@ -23,7 +23,7 @@ public class GameStorageManager {
     }
 
     private void saveBoard(int[][] board, String difficulty) throws IOException {
-        String filename = difficulty.toLowerCase() + "_" + System.currentTimeMillis() + ".csv"; // Save with difficulty as string
+        String filename = difficulty.toLowerCase() + "_" + System.currentTimeMillis() + ".csv"; 
         Path filePath = Paths.get(filename);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {

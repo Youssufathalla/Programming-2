@@ -18,9 +18,17 @@ public class BoxChecker extends AbstractChecker {
         for (int r = startRow; r < startRow + 3; r++) {
             for (int c = startCol; c < startCol + 3; c++) {
                 int v = board[r][c];
+                if (v == 0) {
+                    pos++;
+                    continue;
+                } // IMPORTANT
                 count[v]++;
-                if (positions[v] == null) positions[v] = new StringBuilder();
-                if (positions[v].length() > 0) positions[v].append(",");
+                if (positions[v] == null) {
+                    positions[v] = new StringBuilder();
+                }
+                if (positions[v].length() > 0) {
+                    positions[v].append(",");
+                }
                 positions[v].append(pos);
                 pos++;
             }
@@ -28,7 +36,10 @@ public class BoxChecker extends AbstractChecker {
 
         for (int digit = 1; digit <= 9; digit++) {
             if (count[digit] > 1) {
-                result.addError("BOX " + (index + 1) + " #" + digit + " [" + positions[digit] + "]");
+                result.addError(
+                        "BOX " + (index + 1) + " #" + digit
+                        + " [" + positions[digit] + "]"
+                );
             }
         }
     }

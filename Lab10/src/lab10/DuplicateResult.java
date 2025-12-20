@@ -8,7 +8,7 @@ public class DuplicateResult {
     private final List<String> errors = new ArrayList<>();
     private boolean valid = true;
 
-    public void addError(String s) {
+    public synchronized void addError(String s) {
         errors.add(s);
         valid = false;
     }

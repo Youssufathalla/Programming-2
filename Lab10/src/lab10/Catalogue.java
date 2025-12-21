@@ -24,7 +24,7 @@ public class Catalogue {
     }
 
     public boolean hasGamesInDifficultyFiles() {
-        return isValidGameFile("easy.txt") && isValidGameFile("medium.txt") && isValidGameFile("hard.txt");
+        return isValidGameFile("easy.txt") || isValidGameFile("medium.txt") || isValidGameFile("hard.txt");
     }
 
     private boolean isValidGameFile(String fileName) {

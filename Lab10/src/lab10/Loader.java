@@ -32,23 +32,21 @@ public class Loader {
     }
 
     private Game loadGameBasedOnDifficulty() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please choose a difficulty (Easy, Medium, Hard): ");
-        String difficulty = scanner.nextLine().trim().toLowerCase();
+        String difficulty = getDifficultyFromFile();
+        
+        if (difficulty == null) {
+            System.out.println("No valid difficulty files found. Defaulting to Easy.");
+            difficulty = "easy";  // Default to easy if no files are found
+        }
+        
+        String fileName = difficulty + ".txt";
+        File gameFile = new File(fileName);
 
-        String fileName = "";
-        if ("easy".equals(difficulty)) {
-            fileName = "easy.txt";
-        } else if ("medium".equals(difficulty)) {
-            fileName = "medium.txt";
-        } else if ("hard".equals(difficulty)) {
-            fileName = "hard.txt";
-        } else {
-            System.out.println("Invalid difficulty choice. Defaulting to Easy.");
-            fileName = "easy.txt";
+        if (!gameFile.exists()) {
+            System.out.println("Game file for " + difficulty + " is missing.");
+            return null;
         }
 
-        File gameFile = new File(fileName);
         return loadGameFromFile(gameFile);
     }
 
@@ -70,6 +68,22 @@ public class Loader {
         return content.toString();
     }
 
+    private String getDifficultyFromFile() {
+        File easyFile = new File("easy.txt");
+        File mediumFile = new File("medium.txt");
+        File hardFile = new File("hard.txt");
+
+        if (easyFile.exists()) {
+            return "easy";
+        } else if (mediumFile.exists()) {
+            return "medium";
+        } else if (hardFile.exists()) {
+            return "hard";
+        } else {
+            return null;
+        }
+    }
+
     private String askForSolvedSudokuPath() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please provide the path to a solved Sudoku board file: ");
@@ -82,7 +96,7 @@ public class Loader {
     }
 
     private Game loadNewGame() throws Exception {
-        String solvedGamePath = askForSolvedSudokuPath(); 
-        return generateGamesFromSolved(solvedGamePath); 
+        String solvedGamePath = askForSolvedSudokuPath();
+        return generateGamesFromSolved(solvedGamePath);
     }
 }

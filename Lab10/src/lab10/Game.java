@@ -1,4 +1,4 @@
-package lab.pkg9;
+package lab10;
 
 public class Game {
 

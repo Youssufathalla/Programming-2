@@ -40,10 +40,25 @@ public class Difficulty extends javax.swing.JFrame {
         jLabel1.setText("Please Select A Difficulty");
 
         EasyButton.setText("Easy");
+        EasyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EasyButtonActionPerformed(evt);
+            }
+        });
 
         MediumButton.setText("Medium");
+        MediumButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MediumButtonActionPerformed(evt);
+            }
+        });
 
         HardButton.setText("Hard");
+        HardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HardButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,6 +100,21 @@ public class Difficulty extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EasyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EasyButtonActionPerformed
+        this.dispose();
+        new NewGameFrame().setVisible(true);
+    }//GEN-LAST:event_EasyButtonActionPerformed
+
+    private void MediumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediumButtonActionPerformed
+        this.dispose();
+        new NewGameFrame().setVisible(true);
+    }//GEN-LAST:event_MediumButtonActionPerformed
+
+    private void HardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HardButtonActionPerformed
+        this.dispose();
+        new NewGameFrame().setVisible(true);
+    }//GEN-LAST:event_HardButtonActionPerformed
 
     /**
      * @param args the command line arguments

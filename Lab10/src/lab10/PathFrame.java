@@ -99,7 +99,7 @@ public class PathFrame extends javax.swing.JFrame {
 
     private void ContinueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueButtonActionPerformed
         this.dispose();
-        new StarterFrame().setVisible(true);
+        new Difficulty().setVisible(true);
     }//GEN-LAST:event_ContinueButtonActionPerformed
 
     /**

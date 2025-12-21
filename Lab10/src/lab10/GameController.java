@@ -12,7 +12,7 @@ public class GameController {
 
     public void makeMove(int x, int y, int val) {
         try {
-            game.makeMove(x, y, val);  
+            game.makeMove(x, y, val);
             System.out.println("Move made.");
         } catch (IOException e) {
             System.err.println("Error making move: " + e.getMessage());
@@ -21,10 +21,18 @@ public class GameController {
 
     public void undoMove() {
         try {
-            game.undo();  
+            game.undo();
             System.out.println("Move undone.");
         } catch (IOException e) {
             System.err.println("Error undoing move: " + e.getMessage());
+        }
+    }
+
+    public void solveSudoku() {
+        if (game.solve()) {
+            System.out.println("Puzzle solved!");
+        } else {
+            System.out.println("No solution exists.");
         }
     }
 }

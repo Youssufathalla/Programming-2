@@ -6,7 +6,7 @@ public class BoxChecker extends AbstractChecker {
         super(board, result, boxIndex);
     }
 
-    @Override
+    
     public void run() {
         int[] count = new int[10];
         StringBuilder[] positions = new StringBuilder[10];

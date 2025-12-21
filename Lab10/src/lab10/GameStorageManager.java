@@ -1,11 +1,8 @@
 package lab10;
 
-
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,18 +12,16 @@ public class GameStorageManager {
     private static final String CURRENT_GAME_FILE = "current.csv";
 
     public void saveGame(int[][] board, String difficulty) throws IOException {
-        if (difficulty != null) {
-            saveBoard(board, difficulty);
-        } else {
+        if (hasCurrentGame()) {
             saveCurrentGame(board);
+        } else {
+            saveBoard(board, difficulty);
         }
     }
 
     private void saveBoard(int[][] board, String difficulty) throws IOException {
         String filename = difficulty.toLowerCase() + "_" + System.currentTimeMillis() + ".csv"; 
-        Path filePath = Paths.get(filename);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
                     if (j > 0) writer.write(",");
@@ -47,51 +42,45 @@ public class GameStorageManager {
             sb.append("\n");
         }
 
-        Files.write(Paths.get(CURRENT_GAME_FILE), sb.toString().getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-    }
-
-    public void moveCurrentGameToFile(String difficulty) throws IOException {
-        if (Files.exists(Paths.get(CURRENT_GAME_FILE))) {
-            int[][] board = readCsv(CURRENT_GAME_FILE);
-            saveBoard(board, difficulty);
-            Files.delete(Paths.get(CURRENT_GAME_FILE));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CURRENT_GAME_FILE))) {
+            writer.write(sb.toString());
         }
-    }
-
-    private int[][] readCsv(String fileName) throws IOException {
-        return BoardReader.read(fileName);
     }
 
     public boolean hasCurrentGame() {
-        return Files.exists(Paths.get(CURRENT_GAME_FILE));
+        return new java.io.File(CURRENT_GAME_FILE).exists();  
     }
 
     public void deleteCurrentGame() throws IOException {
-        Files.deleteIfExists(Paths.get(CURRENT_GAME_FILE));
+        new java.io.File(CURRENT_GAME_FILE).delete();  
     }
 
-    public Game loadGame(String difficulty) throws IOException {
-        List<String> games = listGamesForDifficulty(difficulty);
-        if (games.isEmpty()) {
-            throw new IOException("No saved games for " + difficulty);
-        }
-
-        String selectedGame = games.get(new Random().nextInt(games.size()));
-        int[][] board = readCsv(selectedGame);
-
-        return new Game(board, difficulty);
-    }
-
-    private List<String> listGamesForDifficulty(String difficulty) throws IOException {
+    public Game loadGame(String difficulty) throws Exception {
         List<String> games = new ArrayList<>();
         String prefix = difficulty.toLowerCase();  
 
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get("."), prefix + "_*.csv")) {
-            for (Path entry : stream) {
-                games.add(entry.toString());
+        for (String fileName : new java.io.File(".").list()) {
+            if (fileName.startsWith(prefix) && fileName.endsWith(".csv")) {
+                games.add(fileName);  
             }
         }
 
-        return games;
+        if (games.isEmpty()) {
+            throw new IOException("No saved games for " + difficulty);  
+        }
+
+        String selectedGame = games.get(new Random().nextInt(games.size()));  
+        int[][] board = readCsv(selectedGame);  
+
+        return new Game(board, difficulty);  
+    }
+
+    private int[][] readCsv(String fileName) throws Exception {
+        return BoardReader.read(fileName);  
+    }
+
+    public void startNewGame(int[][] newBoard, String difficulty) throws IOException {
+        deleteCurrentGame();  
+        saveBoard(newBoard, difficulty);  
     }
 }

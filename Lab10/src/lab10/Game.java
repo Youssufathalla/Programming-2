@@ -2,6 +2,8 @@ package lab10;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
@@ -92,5 +94,40 @@ public class Game {
             }
         }
         Files.move(tempFile, logFilePath, StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public boolean solve() {
+        List<int[]> emptyCells = findEmptyCells();
+        if (emptyCells.size() != 5) {
+            System.out.println("Puzzle doesn't have exactly 5 empty cells.");
+            return false;
+        }
+
+        PermutationsIterator iterator = new PermutationsIterator();
+        BoardFlyweight flyweight = new BoardFlyweight(board);
+
+        while (iterator.hasNext()) {
+            int[] combination = iterator.next();
+
+            if (flyweight.isValidCombination(combination, emptyCells)) {
+                System.out.println("Solution found!");
+                return true;
+            }
+        }
+
+        System.out.println("No valid solution found.");
+        return false;
+    }
+
+    private List<int[]> findEmptyCells() {
+        List<int[]> emptyCells = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == 0) {
+                    emptyCells.add(new int[]{i, j});
+                }
+            }
+        }
+        return emptyCells;
     }
 }

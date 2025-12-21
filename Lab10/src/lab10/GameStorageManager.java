@@ -3,13 +3,16 @@ package lab10;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class GameStorageManager {
 
-    private static final String CURRENT_GAME_FILE = "current.csv";
+    private static final String INCOMPLETE_FOLDER = "incomplete";
+    private static final String CURRENT_GAME_FILE = INCOMPLETE_FOLDER + "/current.csv";
+    private static final String LOG_FILE = INCOMPLETE_FOLDER + "/log.txt";
 
     public void saveGame(int[][] board, String difficulty) throws IOException {
         if (hasCurrentGame()) {
@@ -20,7 +23,9 @@ public class GameStorageManager {
     }
 
     private void saveBoard(int[][] board, String difficulty) throws IOException {
-        String filename = difficulty.toLowerCase() + "_" + System.currentTimeMillis() + ".csv"; 
+        String filename = difficulty.toLowerCase() + "/" + difficulty.toLowerCase() + "_" + System.currentTimeMillis() + ".csv";
+        Files.createDirectories(Paths.get(difficulty.toLowerCase()));
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -42,45 +47,48 @@ public class GameStorageManager {
             sb.append("\n");
         }
 
+        Files.createDirectories(Paths.get(INCOMPLETE_FOLDER));
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CURRENT_GAME_FILE))) {
             writer.write(sb.toString());
         }
     }
 
     public boolean hasCurrentGame() {
-        return new java.io.File(CURRENT_GAME_FILE).exists();  
+        return new java.io.File(CURRENT_GAME_FILE).exists();
     }
 
     public void deleteCurrentGame() throws IOException {
-        new java.io.File(CURRENT_GAME_FILE).delete();  
+        new java.io.File(CURRENT_GAME_FILE).delete();
     }
 
     public Game loadGame(String difficulty) throws Exception {
         List<String> games = new ArrayList<>();
-        String prefix = difficulty.toLowerCase();  
+        String prefix = difficulty.toLowerCase();
 
         for (String fileName : new java.io.File(".").list()) {
             if (fileName.startsWith(prefix) && fileName.endsWith(".csv")) {
-                games.add(fileName);  
+                games.add(fileName);
             }
         }
 
         if (games.isEmpty()) {
-            throw new IOException("No saved games for " + difficulty);  
+            throw new IOException("No saved games for " + difficulty);
         }
 
-        String selectedGame = games.get(new Random().nextInt(games.size()));  
-        int[][] board = readCsv(selectedGame);  
+        String selectedGame = games.get(new Random().nextInt(games.size()));
+        int[][] board = readCsv(selectedGame);
 
-        return new Game(board, difficulty);  
+        return new Game(board, difficulty);
     }
 
     private int[][] readCsv(String fileName) throws Exception {
-        return BoardReader.read(fileName);  
+        return BoardReader.read(fileName);
     }
 
     public void startNewGame(int[][] newBoard, String difficulty) throws IOException {
-        deleteCurrentGame();  
-        saveBoard(newBoard, difficulty);  
+        deleteCurrentGame();
+        saveBoard(newBoard, difficulty);
     }
+
+  
 }

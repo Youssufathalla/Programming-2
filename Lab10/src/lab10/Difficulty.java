@@ -103,17 +103,17 @@ public class Difficulty extends javax.swing.JFrame {
 
     private void EasyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EasyButtonActionPerformed
         this.dispose();
-        new NewGameFrame().setVisible(true);
+        new GameFrame().setVisible(true);
     }//GEN-LAST:event_EasyButtonActionPerformed
 
     private void MediumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediumButtonActionPerformed
         this.dispose();
-        new NewGameFrame().setVisible(true);
+        new GameFrame().setVisible(true);
     }//GEN-LAST:event_MediumButtonActionPerformed
 
     private void HardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HardButtonActionPerformed
         this.dispose();
-        new NewGameFrame().setVisible(true);
+        new GameFrame().setVisible(true);
     }//GEN-LAST:event_HardButtonActionPerformed
 
     /**

@@ -1,26 +1,51 @@
+package lab10;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class Catalog {
-    private boolean current;  // True if there is a game in progress, False otherwise
-    private boolean allModesExist;  // True if there is at least one game available for each difficulty, False otherwise
 
-    // Constructor to initialize the game state
-    public Catalog(boolean current, boolean allModesExist) {
-        this.current = current;
-        this.allModesExist = allModesExist;
-    }
-
-    // Check if there is an unfinished game
     public boolean hasUnfinishedGame() {
-        return current;  // Return whether the game is in progress
+        File currentGameFile = new File("current_game.txt");
+
+        if (currentGameFile.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(currentGameFile))) {
+                String line = br.readLine();
+                if (line != null && line.equals("INCOMPLETE")) {
+                    return true;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
-    // Check if there is at least one game available for each difficulty
     public boolean hasGamesInDifficultyFiles() {
-        return allModesExist;  // Return whether all modes exist (easy, medium, and hard)
+        return isValidGameFile("easy.txt") || isValidGameFile("medium.txt") || isValidGameFile("hard.txt");
     }
 
-    // Method to update the game state
-    public void setGameState(boolean current, boolean allModesExist) {
-        this.current = current;
-        this.allModesExist = allModesExist;
+    private boolean isValidGameFile(String fileName) {
+        File gameFile = new File(fileName);
+
+        if (!gameFile.exists()) {
+            return false;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(gameFile))) {
+            String line;
+            boolean hasContent = false;
+            while ((line = br.readLine()) != null) {
+                hasContent = true;
+                break;
+            }
+
+            return hasContent;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

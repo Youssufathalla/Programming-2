@@ -1,24 +1,39 @@
 package lab10;
 
+import java.io.IOException;
 
 public class GameController {
 
     private final Game game;
+    private final GameStorageManager gameStorageManager;
 
-    public GameController(Game game) {
+    public GameController(Game game, GameStorageManager gameStorageManager) {
         this.game = game;
+        this.gameStorageManager = gameStorageManager;
     }
 
-    // Call this method when the user wants to undo the last move
     public void undoMove() {
-        game.undo();  // Undo the last move
+        game.undo();
         System.out.println("Move undone.");
+
+        try {
+            gameStorageManager.saveGame(game.getBoard(), game.getDifficulty());
+            System.out.println("Game state saved after undo.");
+        } catch (IOException e) {
+            System.err.println("Error saving game state after undo: " + e.getMessage());
+        }
     }
 
-    // Call this method when the user makes a valid move
     public void makeMove(int row, int col, int value) {
-        game.saveState();  // Save the state before making the move
-        game.getBoard()[row][col] = value;  // Apply the move
+        game.saveState();
+        game.getBoard()[row][col] = value;
         System.out.println("Move made.");
+
+        try {
+            gameStorageManager.saveGame(game.getBoard(), game.getDifficulty());
+            System.out.println("Game state saved after move.");
+        } catch (IOException e) {
+            System.err.println("Error saving game state after move: " + e.getMessage());
+        }
     }
 }

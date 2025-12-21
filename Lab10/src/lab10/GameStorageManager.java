@@ -1,6 +1,8 @@
 package lab10;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
@@ -88,6 +90,22 @@ public class GameStorageManager {
     public void startNewGame(int[][] newBoard, String difficulty) throws IOException {
         deleteCurrentGame();
         saveBoard(newBoard, difficulty);
+    }
+    
+    public int[][] loadSolvedSudoku(String filePath) throws IOException {
+        int[][] board = new int[9][9];
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            int row = 0;
+            while ((line = reader.readLine()) != null && row < 9) {
+                String[] values = line.split(",");
+                for (int col = 0; col < 9; col++) {
+                    board[row][col] = Integer.parseInt(values[col].trim());
+                }
+                row++;
+            }
+        }
+        return board;
     }
 
   

@@ -5,35 +5,26 @@ import java.io.IOException;
 public class GameController {
 
     private final Game game;
-    private final GameStorageManager gameStorageManager;
 
-    public GameController(Game game, GameStorageManager gameStorageManager) {
+    public GameController(Game game) {
         this.game = game;
-        this.gameStorageManager = gameStorageManager;
     }
 
-    public void undoMove() {
-        game.undo();
-        System.out.println("Move undone.");
-
+    public void makeMove(int x, int y, int val) {
         try {
-            gameStorageManager.saveGame(game.getBoard(), game.getDifficulty());
-            System.out.println("Game state saved after undo.");
+            game.makeMove(x, y, val);  
+            System.out.println("Move made.");
         } catch (IOException e) {
-            System.err.println("Error saving game state after undo: " + e.getMessage());
+            System.err.println("Error making move: " + e.getMessage());
         }
     }
 
-    public void makeMove(int row, int col, int value) {
-        game.saveState();
-        game.getBoard()[row][col] = value;
-        System.out.println("Move made.");
-
+    public void undoMove() {
         try {
-            gameStorageManager.saveGame(game.getBoard(), game.getDifficulty());
-            System.out.println("Game state saved after move.");
+            game.undo();  
+            System.out.println("Move undone.");
         } catch (IOException e) {
-            System.err.println("Error saving game state after move: " + e.getMessage());
+            System.err.println("Error undoing move: " + e.getMessage());
         }
     }
 }

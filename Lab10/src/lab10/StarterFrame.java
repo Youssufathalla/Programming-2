@@ -95,7 +95,7 @@ public class StarterFrame extends javax.swing.JFrame {
 
     private void CurrentGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentGameButtonActionPerformed
         this.dispose();
-        new CurrentGameFrame().setVisible(true);
+        new GameFrame().setVisible(true);
     }//GEN-LAST:event_CurrentGameButtonActionPerformed
 
     /**

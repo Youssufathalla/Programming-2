@@ -1,6 +1,8 @@
-import java.io.BufferedReader;
+package lab10;
+
 import java.io.File;
 import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Catalogue {
@@ -22,12 +24,12 @@ public class Catalogue {
     }
 
     public boolean hasGamesInDifficultyFiles() {
-        return isValidGameFile("easy.txt") && isValidGameFile("medium.txt") && isValidGameFile("hard.txt");
+        return isValidGameFile("easy.txt") || isValidGameFile("medium.txt") || isValidGameFile("hard.txt");
     }
 
     private boolean isValidGameFile(String fileName) {
         File gameFile = new File(fileName);
-        
+
         if (!gameFile.exists()) {
             return false;
         }

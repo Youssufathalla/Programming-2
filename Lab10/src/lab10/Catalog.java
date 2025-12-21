@@ -7,15 +7,29 @@ import java.io.IOException;
 
 public class Catalog {
 
+    private boolean current;
+    private boolean allModesExist;
+
+    public Catalog() {
+        this.current = checkUnfinishedGame();
+        this.allModesExist = checkGamesInDifficultyFiles();
+    }
+
     public boolean hasUnfinishedGame() {
+        return current;
+    }
+
+    public boolean hasGamesInDifficultyFiles() {
+        return allModesExist;
+    }
+
+    private boolean checkUnfinishedGame() {
         File currentGameFile = new File("current_game.txt");
 
         if (currentGameFile.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(currentGameFile))) {
                 String line = br.readLine();
-                if (line != null && line.equals("INCOMPLETE")) {
-                    return true;
-                }
+                return line != null && line.equals("INCOMPLETE");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -23,8 +37,8 @@ public class Catalog {
         return false;
     }
 
-    public boolean hasGamesInDifficultyFiles() {
-        return isValidGameFile("easy.txt") || isValidGameFile("medium.txt") || isValidGameFile("hard.txt");
+    private boolean checkGamesInDifficultyFiles() {
+        return isValidGameFile("easy.txt") && isValidGameFile("medium.txt") && isValidGameFile("hard.txt");
     }
 
     private boolean isValidGameFile(String fileName) {
@@ -36,16 +50,14 @@ public class Catalog {
 
         try (BufferedReader br = new BufferedReader(new FileReader(gameFile))) {
             String line;
-            boolean hasContent = false;
             while ((line = br.readLine()) != null) {
-                hasContent = true;
-                break;
+                if (!line.trim().isEmpty()) {
+                    return true;
+                }
             }
-
-            return hasContent;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 }

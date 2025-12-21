@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameStorageManager {
+public class Loader {
 
     private static final String INCOMPLETE_FOLDER = "incomplete";
     private static final String CURRENT_GAME_FILE = INCOMPLETE_FOLDER + "/current.csv";

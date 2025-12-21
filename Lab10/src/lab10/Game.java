@@ -37,12 +37,13 @@ public class Game {
         int prev = board[x][y];
 
         board[x][y] = val;
-
-        logMove(x, y, val, prev);
+UserAction userAction = new UserAction(x, y, val, prev);
+        logUserAction(userAction);
     }
 
-    private void logMove(int x, int y, int val, int prev) throws IOException {
-        String logEntry = String.format("(%d, %d, %d, %d)\n", x, y, val, prev);
+    private void logUserAction(UserAction userAction) throws IOException {
+        
+        String logEntry = String.format("(%d, %d, %d, %d)\n", userAction.getX(), userAction.getY(), userAction.getCurrent(), userAction.getPrevious());
 
         Files.createDirectories(Paths.get("incomplete"));
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFilePath.toFile(), true))) {

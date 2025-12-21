@@ -6,7 +6,7 @@ public class ColumnChecker extends AbstractChecker {
         super(board, result, colIndex);
     }
 
-    @Override
+    
     public void run() {
         int[] count = new int[10];
         StringBuilder[] positions = new StringBuilder[10];

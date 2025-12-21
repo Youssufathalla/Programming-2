@@ -1,6 +1,6 @@
 package lab10;
 
-public abstract class AbstractChecker implements Runnable {
+public abstract class AbstractChecker  {
 
     protected final int[][] board;
     protected final DuplicateResult result;
@@ -12,6 +12,5 @@ public abstract class AbstractChecker implements Runnable {
         this.index = index;
     }
 
-    @Override
-    public abstract void run();
+    
 }

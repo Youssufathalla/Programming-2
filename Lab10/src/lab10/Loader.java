@@ -1,7 +1,10 @@
+package lab10;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Loader {
 
@@ -17,7 +20,7 @@ public class Loader {
 
     private Game loadUnfinishedGame() throws IOException {
         File currentGameFile = new File("current_game.txt");
-        
+
         try (BufferedReader br = new BufferedReader(new FileReader(currentGameFile))) {
             StringBuilder boardContent = new StringBuilder();
             String line;
@@ -28,14 +31,25 @@ public class Loader {
         }
     }
 
-    private Game loadGameBasedOnDifficulty() {
-        File easyFile = new File("easy.txt");
-        return loadGameFromFile(easyFile);
-    }
+    private Game loadGameBasedOnDifficulty() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please choose a difficulty (Easy, Medium, Hard): ");
+        String difficulty = scanner.nextLine().trim().toLowerCase();
 
-    private Game loadNewGame() throws Exception {
-        String solvedGamePath = askForSolvedSudokuPath();
-        return generateGamesFromSolved(solvedGamePath);
+        String fileName = "";
+        if ("easy".equals(difficulty)) {
+            fileName = "easy.txt";
+        } else if ("medium".equals(difficulty)) {
+            fileName = "medium.txt";
+        } else if ("hard".equals(difficulty)) {
+            fileName = "hard.txt";
+        } else {
+            System.out.println("Invalid difficulty choice. Defaulting to Easy.");
+            fileName = "easy.txt";
+        }
+
+        File gameFile = new File(fileName);
+        return loadGameFromFile(gameFile);
     }
 
     private Game loadGameFromFile(File gameFile) {
@@ -57,11 +71,18 @@ public class Loader {
     }
 
     private String askForSolvedSudokuPath() {
-        return "path_to_solved_sudoku.txt";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please provide the path to a solved Sudoku board file: ");
+        return scanner.nextLine().trim();
     }
 
     private Game generateGamesFromSolved(String solvedGamePath) throws Exception {
         String solvedBoard = readFile(new File(solvedGamePath));
         return new Game(solvedBoard);
+    }
+
+    private Game loadNewGame() throws Exception {
+        String solvedGamePath = askForSolvedSudokuPath(); 
+        return generateGamesFromSolved(solvedGamePath); 
     }
 }

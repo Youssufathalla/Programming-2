@@ -1,6 +1,8 @@
-import java.io.BufferedReader;
+package lab10;
+
 import java.io.File;
 import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Catalogue {
@@ -27,7 +29,7 @@ public class Catalogue {
 
     private boolean isValidGameFile(String fileName) {
         File gameFile = new File(fileName);
-        
+
         if (!gameFile.exists()) {
             return false;
         }

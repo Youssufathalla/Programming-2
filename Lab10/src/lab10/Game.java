@@ -1,3 +1,5 @@
+package lab10;
+
 public class Game {
 
     private final String boardContent;

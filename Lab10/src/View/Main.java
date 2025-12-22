@@ -1,9 +1,12 @@
-package Model;
+package View;
 import Controller.GameController;
 import Controller.Controllable;
+import Model.BoardReader;
 import View.GameView;
 import View.Viewable;
 import Model.Catalog;
+import Model.Catalog;
+import Model.Verifier;
 
 public class Main {
 

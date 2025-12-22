@@ -10,7 +10,16 @@ import Model.*;
 import View.UserAction;
 
 public class GameController implements Controllable {
+private final Loader loader;
 
+    public GameController(Loader loader) {
+        this.loader = loader;
+    }
+
+    public void completeCurrentGame() throws IOException {
+        loader.deleteCurrentGame();
+        loader.clearLog();
+    }
     private final Random rng = new Random();
 
     @Override

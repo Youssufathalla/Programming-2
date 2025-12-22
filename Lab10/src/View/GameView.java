@@ -13,6 +13,9 @@ public class GameView implements Viewable {
     }
 
     @Override
+      public void completeCurrentGame() throws IOException {
+        controller.completeCurrentGame();
+    }
     public Catalog getCatalog() {
         boolean[] c = controller.getCatalog();
         return new Catalog(c[0], c[1]);

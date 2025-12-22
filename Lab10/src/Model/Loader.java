@@ -62,6 +62,10 @@ public class Loader {
     public void deleteCurrentGame() throws IOException {
         new java.io.File(CURRENT_GAME_FILE).delete();
     }
+    
+     public void clearLog() throws IOException {
+        new java.io.File(LOG_FILE).delete();
+    }
 
     public Game loadGame(String difficulty) throws Exception {
         List<String> games = new ArrayList<>();

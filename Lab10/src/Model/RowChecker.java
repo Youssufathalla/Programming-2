@@ -1,7 +1,5 @@
 package Model;
 
-import Model.AbstractChecker;
-
 public class RowChecker extends AbstractChecker {
 
     public RowChecker(int[][] board, DuplicateResult result, int rowIndex) {

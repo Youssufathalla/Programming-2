@@ -1,7 +1,5 @@
 package Model;
 
-import Model.AbstractChecker;
-
 public class BoxChecker extends AbstractChecker {
 
     public BoxChecker(int[][] board, DuplicateResult result, int boxIndex) {

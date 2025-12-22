@@ -49,7 +49,7 @@ public class BoardReader {
                 }
 
 
-                if (val < 1 || val > 9) {
+                if (val < 0 || val > 9) {
                     br.close();
                     throw new Exception("INVALID INPUT");
                 }

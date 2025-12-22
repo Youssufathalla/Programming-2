@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Loader;
 import java.io.IOException;
 import View.UserAction;
 
@@ -9,7 +10,7 @@ public class ControllerFacade implements Controllable {
     private final GameController controller;
 
     private ControllerFacade() {
-        controller = new GameController();
+        controller = new GameController(new Loader());
     }
 
     public static ControllerFacade getInstance() {
@@ -52,6 +53,11 @@ public class ControllerFacade implements Controllable {
     @Override
     public int[][] undo(int[][] board) throws IOException {
         return controller.undo(board);
+    }
+
+    @Override
+    public void completeCurrentGame() throws IOException {
+        controller.completeCurrentGame();
     }
 
 }

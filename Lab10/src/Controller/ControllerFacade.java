@@ -3,6 +3,9 @@ package Controller;
 import Model.Loader;
 import java.io.IOException;
 import View.UserAction;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class ControllerFacade implements Controllable {
 
@@ -19,6 +22,21 @@ public class ControllerFacade implements Controllable {
         }
         return instance;
     }
+public void saveCurrentGame(int[][] board) throws IOException {
+    new File("incomplete").mkdirs();
+
+    try (BufferedWriter w =
+         new BufferedWriter(new FileWriter("incomplete/current.csv"))) {
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (j > 0) w.write(",");
+                w.write(String.valueOf(board[i][j]));
+            }
+            w.newLine();
+        }
+    }
+}
 
     @Override
     public boolean[] getCatalog() {

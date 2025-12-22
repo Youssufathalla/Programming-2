@@ -87,17 +87,20 @@ private int countEmptyCells() {
         });
     }
 
-    private void cellEdited(int x, int y, int newValue) {
-        int prev = game.getBoard()[x][y];
-        game.getBoard()[x][y] = newValue;
-        SolverButton.setEnabled(countEmptyCells() == 5);
+   private void cellEdited(int x, int y, int newValue) {
+    int prev = game.getBoard()[x][y];
+    game.getBoard()[x][y] = newValue;
 
-        try {
-            view.logUserAction(x + "," + y + "," + newValue + "," + prev);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Failed to log move");
-        }
+    SolverButton.setEnabled(countEmptyCells() == 5);
+
+    try {
+        view.logUserAction(x + "," + y + "," + newValue + "," + prev);
+        view.saveCurrentGame(game);  
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Failed to save move");
     }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.

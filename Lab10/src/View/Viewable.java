@@ -23,4 +23,6 @@ public interface Viewable {
     void logUserAction(String userAction) throws IOException;
     void completeCurrentGame() throws IOException;
      void undo(Game game) throws IOException;
+     void saveCurrentGame(Game game) throws IOException;
+
 }

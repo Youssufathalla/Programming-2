@@ -20,4 +20,6 @@ public interface Controllable {
     void completeCurrentGame() throws IOException;
 
     int[][] undo(int[][] board) throws IOException;
+    void saveCurrentGame(int[][] game) throws IOException;
+
 }

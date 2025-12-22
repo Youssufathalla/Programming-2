@@ -32,6 +32,11 @@ public class GameView implements Viewable {
     public void driveGames(Game sourceGame) throws SolutionInvalidException {
         controller.driveGames(sourceGame.getDifficulty());
     }
+    @Override
+public void saveCurrentGame(Game game) throws IOException {
+    controller.saveCurrentGame(game.getBoard());
+}
+
 
     @Override
     public String verifyGame(Game game) {

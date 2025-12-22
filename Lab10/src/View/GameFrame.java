@@ -241,6 +241,7 @@ private int countEmptyCells() {
 
         try {
             view.completeCurrentGame();
+            new java.io.File(game.getDifficulty().toLowerCase()).listFiles(f -> f.getName().endsWith(".csv"))[new java.util.Random().nextInt(new java.io.File(game.getDifficulty().toLowerCase()).listFiles(f -> f.getName().endsWith(".csv")).length)].delete();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Failed to finalize game");
         }

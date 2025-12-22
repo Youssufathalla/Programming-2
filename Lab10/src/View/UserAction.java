@@ -1,4 +1,4 @@
-package Model;
+package View;
 public class UserAction {
     private int x;       
     private int y;         

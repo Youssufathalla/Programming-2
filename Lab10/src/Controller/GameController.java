@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 import Model.*;
-import Model.UserAction;
+import View.UserAction;
 
 public class GameController implements Controllable {
 

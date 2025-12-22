@@ -1,7 +1,7 @@
 package Controller;
 
 import java.io.IOException;
-import Model.UserAction;
+import View.UserAction;
 
 public interface Controllable {
 

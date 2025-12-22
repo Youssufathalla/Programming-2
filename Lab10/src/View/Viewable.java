@@ -1,13 +1,24 @@
 package View;
 
-import Model.Game;
+import java.io.IOException;
 import Model.Catalog;
+import Model.Game;
+import Model.DifficultyEnum;
+import Controller.NotFoundException;
+import Controller.SolutionInvalidException;
+import Controller.InvalidGame;
 
-interface Viewable {
+public interface Viewable {
+
     Catalog getCatalog();
-    Game getGame(String level) throws Exception;
-    void driveGames(Game sourceGame) throws Exception;
+
+    Game getGame(DifficultyEnum level) throws NotFoundException;
+
+    void driveGames(Game sourceGame) throws SolutionInvalidException;
+
     String verifyGame(Game game);
-    int[] solveGame(Game game) throws Exception;
-    void logUserAction(String userAction) throws Exception;
+
+    int[] solveGame(Game game) throws InvalidGame;
+
+    void logUserAction(String userAction) throws IOException;
 }

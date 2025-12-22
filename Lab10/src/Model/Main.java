@@ -1,10 +1,22 @@
 package Model;
+import Controller.GameController;
+import Controller.Controllable;
+import View.GameView;
+import View.Viewable;
+import Model.Catalog;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
 
         
+Controllable controller = new GameController();
+    Viewable view = new GameView(controller);
+
+    Catalog catalog = view.getCatalog();
+
+    System.out.println("Game in progress: " + catalog.hasUnfinishedGame());
+    System.out.println("All modes exist: " + catalog.hasGamesInDifficultyFiles());
 
         int[][] board = BoardReader.read(args[0]);
         Verifier verifier = new Verifier(board);

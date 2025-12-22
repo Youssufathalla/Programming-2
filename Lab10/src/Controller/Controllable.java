@@ -1,12 +1,19 @@
 package Controller;
 
+import java.io.IOException;
 import Model.UserAction;
 
-interface Controllable {
+public interface Controllable {
+
     boolean[] getCatalog();
-    int[][] getGame(char level) throws Exception;
-    void driveGames(String sourcePath) throws Exception;
+
+    int[][] getGame(char level) throws NotFoundException;
+
+    void driveGames(String sourcePath) throws SolutionInvalidException;
+
     boolean[][] verifyGame(int[][] game);
-    int[][] solveGame(int[][] game) throws Exception;
-    void logUserAction(UserAction userAction) throws Exception;
+
+    int[][] solveGame(int[][] game) throws InvalidGame;
+
+    void logUserAction(UserAction userAction) throws IOException;
 }

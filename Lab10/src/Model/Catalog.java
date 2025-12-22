@@ -15,6 +15,11 @@ public class Catalog {
         this.allModesExist = checkGamesInDifficultyFiles();
     }
 
+    public Catalog(boolean current, boolean allModesExist) {
+        this.current = current;
+        this.allModesExist = allModesExist;
+    }
+
     public boolean hasUnfinishedGame() {
         return current;
     }
@@ -24,40 +29,19 @@ public class Catalog {
     }
 
     private boolean checkUnfinishedGame() {
-        File currentGameFile = new File("current_game.txt");
-
-        if (currentGameFile.exists()) {
-            try (BufferedReader br = new BufferedReader(new FileReader(currentGameFile))) {
-                String line = br.readLine();
-                return line != null && line.equals("INCOMPLETE");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+        File f = new File("incomplete/current.csv");
+        return f.exists();
     }
 
     private boolean checkGamesInDifficultyFiles() {
-        return isValidGameFile("easy.txt") && isValidGameFile("medium.txt") && isValidGameFile("hard.txt");
+        return hasGame("easy") && hasGame("medium") && hasGame("hard");
     }
 
-    private boolean isValidGameFile(String fileName) {
-        File gameFile = new File(fileName);
+    private boolean hasGame(String folder) {
+        File dir = new File(folder);
+        if (!dir.exists() || !dir.isDirectory()) return false;
 
-        if (!gameFile.exists()) {
-            return false;
-        }
-
-        try (BufferedReader br = new BufferedReader(new FileReader(gameFile))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+        File[] files = dir.listFiles((d, name) -> name.endsWith(".csv"));
+        return files != null && files.length > 0;
     }
 }

@@ -4,8 +4,6 @@
  */
 package View;
 
-import Model.GameFrame;
-
 /**
  *
  * @author hassa

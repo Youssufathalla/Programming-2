@@ -10,7 +10,8 @@ import Model.*;
 import View.UserAction;
 
 public class GameController implements Controllable {
-private final Loader loader;
+
+    private final Loader loader;
 
     public GameController(Loader loader) {
         this.loader = loader;
@@ -228,4 +229,43 @@ private final Loader loader;
         }
         throw new NotFoundException("Invalid level");
     }
+
+    @Override
+    public int[][] undo(int[][] board) throws IOException {
+        File log = new File("incomplete/log.txt");
+        if (!log.exists()) {
+            return board;
+        }
+
+        List<String> lines = java.nio.file.Files.readAllLines(log.toPath());
+        if (lines.isEmpty()) {
+            return board;
+        }
+
+        String last = lines.remove(lines.size() - 1);
+        String[] p = last.split(",");
+
+        int x = Integer.parseInt(p[0]);
+        int y = Integer.parseInt(p[1]);
+        int prev = Integer.parseInt(p[3]);
+
+        board[x][y] = prev;
+
+        java.nio.file.Files.write(log.toPath(), lines);
+
+        try (BufferedWriter w = new BufferedWriter(new FileWriter("incomplete/current.csv"))) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (j > 0) {
+                        w.write(",");
+                    }
+                    w.write(String.valueOf(board[i][j]));
+                }
+                w.newLine();
+            }
+        }
+
+        return board;
+    }
+
 }

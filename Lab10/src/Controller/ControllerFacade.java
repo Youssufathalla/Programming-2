@@ -48,4 +48,10 @@ public class ControllerFacade implements Controllable {
     public void logUserAction(UserAction userAction) throws IOException {
         controller.logUserAction(userAction);
     }
+
+    @Override
+    public int[][] undo(int[][] board) throws IOException {
+        return controller.undo(board);
+    }
+
 }

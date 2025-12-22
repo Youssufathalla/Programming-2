@@ -4,6 +4,13 @@
  */
 package View;
 
+import Model.Game;
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import java.io.IOException;
+import Model.GameState;
+import Controller.InvalidGame;
+
 /**
  *
  * @author hassa
@@ -13,10 +20,83 @@ public class GameFrame extends javax.swing.JFrame {
     /**
      * Creates new form CurrentGameFrame
      */
-    private Viewable view; 
-    public GameFrame(Viewable view) {
+    private Viewable view;
+    private Game game;
+
+    public GameFrame(Viewable view, Game game) {
         this.view = view;
+        this.game = game;
         initComponents();
+        loadBoardToTable();
+        attachTableListener();
+    }
+private int countEmptyCells() {
+    int count = 0;
+    int[][] board = game.getBoard();
+
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (board[i][j] == 0) count++;
+        }
+    }
+    return count;
+}
+    private void loadBoardToTable() {
+        int[][] board = game.getBoard();
+        SolverButton.setEnabled(countEmptyCells() == 5);
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == 0) {
+                    CurrentGameBoard.setValueAt("", i, j);
+                } else {
+                    CurrentGameBoard.setValueAt(board[i][j], i, j);
+                }
+            }
+        }
+    }
+
+    private void attachTableListener() {
+        
+        CurrentGameBoard.getModel().addTableModelListener(e -> {
+
+            if (e.getType() != TableModelEvent.UPDATE) {
+                return;
+            }
+
+            int row = e.getFirstRow();
+            int col = e.getColumn();
+
+            if (row < 0 || col < 0) {
+                return;
+            }
+
+            Object value = CurrentGameBoard.getValueAt(row, col);
+            int newValue = 0;
+
+            if (value != null && !value.toString().isEmpty()) {
+                try {
+                    newValue = Integer.parseInt(value.toString());
+                } catch (NumberFormatException ex) {
+                    CurrentGameBoard.setValueAt("", row, col);
+                    return;
+                }
+            }
+
+            cellEdited(row, col, newValue);
+        });
+    }
+
+    private void cellEdited(int x, int y, int newValue) {
+        int prev = game.getBoard()[x][y];
+        game.getBoard()[x][y] = newValue;
+        SolverButton.setEnabled(countEmptyCells() == 5);
+
+        try {
+            view.logUserAction(x + "," + y + "," + newValue + "," + prev);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to log move");
+        }
     }
 
     /**
@@ -34,6 +114,7 @@ public class GameFrame extends javax.swing.JFrame {
         CurrentGameBoard = new javax.swing.JTable();
         UndoButton = new javax.swing.JButton();
         SolverButton = new javax.swing.JButton();
+        VerifyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +149,18 @@ public class GameFrame extends javax.swing.JFrame {
         });
 
         SolverButton.setText("Solver");
+        SolverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SolverButtonActionPerformed(evt);
+            }
+        });
+
+        VerifyButton.setText("Verify");
+        VerifyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerifyButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +178,9 @@ public class GameFrame extends javax.swing.JFrame {
                                 .addComponent(UndoButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(SolverButton)
-                                .addGap(14, 14, 14)))))
+                                .addGap(60, 60, 60)
+                                .addComponent(VerifyButton)
+                                .addGap(26, 26, 26)))))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -103,7 +198,8 @@ public class GameFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UndoButton)
-                    .addComponent(SolverButton))
+                    .addComponent(SolverButton)
+                    .addComponent(VerifyButton))
                 .addGap(14, 14, 14))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -116,8 +212,48 @@ public class GameFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            game.undo();
+            loadBoardToTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Nothing to undo");
+        }
     }//GEN-LAST:event_UndoButtonActionPerformed
+
+    private void SolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolverButtonActionPerformed
+         try {
+        int[] solution = view.solveGame(game);
+        JOptionPane.showMessageDialog(this, "Solution exists for missing cells");
+    } catch (InvalidGame e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+    }//GEN-LAST:event_SolverButtonActionPerformed
+
+    private void VerifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerifyButtonActionPerformed
+       String result = view.verifyGame(game);
+
+    if (GameState.VALID.equals(result)) {
+
+        JOptionPane.showMessageDialog(this, "Game solved correctly!");
+
+        try {
+            view.completeCurrentGame();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to finalize game");
+        }
+
+        dispose();
+        new StarterFrame(view).setVisible(true);
+
+    } else if (GameState.INCOMPLETE.equals(result)) {
+
+        JOptionPane.showMessageDialog(this, "Game is incomplete");
+
+    } else {
+
+        JOptionPane.showMessageDialog(this, result);
+    }
+    }//GEN-LAST:event_VerifyButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +295,7 @@ public class GameFrame extends javax.swing.JFrame {
     private javax.swing.JTable CurrentGameBoard;
     private javax.swing.JButton SolverButton;
     private javax.swing.JButton UndoButton;
+    private javax.swing.JButton VerifyButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

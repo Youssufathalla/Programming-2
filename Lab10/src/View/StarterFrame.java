@@ -4,7 +4,10 @@
  */
 package View;
 
+import Model.BoardReader;
 import Model.Catalog;
+import Model.Game;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -116,8 +119,13 @@ public class StarterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_NewGameButtonActionPerformed
 
     private void CurrentGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentGameButtonActionPerformed
-        this.dispose();
-        new GameFrame(view).setVisible(true);
+       try {
+        Game game = new Game(BoardReader.read("incomplete/current.csv"), "CONTINUE");
+        dispose();
+        new GameFrame(view, game).setVisible(true);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "No saved game found");
+    }
     }//GEN-LAST:event_CurrentGameButtonActionPerformed
 
     /**

@@ -4,6 +4,10 @@
  */
 package View;
 
+import Model.DifficultyEnum;
+import Model.Game;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hassa
@@ -18,7 +22,15 @@ public class Difficulty extends javax.swing.JFrame {
         this.view = view;
         initComponents();
     }
-
+private void loadGame(DifficultyEnum level) {
+    try {
+        Game game = view.getGame(level);
+        dispose();
+        new GameFrame(view, game).setVisible(true);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,18 +116,15 @@ public class Difficulty extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EasyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EasyButtonActionPerformed
-        this.dispose();
-        new GameFrame(view).setVisible(true);
+        loadGame(DifficultyEnum.EASY);
     }//GEN-LAST:event_EasyButtonActionPerformed
 
     private void MediumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediumButtonActionPerformed
-        this.dispose();
-        new GameFrame(view).setVisible(true);
+        loadGame(DifficultyEnum.MEDIUM);
     }//GEN-LAST:event_MediumButtonActionPerformed
 
     private void HardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HardButtonActionPerformed
-        this.dispose();
-        new GameFrame(view).setVisible(true);
+         loadGame(DifficultyEnum.HARD);
     }//GEN-LAST:event_HardButtonActionPerformed
 
     /**

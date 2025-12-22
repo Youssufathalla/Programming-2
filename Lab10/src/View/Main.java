@@ -1,6 +1,7 @@
 package View;
 import Controller.GameController;
 import Controller.Controllable;
+import Controller.ControllerFacade;
 import Model.BoardReader;
 import View.GameView;
 import View.Viewable;
@@ -13,7 +14,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         
-Controllable controller = new GameController();
+Controllable controller = ControllerFacade.getInstance();
+
     Viewable view = new GameView(controller);
 
     Catalog catalog = view.getCatalog();

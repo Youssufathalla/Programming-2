@@ -66,29 +66,91 @@ public class GameController implements Controllable {
     @Override
     public boolean[][] verifyGame(int[][] game) {
         boolean[][] ok = new boolean[9][9];
-        for (int i = 0; i < 9; i++) Arrays.fill(ok[i], true);
+        for (int i = 0; i < 9; i++) {
+            Arrays.fill(ok[i], true);
+        }
 
-        Verifier v = new Verifier(game);
-        if (GameState.VALID.equals(v.run())) return ok;
+        String state = new Verifier(game).run();
+        if (GameState.VALID.equals(state) || GameState.INCOMPLETE.equals(state)) {
+            return ok;
+        }
 
         for (int r = 0; r < 9; r++) {
-            int[] cnt = new int[10];
+            Map<Integer, List<Integer>> pos = new HashMap<>();
             for (int c = 0; c < 9; c++) {
-                int v1 = game[r][c];
-                if (v1 != 0 && ++cnt[v1] > 1) ok[r][c] = false;
+                int v = game[r][c];
+                if (v == 0) {
+                    continue;
+                }
+                pos.computeIfAbsent(v, k -> new ArrayList<>()).add(c);
+            }
+            for (Map.Entry<Integer, List<Integer>> e : pos.entrySet()) {
+                if (e.getValue().size() > 1) {
+                    for (int c : e.getValue()) {
+                        ok[r][c] = false;
+                    }
+                }
             }
         }
+
+        for (int c = 0; c < 9; c++) {
+            Map<Integer, List<Integer>> pos = new HashMap<>();
+            for (int r = 0; r < 9; r++) {
+                int v = game[r][c];
+                if (v == 0) {
+                    continue;
+                }
+                pos.computeIfAbsent(v, k -> new ArrayList<>()).add(r);
+            }
+            for (Map.Entry<Integer, List<Integer>> e : pos.entrySet()) {
+                if (e.getValue().size() > 1) {
+                    for (int r : e.getValue()) {
+                        ok[r][c] = false;
+                    }
+                }
+            }
+        }
+
+        for (int b = 0; b < 9; b++) {
+            int sr = (b / 3) * 3;
+            int sc = (b % 3) * 3;
+
+            Map<Integer, List<int[]>> pos = new HashMap<>();
+            for (int r = sr; r < sr + 3; r++) {
+                for (int c = sc; c < sc + 3; c++) {
+                    int v = game[r][c];
+                    if (v == 0) {
+                        continue;
+                    }
+                    pos.computeIfAbsent(v, k -> new ArrayList<>()).add(new int[]{r, c});
+                }
+            }
+            for (Map.Entry<Integer, List<int[]>> e : pos.entrySet()) {
+                if (e.getValue().size() > 1) {
+                    for (int[] rc : e.getValue()) {
+                        ok[rc[0]][rc[1]] = false;
+                    }
+                }
+            }
+        }
+
         return ok;
     }
 
     @Override
     public int[][] solveGame(int[][] game) throws InvalidGame {
         List<int[]> empty = new ArrayList<>();
-        for (int i = 0; i < 9; i++)
-            for (int j = 0; j < 9; j++)
-                if (game[i][j] == 0) empty.add(new int[]{i, j});
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (game[i][j] == 0) {
+                    empty.add(new int[]{i, j});
+                }
+            }
+        }
 
-        if (empty.size() != 5) throw new InvalidGame("Expected 5 empty cells");
+        if (empty.size() != 5) {
+            throw new InvalidGame("Expected 5 empty cells");
+        }
 
         int[][] work = copy(game);
         BoardFlyweight fly = new BoardFlyweight(work);
@@ -103,6 +165,8 @@ public class GameController implements Controllable {
                     res[k][1] = empty.get(k)[1];
                     res[k][2] = comb[k];
                 }
+                new File("incomplete/current.csv").delete();
+                new File("incomplete/log.txt").delete();
                 return res;
             }
         }
@@ -124,7 +188,9 @@ public class GameController implements Controllable {
         try (BufferedWriter w = new BufferedWriter(new FileWriter(f))) {
             for (int[] r : board) {
                 for (int j = 0; j < 9; j++) {
-                    if (j > 0) w.write(",");
+                    if (j > 0) {
+                        w.write(",");
+                    }
                     w.write(String.valueOf(r[j]));
                 }
                 w.newLine();
@@ -134,15 +200,23 @@ public class GameController implements Controllable {
 
     private int[][] copy(int[][] b) {
         int[][] c = new int[9][9];
-        for (int i = 0; i < 9; i++) System.arraycopy(b[i], 0, c[i], 0, 9);
+        for (int i = 0; i < 9; i++) {
+            System.arraycopy(b[i], 0, c[i], 0, 9);
+        }
         return c;
     }
 
     private String mapLevel(char c) throws NotFoundException {
         c = Character.toLowerCase(c);
-        if (c == 'e' || c == '1') return "easy";
-        if (c == 'm' || c == '2') return "medium";
-        if (c == 'h' || c == '3') return "hard";
+        if (c == 'e' || c == '1') {
+            return "easy";
+        }
+        if (c == 'm' || c == '2') {
+            return "medium";
+        }
+        if (c == 'h' || c == '3') {
+            return "hard";
+        }
         throw new NotFoundException("Invalid level");
     }
 }

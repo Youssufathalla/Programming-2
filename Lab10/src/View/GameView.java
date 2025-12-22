@@ -1,10 +1,7 @@
 package View;
 
 import java.io.IOException;
-import Controller.Controllable;
-import Controller.InvalidGame;
-import Controller.NotFoundException;
-import Controller.SolutionInvalidException;
+import Controller.*;
 import Model.*;
 
 public class GameView implements Viewable {
@@ -29,7 +26,7 @@ public class GameView implements Viewable {
 
     @Override
     public void driveGames(Game sourceGame) throws SolutionInvalidException {
-        controller.driveGames("source.csv");
+        controller.driveGames(sourceGame.getDifficulty());
     }
 
     @Override
@@ -37,22 +34,39 @@ public class GameView implements Viewable {
         boolean[][] ok = controller.verifyGame(game.getBoard());
         boolean bad = false, zero = false;
 
-        for (int i = 0; i < 9; i++)
-            for (int j = 0; j < 9; j++) {
-                if (!ok[i][j]) bad = true;
-                if (game.getBoard()[i][j] == 0) zero = true;
-            }
+        StringBuilder sb = new StringBuilder();
 
-        if (!bad && !zero) return "valid";
-        if (!bad) return "incomplete";
-        return "invalid";
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (game.getBoard()[i][j] == 0) {
+                    zero = true;
+                }
+                if (!ok[i][j]) {
+                    bad = true;
+                    if (sb.length() > 0) {
+                        sb.append(" ");
+                    }
+                    sb.append(i + 1).append(",").append(j + 1);
+                }
+            }
+        }
+
+        if (!bad && !zero) {
+            return "valid";
+        }
+        if (!bad) {
+            return "incomplete";
+        }
+        return "invalid " + sb;
     }
 
     @Override
     public int[] solveGame(Game game) throws InvalidGame {
         int[][] sol = controller.solveGame(game.getBoard());
         int[] r = new int[sol.length];
-        for (int i = 0; i < sol.length; i++) r[i] = sol[i][2];
+        for (int i = 0; i < sol.length; i++) {
+            r[i] = sol[i][2];
+        }
         return r;
     }
 
@@ -60,12 +74,12 @@ public class GameView implements Viewable {
     public void logUserAction(String s) throws IOException {
         String[] p = s.split(",");
         controller.logUserAction(
-            new UserAction(
-                Integer.parseInt(p[0]),
-                Integer.parseInt(p[1]),
-                Integer.parseInt(p[2]),
-                Integer.parseInt(p[3])
-            )
+                new UserAction(
+                        Integer.parseInt(p[0]),
+                        Integer.parseInt(p[1]),
+                        Integer.parseInt(p[2]),
+                        Integer.parseInt(p[3])
+                )
         );
     }
 }

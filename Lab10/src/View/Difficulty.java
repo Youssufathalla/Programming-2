@@ -13,7 +13,9 @@ public class Difficulty extends javax.swing.JFrame {
     /**
      * Creates new form Difficulty
      */
-    public Difficulty() {
+    private Viewable view; 
+    public Difficulty(Viewable view) {
+        this.view = view;
         initComponents();
     }
 
@@ -103,17 +105,17 @@ public class Difficulty extends javax.swing.JFrame {
 
     private void EasyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EasyButtonActionPerformed
         this.dispose();
-        new GameFrame().setVisible(true);
+        new GameFrame(view).setVisible(true);
     }//GEN-LAST:event_EasyButtonActionPerformed
 
     private void MediumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediumButtonActionPerformed
         this.dispose();
-        new GameFrame().setVisible(true);
+        new GameFrame(view).setVisible(true);
     }//GEN-LAST:event_MediumButtonActionPerformed
 
     private void HardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HardButtonActionPerformed
         this.dispose();
-        new GameFrame().setVisible(true);
+        new GameFrame(view).setVisible(true);
     }//GEN-LAST:event_HardButtonActionPerformed
 
     /**

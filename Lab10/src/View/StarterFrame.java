@@ -4,6 +4,8 @@
  */
 package View;
 
+import Model.Catalog;
+
 /**
  *
  * @author hassa
@@ -13,9 +15,21 @@ public class StarterFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public StarterFrame() {
-        initComponents();
-    }
+    private Viewable view; 
+    
+
+    public StarterFrame(Viewable view) {
+    this.view = view;
+    initComponents();
+    setupLogic();
+}
+    private void setupLogic() {
+    Catalog catalog = view.getCatalog();
+
+    CurrentGameButton.setEnabled(catalog.hasUnfinishedGame());
+   
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,12 +104,20 @@ public class StarterFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NewGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewGameButtonActionPerformed
-        // TODO add your handling code here:
+      Catalog catalog = view.getCatalog();
+        if(catalog.hasGamesInDifficultyFiles()){
+            this.dispose();
+    new Difficulty(view).setVisible(true);
+        }
+        else{
+        this.dispose();
+    new PathFrame(view).setVisible(true);
+        }
     }//GEN-LAST:event_NewGameButtonActionPerformed
 
     private void CurrentGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentGameButtonActionPerformed
         this.dispose();
-        new GameFrame().setVisible(true);
+        new GameFrame(view).setVisible(true);
     }//GEN-LAST:event_CurrentGameButtonActionPerformed
 
     /**

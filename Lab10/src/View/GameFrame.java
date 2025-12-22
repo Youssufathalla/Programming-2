@@ -250,7 +250,7 @@ private int countEmptyCells() {
 
     } else  {
 
-        JOptionPane.showMessageDialog(this, "Incoorect solution");}
+        JOptionPane.showMessageDialog(this, "Incorrect solution");}
 
     }//GEN-LAST:event_VerifyButtonActionPerformed
 

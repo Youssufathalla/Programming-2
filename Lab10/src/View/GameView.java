@@ -87,6 +87,7 @@ public class GameView implements Viewable {
         );
     }
 
+    @Override
     public void undo(Game game) throws IOException {
         controller.undo(game.getBoard());
     }

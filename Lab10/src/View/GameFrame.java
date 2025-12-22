@@ -234,9 +234,9 @@ private int countEmptyCells() {
 
     private void VerifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerifyButtonActionPerformed
        String result = view.verifyGame(game);
-
-    if (GameState.VALID.equals(result)) {
-
+        System.out.println(result);
+    if (result.equals("valid")) {
+        
         JOptionPane.showMessageDialog(this, "Game solved correctly!");
 
         try {
@@ -248,14 +248,10 @@ private int countEmptyCells() {
         dispose();
         new StarterFrame(view).setVisible(true);
 
-    } else if (GameState.INCOMPLETE.equals(result)) {
+    } else  {
 
-        JOptionPane.showMessageDialog(this, "Game is incomplete");
+        JOptionPane.showMessageDialog(this, "Incoorect solution");}
 
-    } else {
-
-        JOptionPane.showMessageDialog(this, result);
-    }
     }//GEN-LAST:event_VerifyButtonActionPerformed
 
     /**

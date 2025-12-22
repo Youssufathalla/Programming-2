@@ -1,4 +1,7 @@
-package lab10;
+package Controller;
+
+import Model.UserAction;
+
 interface Controllable {
     boolean[] getCatalog();
     int[][] getGame(char level) throws Exception;

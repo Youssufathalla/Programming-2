@@ -1,4 +1,6 @@
-package lab10;
+package Model;
+
+import Model.AbstractChecker;
 
 public class BoxChecker extends AbstractChecker {
 

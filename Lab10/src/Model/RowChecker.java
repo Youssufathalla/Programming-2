@@ -1,9 +1,11 @@
-package lab10;
+package Model;
 
-public class ColumnChecker extends AbstractChecker {
+import Model.AbstractChecker;
 
-    public ColumnChecker(int[][] board, DuplicateResult result, int colIndex) {
-        super(board, result, colIndex);
+public class RowChecker extends AbstractChecker {
+
+    public RowChecker(int[][] board, DuplicateResult result, int rowIndex) {
+        super(board, result, rowIndex);
     }
 
     
@@ -11,8 +13,8 @@ public class ColumnChecker extends AbstractChecker {
         int[] count = new int[10];
         StringBuilder[] positions = new StringBuilder[10];
 
-        for (int row = 0; row < 9; row++) {
-            int v = board[row][index];
+        for (int col = 0; col < 9; col++) {
+            int v = board[index][col];
             if (v == 0) {
                 continue;   
             }
@@ -23,13 +25,13 @@ public class ColumnChecker extends AbstractChecker {
             if (positions[v].length() > 0) {
                 positions[v].append(",");
             }
-            positions[v].append(row + 1);
+            positions[v].append(col + 1);
         }
 
         for (int digit = 1; digit <= 9; digit++) {
             if (count[digit] > 1) {
                 result.addError(
-                        "COL " + (index + 1) + " #" + digit
+                        "ROW " + (index + 1) + " #" + digit
                         + " [" + positions[digit] + "]"
                 );
             }

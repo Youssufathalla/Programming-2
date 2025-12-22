@@ -1,5 +1,6 @@
-package lab10;
+package Controller;
 
+import Model.Game;
 import java.io.IOException;
 
 public class GameController {

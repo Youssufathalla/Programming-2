@@ -1,4 +1,4 @@
-package lab10;
+package Model;
 
 import java.util.ArrayList;
 import java.util.HashSet;

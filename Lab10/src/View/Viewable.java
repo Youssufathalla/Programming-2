@@ -1,4 +1,8 @@
-package lab10;
+package View;
+
+import Model.Game;
+import Model.Catalog;
+
 interface Viewable {
     Catalog getCatalog();
     Game getGame(String level) throws Exception;

@@ -1,4 +1,4 @@
-package lab10;
+package Model;
 
 public class Verifier {
 

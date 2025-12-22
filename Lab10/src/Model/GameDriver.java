@@ -1,4 +1,4 @@
-package lab10;
+package Model;
 
 import java.util.HashMap;
 import java.util.List;

@@ -107,18 +107,18 @@ public class PathFrame extends javax.swing.JFrame {
     private void ContinueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueButtonActionPerformed
           try {
         String path = PathField.getText();
-
+          
         int[][] board = BoardReader.read(path);
-        Game source = new Game(board, "SOURCE");
-
+        Game source = new Game(board, "valid.csv");
+  
         view.driveGames(source);
-
+  
         JOptionPane.showMessageDialog(this, "Games saved successfully");
         dispose();
         new Difficulty(view).setVisible(true);
-
+        
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "this file doesnt contain valid sudoko board");
+        JOptionPane.showMessageDialog(this, "this file doesnt contain valid soduko board");
     }
 
     }//GEN-LAST:event_ContinueButtonActionPerformed

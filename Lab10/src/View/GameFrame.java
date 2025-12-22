@@ -213,7 +213,7 @@ private int countEmptyCells() {
 
     private void UndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoButtonActionPerformed
         try {
-            game.undo();
+            view.undo();
             loadBoardToTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nothing to undo");

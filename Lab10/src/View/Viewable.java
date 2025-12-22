@@ -22,4 +22,5 @@ public interface Viewable {
 
     void logUserAction(String userAction) throws IOException;
     void completeCurrentGame() throws IOException;
+     int[][] undo(int[][] board) throws IOException;
 }
